@@ -81,16 +81,19 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            align-items: center;
         }
 
         nav a {
             color: var(--char);
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 4px;
             font-weight: 500;
             transition: all 0.2s;
+            white-space: nowrap;
+            font-size: 0.95rem;
         }
 
         nav a:hover {
@@ -100,11 +103,13 @@
         .cta-button {
             background: var(--green);
             color: white;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
             display: inline-block;
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
 
         .question-card {
@@ -566,6 +571,48 @@
                 width: 100%;
                 text-align: center;
                 margin: 2px 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .question-card {
+                padding: 15px;
+            }
+            
+            .question-content {
+                font-size: 16px;
+            }
+            
+            .action-button {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .form-textarea {
+                min-height: 120px;
+            }
+            
+            nav {
+                gap: 6px;
+            }
+            
+            nav a, .cta-button {
+                padding: 5px 10px;
+                font-size: 0.85rem;
+            }
+            
+            .question-author,
+            .reply-author {
+                font-size: 14px;
+            }
+            
+            .question-date,
+            .reply-date {
+                font-size: 12px;
             }
         }
 
