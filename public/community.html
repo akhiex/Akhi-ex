@@ -206,10 +206,11 @@
         .question-actions {
             display: flex;
             flex-direction: row;
-            gap: 10px;
+            gap: 0;
             padding-top: 20px;
             border-top: 1px solid var(--border);
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            justify-content: space-between;
         }
 
         .action-button {
@@ -229,6 +230,7 @@
             white-space: nowrap;
             flex: 1;
             min-width: 0;
+            margin: 0 2px;
         }
 
         .action-button:hover {
@@ -633,6 +635,7 @@
             .question-actions {
                 flex-direction: row;
                 gap: 15px;
+                justify-content: flex-start;
             }
 
             .action-button {
@@ -641,6 +644,7 @@
                 flex: 0 0 auto;
                 padding: 8px 16px;
                 gap: 8px;
+                margin: 0;
             }
 
             .side-form-container {
@@ -711,7 +715,7 @@
 
             <nav id="mainNav">
                 <a href="/index.html"><i class="fas fa-scale-balanced"></i> Back to home</a>
-                <a href="#faq-section"><i class="fas fa-circle-question"></i> FAQ</a>
+                <a href="/index.html#faq-section"><i class="fas fa-circle-question"></i> FAQ</a>
                 
             </nav>
         </header>
