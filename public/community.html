@@ -927,6 +927,46 @@
             currentParentAnswerId = null;
         }
 
+        // ============ FIXED FUNCTION ============
+        function addToCommunitySection(replyHtml) {
+            const questionElement = document.querySelector(
+                `.question-card[data-id="${currentQuestionId}"]`
+            );
+
+            // Try to get existing section by ID (much more reliable)
+            let answersSection = document.getElementById(`replies-${currentQuestionId}`);
+
+            if (!answersSection) {
+                // Build replies section
+                answersSection = document.createElement("div");
+                answersSection.id = `replies-${currentQuestionId}`;
+                answersSection.className = "answers-section";
+                answersSection.style.display = "block";
+
+                answersSection.innerHTML = `
+                    <div class="section-title">
+                        <i class="fas fa-users"></i>
+                        <span>Community Replies</span>
+                    </div>
+                    ${replyHtml}
+                `;
+
+                // Insert section in the correct stable location —
+                // ALWAYS after the question-actions block.
+                const actions = questionElement.querySelector(".question-actions");
+                actions.insertAdjacentElement("afterend", answersSection);
+
+                return;
+            }
+
+            // If section already exists:
+            const noRepliesMessage = answersSection.querySelector("p");
+            if (noRepliesMessage) noRepliesMessage.remove();
+
+            answersSection.insertAdjacentHTML("beforeend", replyHtml);
+            answersSection.style.display = "block";
+        }
+
         async function submitReplyFromForm() {
             const name = document.getElementById('replyName').value.trim();
             const content = document.getElementById('replyContent').value.trim();
@@ -968,19 +1008,61 @@
                 console.log('Result:', result);
                 
                 if (result.success) {
+                    // Create the HTML for the new reply
+                    const newReply = {
+                        id: Date.now(),
+                        content: content,
+                        author: name || 'Anonymous',
+                        isOwner: isOwnerAuthenticated,
+                        date: new Date().toISOString(),
+                        replies: []
+                    };
+                    
+                    const replyHtml = createReplyHTML(newReply, isOwnerAuthenticated, currentQuestionId);
+                    
+                    // If it's an owner reply, we need to add it to the authors section
+                    if (isOwnerAuthenticated) {
+                        // Find the question element
+                        const questionElement = document.querySelector(`.question-card[data-id="${currentQuestionId}"]`);
+                        
+                        // Check if there's already an authors-answer section
+                        let existingAuthorAnswer = questionElement.querySelector('.authors-answer');
+                        
+                        if (existingAuthorAnswer) {
+                            // If it exists, add the new reply after it
+                            existingAuthorAnswer.insertAdjacentHTML('afterend', replyHtml);
+                        } else {
+                            // Otherwise, add it after the question-actions
+                            const actions = questionElement.querySelector('.question-actions');
+                            actions.insertAdjacentHTML('afterend', replyHtml);
+                        }
+                    } else {
+                        // For community replies, use the fixed function
+                        addToCommunitySection(replyHtml);
+                    }
+                    
+                    // Update the replies count on the button
+                    const repliesButton = document.querySelector(`.question-card[data-id="${currentQuestionId}"] .action-button:nth-child(3)`);
+                    if (repliesButton) {
+                        const currentCount = parseInt(repliesButton.querySelector('span:last-child').textContent.match(/\d+/)[0]) || 0;
+                        repliesButton.querySelector('span:last-child').textContent = `Replies (${currentCount + 1})`;
+                    }
+                    
                     closeSideForm();
-                    // RELOAD THE QUESTIONS TO SHOW THE NEW REPLY
-                    await loadQuestions();
-                    console.log('✅ Reply posted and page updated!');
+                    console.log('✅ Reply posted and UI updated instantly!');
+                    
+                    // Also update the backend data (optional - for consistency)
+                    setTimeout(() => {
+                        loadQuestions();
+                    }, 1000);
+                    
                 } else {
                     throw new Error(result.message || 'Failed to post reply');
                 }
                 
             } catch (error) {
                 console.error('Error posting reply:', error);
-                // EVEN IF ERROR, TRY TO RELOAD TO SEE IF REPLY WAS SAVED
-                await loadQuestions();
-                alert("Reply posted! The page has been updated.");
+                alert("Error posting reply. Please try again.");
             } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
