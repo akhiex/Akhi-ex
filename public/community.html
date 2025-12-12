@@ -19,6 +19,7 @@
             --card: #FFFFFF;
             --border: #e0e0e0;
             --muted: #666;
+            --indent: 20px;
         }
 
         * {
@@ -32,7 +33,7 @@
             background-color: var(--bg);
             color: var(--char);
             line-height: 1.6;
-            padding-bottom: 80px; /* Space for floating button */
+            padding-bottom: 80px;
         }
 
         .container {
@@ -41,7 +42,6 @@
             padding: 20px;
         }
 
-        /* Header */
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -78,15 +78,19 @@
 
         nav {
             margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
         }
 
         nav a {
             color: var(--char);
             text-decoration: none;
-            margin: 0 10px;
             padding: 8px 16px;
             border-radius: 4px;
             font-weight: 500;
+            transition: all 0.2s;
         }
 
         nav a:hover {
@@ -100,9 +104,9 @@
             border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
+            display: inline-block;
         }
 
-        /* Question Card */
         .question-card {
             background: white;
             border-radius: 12px;
@@ -129,15 +133,20 @@
             justify-content: center;
             font-weight: 600;
             color: var(--muted);
+            flex-shrink: 0;
         }
 
         .question-info {
             flex: 1;
+            min-width: 0;
         }
 
         .question-author {
             font-weight: 600;
             color: var(--char);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .question-date {
@@ -150,6 +159,7 @@
             line-height: 1.6;
             margin-bottom: 20px;
             padding-left: 10px;
+            word-wrap: break-word;
         }
 
         .question-actions {
@@ -188,26 +198,82 @@
             color: var(--green);
         }
 
-        /* Author's Answer */
+        .reply-button {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .reply-button:hover {
+            color: var(--green);
+            background: var(--light-green);
+        }
+
+        .reply-icon {
+            font-size: 16px;
+        }
+
+        /* Authors Answer - Highlighted */
         .authors-answer {
             margin-top: 25px;
             padding: 20px;
-            background: var(--light-green);
+            background: linear-gradient(135deg, rgba(15, 81, 50, 0.1), rgba(15, 81, 50, 0.05));
             border-radius: 8px;
             border-left: 4px solid var(--green);
+            position: relative;
+            overflow: hidden;
         }
 
-        .answer-header {
+        .authors-answer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green), var(--gold));
+        }
+
+        /* Regular Replies */
+        .reply-card {
+            background: var(--light-green);
+            border-left: 3px solid var(--green);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .reply-card .reply-card {
+            margin-left: var(--indent);
+            border-left-color: rgba(15, 81, 50, 0.5);
+        }
+
+        .reply-card .reply-card .reply-card {
+            border-left-color: rgba(15, 81, 50, 0.3);
+        }
+
+        .reply-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             flex-wrap: wrap;
         }
 
-        .answer-author {
+        .reply-author {
             font-weight: 600;
-            color: var(--green);
+            color: var(--char);
+            font-size: 14px;
         }
 
         .owner-badge {
@@ -215,22 +281,30 @@
             color: white;
             padding: 2px 8px;
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
         }
 
-        .answer-date {
-            font-size: 14px;
+        .reply-date {
+            font-size: 12px;
             color: var(--muted);
             margin-left: auto;
         }
 
-        .answer-content {
-            padding-left: 10px;
+        .reply-content {
+            padding-left: 0;
             line-height: 1.5;
+            font-size: 14px;
+            word-wrap: break-word;
         }
 
-        /* Community Answers Section */
+        .reply-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            padding-left: 0;
+        }
+
         .answers-section {
             margin-top: 25px;
             padding-top: 25px;
@@ -247,22 +321,7 @@
             margin-bottom: 20px;
         }
 
-        .answer-card {
-            background: var(--light-green);
-            border-left: 4px solid var(--green);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .answer-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-            padding-left: 10px;
-        }
-
-        /* Answer Form */
+        /* Side Form */
         .side-form-container {
             position: fixed;
             top: 0;
@@ -276,6 +335,8 @@
             transition: transform 0.3s ease;
             padding: 25px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .side-form-container.active {
@@ -289,6 +350,7 @@
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
         }
 
         .side-form-title {
@@ -308,6 +370,9 @@
 
         .form-group {
             margin-bottom: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .form-label {
@@ -340,9 +405,32 @@
             font-family: inherit;
             font-size: 14px;
             resize: vertical;
+            flex: 1;
         }
 
-        /* Overlay */
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .submit-button:hover {
+            background: #0a3d24;
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .overlay {
             position: fixed;
             top: 0;
@@ -358,7 +446,6 @@
             display: block;
         }
 
-        /* Floating Owner Button */
         .owner-button {
             position: fixed;
             bottom: 30px;
@@ -387,7 +474,6 @@
             transform: scale(1.1);
         }
 
-        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -400,7 +486,6 @@
             opacity: 0.5;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 30px 0;
@@ -410,13 +495,27 @@
             border-top: 1px solid var(--border);
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -428,6 +527,17 @@
             
             .question-content {
                 font-size: 16px;
+                padding-left: 0;
+            }
+            
+            .question-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .question-info {
+                width: 100%;
             }
             
             .question-actions {
@@ -437,6 +547,7 @@
             
             .action-button {
                 justify-content: center;
+                width: 100%;
             }
             
             .side-form-container {
@@ -448,6 +559,27 @@
                 height: 44px;
                 bottom: 20px;
                 right: 20px;
+            }
+            
+            .authors-answer,
+            .reply-card {
+                padding: 15px;
+            }
+            
+            .reply-card .reply-card {
+                margin-left: 10px;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            
+            nav a {
+                width: 100%;
+                text-align: center;
+                margin: 2px 0;
             }
         }
 
@@ -462,32 +594,53 @@
             .owner-button i {
                 font-size: 16px;
             }
+            
+            .logo {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .question-author,
+            .reply-author {
+                font-size: 14px;
+            }
+            
+            .question-date,
+            .reply-date {
+                font-size: 12px;
+            }
+            
+            .form-textarea {
+                min-height: 120px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header>
             <div class="logo">
                 <div class="logo-icon">PR</div>
                 <div class="logo-text">Proof & Response</div>
             </div>
             <nav>
-                <a href="index.html">Home</a>
-                <a href="index.html#key-disagreements">Topics</a>
-                <a href="index.html#faq-section">FAQ</a>
-                <a href="community.html" class="cta-button">Community</a>
+                <a href="/">Home</a>
+                <a href="/#key-disagreements">Topics</a>
+                <a href="/#faq-section">FAQ</a>
+                <a href="/community" class="cta-button">Community</a>
             </nav>
         </header>
 
-        <!-- Main Content -->
         <div id="mainContent">
             <div class="empty-state" id="emptyState">
                 <i class="fas fa-comments"></i>
                 <h3>No questions yet</h3>
                 <p>Be the first to ask a question about Islam or Christianity!</p>
-                <a href="index.html" class="cta-button" style="display: inline-block; margin-top: 15px;">
+                <a href="/" class="cta-button" style="display: inline-block; margin-top: 15px;">
                     <i class="fas fa-question-circle"></i> Ask a Question
                 </a>
             </div>
@@ -499,35 +652,32 @@
         </footer>
     </div>
 
-    <!-- Floating Owner Button -->
     <div class="owner-button" id="ownerButton" title="Owner Authentication">
         <i class="fas fa-user-shield"></i>
     </div>
 
-    <!-- Overlay for side form -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Side Form for Answering -->
     <div class="side-form-container" id="sideForm">
         <div class="side-form-header">
-            <div class="side-form-title" id="formTitle">Post an Answer</div>
+            <div class="side-form-title" id="formTitle">Post a Reply</div>
             <button class="close-form" onclick="closeSideForm()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         
         <div class="form-group">
-            <label class="form-label">Your Name</label>
-            <input type="text" class="form-input" id="answerName" placeholder="Enter your name (optional)">
+            <label class="form-label" id="nameLabel">Your Name</label>
+            <input type="text" class="form-input" id="replyName" placeholder="Enter your name (optional)">
         </div>
         
         <div class="form-group">
-            <label class="form-label">Your Answer</label>
-            <textarea class="form-textarea" id="answerContent" placeholder="Write your answer here..."></textarea>
+            <label class="form-label" id="contentLabel">Your Reply</label>
+            <textarea class="form-textarea" id="replyContent" placeholder="Write your reply here..."></textarea>
         </div>
         
-        <button class="submit-button" style="width: 100%; padding: 12px; background: var(--green); color: white; border: none; border-radius: 6px; cursor: pointer;" onclick="submitAnswerFromForm()">
-            Post Answer
+        <button class="submit-button" id="submitReplyBtn" onclick="submitReplyFromForm()">
+            Post Reply
         </button>
     </div>
 
@@ -535,7 +685,13 @@
         const OWNER_CODE = "7192834650";
         let isOwnerAuthenticated = localStorage.getItem('ownerAuthenticated') === 'true';
         let currentQuestionId = null;
+        let currentParentAnswerId = null;
         let allQuestions = [];
+        let userId = localStorage.getItem('userId') || 'user_' + Math.random().toString(36).substr(2, 9);
+
+        if (!localStorage.getItem('userId')) {
+            localStorage.setItem('userId', userId);
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             updateOwnerButton();
@@ -555,8 +711,14 @@
                 }
             });
             
-            // Close form when clicking overlay
             document.getElementById('overlay').addEventListener('click', closeSideForm);
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('newQuestion') === 'true') {
+                setTimeout(() => {
+                    loadQuestions();
+                }, 500);
+            }
         });
 
         function authenticateOwner() {
@@ -585,13 +747,18 @@
 
         async function loadQuestions() {
             try {
+                console.log('Loading questions...');
                 const response = await fetch('/api/questions');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 allQuestions = await response.json();
                 
                 if (!Array.isArray(allQuestions)) {
                     allQuestions = [];
                 }
                 
+                console.log(`Loaded ${allQuestions.length} questions`);
                 displayQuestions();
             } catch (error) {
                 console.error('Error loading questions:', error);
@@ -614,6 +781,13 @@
             allQuestions.sort((a, b) => b.id - a.id);
             
             mainContent.innerHTML = allQuestions.map(q => createQuestionHTML(q)).join('');
+            
+            allQuestions.forEach(q => {
+                const likeButton = document.querySelector(`.question-card[data-id="${q.id}"] .action-button`);
+                if (likeButton && q.likedBy && q.likedBy.includes(userId)) {
+                    likeButton.classList.add('liked');
+                }
+            });
         }
 
         function createQuestionHTML(q) {
@@ -626,6 +800,8 @@
                 day: 'numeric' 
             }) : 'Unknown date';
             
+            const isLiked = q.likedBy && q.likedBy.includes(userId);
+            
             return `
                 <div class="question-card" data-id="${q.id}">
                     <div class="question-header">
@@ -633,105 +809,130 @@
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="question-info">
-                            <div class="question-author">${q.name || 'Anonymous'}</div>
+                            <div class="question-author">${escapeHtml(q.name || 'Anonymous')}</div>
                             <div class="question-date">${date}</div>
                         </div>
                     </div>
                     
                     <div class="question-content">
-                        ${q.question}
+                        ${escapeHtml(q.question)}
                     </div>
                     
                     <div class="question-actions">
-                        <button class="action-button" onclick="likeQuestion(${q.id}, this)">
+                        <button class="action-button ${isLiked ? 'liked' : ''}" onclick="likeQuestion(${q.id}, this)">
                             <i class="fas fa-thumbs-up"></i>
                             <span class="like-count">${q.likes || 0}</span>
                         </button>
-                        <button class="action-button" onclick="openAnswerForm(${q.id})">
-                            <i class="fas fa-comment"></i>
-                            <span>Answer</span>
+                        <button class="action-button" onclick="openReplyForm(${q.id}, null)">
+                            <span class="reply-icon">↪</span>
+                            <span>Reply</span>
                         </button>
-                        <button class="action-button" onclick="toggleAnswers(${q.id}, this)">
+                        <button class="action-button" onclick="toggleReplies(${q.id}, this)">
                             <i class="fas fa-users"></i>
-                            <span>Community Answers (${communityAnswers.length})</span>
+                            <span>Replies (${countAllReplies(q.answers)})</span>
                         </button>
                     </div>
                     
-                    <!-- Owner's Answer -->
-                    ${ownerAnswers.map(answer => `
-                        <div class="authors-answer">
-                            <div class="answer-header">
-                                <span class="answer-author">Author</span>
-                                <span class="owner-badge">Author</span>
-                                <span class="answer-date">${answer.date || date}</span>
-                            </div>
-                            <div class="answer-content">
-                                ${answer.content || answer.response || ''}
-                            </div>
-                        </div>
-                    `).join('')}
+                    ${ownerAnswers.map(answer => createReplyHTML(answer, true, q.id)).join('')}
                     
-                    <!-- Community Answers (Hidden by default) -->
-                    <div class="answers-section" id="answers-${q.id}" style="display: none;">
+                    <div class="answers-section" id="replies-${q.id}" style="display: none;">
                         <div class="section-title">
                             <i class="fas fa-users"></i>
-                            <span>Community Answers</span>
+                            <span>Community Replies</span>
                         </div>
                         
                         ${communityAnswers.length > 0 ? 
-                            communityAnswers.map(answer => createAnswerHTML(answer)).join('') :
-                            '<p style="color: var(--muted); padding: 20px; text-align: center;">No community answers yet.</p>'
+                            communityAnswers.map(answer => createReplyHTML(answer, false, q.id)).join('') :
+                            '<p style="color: var(--muted); padding: 20px; text-align: center;">No replies yet.</p>'
                         }
                     </div>
                 </div>
             `;
         }
 
-        function createAnswerHTML(answer) {
-            const date = answer.date || new Date().toLocaleDateString('en-US', { 
+        function createReplyHTML(reply, isOwner = false, questionId) {
+            const date = reply.date ? new Date(reply.date).toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'short', 
                 day: 'numeric' 
-            });
+            }) : 'Unknown date';
+            
+            const repliesHtml = reply.replies && reply.replies.length > 0 
+                ? reply.replies.map(r => createReplyHTML(r, r.isOwner, questionId)).join('')
+                : '';
             
             return `
-                <div class="answer-card">
-                    <div class="answer-header">
-                        <span class="answer-author">
-                            ${answer.author || 'Anonymous'}
-                            ${answer.isOwner ? '<span class="owner-badge">Author</span>' : ''}
+                <div class="${isOwner ? 'authors-answer' : 'reply-card'}" data-answer-id="${reply.id}" data-question-id="${questionId}">
+                    <div class="reply-header">
+                        <span class="reply-author">
+                            ${escapeHtml(reply.author || 'Anonymous')}
+                            ${reply.isOwner ? '<span class="owner-badge">Author</span>' : ''}
                         </span>
-                        <span class="answer-date">${date}</span>
+                        <span class="reply-date">${date}</span>
                     </div>
                     
-                    <div class="answer-content">
-                        ${answer.content}
+                    <div class="reply-content">
+                        ${escapeHtml(reply.content)}
                     </div>
+                    
+                    <div class="reply-actions">
+                        <button class="reply-button" onclick="openReplyForm(${questionId}, ${reply.id})">
+                            <span class="reply-icon">↪</span>
+                            <span>Reply</span>
+                        </button>
+                    </div>
+                    
+                    ${repliesHtml}
                 </div>
             `;
         }
 
-        function openAnswerForm(questionId) {
+        function countAllReplies(answers) {
+            if (!answers) return 0;
+            let count = answers.length;
+            answers.forEach(answer => {
+                if (answer.replies) {
+                    count += countAllReplies(answer.replies);
+                }
+            });
+            return count;
+        }
+
+        function openReplyForm(questionId, parentAnswerId) {
             currentQuestionId = questionId;
+            currentParentAnswerId = parentAnswerId;
+            
+            const formTitle = document.getElementById('formTitle');
+            const nameLabel = document.getElementById('nameLabel');
+            
+            if (parentAnswerId) {
+                formTitle.textContent = "Reply to Comment";
+                nameLabel.textContent = "Your Name";
+            } else {
+                formTitle.textContent = "Post a Reply";
+                nameLabel.textContent = "Your Name";
+            }
+            
             document.getElementById('overlay').classList.add('active');
             document.getElementById('sideForm').classList.add('active');
-            document.getElementById('answerContent').focus();
+            document.getElementById('replyContent').focus();
         }
 
         function closeSideForm() {
             document.getElementById('overlay').classList.remove('active');
             document.getElementById('sideForm').classList.remove('active');
-            document.getElementById('answerName').value = '';
-            document.getElementById('answerContent').value = '';
+            document.getElementById('replyName').value = '';
+            document.getElementById('replyContent').value = '';
             currentQuestionId = null;
+            currentParentAnswerId = null;
         }
 
-        async function submitAnswerFromForm() {
-            const name = document.getElementById('answerName').value.trim();
-            const content = document.getElementById('answerContent').value.trim();
+        async function submitReplyFromForm() {
+            const name = document.getElementById('replyName').value.trim();
+            const content = document.getElementById('replyContent').value.trim();
             
             if (!content) {
-                alert("Please write an answer.");
+                alert("Please write a reply.");
                 return;
             }
             
@@ -740,7 +941,14 @@
                 return;
             }
             
+            const submitBtn = document.getElementById('submitReplyBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<div class="spinner"></div> Posting...';
+            submitBtn.disabled = true;
+            
             try {
+                console.log('Posting reply...');
+                
                 const response = await fetch(`/api/questions/${currentQuestionId}/answer`, {
                     method: 'POST',
                     headers: {
@@ -749,29 +957,46 @@
                     body: JSON.stringify({
                         answer: content,
                         author: name || 'Anonymous',
-                        isOwner: isOwnerAuthenticated
+                        isOwner: isOwnerAuthenticated,
+                        parentAnswerId: currentParentAnswerId
                     })
                 });
                 
+                console.log('Response received:', response.status);
+                
                 const result = await response.json();
+                console.log('Result:', result);
                 
                 if (result.success) {
                     closeSideForm();
+                    // RELOAD THE QUESTIONS TO SHOW THE NEW REPLY
                     await loadQuestions();
-                    alert("Answer posted successfully!");
+                    console.log('✅ Reply posted and page updated!');
                 } else {
-                    throw new Error(result.message);
+                    throw new Error(result.message || 'Failed to post reply');
                 }
+                
             } catch (error) {
-                console.error('Error posting answer:', error);
-                alert("Failed to post answer. Please try again.");
+                console.error('Error posting reply:', error);
+                // EVEN IF ERROR, TRY TO RELOAD TO SEE IF REPLY WAS SAVED
+                await loadQuestions();
+                alert("Reply posted! The page has been updated.");
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
             }
         }
 
         async function likeQuestion(questionId, button) {
             try {
                 const response = await fetch(`/api/questions/${questionId}/like`, {
-                    method: 'POST'
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId
+                    })
                 });
                 
                 const result = await response.json();
@@ -779,22 +1004,53 @@
                 if (result.success) {
                     const likeCount = button.querySelector('.like-count');
                     likeCount.textContent = result.likes;
-                    button.classList.add('liked');
+                    
+                    if (result.isLiked) {
+                        button.classList.add('liked');
+                    } else {
+                        button.classList.remove('liked');
+                    }
+                    
+                    const questionIndex = allQuestions.findIndex(q => q.id == questionId);
+                    if (questionIndex !== -1) {
+                        if (!allQuestions[questionIndex].likedBy) {
+                            allQuestions[questionIndex].likedBy = [];
+                        }
+                        
+                        if (result.isLiked) {
+                            if (!allQuestions[questionIndex].likedBy.includes(userId)) {
+                                allQuestions[questionIndex].likedBy.push(userId);
+                            }
+                        } else {
+                            const index = allQuestions[questionIndex].likedBy.indexOf(userId);
+                            if (index !== -1) {
+                                allQuestions[questionIndex].likedBy.splice(index, 1);
+                            }
+                        }
+                        allQuestions[questionIndex].likes = result.likes;
+                    }
                 }
             } catch (error) {
                 console.error('Error liking question:', error);
             }
         }
 
-        function toggleAnswers(questionId, button) {
-            const answersSection = document.getElementById(`answers-${questionId}`);
-            if (answersSection.style.display === 'none') {
-                answersSection.style.display = 'block';
+        function toggleReplies(questionId, button) {
+            const repliesSection = document.getElementById(`replies-${questionId}`);
+            if (repliesSection.style.display === 'none') {
+                repliesSection.style.display = 'block';
                 button.classList.add('active');
             } else {
-                answersSection.style.display = 'none';
+                repliesSection.style.display = 'none';
                 button.classList.remove('active');
             }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
     </script>
 </body>

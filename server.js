@@ -14,72 +14,80 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Function to read questions with error handling
+// Function to read questions
 async function readQuestionsFile() {
     try {
         const data = await fs.readFile(QUESTIONS_FILE, 'utf8');
         if (!data.trim()) {
-            // File is empty, return default structure
             return { questions: [] };
         }
         return JSON.parse(data);
     } catch (error) {
-        // If file doesn't exist or is corrupted, return default structure
+        console.error('Error reading questions file:', error);
         return { questions: [] };
     }
 }
 
 // Function to write questions
 async function writeQuestionsFile(questionsData) {
-    await fs.writeFile(QUESTIONS_FILE, JSON.stringify(questionsData, null, 2));
+    try {
+        await fs.writeFile(QUESTIONS_FILE, JSON.stringify(questionsData, null, 2));
+        console.log('✅ Wrote to questions.json');
+        return true;
+    } catch (error) {
+        console.error('❌ Error writing questions file:', error);
+        return false;
+    }
 }
 
-// Ensure questions.json exists on startup
+// Ensure questions.json exists
 async function initializeQuestionsFile() {
     try {
         await fs.access(QUESTIONS_FILE);
     } catch {
-        await fs.writeFile(QUESTIONS_FILE, JSON.stringify({ questions: [] }, null, 2));
+        await writeQuestionsFile({ questions: [] });
         console.log('Created questions.json file');
     }
 }
 
-// API endpoint to submit questions
+// Submit question
 app.post('/api/submit-question', async (req, res) => {
     try {
-        const { name, email, question, timestamp, ip, userAgent } = req.body;
+        const { name, email, question } = req.body;
         
-        // Validate required fields
-        if (!question) {
+        if (!question || question.trim().length < 5) {
             return res.status(400).json({ 
                 success: false, 
-                message: 'Question is required' 
+                message: 'Question must be at least 5 characters' 
             });
         }
         
-        // Read existing questions
         const questionsData = await readQuestionsFile();
         
-        // Add new question
         const newQuestion = {
             id: Date.now(),
             name: name || 'Anonymous',
-            email: email || 'anonymous@example.com',
-            question: question,
-            timestamp: timestamp || new Date().toISOString(),
-            ip: ip || req.ip,
-            userAgent: userAgent || req.headers['user-agent'],
+            email: email || '',
+            question: question.trim(),
+            timestamp: new Date().toISOString(),
+            ip: req.ip,
+            userAgent: req.headers['user-agent'],
             status: 'pending',
-            response: null,
-            respondedAt: null,
             likes: 0,
+            likedBy: [],
             answers: []
         };
         
         questionsData.questions.push(newQuestion);
         
-        // Write back to file
-        await writeQuestionsFile(questionsData);
+        const writeSuccess = await writeQuestionsFile(questionsData);
+        
+        if (!writeSuccess) {
+            return res.status(500).json({ 
+                success: false, 
+                message: 'Failed to save question' 
+            });
+        }
         
         res.json({
             success: true,
@@ -96,7 +104,7 @@ app.post('/api/submit-question', async (req, res) => {
     }
 });
 
-// API endpoint to get all questions
+// Get all questions
 app.get('/api/questions', async (req, res) => {
     try {
         const questionsData = await readQuestionsFile();
@@ -110,76 +118,137 @@ app.get('/api/questions', async (req, res) => {
     }
 });
 
-// API endpoint to update question (add answer)
+// Post reply/answer - FIXED VERSION
 app.post('/api/questions/:id/answer', async (req, res) => {
+    console.log('📥 REPLY REQUEST for question:', req.params.id, 'Data:', req.body);
+    
     try {
         const { id } = req.params;
-        const { answer, author, isOwner } = req.body;
+        const { answer, author, isOwner, parentAnswerId } = req.body;
         
-        if (!answer) {
+        if (!answer || answer.trim().length === 0) {
+            console.log('❌ Empty reply');
             return res.status(400).json({ 
                 success: false, 
-                message: 'Answer is required' 
+                message: 'Reply cannot be empty' 
             });
         }
         
         const questionsData = await readQuestionsFile();
-        
         const questionIndex = questionsData.questions.findIndex(q => q.id == id);
         
         if (questionIndex === -1) {
+            console.log('❌ Question not found:', id);
             return res.status(404).json({ 
                 success: false, 
                 message: 'Question not found' 
             });
         }
         
-        // Add answer
-        const newAnswer = {
+        const newReply = {
             id: Date.now(),
-            content: answer,
+            content: answer.trim(),
             author: author || 'Anonymous',
-            isOwner: isOwner || false,
+            isOwner: !!isOwner,
             date: new Date().toISOString(),
-            answers: []
+            replies: []
         };
         
-        if (!questionsData.questions[questionIndex].answers) {
-            questionsData.questions[questionIndex].answers = [];
+        console.log('📝 Created new reply:', newReply);
+        
+        let added = false;
+        
+        if (parentAnswerId) {
+            // Find parent reply and add to it
+            console.log('🔍 Looking for parent reply:', parentAnswerId);
+            
+            const findAndAddToParent = (replies, parentId, newReply) => {
+                for (let i = 0; i < replies.length; i++) {
+                    if (replies[i].id == parentId) {
+                        console.log('✅ Found parent, adding reply');
+                        if (!replies[i].replies) replies[i].replies = [];
+                        replies[i].replies.push(newReply);
+                        return true;
+                    }
+                    if (replies[i].replies && replies[i].replies.length > 0) {
+                        if (findAndAddToParent(replies[i].replies, parentId, newReply)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            };
+            
+            added = findAndAddToParent(questionsData.questions[questionIndex].answers, parentAnswerId, newReply);
+            
+            if (!added) {
+                console.log('❌ Parent reply not found, adding as top-level');
+                // If parent not found, add as top-level reply
+                if (!questionsData.questions[questionIndex].answers) {
+                    questionsData.questions[questionIndex].answers = [];
+                }
+                questionsData.questions[questionIndex].answers.push(newReply);
+                added = true;
+            }
+        } else {
+            // Add as top-level reply
+            console.log('➕ Adding as top-level reply');
+            if (!questionsData.questions[questionIndex].answers) {
+                questionsData.questions[questionIndex].answers = [];
+            }
+            questionsData.questions[questionIndex].answers.push(newReply);
+            added = true;
+            
+            // Mark as answered if owner replied
+            if (isOwner) {
+                questionsData.questions[questionIndex].status = 'answered';
+                questionsData.questions[questionIndex].response = answer.trim();
+                questionsData.questions[questionIndex].respondedAt = new Date().toISOString();
+            }
         }
         
-        questionsData.questions[questionIndex].answers.push(newAnswer);
-        
-        // Update question status if owner answered
-        if (isOwner) {
-            questionsData.questions[questionIndex].status = 'answered';
-            questionsData.questions[questionIndex].response = answer;
-            questionsData.questions[questionIndex].respondedAt = new Date().toISOString();
+        if (!added) {
+            console.log('❌ Failed to add reply anywhere');
+            return res.status(500).json({ 
+                success: false, 
+                message: 'Failed to add reply' 
+            });
         }
         
-        await writeQuestionsFile(questionsData);
+        console.log('💾 Saving to file...');
+        const writeSuccess = await writeQuestionsFile(questionsData);
         
+        if (!writeSuccess) {
+            console.log('❌ Failed to write to file');
+            return res.status(500).json({ 
+                success: false, 
+                message: 'Failed to save reply' 
+            });
+        }
+        
+        console.log('✅ Reply saved successfully');
         res.json({
             success: true,
-            message: 'Answer added successfully'
+            message: 'Reply posted successfully',
+            reply: newReply
         });
         
     } catch (error) {
-        console.error('Error adding answer:', error);
+        console.error('❌ Error posting reply:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Internal server error' 
+            message: 'Internal server error: ' + error.message 
         });
     }
 });
 
-// API endpoint to like a question
+// Like/unlike question
 app.post('/api/questions/:id/like', async (req, res) => {
     try {
         const { id } = req.params;
+        const { userId = 'anonymous' } = req.body;
         
         const questionsData = await readQuestionsFile();
-        
         const questionIndex = questionsData.questions.findIndex(q => q.id == id);
         
         if (questionIndex === -1) {
@@ -189,17 +258,35 @@ app.post('/api/questions/:id/like', async (req, res) => {
             });
         }
         
-        // Increment likes
-        if (!questionsData.questions[questionIndex].likes) {
-            questionsData.questions[questionIndex].likes = 0;
-        }
-        questionsData.questions[questionIndex].likes++;
+        const question = questionsData.questions[questionIndex];
         
-        await writeQuestionsFile(questionsData);
+        if (!question.likedBy) {
+            question.likedBy = [];
+        }
+        
+        const userIndex = question.likedBy.indexOf(userId);
+        
+        if (userIndex === -1) {
+            question.likedBy.push(userId);
+            question.likes = (question.likes || 0) + 1;
+        } else {
+            question.likedBy.splice(userIndex, 1);
+            question.likes = Math.max(0, (question.likes || 0) - 1);
+        }
+        
+        const writeSuccess = await writeQuestionsFile(questionsData);
+        
+        if (!writeSuccess) {
+            return res.status(500).json({ 
+                success: false, 
+                message: 'Failed to save like' 
+            });
+        }
         
         res.json({
             success: true,
-            likes: questionsData.questions[questionIndex].likes
+            likes: question.likes,
+            isLiked: userIndex === -1
         });
         
     } catch (error) {
@@ -211,9 +298,27 @@ app.post('/api/questions/:id/like', async (req, res) => {
     }
 });
 
-// Serve index.html for any other route
-app.get('*', (req, res) => {
+// Serve HTML files
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/community', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'community.html'));
+});
+
+// Serve other pages
+app.get('/:page', (req, res) => {
+    const page = req.params.page;
+    const filePath = path.join(__dirname, 'public', `${page}.html`);
+    
+    fs.access(filePath)
+        .then(() => {
+            res.sendFile(filePath);
+        })
+        .catch(() => {
+            res.redirect('/');
+        });
 });
 
 // Start server
@@ -221,8 +326,9 @@ async function startServer() {
     await initializeQuestionsFile();
     
     app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
-        console.log(`Questions are saved to: ${QUESTIONS_FILE}`);
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
+        console.log(`🏠 Home: http://localhost:${PORT}/`);
+        console.log(`💬 Community: http://localhost:${PORT}/community`);
     });
 }
 

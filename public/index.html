@@ -138,7 +138,7 @@
             color: white;
         }
 
-        /* Hero Section */
+        /* Enhanced Hero Section */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -174,7 +174,7 @@
             gap: 16px;
         }
 
-        /* Question Container */
+        /* Improved Question Container - FIXED HEIGHT */
         .question-container {
             background: white;
             border-radius: var(--radius);
@@ -342,35 +342,6 @@
             to { transform: scale(1); }
         }
 
-        /* Floating Owner Button */
-        .owner-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: white;
-            border: 2px solid var(--green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--green);
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-
-        .owner-button.authenticated {
-            background: var(--green);
-            color: white;
-        }
-
-        .owner-button:hover {
-            transform: scale(1.1);
-        }
-
         /* Topics Grid */
         .topics-grid {
             display: grid;
@@ -458,7 +429,7 @@
             border-radius: 2px;
         }
 
-        /* FAQ Section */
+        /* Improved FAQ Section */
         .faq-section {
             margin: 80px 0;
         }
@@ -621,13 +592,6 @@
                 font-size: 2rem;
                 margin: 60px 0 30px;
             }
-
-            .owner-button {
-                width: 44px;
-                height: 44px;
-                bottom: 20px;
-                right: 20px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -650,17 +614,6 @@
             .question-textarea {
                 height: 130px;
                 padding: 12px;
-            }
-
-            .owner-button {
-                width: 40px;
-                height: 40px;
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .owner-button i {
-                font-size: 16px;
             }
         }
 
@@ -696,15 +649,17 @@
             </div>
 
             <nav>
-                <a href="#key-disagreements">Key Disagreements</a>
-                <a href="#proving-islam">Proving Islam</a>
-                <a href="#faq-section">FAQ</a>
-                <a href="community.html">Q&A</a>
-            </nav>
+    <a href="#key-disagreements">Key Disagreements</a>
+    <a href="#proving-islam">Proving Islam</a>
+    <a href="#faq-section">FAQ</a>
+    <a href="/community.html">Q&A</a>  <!-- Added / -->
+</nav>
 
-            <a class="cta" href="community.html">
-                <i class="fas fa-question-circle"></i> View Questions
-            </a>
+<a class="cta" href="/community.html">
+    <i class="fas fa-question-circle"></i> View Questions
+</a>
+
+
         </header>
 
         <!-- Hero Section with Question Form -->
@@ -768,45 +723,279 @@
             </div>
         </section>
 
-        <!-- Key Disagreements Section -->
+        <!-- Key Disagreements Section - REVISED -->
         <h2 id="key-disagreements">Key Disagreements Between Islam and Christianity</h2>
         <div class="topics-grid" role="list">
-            <!-- Your existing cards here - keep them as they are -->
             <article class="card" role="listitem">
                 <h3>Jesus Never Claimed Divinity</h3>
                 <p>Examining Jesus' own statements about his nature and mission versus later Christian doctrines</p>
                 <a class="btn" href="jesus-divinity.html">Read Analysis</a>
             </article>
-            <!-- ... rest of your cards ... -->
+
+            <article class="card" role="listitem">
+                <h3>Evolution of Trinity Doctrine</h3>
+                <p>How the concept of Trinity developed over centuries through church councils</p>
+                <a class="btn" href="trinity-evolution.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Biblical Textual Integrity</h3>
+                <p>Anonymous authorship and textual variations in the New Testament</p>
+                <a class="btn" href="biblical-integrity.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Paul: Apostle or Apostate?</h3>
+                <p>Evaluating Paul's teachings versus Jesus' original message</p>
+                <a class="btn" href="paul-apostate.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Pagan Origins of Christianity</h3>
+                <p>Pagan influences on Christian doctrines versus pure monotheism</p>
+                <a class="btn" href="pagan-origins.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Jesus' Teachings vs Christianity</h3>
+                <p>How Jesus' original message contradicts modern Christian doctrines</p>
+                <a class="btn" href="jesus-vs-christianity.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Original Sin & Atonement</h3>
+                <p>Islamic rejection of inherited sin versus Christian doctrine of atonement</p>
+                <a class="btn" href="original-sin.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Crucifixion Narrative</h3>
+                <p>Is Crucifixion really historically accurate?</p>
+                <a class="btn" href="crucifixion.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Salvation Concept</h3>
+                <p>Faith versus works in Islamic and Christian theology</p>
+                <a class="btn" href="salvation.html">Read Analysis</a>
+            </article>
         </div>
 
         <!-- Proving Islam Section -->
         <h2 id="proving-islam">Proving Islam: Evidence & Responses</h2>
         <div class="topics-grid" role="list">
-            <!-- Your existing cards here - keep them as they are -->
             <article class="card" role="listitem">
                 <h3>Refuting Islamic Dilemma</h3>
                 <p>Addressing common misconceptions and objections about Islam</p>
                 <a class="btn" href="refuting-dilemma.html">Read Analysis</a>
             </article>
-            <!-- ... rest of your cards ... -->
+
+            <article class="card" role="listitem">
+                <h3>The Age of Aisha</h3>
+                <p>Historical context and scholarly perspectives</p>
+                <a class="btn" href="age-of-aisha.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Claims Against Prophet Muhammad <span class="pbuh">ﷺ</span></h3>
+                <p>Responding to criticisms of Prophet Muhammad's character</p>
+                <a class="btn" href="prophet-claims.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Prophethood Evidence</h3>
+                <p>Evidence for Muhammad's prophethood and responses to objections</p>
+                <a class="btn" href="prophethood.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Muhammad <span class="pbuh">ﷺ</span> in the Bible</h3>
+                <p>Biblical prophecies pointing to Prophet Muhammad</p>
+                <a class="btn" href="muhammad-in-bible.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Scientific Miracles</h3>
+                <p>Scientific facts in the Quran unknown at the time</p>
+                <a class="btn" href="scientific-miracles.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Quran Preservation</h3>
+                <p>Evidence for perfect preservation of the Quranic text</p>
+                <a class="btn" href="quran-preservation.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Islamic View of Prophets</h3>
+                <p>Understanding the role and status of prophets in Islam</p>
+                <a class="btn" href="islamic-prophets.html">Read Analysis</a>
+            </article>
+
+            <article class="card" role="listitem">
+                <h3>Sharia & Governance</h3>
+                <p>Clarifying Islamic law and historical development</p>
+                <a class="btn" href="sharia-governance.html">Read Analysis</a>
+            </article>
         </div>
 
-        <!-- FAQ Section -->
+        <!-- FAQ Section - Accordion Style -->
         <section class="faq-section" id="faq-section">
             <h2>Frequently Asked Questions</h2>
+
             <div class="faq-container">
-                <!-- Your existing FAQ items here - keep them as they are -->
                 <div class="faq-item">
                     <div class="faq-question">
                         <span>What are the Taurah and the Injil in the Quran?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
+
                     <div class="faq-answer">
-                        <!-- FAQ content -->
+                        <p>In the Quran, the <strong>Taurah (Torah)</strong> and the <strong>Injil (Gospel)</strong> are described as original revelations from Allah, sent to <strong>Moses</strong> and <strong>Jesus</strong> as direct words of divine guidance.</p>
+
+                        <p class="quran-verse">"Indeed, We sent down the Taurah, in which was guidance and light..." (Quran 5:44)</p>
+                        <p class="quran-verse">"And We gave Jesus, the son of Mary, the Injil, in which was guidance and light..." (Quran 5:46)</p>
+
+                        <p>However, the Quran also teaches that these scriptures were not preserved in their pure form. Over generations, some people <em>"distorted the words with their tongues"</em> (Quran 3:78) and <em>"wrote the Book with their own hands and said, 'This is from Allah'"</em> (Quran 2:79). This shows both verbal and written distortion — where divine revelation was mixed with human changes and interpretations.</p>
+
+                        <p>Even in Jewish tradition, the Torah exists as both the Written and Oral law, and the Quran's description reflects how interpretation and transmission altered the message. Similarly, the Injil given to Jesus was a single divine revelation, not the four later Gospels written decades after him. The existing Gospels may preserve traces of that message, but they are not the original Injil mentioned in the Quran.</p>
+
+                        <p>When the Quran says, <em>"No one can change the words of Allah"</em> (Quran 6:115), it refers to Allah's eternal and perfect truth — not to the physical copies of scripture that humans later altered. The true Word of Allah remains preserved with Him, while human handling led to changes in the earthly versions.</p>
+
+                        <p>Thus, Islam teaches that the Taurah and Injil were true revelations, but their original forms were lost or changed. The Quran was revealed as the final, preserved message — confirming the truth that remains and correcting what was distorted.</p>
+
+                        <p class="quran-verse">"And We have revealed to you the Book in truth, confirming what was before it of the Scripture and as a criterion over it." (Quran 5:48)</p>
                     </div>
                 </div>
-                <!-- ... rest of your FAQ items ... -->
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is Allah same as the Hebrew God Elohim?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The Qur'an uses the name Allah because that is the word for the one true God in Arabic. Just like the Hebrew Bible uses Elohim, and Jesus in Aramaic used Alaha. These are different languages referring to the same Creator, not different gods.</p>
+
+                        <p class="quran-verse">"Innānī ana Allāh — I am Allah." (Quran 20:14)</p>
+
+                        <p>So the Bible says "I am Elohim," and the Qur'an says "I am Allah." Different languages, same meaning: the one God speaking His identity.</p>
+
+                        <p>Also, the word "Allah" is actually used in the Arabic Torah and Arabic Gospels, where Arab Christians have always called God "Allah" long before Islam existed.</p>
+
+                        <p>Arabic uses two forms:</p>
+                        <ul>
+                            <li><em>ilah</em> = a god (can refer to false deities)</li>
+                            <li><em>Allah</em> = the God (the one true Creator)</li>
+                        </ul>
+
+                        <p>You can say: "Zeus was an ilah for the Greeks," but you cannot call him Allah because Allah is used only for the true God.</p>
+
+                        <p>Jesus spoke Aramaic, and the word for God in his language is Alaha. What Jesus meant is:</p>
+
+                        <p class="quran-verse">"For I have come down from Alaha, not to do my will but the will of Him who sent me." (John 6:38)</p>
+
+                        <p>This shows that Jesus used the same Semitic word-family for God that the Qur'an uses: Elah → Alaha → Allah.</p>
+
+                        <p>Different languages, one meaning: the one eternal Creator.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is everyone going to hell according to Islam?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Islam does not teach that everyone is going to Hell. The message of Islam is that Allah is perfectly just and perfectly merciful. A person is only held accountable for what they truly knew, understood, and deliberately rejected.</p>
+
+                        <p>Those who receive the message of Islam clearly, know it is true, and then consciously reject and mock it are accountable for that rejection. But those who never heard the message, or heard a distorted version of it, are not automatically punished. Allah will judge them with complete justice.</p>
+
+                        <p class="quran-verse">"We never punish a people until We have sent a messenger." (Quran 17:15)</p>
+
+                        <p>This means a person is not punished for something they never had access to or never understood.</p>
+
+                        <p>The Prophet ﷺ also explained that those who never heard the message, or who lived in times or places where the message didn't reach them correctly, will be tested by Allah on the Day of Judgment in a way perfectly suited to His justice and mercy.</p>
+
+                        <p>"Four types of people will present excuses on the Day of Resurrection… the one who lived in between the prophets (and did not hear the message)... Allah will test them, and whoever obeys will enter Paradise." (Hadith reported by Ahmad, authenticated by Ibn Taymiyyah, Ibn al-Qayyim, al-Albani)</p>
+
+                        <p>The Prophet ﷺ also taught that Allah does not punish anyone for something they did not know was wrong:</p>
+
+                        <p>"If I command you to do something, do as much of it as you can; and if I forbid you from something, then avoid it." (Sahih al-Bukhari)</p>
+
+                        <p>A person is responsible only for what they knowingly choose. No one carries the sin of someone else.</p>
+
+                        <p class="quran-verse">"No soul shall bear the burden of another." (Quran 6:164)</p>
+
+                        <p>This principle is one of the clearest statements of divine justice in the Qur'an. Islam does not condemn all people to Hell. Rather, Allah judges each individual according to knowledge, intention, sincerity, and opportunity.</p>
+
+                        <p>Those who never heard the message correctly will not be judged the same as those who heard it clearly and knowingly rejected it. Allah's justice ensures that every person is treated fairly, and His mercy ensures that no one is wronged.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do Muslims believe in original sin?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The concept of original sin was introduced by Paul, who was a self-appointed apostle. He brought the idea that every human inherits sin from Adam and Eve, even though Jesus himself taught people to ask directly for forgiveness.</p>
+
+                        <p>"For if you forgive others their trespasses, your heavenly Father will also forgive you. But if you do not forgive others their trespasses, neither will your Father forgive your trespasses." (Matthew 6:14–15)</p>
+
+                        <p>This clearly shows that forgiveness comes from seeking God's mercy, not through inherited guilt.</p>
+
+                        <p>In Islam, the story of Adam and Eve is very different. Both of them asked Allah for forgiveness after their mistake, and Allah, being Most Merciful, forgave them. There is no concept of inherited sin in Islam. Every human being is born pure and is responsible only for his or her own actions.</p>
+
+                        <p>Muslims also believe in salvation, but salvation in Islam comes through faith in Allah, doing good deeds, believing in His prophets, and the Last Day.</p>
+
+                        <p class="quran-verse">"Indeed, those who have believed and done righteous deeds will have gardens beneath which rivers flow. That is the great attainment." (Quran 85:11)</p>
+
+                        <p>This verse shows that salvation depends on belief and righteous action, not on someone else's sacrifice or sin.</p>
+
+                        <p class="quran-verse">"No soul shall bear the burden of another." (Quran 6:164)</p>
+
+                        <p>This means that everyone is judged for their own actions, and those who sincerely repent and do good will be forgiven by Allah. If a person does wrong and never seeks forgiveness, they may face punishment for a time, but believers will ultimately enter Paradise by Allah's mercy.</p>
+
+                        <p>This understanding of sin and salvation makes logical sense — every person is responsible for what they do, and everyone has the chance to seek forgiveness and earn Allah's mercy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What does it mean that Jesus is called "Word of God" and "Spirit from God" in the Quran?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+
+                    <div class="faq-answer">
+                        <p>Some Christians interpret the Quran as referring to Jesus as the "Word of God" and a "Spirit from Him." However, the actual verse in the Quran states:</p>
+
+                        <p class="quran-verse">"O People of the Book, do not go to extremes in your religion or say about Allah except the truth. The Messiah, Jesus, son of Mary, was no more than a messenger of Allah and the fulfillment of His Word through Mary and a spirit from Him. So believe in Allah and His messengers and do not say, 'Trinity.' Stop!—for your own good. Indeed, Allah is the only One God. Glory be to Him! He is far above having a son. To Him belongs whatever is in the heavens and whatever is on the earth." (Quran 4:171)</p>
+
+                        <p>Applying the Christian interpretation literally by replacing "Word of God" and "Spirit from Him" with "Jesus" makes the verse read:</p>
+
+                        <p class="quran-verse">"O People of the Book, do not go to extremes in your religion or say about Allah except the truth. The Messiah, Jesus, son of Mary, was no more than a messenger of Allah and the fulfillment of Jesus through Mary and a Jesus by command from Him... "</p>
+
+                        <p>This clearly shows that the Christian logic leads to an absurd conclusion. The Quran further clarifies the creation of Jesus:</p>
+
+                        <p class="quran-verse">"Indeed, the example of Jesus to Allah is like that of Adam. He created him from dust; then He said to him, 'Be,' and he was." (Quran 3:59)</p>
+
+                        <p>This analogy underscores that Jesus was created by Allah's command, similar to Adam, without implying divinity.</p>
+
+                        <p>Additionally, the phrase "Spirit from Him" is interpreted as the Archangel Gabriel (Rūḥ al-Qudus), who transmitted the spirit to Mary to facilitate the miraculous birth of Jesus. Gabriel is mentioned by several names in the Quran, and one of his titles is Holy Spirit, but this does not imply that the spirit itself is divine, nor does it make Jesus divine.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Chose one: Jesus or Muhammad</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, Muslims believe in and respect all prophets, including Jesus and Muhammad. The Quran commands Muslims to believe in all prophets without distinction.</p>
+                        <p class="quran-verse">"The Messenger has believed in what was revealed to him from his Lord, and so have the believers. All of them have believed in Allah and His angels and His books and His messengers, saying, 'We make no distinction between any of His messengers.' And they say, 'We hear and we obey. We seek Your forgiveness, our Lord, and to You is the destination.'" (Quran 2:285)</p>
+                        <p class="quran-verse">"Say, [O believers], 'We have believed in Allah and what has been revealed to us and what has been revealed to Abraham, Ishmael, Isaac, Jacob, and the Descendants [al-Asbat], and what was given to Moses and Jesus and what was given to the prophets from their Lord. We make no distinction between any of them, and we are Muslims [in submission] to Him.'" (Quran 3:84)</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -823,11 +1012,6 @@
         </footer>
     </div>
 
-    <!-- Floating Owner Button -->
-    <div class="owner-button" id="ownerButton" title="Owner Authentication">
-        <i class="fas fa-user-shield"></i>
-    </div>
-
     <script>
         // FAQ Accordion Functionality
         document.querySelectorAll('.faq-question').forEach(question => {
@@ -835,10 +1019,12 @@
                 const faqItem = question.parentElement;
                 const isActive = faqItem.classList.contains('active');
                 
+                // Close all FAQ items
                 document.querySelectorAll('.faq-item').forEach(item => {
                     item.classList.remove('active');
                 });
                 
+                // Open clicked item if it wasn't active
                 if (!isActive) {
                     faqItem.classList.add('active');
                 }
@@ -857,52 +1043,7 @@
             errorElement.style.display = 'none';
         }
 
-        // Owner Authentication
-        const OWNER_CODE = "7192834650";
-        let isOwnerAuthenticated = localStorage.getItem('ownerAuthenticated') === 'true';
-
-        // Update owner button on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateOwnerButton();
-        });
-
-        function updateOwnerButton() {
-            const btn = document.getElementById('ownerButton');
-            if (isOwnerAuthenticated) {
-                btn.classList.add('authenticated');
-                btn.title = "Owner (Authenticated) - Click to logout";
-            } else {
-                btn.classList.remove('authenticated');
-                btn.title = "Owner Authentication";
-            }
-            
-            btn.onclick = function() {
-                if (isOwnerAuthenticated) {
-                    if (confirm("Log out as owner?")) {
-                        localStorage.removeItem('ownerAuthenticated');
-                        isOwnerAuthenticated = false;
-                        updateOwnerButton();
-                        alert("Logged out.");
-                    }
-                } else {
-                    authenticateOwner();
-                }
-            };
-        }
-
-        function authenticateOwner() {
-            const code = prompt("Enter owner code:");
-            if (code === OWNER_CODE) {
-                isOwnerAuthenticated = true;
-                localStorage.setItem('ownerAuthenticated', 'true');
-                updateOwnerButton();
-                alert("Owner authentication successful!");
-            } else if (code !== null) {
-                alert("Invalid code.");
-            }
-        }
-
-        // Question Form Submission - USING BACKEND API
+        // Question Form Submission - USING BACKEND API (Fixed Version)
         document.getElementById('questionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -932,7 +1073,7 @@
                 const userAgent = navigator.userAgent;
                 const timestamp = new Date().toISOString();
                 
-                // Send to backend
+                // Send to backend API - THIS IS WHAT MAKES IT APPEAR IN COMMUNITY.HTML
                 const response = await fetch('/api/submit-question', {
                     method: 'POST',
                     headers: {
@@ -943,7 +1084,6 @@
                         email: "user@example.com",
                         question: question,
                         timestamp: timestamp,
-                        ip: "unknown",
                         userAgent: userAgent
                     })
                 });
@@ -951,14 +1091,16 @@
                 const result = await response.json();
                 
                 if (result.success) {
+                    // Show success message
                     document.getElementById('questionForm').style.display = 'none';
                     document.getElementById('successMessage').style.display = 'block';
                     
+                    // Redirect to community page after delay
                     setTimeout(() => {
                         window.location.href = 'community.html?newQuestion=true&t=' + Date.now();
                     }, 2000);
                 } else {
-                    throw new Error(result.message);
+                    throw new Error(result.message || 'Failed to submit question');
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -968,7 +1110,7 @@
             }
         });
 
-        // Smooth scrolling
+        // Smooth scrolling for FAQ section
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
