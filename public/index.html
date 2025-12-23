@@ -880,6 +880,8 @@
 
             .question-container {
                 height: 420px;
+                max-width: 90%; /* Fix: Centered with breathing room */
+                margin: 20px auto;
             }
 
             .question-header {
@@ -902,7 +904,7 @@
     <div id="app"></div>
 
     <!-- Page-specific content -->
-    <script type="module">
+<script>
         async function loadBaseHTML() {
             try {
                 const response = await fetch('base.html');
@@ -925,8 +927,8 @@
                 if (header) {
                     document.body.insertBefore(header, document.body.firstChild);
                     
-                    // Set up navigation for index.html
-                    const navLinks = header.querySelector('#mainNav');
+                    // Set up navigation for index.html AFTER header is in DOM
+                    const navLinks = document.querySelector('#mainNav'); // Query from live DOM
                     if (navLinks) {
                         navLinks.innerHTML = `
                             <a href="#key-disagreements"><i class="fas fa-scale-balanced"></i> Key Disagreements</a>
@@ -934,6 +936,9 @@
                             <a href="#faq-section"><i class="fas fa-circle-question"></i> FAQ</a>
                         `;
                     }
+                    
+                    // Initialize mobile menu AFTER header is loaded
+                    initMobileMenu();
                 }
                 
                 // Insert footer at the end
@@ -956,10 +961,165 @@
                 console.error('Error loading base template:', error);
             }
         }
-        
-        document.addEventListener('DOMContentLoaded', loadBaseHTML);
-    </script>
 
+        // Separate mobile menu initialization function
+        function initMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    const icon = this.querySelector('i');
+                    
+                    if (mainNav.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    const isClickInside = mainNav.contains(event.target) || menuToggle.contains(event.target);
+                    
+                    if (!isClickInside && mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close menu when a nav link is clicked
+                const navLinks = mainNav.querySelectorAll('a[href^="#"]');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mainNav.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+        }
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', loadBaseHTML);
+
+        // FAQ Accordion Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Form Validation
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function hideError(elementId) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.style.display = 'none';
+        }
+
+        // Question Form Submission
+        document.getElementById('questionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const question = document.getElementById('question').value.trim();
+            
+            hideError('questionError');
+            
+            let isValid = true;
+            
+            if (!question) {
+                showError('questionError', 'Question is required');
+                isValid = false;
+            } else if (question.length < 20) {
+                showError('questionError', 'Question must be at least 20 characters');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
+            submitBtn.disabled = true;
+            
+            try {
+                const userAgent = navigator.userAgent;
+                const timestamp = new Date().toISOString();
+                
+                const response = await fetch('/api/submit-question', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: "User",
+                        email: "user@example.com",
+                        question: question,
+                        timestamp: timestamp,
+                        userAgent: userAgent
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('questionForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'community.html?newQuestion=true&t=' + Date.now();
+                    }, 2000);
+                } else {
+                    throw new Error(result.message || 'Failed to submit question');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('questionError', 'Failed to submit. Please try again.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Smooth scrolling for FAQ section
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const section = document.querySelector(href);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
 <!-- Hero Section with Question Form -->
 <section class="hero">
     <div class="page-container">
