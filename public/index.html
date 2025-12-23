@@ -239,13 +239,13 @@
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
             padding: 0;
-            margin: 20px auto;
+            margin: 20px auto; /* CENTERED BY DEFAULT */
             overflow: hidden;
             position: relative;
             animation: slideUp 0.8s ease-out 0.6s both;
             color:var(--charcoal);
             width: 100%;
-            max-width: 500px;
+            max-width: 500px; /* LIMIT WIDTH ON MOBILE */
         }
 
         .question-header {
@@ -689,7 +689,8 @@
 
             .question-container {
                 height: 500px;
-                margin: 0 auto;
+                margin: 0 auto; /* ENSURES CENTERING ON TABLET */
+                max-width: 500px; /* KEEPS CONSISTENT WIDTH */
             }
 
             .topics-grid {
@@ -752,7 +753,7 @@
                 display: flex;
                 flex-direction: column;
                 max-width: 100%;
-                margin: 0;
+                margin: 0; /* REMOVES AUTO MARGIN ON DESKTOP - ALLOWED TO TAKE FULL WIDTH */
             }
 
             .question-header {
@@ -825,7 +826,7 @@
         }
 
         /* ============================================================
-           RESPONSIVE ADJUSTMENTS
+           RESPONSIVE ADJUSTMENTS - FIXED FOR CENTERING
         ============================================================ */
         @media (max-width: 1024px) {
             .hero {
@@ -834,6 +835,7 @@
                 gap: 40px;
                 padding: 40px 20px;
                 text-align: center;
+                align-items: center; /* ADDED FOR CENTERING */
             }
 
             .hero h1 {
@@ -851,10 +853,18 @@
                 align-items: center;
             }
 
+            /* CRITICAL FIX: Ensure question container is centered */
+            .hero-right {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+            
             .question-container {
                 height: 420px;
-                margin: 0 auto;
-                max-width: 500px;
+                margin: 0 auto !important; /* FORCE CENTERING */
+                max-width: 500px !important; /* PREVENT OVERWIDE */
+                width: 100%;
             }
         }
 
@@ -871,6 +881,12 @@
                 font-size: 2rem;
                 margin: 60px auto 30px;
             }
+            
+            /* ENSURE CENTERING ON SMALLER TABLETS */
+            .question-container {
+                max-width: 85% !important;
+                margin: 20px auto !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -880,8 +896,8 @@
 
             .question-container {
                 height: 420px;
-                max-width: 90%; /* Fix: Centered with breathing room */
-                margin: 20px auto;
+                max-width: 90% !important; /* Fix: Centered with breathing room */
+                margin: 20px auto !important; /* FORCE CENTERING */
             }
 
             .question-header {
@@ -895,6 +911,14 @@
             .question-textarea {
                 height: 130px;
                 padding: 12px;
+            }
+        }
+        
+        /* EXTRA SAFEGUARD FOR MEDIUM TABLETS */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .question-container {
+                max-width: 85% !important;
+                margin: 20px auto !important;
             }
         }
     </style>
