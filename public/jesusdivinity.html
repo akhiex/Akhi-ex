@@ -14,491 +14,500 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Page-Specific CSS -->
-    <style>
-        /* ============================================================
-           ROOT VARIABLES (Matches base.html)
-        ============================================================ */
-        :root {
-            --off-white: #f8f9fa;
-            --light-gray: #e9ecef;
-            --medium-gray: #adb5bd;
-            --dark-charcoal: #212529;
-            --deep-charcoal: #111316;
-            --silver: #6c757d;
-            --gold: #D4AF37;
-            --light-gold: rgba(212, 175, 55, 0.1);
-            --medium-gold: rgba(212, 175, 55, 0.15);
-            --border-light: #dee2e6;
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05);
-            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.08);
-            --shadow-strong: 0 15px 50px rgba(0, 0, 0, 0.12);
-            --radius: 12px;
-            --radius-sm: 8px;
-        }
+<!-- Page-Specific CSS -->
+<style>
+    /* ============================================================
+       ROOT VARIABLES (Matches base.html)
+    ============================================================ */
+    :root {
+        --off-white: #f8f9fa;
+        --light-gray: #e9ecef;
+        --medium-gray: #adb5bd;
+        --dark-charcoal: #212529;
+        --deep-charcoal: #111316;
+        --silver: #6c757d;
+        --gold: #D4AF37;
+        --light-gold: rgba(212, 175, 55, 0.1);
+        --medium-gold: rgba(212, 175, 55, 0.15);
+        --border-light: #dee2e6;
+        --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05);
+        --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.08);
+        --shadow-strong: 0 15px 50px rgba(0, 0, 0, 0.12);
+        --radius: 12px;
+        --radius-sm: 8px;
+    }
 
-        /* ============================================================
-           BASE RESET
-        ============================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* ============================================================
+       BASE RESET
+    ============================================================ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--off-white);
-            color: var(--dark-charcoal);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--off-white);
+        color: var(--dark-charcoal);
+        line-height: 1.6;
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
 
-        main {
-            flex: 1;
-            padding: 40px 0;
-            animation: fadeIn 0.8s ease-out;
-        }
+    main {
+        flex: 1;
+        padding: 40px 0;
+        animation: fadeIn 0.8s ease-out;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
 
-        /* ============================================================
-           HERO SECTION - MOBILE FIRST
-        ============================================================ */
-        .page-hero {
-            text-align: center;
-            padding: 40px 0 30px;
-            margin-bottom: 30px;
-        }
+    /* ============================================================
+       HERO SECTION - MOBILE FIRST
+    ============================================================ */
+    .page-hero {
+        text-align: center;
+        padding: 40px 0 30px;
+        margin-bottom: 30px;
+    }
 
+    /* MOBILE TEXT SIZES */
+    .page-hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem; /* Smaller for mobile */
+        color: var(--deep-charcoal);
+        margin-bottom: 15px;
+        line-height: 1.3;
+        font-weight: 700;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem; /* Smaller for mobile */
+        color: var(--silver);
+        max-width: 800px;
+        margin: 0 auto 25px;
+        font-weight: 400;
+    }
+
+    .hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .tag {
+        background: var(--light-gold);
+        color: var(--gold);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* ============================================================
+       VIDEO SECTION - MOBILE FIRST
+    ============================================================ */
+    .video-section {
+        margin: 40px auto;
+        max-width: 900px;
+    }
+
+    .video-container {
+        position: relative;
+        width: 100%;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-strong);
+        background: #000;
+    }
+
+    video {
+        width: 100%;
+        height: auto;
+        display: block;
+        max-height: 500px;
+    }
+
+    .video-caption {
+        text-align: center;
+        margin-top: 15px;
+        color: var(--silver);
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+
+    .video-caption i {
+        color: var(--gold);
+        margin-right: 5px;
+    }
+
+    /* ============================================================
+       CONTENT SECTIONS - CLEAR & UNDERSTANDABLE
+    ============================================================ */
+    .content-section {
+        margin: 50px 0;
+        padding: 30px 20px;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-medium);
+        border: 1px solid var(--border-light);
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--light-gold);
+    }
+
+    .section-icon {
+        background: var(--light-gold);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem; /* Smaller for mobile */
+        color: var(--deep-charcoal);
+        margin: 0;
+        line-height: 1.3;
+    }
+
+    /* ============================================================
+       CLEAR LOGICAL ARGUMENTS
+    ============================================================ */
+    .argument-block {
+        background: #f8f9fa;
+        border-radius: var(--radius-sm);
+        padding: 25px;
+        margin-bottom: 25px;
+        border-left: 4px solid var(--gold);
+    }
+
+    .argument-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        color: var(--deep-charcoal);
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .argument-title i {
+        color: var(--gold);
+    }
+
+    .argument-content {
+        color: var(--dark-charcoal);
+        line-height: 1.7;
+        font-size: 1rem; /* Smaller for mobile */
+    }
+
+    .argument-content p {
+        margin-bottom: 15px;
+    }
+
+    /* ============================================================
+       SIMPLE BIBLE VERSE COMPARISON
+    ============================================================ */
+    .verse-comparison {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin: 30px 0;
+    }
+
+    .verse-card {
+        background: white;
+        border-radius: var(--radius-sm);
+        padding: 25px;
+        border: 1px solid var(--border-light);
+        transition: var(--transition);
+    }
+
+    .verse-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-medium);
+        border-color: var(--gold);
+    }
+
+    .verse-reference {
+        font-weight: 600;
+        color: var(--gold);
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .verse-text {
+        font-size: 1rem; /* Smaller for mobile */
+        line-height: 1.7;
+        color: var(--dark-charcoal);
+        margin-bottom: 15px;
+        font-style: italic;
+        padding: 10px;
+        background: var(--light-gold);
+        border-radius: 6px;
+    }
+
+    .verse-explanation {
+        font-size: 1rem;
+        color: var(--dark-charcoal);
+        line-height: 1.6;
+        padding-top: 15px;
+        border-top: 1px dashed var(--border-light);
+    }
+
+    /* ============================================================
+       EVIDENCE LIST - CLEAR AND SIMPLE
+    ============================================================ */
+    .evidence-list {
+        list-style: none;
+        padding: 0;
+        margin: 25px 0;
+    }
+
+    .evidence-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        background: white;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border-light);
+    }
+
+    .evidence-number {
+        background: var(--gold);
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        flex-shrink: 0;
+        font-size: 0.9rem;
+    }
+
+    .evidence-content h4 {
+        color: var(--deep-charcoal);
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .evidence-content p {
+        color: var(--dark-charcoal);
+        line-height: 1.6;
+        font-size: 0.95rem; /* Smaller for mobile */
+    }
+
+    /* ============================================================
+       KEY POINT HIGHLIGHTS
+    ============================================================ */
+    .key-point {
+        background: linear-gradient(135deg, var(--light-gold), rgba(212, 175, 55, 0.05));
+        border-radius: var(--radius);
+        padding: 25px;
+        margin: 30px 0;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        position: relative;
+    }
+
+    .key-point::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--gold);
+    }
+
+    .key-point-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--deep-charcoal);
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .key-point-title i {
+        color: var(--gold);
+    }
+
+    /* ============================================================
+       QURAN SECTION WITH 5:72
+    ============================================================ */
+    .quran-section {
+        margin: 60px 0;
+        padding: 40px 25px;
+        background: linear-gradient(135deg, var(--deep-charcoal), #1a1d23);
+        color: white;
+        border-radius: var(--radius);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quran-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        color: var(--gold);
+        position: relative;
+        z-index: 1;
+    }
+
+    .quran-arabic {
+        font-family: 'Traditional Arabic', 'Times New Roman', serif;
+        font-size: 1.5rem; /* Smaller for mobile */
+        line-height: 2.2;
+        margin: 25px 0;
+        position: relative;
+        z-index: 1;
+        color: #f0f0f0;
+        direction: rtl;
+    }
+
+    .quran-translation {
+        font-size: 1rem; /* Smaller for mobile */
+        color: var(--light-gray);
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        line-height: 1.7;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: var(--radius-sm);
+    }
+
+    .quran-reference {
+        margin-top: 20px;
+        color: var(--gold);
+        font-size: 0.95rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ============================================================
+       RESPONSIVE DESIGN - TABLET (≥768px)
+    ============================================================ */
+    @media (min-width: 768px) {
         .page-hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: var(--deep-charcoal);
-            margin-bottom: 15px;
-            line-height: 1.3;
-            font-weight: 700;
+            font-size: 2.8rem; /* Restore original for tablet */
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--silver);
-            max-width: 800px;
-            margin: 0 auto 25px;
-            font-weight: 400;
+            font-size: 1.2rem; /* Restore original for tablet */
         }
 
-        .hero-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .tag {
-            background: var(--light-gold);
-            color: var(--gold);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* ============================================================
-           VIDEO SECTION - MOBILE FIRST
-        ============================================================ */
-        .video-section {
-            margin: 40px auto;
-            max-width: 900px;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-strong);
-            background: #000;
-        }
-
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
-            max-height: 500px;
-        }
-
-        .video-caption {
-            text-align: center;
-            margin-top: 15px;
-            color: var(--silver);
-            font-size: 0.9rem;
-            padding: 0 10px;
-        }
-
-        .video-caption i {
-            color: var(--gold);
-            margin-right: 5px;
-        }
-
-        /* ============================================================
-           CONTENT SECTIONS - CLEAR & UNDERSTANDABLE
-        ============================================================ */
         .content-section {
-            margin: 50px 0;
-            padding: 30px 20px;
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-medium);
-            border: 1px solid var(--border-light);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--light-gold);
-        }
-
-        .section-icon {
-            background: var(--light-gold);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            font-size: 1.3rem;
-            flex-shrink: 0;
+            padding: 40px 35px;
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--deep-charcoal);
-            margin: 0;
-            line-height: 1.3;
+            font-size: 2.1rem; /* Restore original for tablet */
         }
 
-        /* ============================================================
-           CLEAR LOGICAL ARGUMENTS
-        ============================================================ */
-        .argument-block {
-            background: #f8f9fa;
-            border-radius: var(--radius-sm);
-            padding: 25px;
-            margin-bottom: 25px;
-            border-left: 4px solid var(--gold);
-        }
-
-        .argument-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            color: var(--deep-charcoal);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .argument-title i {
-            color: var(--gold);
-        }
-
-        .argument-content {
-            color: var(--dark-charcoal);
-            line-height: 1.7;
-            font-size: 1.05rem;
-        }
-
-        .argument-content p {
-            margin-bottom: 15px;
-        }
-
-        /* ============================================================
-           SIMPLE BIBLE VERSE COMPARISON
-        ============================================================ */
         .verse-comparison {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .verse-card {
-            background: white;
-            border-radius: var(--radius-sm);
-            padding: 25px;
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-
-        .verse-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-            border-color: var(--gold);
-        }
-
-        .verse-reference {
-            font-weight: 600;
-            color: var(--gold);
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .verse-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--dark-charcoal);
-            margin-bottom: 15px;
-            font-style: italic;
-            padding: 10px;
-            background: var(--light-gold);
-            border-radius: 6px;
-        }
-
-        .verse-explanation {
-            font-size: 1rem;
-            color: var(--dark-charcoal);
-            line-height: 1.6;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-light);
-        }
-
-        /* ============================================================
-           EVIDENCE LIST - CLEAR AND SIMPLE
-        ============================================================ */
-        .evidence-list {
-            list-style: none;
-            padding: 0;
-            margin: 25px 0;
-        }
-
-        .evidence-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            background: white;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-light);
-        }
-
-        .evidence-number {
-            background: var(--gold);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            flex-shrink: 0;
-            font-size: 0.9rem;
-        }
-
-        .evidence-content h4 {
-            color: var(--deep-charcoal);
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .evidence-content p {
-            color: var(--dark-charcoal);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        /* ============================================================
-           KEY POINT HIGHLIGHTS
-        ============================================================ */
-        .key-point {
-            background: linear-gradient(135deg, var(--light-gold), rgba(212, 175, 55, 0.05));
-            border-radius: var(--radius);
-            padding: 25px;
-            margin: 30px 0;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            position: relative;
-        }
-
-        .key-point::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--gold);
-        }
-
-        .key-point-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--deep-charcoal);
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-
-        .key-point-title i {
-            color: var(--gold);
-        }
-
-        /* ============================================================
-           QURAN SECTION WITH 5:72
-        ============================================================ */
-        .quran-section {
-            margin: 60px 0;
-            padding: 40px 25px;
-            background: linear-gradient(135deg, var(--deep-charcoal), #1a1d23);
-            color: white;
-            border-radius: var(--radius);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
         }
 
         .quran-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--gold);
-            position: relative;
-            z-index: 1;
+            font-size: 2.2rem;
         }
 
         .quran-arabic {
-            font-family: 'Traditional Arabic', 'Times New Roman', serif;
-            font-size: 2rem;
-            line-height: 2.2;
-            margin: 25px 0;
-            position: relative;
-            z-index: 1;
-            color: #f0f0f0;
-            direction: rtl;
+            font-size: 2.3rem; /* Restore original for tablet */
         }
 
         .quran-translation {
-            font-size: 1.1rem;
-            color: var(--light-gray);
+            font-size: 1.1rem; /* Restore original for tablet */
+        }
+    }
+
+    /* ============================================================
+       RESPONSIVE DESIGN - DESKTOP (≥1024px)
+    ============================================================ */
+    @media (min-width: 1024px) {
+        .page-hero h1 {
+            font-size: 3.2rem; /* Restore original for desktop */
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-section {
+            padding: 50px 45px;
+        }
+
+        .section-title {
+            font-size: 2.3rem; /* Restore original for desktop */
+        }
+
+        .verse-comparison {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .evidence-item {
+            padding: 25px;
+        }
+
+        .video-container {
             max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            line-height: 1.7;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--radius-sm);
         }
 
-        .quran-reference {
-            margin-top: 20px;
-            color: var(--gold);
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 1;
+        .quran-arabic {
+            font-size: 2.5rem; /* Restore original for desktop */
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        /* ============================================================
-           RESPONSIVE DESIGN
-        ============================================================ */
-        @media (min-width: 768px) {
-            .page-hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .content-section {
-                padding: 40px 35px;
-            }
-
-            .section-title {
-                font-size: 2.1rem;
-            }
-
-            .verse-comparison {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-
-            .quran-title {
-                font-size: 2.2rem;
-            }
-
-            .quran-arabic {
-                font-size: 2.3rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .page-hero h1 {
-                font-size: 3.2rem;
-                max-width: 900px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .content-section {
-                padding: 50px 45px;
-            }
-
-            .section-title {
-                font-size: 2.3rem;
-            }
-
-            .verse-comparison {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .evidence-item {
-                padding: 25px;
-            }
-
-            .video-container {
-                max-width: 800px;
-                margin: 0 auto;
-            }
-
-            .quran-arabic {
-                font-size: 2.5rem;
-                max-width: 900px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-    </style>
+    }
+</style>
     
     <!-- Load Base Template (Same as index.html) -->
     <script>
