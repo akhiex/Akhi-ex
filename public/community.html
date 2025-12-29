@@ -997,68 +997,96 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ============================================
-           RESPONSIVE NAVIGATION (from base.html)
-           ============================================ */
-        @media (min-width: 768px) {
-            .mobile-nav-toggle {
-                display: none;
-            }
+/* ============================================
+   RESPONSIVE NAVIGATION (from base.html) - FIXED
+   ============================================ */
+@media (min-width: 768px) {
+    .mobile-nav-toggle {
+        display: none;
+    }
 
-            nav {
-                display: flex !important;
-                position: static;
-                background: transparent;
-                backdrop-filter: none;
-                border: none;
-                padding: 0;
-                margin: 0;
-                box-shadow: none;
-                animation: none;
-                gap: 20px;
-            }
+    nav {
+        display: flex !important;
+        position: static;
+        background: transparent;
+        backdrop-filter: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        animation: none;
+        gap: 20px;
+    }
 
-            nav a {
-                padding: 8px 0;
-                margin: 0;
-                background: transparent;
-                border-radius: 0;
-                position: relative;
-            }
+    nav a {
+        padding: 8px 0;
+        margin: 0;
+        background: transparent;
+        border-radius: 0;
+        position: relative;
+    }
 
-            nav a::before {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 0;
-                height: 2px;
-                background: var(--neon-blue);
-                transition: width 0.3s ease;
-            }
+    nav a::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--neon-blue);
+        transition: width 0.3s ease;
+    }
 
-            nav a:hover::before {
-                width: 100%;
-            }
+    nav a:hover::before {
+        width: 100%;
+    }
 
-            nav a:hover {
-                background: transparent;
-                transform: none;
-                box-shadow: none;
-            }
+    nav a:hover {
+        background: transparent;
+        transform: none;
+        box-shadow: none;
+    }
 
-            .side-form-glass {
-                width: 450px;
-                padding: 40px;
-            }
+    .side-form-glass {
+        width: 450px;
+        padding: 40px;
+    }
 
-            .owner-button-glass {
-                width: 70px;
-                height: 70px;
-                bottom: 40px;
-                right: 40px;
-            }
-        }
+    .owner-button-glass {
+        width: 70px;
+        height: 70px;
+        bottom: 40px;
+        right: 40px;
+    }
+}
+
+/* MOBILE STYLES - FIXED */
+@media (max-width: 767px) {
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--glass-white);
+        backdrop-filter: blur(30px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius);
+        padding: 15px;
+        margin-top: 8px;
+        box-shadow: var(--shadow-strong);
+        z-index: 1000;
+        flex-direction: column;
+    }
+
+    nav.active {
+        display: flex !important;
+    }
+
+    .mobile-nav-toggle {
+        display: flex !important;
+    }
+}
 
         @media (min-width: 1024px) {
             .header-content {
