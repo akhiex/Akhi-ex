@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -180,8 +179,8 @@
             position: relative;
             width: 100%;
             background: transparent;
-            margin-bottom: 40px;
-            padding: 20px 0;
+            margin-bottom: 20px; /* REDUCED: From 40px to 20px */
+            padding: 15px 0; /* REDUCED: From 20px to 15px */
             animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
 
@@ -196,7 +195,7 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: var(--border-radius-lg);
-            padding: 15px 25px;
+            padding: 12px 20px; /* REDUCED: From 15px 25px */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -250,106 +249,23 @@
             letter-spacing: 0.5px;
         }
 
-        .simplified-mobile-nav-toggle {
-            width: 48px;
-            height: 48px;
-            background: var(--glass-white);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .simplified-mobile-nav-toggle span {
-            width: 24px;
-            height: 2px;
-            background: var(--pure-white);
-            border-radius: 1px;
-            transition: all var(--transition-fast);
-            transform-origin: center;
-        }
-
-        .simplified-mobile-nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .simplified-mobile-nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .simplified-mobile-nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
         /* ============================================
-           SIMPLIFIED NAVIGATION (Only 3 items)
+           SIMPLIFIED NAVIGATION (Only 3 items) - DESKTOP ONLY
            ============================================ */
         .simplified-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--glass-white);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-top: 10px;
-            box-shadow: var(--shadow-strong);
-            z-index: 9999; /* FIXED: Increased z-index to appear above everything */
-        }
-
-        .simplified-nav.active {
-            display: block;
-        }
-
-        .simplified-nav a {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 20px;
-            color: var(--pure-white);
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 15px;
-            transition: all var(--transition-fast);
-            margin-bottom: 8px;
-        }
-
-        .simplified-nav a:last-child {
-            margin-bottom: 0;
-        }
-
-        .simplified-nav a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(10px);
-        }
-
-        .simplified-nav a i {
-            color: var(--neon-blue);
-            width: 20px;
-            text-align: center;
-            font-size: 18px;
+            display: none; /* Hidden on mobile */
         }
 
         /* ============================================
            HERO SECTION
            ============================================ */
         .hero-container {
-            padding: 150px 20px 80px;
+            padding: 30px 20px 60px; /* CHANGED: Reduced from 40px 20px 80px to 30px 20px 60px */
             max-width: var(--max-width);
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: 50px; /* CHANGED: Reduced from 60px to 50px */
             position: relative;
         }
 
@@ -363,7 +279,7 @@
             font-size: 3.2rem;
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 25px;
+            margin-bottom: 15px; /* REDUCED: From 20px to 15px */
             background: linear-gradient(135deg, var(--pure-white), var(--neon-blue), var(--neon-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -386,7 +302,7 @@
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin: 0 auto 25px; /* REDUCED: From 30px to 25px */
             line-height: 1.7;
             animation: textReveal 1.2s ease-out 0.7s both;
         }
@@ -1021,139 +937,145 @@
             max-width: 600px;
         }
 
-
-/* ============================================
-   RESPONSIVE DESIGN - FIXED
-   ============================================ */
-@media (max-width: 767px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.1rem;
-        padding: 0 10px;
-    }
-    
-    .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0 20px;
-    }
-    
-    .action-btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .question-card-inner {
-        padding: 25px;
-    }
-    
-    .question-title {
-        font-size: 1.3rem;
-    }
-    
-    .question-textarea {
-        min-height: 150px;
-        padding: 20px;
-    }
-    
-    .topics-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 10px;
-    }
-    
-    .topic-card-3d {
-        padding: 25px;
-    }
-    
-    .faq-question-3d {
-        padding: 22px 25px;
-        font-size: 1.1rem;
-    }
-    
-    .faq-answer-3d {
-        padding: 0 25px;
-    }
-    
-    .faq-item-3d.active .faq-answer-3d {
-        padding: 0 25px 25px;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    /* MOBILE NAV FIX FOR INDEX.HTML */
-    .simplified-nav {
-        display: none !important;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--glass-white);
-        backdrop-filter: blur(30px);
-        border: 1px solid var(--glass-border);
-        border-radius: var(--border-radius);
-        padding: 20px;
-        margin-top: 10px;
-        box-shadow: var(--shadow-strong);
-        z-index: 9999; /* FIXED: Increased z-index */
-        flex-direction: column;
-    }
-    
-    .simplified-nav.active {
-        display: flex !important;
-    }
-    
-    .simplified-mobile-nav-toggle {
-        display: flex !important;
-    }
-}
-
-/* Desktop styles - SEPARATE media query */
-@media (min-width: 768px) {
-    .simplified-mobile-nav-toggle {
-        display: none !important;
-    }
-    
-    .simplified-nav {
-        display: flex !important;
-        position: static;
-        background: transparent;
-        backdrop-filter: none;
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-shadow: none;
-        animation: none;
-        gap: 25px;
-        flex-direction: row;
-    }
-    
-    .simplified-nav a {
-        padding: 10px 0;
-        margin: 0;
-        background: transparent;
-        border-radius: 0;
-    }
-    
-    .simplified-nav a:hover {
-        background: transparent;
-        transform: none;
-        box-shadow: none;
-    }
-}
-
-
+        /* ============================================
+           RESPONSIVE DESIGN - FIXED
+           ============================================ */
+        @media (max-width: 767px) {
+            .hero-title {
+                font-size: 2.2rem;
+                margin-bottom: 12px; /* REDUCED: Further reduced */
+            }
             
+            .hero-subtitle {
+                font-size: 1.05rem;
+                padding: 0 10px;
+                margin: 0 auto 20px; /* REDUCED: From 25px to 20px */
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0 20px;
+                gap: 10px; /* REDUCED: From 12px to 10px */
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px; /* REDUCED: From 16px 24px */
+            }
+            
+            .question-card-inner {
+                padding: 20px;
+            }
+            
+            .question-title {
+                font-size: 1.3rem;
+            }
+            
+            .question-textarea {
+                min-height: 140px;
+                padding: 18px;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 0 10px;
+            }
+            
+            .topic-card-3d {
+                padding: 20px;
+            }
+            
+            .faq-question-3d {
+                padding: 18px 20px;
+                font-size: 1.1rem;
+            }
+            
+            .faq-answer-3d {
+                padding: 0 20px;
+            }
+            
+            .faq-item-3d.active .faq-answer-3d {
+                padding: 0 20px 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            /* HERO CONTAINER PADDING REDUCED */
+            .hero-container {
+                padding: 20px 15px 40px; /* CHANGED: Reduced for mobile */
+                gap: 30px; /* CHANGED: Reduced gap for mobile */
+            }
+            
+            /* HEADER MARGIN FURTHER REDUCED */
+            .simplified-header {
+                margin-bottom: 15px; /* REDUCED: Further reduced for mobile */
+            }
+        }
 
+        /* Desktop styles - SEPARATE media query */
+        @media (min-width: 768px) {
+            .simplified-nav {
+                display: flex !important;
+                position: static;
+                background: transparent;
+                backdrop-filter: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                box-shadow: none;
+                animation: none;
+                gap: 25px;
+                flex-direction: row;
+            }
+            
+            .simplified-nav a {
+                padding: 10px 0;
+                margin: 0;
+                background: transparent;
+                border-radius: 0;
+                position: relative;
+                text-decoration: none;
+                color: var(--pure-white);
+                font-weight: 500;
+                transition: all var(--transition-fast);
+            }
+            
+            .simplified-nav a::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--neon-blue);
+                transition: width 0.3s ease;
+            }
+            
+            .simplified-nav a:hover::before {
+                width: 100%;
+            }
+            
+            .simplified-nav a:hover {
+                background: transparent;
+                transform: none;
+                box-shadow: none;
+            }
+        }
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 10px; /* FURTHER REDUCED */
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                margin: 0 auto 15px; /* FURTHER REDUCED */
             }
             
             .section-title {
@@ -1168,6 +1090,15 @@
             
             .success-title {
                 font-size: 1.5rem;
+            }
+            
+            .hero-container {
+                padding: 15px 10px 30px; /* FURTHER REDUCED on very small screens */
+                gap: 25px; /* FURTHER REDUCED */
+            }
+            
+            .simplified-header {
+                margin-bottom: 10px; /* FURTHER REDUCED */
             }
         }
 
@@ -1215,7 +1146,7 @@
     <header class="simplified-header">
         <div class="container">
             <div class="simplified-header-content">
-                <div class="simplified-logo">
+                <a href="index.html" class="simplified-logo">
                     <div class="logo-image-container">
                         <img src="image.png" alt="Akhi ex responds Logo" class="logo-image">
                     </div>
@@ -1223,16 +1154,10 @@
                         <div class="simplified-logo-title">Akhi ex responds</div>
                         <div class="simplified-logo-subtitle">Islamic responses to major Christian claims</div>
                     </div>
-                </div>
+                </a>
 
-                <button class="simplified-mobile-nav-toggle" id="simplifiedMenuToggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-
+                <!-- Only 3 navigation items for index.html - Desktop only -->
                 <nav class="simplified-nav" id="simplifiedMainNav">
-                    <!-- Only 3 navigation items for index.html -->
                     <a href="#key-disagreements">
                         <i class="fas fa-scale-balanced"></i>
                         Key Disagreements
@@ -1786,34 +1711,6 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle for Simplified Header - FIXED
-        const simplifiedMenuToggle = document.getElementById('simplifiedMenuToggle');
-        const simplifiedMainNav = document.getElementById('simplifiedMainNav');
-
-        if (simplifiedMenuToggle && simplifiedMainNav) {
-            simplifiedMenuToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                simplifiedMainNav.classList.toggle('active');
-                this.classList.toggle('active');
-            });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!simplifiedMainNav.contains(event.target) && !simplifiedMenuToggle.contains(event.target)) {
-                    simplifiedMainNav.classList.remove('active');
-                    simplifiedMenuToggle.classList.remove('active');
-                }
-            });
-            
-            // Close menu when clicking on a nav link
-            simplifiedMainNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    simplifiedMainNav.classList.remove('active');
-                    simplifiedMenuToggle.classList.remove('active');
-                });
-            });
-        }
-
         // FAQ Accordion Functionality
         document.querySelectorAll('.faq-question-3d').forEach(question => {
             question.addEventListener('click', () => {

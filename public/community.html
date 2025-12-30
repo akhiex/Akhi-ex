@@ -253,131 +253,39 @@
             letter-spacing: 0.5px;
         }
 
-        .mobile-nav-toggle {
-            width: 40px; /* FIXED: Smaller size */
-            height: 40px; /* FIXED: Smaller size */
+        /* CHANGED: Hamburger menu replaced with home button */
+        .home-button {
+            width: 40px; /* Same size as before */
+            height: 40px; /* Same size as before */
             background: var(--glass-white);
             border: 1px solid var(--glass-border);
             border-radius: 12px; /* Smaller */
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 5px; /* Smaller gap */
             cursor: pointer;
             transition: all var(--transition-fast);
             position: relative;
             flex-shrink: 0;
+            text-decoration: none;
+            color: var(--pure-white);
         }
 
-        .mobile-nav-toggle span {
-            width: 20px; /* Smaller */
-            height: 2px;
-            background: var(--pure-white);
-            border-radius: 1px;
-            transition: all var(--transition-fast);
-            transform-origin: center;
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--neon-blue);
+            transform: scale(1.1);
         }
 
-        .mobile-nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(4px, 4px);
-        }
-
-        .mobile-nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -5px);
+        .home-button i {
+            font-size: 18px;
         }
 
         /* ============================================
-           NAVIGATION - GLASS MORPHISM (from base.html)
+           NAVIGATION - REMOVED (No longer needed)
            ============================================ */
         nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--glass-white);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--border-radius);
-            padding: 15px;
-            margin-top: 8px;
-            box-shadow: var(--shadow-strong);
-            z-index: 9999; /* FIXED: Increased z-index to appear above everything */
-        }
-
-        nav.active {
-            display: block;
-        }
-
-        nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            color: var(--pure-white);
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 12px;
-            transition: all var(--transition-fast);
-            margin-bottom: 6px;
-        }
-
-        nav a:last-child {
-            margin-bottom: 0;
-        }
-
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-
-        nav a i {
-            color: var(--neon-blue);
-            width: 18px;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        .cta-button {
-            background: var(--gradient-primary);
-            color: var(--pure-white);
-            padding: 10px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all var(--transition-fast);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-strong), var(--shadow-neon);
+            display: none !important; /* Completely hidden */
         }
 
         /* ============================================
@@ -995,96 +903,27 @@
             to { transform: rotate(360deg); }
         }
 
-/* ============================================
-   RESPONSIVE NAVIGATION (from base.html) - FIXED
-   ============================================ */
-@media (min-width: 768px) {
-    .mobile-nav-toggle {
-        display: none;
-    }
+        /* ============================================
+           RESPONSIVE NAVIGATION - SIMPLIFIED
+           ============================================ */
+        @media (min-width: 768px) {
+            .home-button {
+                width: 45px;
+                height: 45px;
+            }
 
-    nav {
-        display: flex !important;
-        position: static;
-        background: transparent;
-        backdrop-filter: none;
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-shadow: none;
-        animation: none;
-        gap: 20px;
-    }
+            .side-form-glass {
+                width: 450px;
+                padding: 40px;
+            }
 
-    nav a {
-        padding: 8px 0;
-        margin: 0;
-        background: transparent;
-        border-radius: 0;
-        position: relative;
-    }
-
-    nav a::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--neon-blue);
-        transition: width 0.3s ease;
-    }
-
-    nav a:hover::before {
-        width: 100%;
-    }
-
-    nav a:hover {
-        background: transparent;
-        transform: none;
-        box-shadow: none;
-    }
-
-    .side-form-glass {
-        width: 450px;
-        padding: 40px;
-    }
-
-    .owner-button-glass {
-        width: 70px;
-        height: 70px;
-        bottom: 40px;
-        right: 40px;
-    }
-}
-
-/* MOBILE STYLES - FIXED */
-@media (max-width: 767px) {
-    nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--glass-white);
-        backdrop-filter: blur(30px);
-        border: 1px solid var(--glass-border);
-        border-radius: var(--border-radius);
-        padding: 15px;
-        margin-top: 8px;
-        box-shadow: var(--shadow-strong);
-        z-index: 9999; /* FIXED: Increased z-index */
-        flex-direction: column;
-    }
-
-    nav.active {
-        display: flex !important;
-    }
-
-    .mobile-nav-toggle {
-        display: flex !important;
-    }
-}
+            .owner-button-glass {
+                width: 70px;
+                height: 70px;
+                bottom: 40px;
+                right: 40px;
+            }
+        }
 
         @media (min-width: 1024px) {
             .header-content {
@@ -1149,7 +988,8 @@
     <header class="floating-header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <!-- Logo is now clickable to go back to index.html -->
+                <a href="index.html" class="logo">
                     <div class="logo-image-container">
                         <img src="image.png" alt="Akhi ex responds Logo" class="logo-image">
                     </div>
@@ -1157,21 +997,16 @@
                         <div class="logo-title">Akhi ex responds</div>
                         <div class="logo-subtitle">Islamic responses to major Christian claims</div>
                     </div>
-                </div>
+                </a>
 
-                <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <!-- CHANGED: Hamburger menu replaced with home button -->
+                <a href="index.html" class="home-button" title="Back to Home">
+                    <i class="fas fa-home"></i>
+                </a>
 
-                <nav id="mainNav">
-                    <!-- Navigation links for Community page -->
-                    <a href="/">
-                        <i class="fas fa-home"></i>
-                        <span>Back toHome</span>
-                    </a>
-                    
+                <!-- Navigation removed -->
+                <nav id="mainNav" style="display: none;">
+                    <!-- Navigation links removed -->
                 </nav>
             </div>
         </div>
@@ -1185,7 +1020,7 @@
                     <i class="fas fa-comments"></i>
                     <h3>No questions yet</h3>
                     <p>Be the first to ask a question about Islam or Christianity!</p>
-                    <a href="/" class="action-button-3d" style="display: inline-flex; margin-top: 15px; text-decoration: none;">
+                    <a href="index.html" class="action-button-3d" style="display: inline-flex; margin-top: 15px; text-decoration: none;">
                         <i class="fas fa-question-circle"></i> Ask a Question
                     </a>
                 </div>
@@ -1245,32 +1080,6 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle from base.html
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
-        
-        if (menuToggle && mainNav) {
-            menuToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                mainNav.classList.toggle('active');
-                this.classList.toggle('active');
-            });
-            
-            document.addEventListener('click', function(event) {
-                if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
-                    mainNav.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                }
-            });
-            
-            mainNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mainNav.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                });
-            });
-        }
-
         // Community page JavaScript - ALL YOUR EXISTING FUNCTIONALITY
         const OWNER_EMAIL = "Akhiexresponse@gmail.com";
         const OWNER_CODE = "7192834650";
