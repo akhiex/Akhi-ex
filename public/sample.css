@@ -1,0 +1,865 @@
+/* ============================================
+   CSS VARIABLES - REVOLUTIONARY DESIGN
+   ============================================ */
+:root {
+    /* Modern Gradient Color Palette */
+    --gradient-primary: linear-gradient(135deg, #1a237e 0%, #283593 25%, #3949ab 50%, #5c6bc0 75%, #7986cb 100%);
+    --gradient-secondary: linear-gradient(135deg, #ffd54f 0%, #ffca28 25%, #ffb300 50%, #ff8f00 75%, #ff6f00 100%);
+    --gradient-dark: linear-gradient(135deg, #0d0f1c 0%, #131626 50%, #1a1c2e 100%);
+    --gradient-light: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+    
+    /* Glassmorphism Colors */
+    --glass-white: rgba(255, 255, 255, 0.15);
+    --glass-white-heavy: rgba(255, 255, 255, 0.25);
+    --glass-dark: rgba(0, 0, 0, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    
+    /* Neon Accents */
+    --neon-blue: #00e5ff;
+    --neon-gold: #ffd700;
+    --neon-purple: #b388ff;
+    --neon-green: #00ff88;
+    --neon-red: #ff3d71;
+    --neon-teal: #00ffcc;
+    
+    /* Core Colors */
+    --deep-blue: #1a237e;
+    --rich-gold: #ffb300;
+    --pure-white: #ffffff;
+    --pure-black: #0a0a0a;
+    --light-gray: #e0e0e0;
+    
+    /* Layout Variables */
+    --max-width: 1200px;
+    --border-radius-sm: 20px;
+    --border-radius: 30px;
+    --border-radius-lg: 40px;
+    --border-radius-xl: 60px;
+    
+    /* Shadows with Depth */
+    --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.15);
+    --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.2);
+    --shadow-neon: 0 0 20px rgba(0, 229, 255, 0.5);
+    --shadow-gold: 0 0 30px rgba(255, 179, 0, 0.4);
+    --shadow-green: 0 0 30px rgba(0, 255, 136, 0.4);
+    --shadow-red: 0 0 30px rgba(255, 61, 113, 0.4);
+    
+    /* Font System */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-accent: 'Poppins', sans-serif;
+    --font-arabic: 'Amiri', serif;
+    
+    /* Transition Speeds */
+    --transition-superfast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   BASE RESET & GLOBAL STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    overflow-x: hidden;
+    background: var(--gradient-dark);
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--pure-white);
+    background: var(--gradient-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3D Background Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(26, 35, 126, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 179, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(179, 136, 255, 0.1) 0%, transparent 50%);
+    z-index: -2;
+    animation: backgroundFloat 20s infinite alternate ease-in-out;
+}
+
+@keyframes backgroundFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(10px, -10px) scale(1.02); }
+    66% { transform: translate(-5px, 5px) scale(0.98); }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ============================================
+   LOGO IMAGE STYLES - FIXED SIZE
+   ============================================ */
+.logo-image-container {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    animation: float3D 6s infinite ease-in-out;
+    box-shadow: var(--shadow-neon);
+}
+
+@keyframes float3D {
+    0%, 100% { 
+        transform: translateY(0) rotateX(0) rotateY(0); 
+    }
+    33% { 
+        transform: translateY(-5px) rotateX(5deg) rotateY(5deg); 
+    }
+    66% { 
+        transform: translateY(3px) rotateX(-5deg) rotateY(-5deg); 
+    }
+}
+
+/* ============================================
+   FLOATING HEADER - REVOLUTIONARY DESIGN
+   ============================================ */
+.floating-header {
+    position: relative;
+    width: 100%;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    margin-bottom: 0;
+    padding: 15px 0;
+    animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.floating-header .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content {
+    background: var(--glass-white);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-strong);
+    position: relative;
+    overflow: hidden;
+    min-height: 60px;
+}
+
+.header-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.header-content:hover::before {
+    left: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    background: linear-gradient(135deg, var(--pure-white), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.logo-subtitle {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1px;
+    letter-spacing: 0.5px;
+}
+
+.mobile-nav-toggle {
+    width: 40px;
+    height: 40px;
+    background: var(--glass-white);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mobile-nav-toggle span {
+    width: 20px;
+    height: 2px;
+    background: var(--pure-white);
+    border-radius: 1px;
+    transition: all var(--transition-fast);
+    transform-origin: center;
+}
+
+.mobile-nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -5px);
+}
+
+/* ============================================
+   NAVIGATION - GLASS MORPHISM
+   ============================================ */
+nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--glass-white);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 8px;
+    box-shadow: var(--shadow-strong);
+    z-index: 1000;
+}
+
+nav.active {
+    display: block;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--pure-white);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all var(--transition-fast);
+    margin-bottom: 6px;
+}
+
+nav a:last-child {
+    margin-bottom: 0;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+nav a i {
+    color: var(--neon-blue);
+    width: 18px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+#content {
+    flex: 1;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* ============================================
+   FLOATING FOOTER - GLASS MORPHISM
+   ============================================ */
+.floating-footer {
+    text-align: center;
+    padding: 40px 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin-top: 60px;
+    width: 100%;
+    position: relative;
+}
+
+.floating-footer .container {
+    background: var(--glass-white);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    box-shadow: var(--shadow-strong);
+}
+
+.floating-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+}
+
+/* ============================================
+   RESPONSIVE NAVIGATION
+   ============================================ */
+@media (min-width: 768px) {
+    .mobile-nav-toggle {
+        display: none;
+    }
+
+    nav {
+        display: flex !important;
+        position: static;
+        background: transparent;
+        backdrop-filter: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        animation: none;
+        gap: 20px;
+    }
+
+    nav a {
+        padding: 8px 0;
+        margin: 0;
+        background: transparent;
+        border-radius: 0;
+        position: relative;
+    }
+
+    nav a::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--neon-blue);
+        transition: width 0.3s ease;
+    }
+
+    nav a:hover::before {
+        width: 100%;
+    }
+
+    nav a:hover {
+        background: transparent;
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header-content {
+        padding: 15px 25px;
+    }
+    
+    .logo-image-container {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .logo-title {
+        font-size: 20px;
+    }
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gradient-secondary);
+}
+
+::selection {
+    background: rgba(0, 229, 255, 0.3);
+    color: var(--pure-white);
+}
+
+/* ============================================
+   RESPONSIVE FONT SIZES - CRITICAL FIX
+   ============================================ */
+html {
+    font-size: 14px; /* Base font size for mobile */
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1024px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* ============================================
+   BASIC CONTENT GRID - SAFE VERSION
+   ============================================ */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+@media (min-width: 992px) {
+    .content-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ============================================
+   BASIC CARD STRUCTURE - SAFE
+   ============================================ */
+.argument-card,
+.era-card,
+.prophecy-card {
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.03) 100%
+    );
+    backdrop-filter: blur(25px);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.argument-card:hover,
+.era-card:hover,
+.prophecy-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-strong);
+}
+
+/* ============================================
+   MOBILE FIXES
+   ============================================ */
+@media (max-width: 767px) {
+    /* Fix header spacing */
+    .floating-header {
+        padding: 10px 0;
+    }
+    
+    .header-content {
+        padding: 10px 15px;
+        min-height: 50px;
+    }
+    
+    .logo-title {
+        font-size: 16px;
+    }
+    
+    /* Fix content spacing */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Fix grid gaps */
+    .content-grid {
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    /* Fix card padding */
+    .argument-card,
+    .era-card,
+    .prophecy-card {
+        padding: 20px;
+    }
+    
+    /* Fix large sections */
+    .conclusion-section,
+    .wisdom-section,
+    .defense-section,
+    .dilemma-section,
+    .critical-analysis,
+    .council-section,
+    .timeline-section,
+    .modern-context,
+    .hypocrisy-section,
+    .academic-analysis,
+    .biblical-section {
+        padding: 25px 15px !important;
+        margin: 20px 10px !important;
+        border-radius: 20px !important;
+    }
+    
+    /* Fix prophecy grid */
+    .prophecy-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+    
+    /* Fix text sizes for mobile */
+    .card-title {
+        font-size: 1.4rem !important;
+    }
+    
+    .historical-quote,
+    .bible-quote,
+    .quran-quote {
+        font-size: 1.1rem !important;
+        padding: 15px !important;
+        line-height: 1.6 !important;
+    }
+    
+    .conclusion-title {
+        font-size: 1.8rem !important;
+    }
+    
+    .final-statement {
+        font-size: 1.1rem !important;
+        padding: 20px !important;
+    }
+    
+    .islamic-affirmation {
+        padding: 15px 20px !important;
+        font-size: 1.1rem !important;
+    }
+}
+
+/* ============================================
+   DESKTOP FIXES - CARD HEIGHT ISSUES
+   ============================================ */
+@media (min-width: 992px) {
+    /* Equalize card heights in 2-column layout */
+    .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: stretch; /* This makes cards stretch to same height */
+    }
+    
+    /* Ensure cards can grow to fill space */
+    .argument-card,
+    .era-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Card content should expand */
+    .argument-card > *:not(.card-header),
+    .era-card > *:not(.card-header) {
+        flex: 1;
+    }
+}
+
+/* ============================================
+   ANIMATIONS - KEEP EXISTING
+   ============================================ */
+@keyframes highlightPulse {
+    0%, 100% { 
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 229, 255, 0.05));
+        box-shadow: 0 5px 15px rgba(0, 229, 255, 0.1);
+    }
+    50% { 
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 229, 255, 0.1));
+        box-shadow: 0 5px 20px rgba(0, 229, 255, 0.2);
+    }
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+.highlight {
+    animation: highlightPulse 2s ease-in-out;
+}
+
+.floating {
+    animation: floatUp 3s ease-in-out infinite;
+}
+/* responsive-fixes.css - Only fixes for mobile/desktop issues */
+
+/* ============================================
+   FIX 1: Prevent text overflow on mobile
+   ============================================ */
+@media (max-width: 767px) {
+    /* Force text to wrap properly */
+    * {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Fix card text */
+    .argument-card,
+    .era-card,
+    .prophecy-card {
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    /* Fix headings */
+    h1, h2, h3, h4, h5, h6 {
+        line-height: 1.3;
+        margin-bottom: 15px;
+    }
+    
+    /* Fix long words */
+    .card-title,
+    .historical-title,
+    .biblical-title,
+    .islamic-title,
+    .quran-ref,
+    .bible-ref,
+    .historical-ref {
+        word-break: break-word;
+    }
+}
+
+/* ============================================
+   FIX 2: Desktop card height equalization
+   ============================================ */
+@media (min-width: 992px) {
+    /* Target only 2-column layouts */
+    .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: stretch; /* This is key for equal heights */
+    }
+    
+    /* Make cards in grid stretch */
+    .content-grid > .argument-card,
+    .content-grid > .era-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Card content should take available space */
+    .argument-card .card-content,
+    .era-card .card-content,
+    .argument-card > div:not(.card-header),
+    .era-card > div:not(.card-header) {
+        flex: 1;
+    }
+    
+    /* But don't stretch prophecy cards in grid view */
+    .prophecy-grid .prophecy-card {
+        height: auto !important;
+        display: block !important;
+    }
+}
+
+/* ============================================
+   FIX 3: Mobile touch targets
+   ============================================ */
+@media (max-width: 767px) {
+    nav a {
+        padding: 15px 20px;
+        min-height: 50px;
+    }
+    
+    .evidence-point {
+        padding: 15px;
+        min-height: 60px;
+    }
+    
+    .cta-button {
+        padding: 12px 24px;
+        min-height: 44px;
+    }
+}
+
+/* ============================================
+   FIX 4: Prophecy grid on mobile
+   ============================================ */
+@media (max-width: 767px) {
+    .prophecy-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .prophecy-card {
+        margin-bottom: 15px !important;
+        break-inside: avoid !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .prophecy-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* ============================================
+   FIX 5: Timeline on mobile
+   ============================================ */
+@media (max-width: 767px) {
+    .timeline::before {
+        left: 30px !important;
+    }
+    
+    .timeline-item {
+        width: calc(100% - 60px) !important;
+        margin-left: 60px !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* ============================================
+   FIX 6: Prevent horizontal scroll
+   ============================================ */
+body, html {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* ============================================
+   FIX 7: Image responsiveness
+   ============================================ */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+.logo-image {
+    max-width: 100%;
+}
+
+/* ============================================
+   FIX 8: Button and interactive element sizing
+   ============================================ */
+@media (max-width: 767px) {
+    .mobile-nav-toggle {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .cta-button {
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
+   FIX 9: Form elements
+   ============================================ */
+input, textarea, select, button {
+    font-size: 16px; /* Prevents iOS zoom */
+}
+
+@media (max-width: 767px) {
+    input, textarea, select, button {
+        font-size: 16px;
+        min-height: 44px; /* Minimum touch target */
+    }
+}
