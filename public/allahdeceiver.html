@@ -257,6 +257,40 @@
         letter-spacing: 0.5px;
     }
 
+    /* Home Icon Button */
+    .home-button {
+        width: 40px;
+        height: 40px;
+        background: var(--glass-white);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+        text-decoration: none;
+    }
+
+    .home-button i {
+        color: var(--neon-blue);
+        font-size: 18px;
+        transition: all var(--transition-fast);
+    }
+
+    .home-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+
+    .home-button:hover i {
+        color: var(--pure-white);
+        transform: scale(1.2);
+    }
+
     .mobile-nav-toggle {
         width: 40px;
         height: 40px;
@@ -462,6 +496,15 @@
         .logo-title {
             font-size: 20px;
         }
+        
+        .home-button {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .home-button i {
+            font-size: 20px;
+        }
     }
 
     /* ============================================
@@ -503,15 +546,15 @@
     }
 
     /* ============================================
-       CONTENT SPECIFIC STYLES
+       CONTENT SPECIFIC STYLES - NO SCROLLBARS
        ============================================ */
     
     /* Hero Video Section */
     .hero-video-section {
         position: relative;
-        margin: 30px auto 50px;
+        margin: 20px auto 40px;
         max-width: 1000px;
-        padding: 0 20px;
+        padding: 0 15px;
         animation: slideUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
     }
 
@@ -519,7 +562,7 @@
         position: relative;
         background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(10, 10, 10, 0.3));
         border-radius: var(--border-radius-xl);
-        padding: 20px;
+        padding: 15px;
         box-shadow: 
             var(--shadow-strong),
             0 0 40px rgba(26, 35, 126, 0.4),
@@ -542,18 +585,30 @@
 
     .video-wrapper {
         position: relative;
-        border-radius: var(--border-radius-lg);
+        border-radius: var(--border-radius);
         overflow: hidden;
         box-shadow: 
             var(--shadow-strong),
             0 0 30px rgba(0, 229, 255, 0.3);
-        transform: perspective(1000px) rotateX(1deg);
         transition: all var(--transition-normal);
         border: 2px solid rgba(0, 229, 255, 0.2);
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: var(--border-radius);
     }
 
     .video-wrapper:hover {
-        transform: perspective(1000px) rotateX(0) scale(1.02);
+        transform: scale(1.02);
         box-shadow: 
             var(--shadow-strong),
             0 0 60px rgba(0, 229, 255, 0.5),
@@ -561,31 +616,31 @@
         border-color: rgba(0, 229, 255, 0.4);
     }
 
-    .video-wrapper video {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: var(--border-radius-lg);
-    }
-
     /* Main Content Grid - LANDSCAPE LAYOUT */
     .content-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 25px;
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto 50px;
-        padding: 0 20px;
+        padding: 0 15px;
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 768px) {
+        .content-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+    }
+
+    @media (min-width: 1200px) {
         .content-grid {
             grid-template-columns: 1fr 1fr;
             gap: 30px;
         }
     }
 
-    /* Argument Cards - WIDER THAN TALL */
+    /* Argument Cards - LANDSCAPE, NO SCROLLBARS */
     .argument-card {
         background: linear-gradient(
             145deg,
@@ -594,7 +649,7 @@
         );
         backdrop-filter: blur(25px);
         border-radius: var(--border-radius-lg);
-        padding: 25px;
+        padding: 20px;
         border: 1px solid var(--glass-border);
         box-shadow: 
             var(--shadow-medium),
@@ -603,7 +658,8 @@
         overflow: hidden;
         transition: all var(--transition-normal);
         animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
-        min-height: 320px;
+        /* LANDSCAPE: width > height, NO SCROLL */
+        min-height: 280px;
         display: flex;
         flex-direction: column;
     }
@@ -637,7 +693,7 @@
     }
 
     .argument-card:hover {
-        transform: translateY(-8px) scale(1.02);
+        transform: translateY(-5px) scale(1.01);
         box-shadow: 
             var(--shadow-strong),
             0 15px 40px rgba(0, 0, 0, 0.4),
@@ -657,7 +713,7 @@
         display: flex;
         align-items: flex-start;
         gap: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         padding-bottom: 15px;
         border-bottom: 2px solid rgba(0, 229, 255, 0.3);
         position: relative;
@@ -665,15 +721,15 @@
     }
 
     .card-icon {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         background: var(--gradient-primary);
-        border-radius: 15px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--pure-white);
-        font-size: 22px;
+        font-size: 20px;
         box-shadow: 
             0 4px 15px rgba(26, 35, 126, 0.5),
             inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -690,7 +746,7 @@
 
     .card-title {
         font-family: var(--font-heading);
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         background: linear-gradient(135deg, var(--pure-white), var(--neon-blue));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -704,9 +760,9 @@
     .quran-evidence {
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(26, 35, 126, 0.2));
         border-radius: var(--border-radius);
-        padding: 20px;
-        margin: 15px 0;
-        border-left: 5px solid var(--neon-gold);
+        padding: 15px;
+        margin: 12px 0;
+        border-left: 4px solid var(--neon-gold);
         position: relative;
         overflow: hidden;
         box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
@@ -729,29 +785,29 @@
         gap: 10px;
         background: rgba(255, 179, 0, 0.2);
         color: var(--neon-gold);
-        padding: 8px 15px;
-        border-radius: 30px;
-        font-size: 0.85rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
         font-weight: 600;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
         border: 1px solid rgba(255, 179, 0, 0.3);
         font-family: var(--font-accent);
         box-shadow: 0 3px 10px rgba(255, 179, 0, 0.2);
     }
 
     .quran-ref i {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .quran-quote {
-        font-size: 1rem;
-        line-height: 1.6;
+        font-size: 0.9rem;
+        line-height: 1.5;
         color: var(--pure-white);
-        margin: 15px 0;
-        padding: 15px;
+        margin: 12px 0;
+        padding: 12px;
         background: rgba(255, 255, 255, 0.05);
         border-radius: var(--border-radius-sm);
-        border-left: 4px solid var(--neon-blue);
+        border-left: 3px solid var(--neon-blue);
         font-family: var(--font-arabic);
         position: relative;
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
@@ -761,8 +817,8 @@
         content: '"';
         position: absolute;
         top: 5px;
-        left: 10px;
-        font-size: 2.5rem;
+        left: 8px;
+        font-size: 1.8rem;
         color: rgba(255, 179, 0, 0.3);
         font-family: var(--font-heading);
         opacity: 0.7;
@@ -772,9 +828,9 @@
     .bible-evidence {
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(179, 136, 255, 0.2));
         border-radius: var(--border-radius);
-        padding: 20px;
-        margin: 15px 0;
-        border-left: 5px solid var(--neon-purple);
+        padding: 15px;
+        margin: 12px 0;
+        border-left: 4px solid var(--neon-purple);
         position: relative;
         overflow: hidden;
         box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
@@ -797,58 +853,57 @@
         gap: 10px;
         background: rgba(179, 136, 255, 0.2);
         color: var(--neon-purple);
-        padding: 8px 15px;
-        border-radius: 30px;
-        font-size: 0.85rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
         font-weight: 600;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
         border: 1px solid rgba(179, 136, 255, 0.3);
         font-family: var(--font-accent);
         box-shadow: 0 3px 10px rgba(179, 136, 255, 0.2);
     }
 
-    /* Key Evidence Points */
+    /* Key Evidence Points - NO SCROLLBARS */
     .evidence-points {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin: 15px 0;
+        gap: 8px;
+        margin: 12px 0;
         flex: 1;
-        overflow-y: auto;
-        max-height: 200px;
+        /* NO OVERFLOW - No scrollbars */
+        overflow: visible;
     }
 
     .evidence-point {
         display: flex;
         align-items: flex-start;
-        gap: 12px;
-        padding: 12px;
+        gap: 10px;
+        padding: 10px;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 229, 255, 0.05));
-        border-radius: 12px;
+        border-radius: 10px;
         transition: all var(--transition-fast);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        flex-shrink: 0;
     }
 
     .evidence-point:hover {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 229, 255, 0.1));
-        transform: translateX(8px);
+        transform: translateX(5px);
         border-color: rgba(0, 229, 255, 0.3);
         box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
     }
 
     .evidence-point i {
         color: var(--neon-blue);
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-top: 2px;
         flex-shrink: 0;
-        min-width: 24px;
+        min-width: 20px;
     }
 
     .evidence-point span {
         color: rgba(255, 255, 255, 0.95);
         font-weight: 500;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         line-height: 1.4;
     }
 
@@ -861,10 +916,10 @@
         );
         backdrop-filter: blur(25px);
         border-radius: var(--border-radius-lg);
-        padding: 30px;
+        padding: 25px;
         border: 1px solid rgba(255, 82, 82, 0.3);
-        margin: 40px auto;
-        max-width: 1200px;
+        margin: 30px auto;
+        max-width: 1400px;
         position: relative;
         overflow: hidden;
         animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s both;
@@ -876,29 +931,29 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
+        height: 3px;
         background: linear-gradient(90deg, var(--neon-red), var(--neon-gold), var(--neon-blue));
     }
 
     .biblical-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        margin-top: 25px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
     }
 
     .bible-verse {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
-        padding: 20px;
+        padding: 15px;
         border-radius: var(--border-radius);
         border: 1px solid var(--glass-border);
         transition: all var(--transition-normal);
     }
 
     .bible-verse:hover {
-        transform: translateY(-5px);
+        transform: translateY(-3px);
         border-color: var(--neon-purple);
-        box-shadow: 0 10px 30px rgba(179, 136, 255, 0.3);
+        box-shadow: 0 8px 25px rgba(179, 136, 255, 0.3);
     }
 
     /* Conclusion */
@@ -909,12 +964,12 @@
             rgba(0, 229, 255, 0.15) 100%
         );
         backdrop-filter: blur(35px);
-        border-radius: var(--border-radius-xl);
-        padding: 40px;
+        border-radius: var(--border-radius-lg);
+        padding: 30px;
         text-align: center;
         border: 1px solid var(--glass-border);
-        margin: 60px auto 40px;
-        max-width: 1200px;
+        margin: 40px auto 30px;
+        max-width: 1400px;
         position: relative;
         overflow: hidden;
         animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1s both;
@@ -926,14 +981,14 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
+        height: 3px;
         background: var(--gradient-primary);
     }
 
     .conclusion-title {
         font-family: var(--font-heading);
-        font-size: 2.2rem;
-        margin-bottom: 30px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
         background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold), var(--neon-purple));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -942,12 +997,12 @@
     }
 
     .final-statement {
-        font-size: 1.2rem;
-        line-height: 1.7;
+        font-size: 1rem;
+        line-height: 1.6;
         color: rgba(255, 255, 255, 0.95);
-        margin: 0 auto 40px;
-        max-width: 900px;
-        padding: 30px;
+        margin: 0 auto 30px;
+        max-width: 1000px;
+        padding: 20px;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
         border-radius: var(--border-radius);
         border: 1px solid var(--glass-border);
@@ -956,14 +1011,14 @@
 
     .islamic-affirmation {
         display: inline-block;
-        padding: 20px 30px;
+        padding: 15px 25px;
         background: linear-gradient(135deg, rgba(255, 179, 0, 0.15), rgba(0, 229, 255, 0.15));
         border-radius: var(--border-radius);
         border: 1px solid rgba(255, 179, 0, 0.4);
         font-family: var(--font-arabic);
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         color: var(--neon-gold);
-        margin-top: 25px;
+        margin-top: 20px;
         position: relative;
         overflow: hidden;
         box-shadow: 0 8px 25px rgba(255, 179, 0, 0.2);
@@ -971,8 +1026,8 @@
     }
 
     .islamic-affirmation:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 35px rgba(255, 179, 0, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(255, 179, 0, 0.3);
         border-color: rgba(255, 179, 0, 0.6);
     }
 
@@ -994,125 +1049,123 @@
     /* Arabic Text */
     .arabic-text {
         font-family: var(--font-arabic);
-        font-size: 1.8rem;
+        font-size: 1.3rem;
         color: var(--neon-gold);
         text-align: center;
-        margin: 20px 0;
-        padding: 20px;
+        margin: 15px 0;
+        padding: 15px;
         background: rgba(255, 179, 0, 0.1);
         border-radius: var(--border-radius);
     }
 
     /* Responsive Design - IMPROVED MOBILE EXPERIENCE */
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         .hero-video-section {
-            padding: 0 15px;
-            margin: 20px auto 30px;
+            padding: 0 10px;
+            margin: 15px auto 25px;
         }
         
         .content-grid {
-            padding: 0 15px;
-            gap: 20px;
-            margin-bottom: 30px;
+            padding: 0 10px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
         
         .argument-card {
-            padding: 20px;
-            min-height: 280px;
+            padding: 15px;
+            min-height: 250px;
         }
         
         .card-title {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
         
         .card-icon {
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
         }
         
         .quran-quote {
-            font-size: 0.95rem;
-            padding: 15px;
-            line-height: 1.5;
+            font-size: 0.85rem;
+            padding: 10px;
+            line-height: 1.4;
         }
         
         .evidence-point span {
-            font-size: 0.9rem;
-            line-height: 1.4;
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
         
         .biblical-section,
         .conclusion-section {
-            padding: 25px 15px;
-            margin: 30px 15px;
+            padding: 20px 15px;
+            margin: 25px 10px;
         }
         
         .conclusion-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
         
         .final-statement {
-            font-size: 1rem;
-            padding: 20px;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            padding: 15px;
+            line-height: 1.5;
         }
         
         .islamic-affirmation {
-            padding: 15px 20px;
-            font-size: 1.1rem;
+            padding: 12px 20px;
+            font-size: 1rem;
         }
         
         .arabic-text {
-            font-size: 1.5rem;
-            padding: 15px;
+            font-size: 1.1rem;
+            padding: 12px;
         }
         
         .biblical-grid {
             grid-template-columns: 1fr;
-            gap: 15px;
+            gap: 12px;
         }
         
         /* Better text wrapping on mobile */
         .card-header {
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         
         .card-title {
-            font-size: 1.2rem;
-            line-height: 1.3;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+        
+        /* Fix mobile text overflow */
+        .evidence-point span,
+        .quran-quote,
+        .final-statement {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
     }
 
-    @media (max-width: 480px) {
-        .video-hero-container {
-            padding: 12px;
-        }
-        
-        .card-header {
-            flex-direction: row;
-            text-align: left;
-            gap: 12px;
+    @media (min-width: 768px) and (max-width: 1199px) {
+        .argument-card {
+            min-height: 300px;
         }
         
         .card-title {
             font-size: 1.1rem;
         }
-        
+    }
+
+    @media (min-width: 1200px) {
         .argument-card {
-            min-height: 260px;
-            padding: 15px;
+            min-height: 320px;
         }
         
-        /* Prevent text from being too large on mobile */
-        .quran-quote,
-        .final-statement,
-        .evidence-point span {
-            font-size: 0.9rem;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            hyphens: auto;
+        .card-title {
+            font-size: 1.3rem;
         }
     }
 
@@ -1134,7 +1187,7 @@
 
     @keyframes floatUp {
         0% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
+        50% { transform: translateY(-5px); }
         100% { transform: translateY(0); }
     }
 
@@ -1145,7 +1198,7 @@
     /* Statistics boxes */
     .stat-box {
         text-align: center;
-        padding: 20px;
+        padding: 15px;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
         border-radius: var(--border-radius);
         border: 1px solid var(--glass-border);
@@ -1153,34 +1206,19 @@
     }
 
     .stat-box:hover {
-        transform: translateY(-5px);
+        transform: translateY(-3px);
         border-color: var(--neon-blue);
         box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
     }
 
     .stat-number {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-    }
-
-    /* Scrollbar for evidence points */
-    .evidence-points::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    .evidence-points::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 2px;
-    }
-
-    .evidence-points::-webkit-scrollbar-thumb {
-        background: var(--neon-blue);
-        border-radius: 2px;
     }
 </style>
 </head>
@@ -1199,11 +1237,16 @@
                     </div>
                 </a>
 
-                <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <a href="index.html" class="home-button" aria-label="Back to Home">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
 
                 <nav id="mainNav">
                     <a href="index.html">
@@ -1221,10 +1264,12 @@
         <div class="hero-video-section">
             <div class="video-hero-container">
                 <div class="video-wrapper">
-                    <video controls>
-                        <source src="allahdeceiver.mp4" type="video/mp4">
-                        Your browser does not support the video tag. Please download the video to view it.
-                    </video>
+                    <iframe src="https://www.youtube.com/embed/3FsI1mburjE?si=Qmm-gHrP8Cnwofi8" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -1237,7 +1282,7 @@
                     <div class="card-icon">
                         <i class="fas fa-language"></i>
                     </div>
-                    <h2 class="card-title">Quran 3:54 Exposed:<br>Misleading Translation Tactics</h2>
+                    <h2 class="card-title">Quran 3:54 Exposed: Misleading Translation Tactics</h2>
                 </div>
                 
                 <div class="quran-evidence">
@@ -1256,15 +1301,15 @@
                 <div class="evidence-points">
                     <div class="evidence-point">
                         <i class="fas fa-times-circle"></i>
-                        <span><strong>Selective Translation:</strong> Christian apologists translate "مَاكِرِينَ" as "deceivers" while ignoring its broader meaning of "planners" or "strategists"</span>
+                        <span><strong>Selective Translation:</strong> Christian apologists translate "مَاكِرِينَ" as "deceivers" while ignoring its broader meaning</span>
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-book"></i>
-                        <span><strong>Dictionary Analysis:</strong> "مَكْر" (makr) means planning, designing, or strategizing. Context determines if it's positive or negative. For Allah, it's always positive.</span>
+                        <span><strong>Dictionary Analysis:</strong> "مَكْر" (makr) means planning, designing, or strategizing. Context determines if it's positive or negative.</span>
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-graduation-cap"></i>
-                        <span><strong>Consensus of Translations:</strong> Over 40 English translations of the Quran unanimously use "planner" or "schemer" in positive context, not "deceiver"</span>
+                        <span><strong>Consensus of Translations:</strong> Over 40 English translations of the Quran unanimously use "planner" or "schemer" in positive context</span>
                     </div>
                 </div>
             </div>
@@ -1276,14 +1321,14 @@
                         <i class="fas fa-font"></i>
                     </div>
                     <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                        Linguistic Reality:<br>Word Study & Context
+                        Linguistic Reality: Word Study & Context
                     </h2>
                 </div>
                 
                 <div class="evidence-points">
                     <div class="evidence-point">
                         <i class="fas fa-a"></i>
-                        <span><strong>Root Analysis:</strong> "م ك ر" (m-k-r) root meaning includes planning, designing, scheming. Like "designer" in English - can be positive (architect) or negative (schemer)</span>
+                        <span><strong>Root Analysis:</strong> "م ك ر" (m-k-r) root meaning includes planning, designing, scheming. Like "designer" in English</span>
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-balance-scale"></i>
@@ -1291,11 +1336,11 @@
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-history"></i>
-                        <span><strong>Contextual Usage:</strong> In Quran 3:54, Allah responds to disbelievers' evil plot against Jesus. Allah's planning is counter-planning to save Jesus, not deception</span>
+                        <span><strong>Contextual Usage:</strong> In Quran 3:54, Allah responds to disbelievers' evil plot against Jesus. Allah's planning is counter-planning to save Jesus</span>
                     </div>
                 </div>
                 
-                <div class="quran-evidence" style="margin-top: 20px; border-left-color: var(--neon-blue);">
+                <div class="quran-evidence" style="margin-top: 12px; border-left-color: var(--neon-blue);">
                     <div class="quran-ref" style="background: rgba(0, 229, 255, 0.2); color: var(--neon-blue); border-color: rgba(0, 229, 255, 0.3);">
                         <i class="fas fa-lightbulb"></i>
                         The Real Meaning
@@ -1313,7 +1358,7 @@
                         <i class="fas fa-star-and-crescent"></i>
                     </div>
                     <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                        Allah's Perfect Nature:<br>No Deception in Islam
+                        Allah's Perfect Nature: No Deception in Islam
                     </h2>
                 </div>
                 
@@ -1325,23 +1370,20 @@
                     <div class="quran-quote" style="border-left-color: var(--neon-purple);">
                         "Allah does not intend injustice to any of His creatures." (Quran 3:108)
                     </div>
-                    <div class="quran-quote" style="border-left-color: var(--neon-gold); margin-top: 15px;">
-                        "Allah is not such that He should be unjust to His servants." (Quran 3:182)
-                    </div>
                 </div>
                 
-                <div class="evidence-points" style="margin-top: 25px;">
+                <div class="evidence-points" style="margin-top: 15px;">
                     <div class="evidence-point">
                         <i class="fas fa-shield-alt"></i>
-                        <span><strong>Islamic Theology:</strong> Deception is fundamentally against Allah's attributes of justice, truth, and mercy. Allah is Al-Haqq (The Truth), Al-'Adl (The Just)</span>
+                        <span><strong>Islamic Theology:</strong> Deception is fundamentally against Allah's attributes of justice, truth, and mercy.</span>
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-scroll"></i>
-                        <span><strong>Prophetic Teaching:</strong> Prophet Muhammad ﷺ emphasized truthfulness as fundamental to faith. Deception is haram (forbidden) for Muslims, let alone for Allah</span>
+                        <span><strong>Prophetic Teaching:</strong> Prophet Muhammad ﷺ emphasized truthfulness as fundamental to faith.</span>
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-balance-scale"></i>
-                        <span><strong>Theological Consistency:</strong> The concept of a deceiving God contradicts Islamic monotheism. Allah is perfect, without flaws or moral imperfections</span>
+                        <span><strong>Theological Consistency:</strong> The concept of a deceiving God contradicts Islamic monotheism.</span>
                     </div>
                 </div>
             </div>
@@ -1353,7 +1395,7 @@
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                        The Clear Conclusion:<br>Fabricated Accusation
+                        The Clear Conclusion: Fabricated Accusation
                     </h2>
                 </div>
                 
@@ -1363,22 +1405,22 @@
                         The Reality Check
                     </div>
                     <div class="quran-quote" style="border-left-color: var(--neon-blue);">
-                        The accusation that Allah is a "deceiver" is a deliberate mistranslation aimed at attacking Islam. It ignores Arabic linguistics, Quranic context, and Islamic theology.
+                        The accusation that Allah is a "deceiver" is a deliberate mistranslation aimed at attacking Islam.
                     </div>
                 </div>
                 
-                <div class="evidence-points" style="margin-top: 25px;">
+                <div class="evidence-points" style="margin-top: 15px;">
                     <div class="evidence-point">
                         <i class="fas fa-gavel"></i>
-                        <span><strong>Linguistic Proof:</strong> "Makr" means planning/designing, not deception. "Khayr" means good/benevolent, making the phrase "best of planners"</span>
+                        <span><strong>Linguistic Proof:</strong> "Makr" means planning/designing, not deception.</span>
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-history"></i>
-                        <span><strong>Historical Context:</strong> The verse refers to Allah saving Jesus from crucifixion plot - a merciful act, not deception</span>
+                        <span><strong>Historical Context:</strong> The verse refers to Allah saving Jesus from crucifixion plot</span>
                     </div>
                     <div class="evidence-point">
                         <i class="fas fa-university"></i>
-                        <span><strong>Academic Consensus:</strong> No credible Arabic linguist or Quran translator supports the "deceiver" translation</span>
+                        <span><strong>Academic Consensus:</strong> No credible Arabic linguist supports the "deceiver" translation</span>
                     </div>
                 </div>
             </div>
@@ -1386,14 +1428,14 @@
 
         <!-- Biblical Evidence Section -->
         <div class="biblical-section">
-            <div class="card-header" style="border-bottom-color: rgba(255, 82, 82, 0.3); padding: 0 0 30px 0;">
+            <div class="card-header" style="border-bottom-color: rgba(255, 82, 82, 0.3); padding: 0 0 20px 0;">
                 <div class="card-icon" style="background: linear-gradient(135deg, #ff5252, #ff8f00);">
                     <i class="fas fa-bible"></i>
                 </div>
-                <h2 class="card-title">Biblical Reality:<br>God as Deceiver in the Bible</h2>
+                <h2 class="card-title">Biblical Reality: God as Deceiver in the Bible</h2>
             </div>
             
-            <p style="color: rgba(255, 255, 255, 0.95); text-align: center; margin-bottom: 40px; font-size: 1.2rem; line-height: 1.7;">
+            <p style="color: rgba(255, 255, 255, 0.95); text-align: center; margin-bottom: 25px; font-size: 1rem; line-height: 1.5;">
                 While Christian apologists falsely accuse Allah of deception, their own Bible contains numerous verses where God admits to or is accused of deception:
             </p>
             
@@ -1403,8 +1445,8 @@
                         <i class="fas fa-scroll"></i>
                         Ezekiel 14:9
                     </div>
-                    <div class="quran-quote" style="font-size: 1.1rem; padding: 15px; border-left-color: var(--neon-red);">
-                        "And if the prophet be deceived when he hath spoken a thing, I the LORD have deceived that prophet, and I will stretch out my hand upon him, and will destroy him from the midst of my people Israel."
+                    <div class="quran-quote" style="font-size: 0.9rem; padding: 12px; border-left-color: var(--neon-red);">
+                        "And if the prophet be deceived when he hath spoken a thing, I the LORD have deceived that prophet..."
                     </div>
                 </div>
                 
@@ -1413,8 +1455,8 @@
                         <i class="fas fa-scroll"></i>
                         Jeremiah 20:7
                     </div>
-                    <div class="quran-quote" style="font-size: 1.1rem; padding: 15px; border-left-color: var(--neon-red);">
-                        "O LORD, thou hast deceived me, and I was deceived: thou art stronger than I, and hast prevailed: I am in derision daily, every one mocketh me."
+                    <div class="quran-quote" style="font-size: 0.9rem; padding: 12px; border-left-color: var(--neon-red);">
+                        "O LORD, thou hast deceived me, and I was deceived: thou art stronger than I..."
                     </div>
                 </div>
                 
@@ -1423,18 +1465,8 @@
                         <i class="fas fa-scroll"></i>
                         Jeremiah 4:10
                     </div>
-                    <div class="quran-quote" style="font-size: 1.1rem; padding: 15px; border-left-color: var(--neon-red);">
-                        "Then said I, Ah, Lord GOD! surely thou hast greatly deceived this people and Jerusalem, saying, Ye shall have peace; whereas the sword reacheth unto the soul."
-                    </div>
-                </div>
-                
-                <div class="bible-verse">
-                    <div class="bible-ref">
-                        <i class="fas fa-scroll"></i>
-                        Job 12:16
-                    </div>
-                    <div class="quran-quote" style="font-size: 1.1rem; padding: 15px; border-left-color: var(--neon-red);">
-                        "With him is strength and wisdom: the deceived and the deceiver are his."
+                    <div class="quran-quote" style="font-size: 0.9rem; padding: 12px; border-left-color: var(--neon-red);">
+                        "...surely thou hast greatly deceived this people and Jerusalem..."
                     </div>
                 </div>
                 
@@ -1443,28 +1475,16 @@
                         <i class="fas fa-scroll"></i>
                         1 Kings 22:22-23
                     </div>
-                    <div class="quran-quote" style="font-size: 1.1rem; padding: 15px; border-left-color: var(--neon-red);">
-                        "And he said, I will go forth, and I will be a lying spirit in the mouth of all his prophets... Now therefore, behold, the LORD hath put a lying spirit in the mouth of all these thy prophets."
+                    <div class="quran-quote" style="font-size: 0.9rem; padding: 12px; border-left-color: var(--neon-red);">
+                        "...the LORD hath put a lying spirit in the mouth of all these thy prophets."
                     </div>
                 </div>
-                
-                <div class="bible-verse">
-                    <div class="bible-ref">
-                        <i class="fas fa-scroll"></i>
-                        2 Thessalonians 2:11
-                    </div>
-                    <div class="quran-quote" style="font-size: 1.1rem; padding: 15px; border-left-color: var(--neon-red);">
-                        "And for this cause God shall send them strong delusion, that they should believe a lie."
-                    </div>
-                </div>
-                
-                
             </div>
             
-            <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 82, 82, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(255, 82, 82, 0.3);">
-                <h4 style="color: var(--neon-red); margin-bottom: 15px;"><i class="fas fa-exclamation-circle"></i> The Irony</h4>
-                <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.6;">
-                    Christian apologists accuse Allah of deception based on a mistranslated verse, while their own Bible contains explicit verses where God admits to deception, sends lying spirits, hardens hearts, and causes people to err.
+            <div style="text-align: center; margin-top: 25px; padding: 15px; background: rgba(255, 82, 82, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(255, 82, 82, 0.3);">
+                <h4 style="color: var(--neon-red); margin-bottom: 10px; font-size: 1rem;"><i class="fas fa-exclamation-circle"></i> The Irony</h4>
+                <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.5; font-size: 0.9rem;">
+                    Christian apologists accuse Allah of deception based on a mistranslated verse, while their own Bible contains explicit verses where God admits to deception.
                 </p>
             </div>
         </div>
@@ -1473,44 +1493,39 @@
         <div class="conclusion-section">
             <h2 class="conclusion-title">The Truth Revealed</h2>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px;">
                 <div class="stat-box">
                     <div class="stat-number">0</div>
-                    <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">Legitimate translations calling Allah "deceiver"</div>
+                    <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.8rem;">Legitimate translations calling Allah "deceiver"</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-number">40+</div>
-                    <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">Quran translations using "planner" or "strategist"</div>
+                    <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.8rem;">Quran translations using "planner"</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-number">12+</div>
-                    <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">Bible verses showing God as deceiver</div>
+                    <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.8rem;">Bible verses showing God as deceiver</div>
                 </div>
             </div>
 
             <div class="final-statement">
-                The accusation that Allah is a "deceiver" based on Quran 3:54 is a deliberate mistranslation that ignores:
-                <br><br>
-                1) <strong>Arabic Linguistics:</strong> "مَاكِرِينَ" means planners/strategists, not deceivers
-                <br>
-                2) <strong>Context:</strong> Allah's "planning" was to save Jesus from crucifixion
-                <br>
-                3) <strong>Theology:</strong> Deception contradicts Allah's attributes of truth and justice
-                <br>
-                4) <strong>Translation Consensus:</strong> All legitimate translations use "planner"
-                <br><br>
-                Meanwhile, the Bible explicitly contains numerous verses where God admits to deception, sends lying spirits, hardens hearts, and causes people to err. The projection is clear: Christian apologists attribute to Allah what exists in their own scripture.
+                The accusation that Allah is a "deceiver" based on Quran 3:54 is a deliberate mistranslation that ignores:<br><br>
+                1) <strong>Arabic Linguistics:</strong> "مَاكِرِينَ" means planners/strategists, not deceivers<br>
+                2) <strong>Context:</strong> Allah's "planning" was to save Jesus from crucifixion<br>
+                3) <strong>Theology:</strong> Deception contradicts Allah's attributes of truth and justice<br>
+                4) <strong>Translation Consensus:</strong> All legitimate translations use "planner"<br><br>
+                Meanwhile, the Bible explicitly contains numerous verses where God admits to deception. The projection is clear.
             </div>
             
             <div class="islamic-affirmation">
                 <i class="fas fa-star-and-crescent"></i>
                 "Allah does not intend injustice to any of His creatures."
-                <span style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; display: block; margin-top: 10px;">Quran 3:108</span>
+                <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85rem; display: block; margin-top: 8px;">Quran 3:108</span>
                 <i class="fas fa-star-and-crescent"></i>
             </div>
             
-            <div style="margin-top: 30px; padding: 20px; background: rgba(0, 229, 255, 0.1); border-radius: var(--border-radius); display: inline-block;">
-                <p style="color: rgba(255, 255, 255, 0.9); margin: 0; font-size: 1.1rem;">
+            <div style="margin-top: 20px; padding: 15px; background: rgba(0, 229, 255, 0.1); border-radius: var(--border-radius); display: inline-block;">
+                <p style="color: rgba(255, 255, 255, 0.9); margin: 0; font-size: 0.95rem;">
                     <i class="fas fa-quote-left" style="color: var(--neon-blue);"></i>
                     With this I say assalamu alaykum, catch you in the next one.
                     <i class="fas fa-quote-right" style="color: var(--neon-blue);"></i>
@@ -1574,46 +1589,6 @@
                 });
             });
             
-            // Video interaction
-            const video = document.querySelector('video');
-            const videoWrapper = document.querySelector('.video-wrapper');
-            
-            if (video && videoWrapper) {
-                video.addEventListener('play', function() {
-                    videoWrapper.style.transform = 'perspective(1000px) rotateX(0) scale(1.05)';
-                    videoWrapper.style.boxShadow = 
-                        'var(--shadow-strong), 0 0 100px rgba(0, 229, 255, 0.6), var(--shadow-neon)';
-                    videoWrapper.style.borderColor = 'rgba(0, 229, 255, 0.6)';
-                });
-                
-                video.addEventListener('pause', function() {
-                    videoWrapper.style.transform = 'perspective(1000px) rotateX(1deg) scale(1)';
-                    videoWrapper.style.boxShadow = 
-                        'var(--shadow-strong), 0 0 50px rgba(0, 229, 255, 0.3)';
-                    videoWrapper.style.borderColor = 'rgba(0, 229, 255, 0.2)';
-                });
-                
-                // If video doesn't load, show message
-                video.addEventListener('error', function() {
-                    const container = document.querySelector('.video-hero-container');
-                    const errorMsg = document.createElement('div');
-                    errorMsg.style.cssText = `
-                        text-align: center;
-                        padding: 20px;
-                        background: rgba(255, 50, 50, 0.1);
-                        border-radius: 10px;
-                        margin-top: 15px;
-                        border: 1px solid rgba(255, 50, 50, 0.3);
-                        color: #ff6b6b;
-                    `;
-                    errorMsg.innerHTML = `
-                        <i class="fas fa-exclamation-triangle"></i>
-                        Video file "allahdeceiver.mp4" not found. Please ensure it's in the same folder as this HTML file.
-                    `;
-                    container.appendChild(errorMsg);
-                });
-            }
-            
             // Floating animation for icons
             const icons = document.querySelectorAll('.card-icon');
             icons.forEach((icon, index) => {
@@ -1625,31 +1600,56 @@
             const bibleVerses = document.querySelectorAll('.bible-verse');
             bibleVerses.forEach((verse, index) => {
                 verse.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px)';
+                    this.style.transform = 'translateY(-5px)';
                 });
                 verse.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
                 });
             });
             
-            // Logo click handler
-            const logo = document.querySelector('.logo');
-            if (logo) {
-                logo.addEventListener('click', function(e) {
-                    console.log('Logo clicked - navigating to index.html');
-                });
-            }
-            
             // Add click effect to Islamic affirmation
             const islamicAffirmation = document.querySelector('.islamic-affirmation');
             if (islamicAffirmation) {
                 islamicAffirmation.addEventListener('click', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.05)';
+                    this.style.transform = 'translateY(-5px) scale(1.05)';
                     setTimeout(() => {
-                        this.style.transform = 'translateY(-5px)';
+                        this.style.transform = 'translateY(-3px)';
                     }, 300);
                 });
             }
+            
+            // Adjust card heights for consistency
+            function adjustCardHeights() {
+                const cards = document.querySelectorAll('.argument-card');
+                if (cards.length === 0) return;
+                
+                let maxHeight = 0;
+                cards.forEach(card => {
+                    card.style.height = 'auto';
+                });
+                
+                cards.forEach(card => {
+                    const height = card.offsetHeight;
+                    if (height > maxHeight) {
+                        maxHeight = height;
+                    }
+                });
+                
+                // Set all cards to the same height for desktop
+                if (window.innerWidth >= 768) {
+                    cards.forEach(card => {
+                        card.style.height = maxHeight + 'px';
+                    });
+                } else {
+                    cards.forEach(card => {
+                        card.style.height = 'auto';
+                    });
+                }
+            }
+            
+            // Run on load and resize
+            window.addEventListener('load', adjustCardHeights);
+            window.addEventListener('resize', adjustCardHeights);
         });
     </script>
 </body>
