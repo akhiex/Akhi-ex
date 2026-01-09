@@ -1235,9 +1235,105 @@
         }
 
         /* ============================================
-           RESPONSIVE DESIGN - FIXED FOR MOBILE
+           MOBILE RESPONSIVE IMPROVEMENTS - UPDATED
            ============================================ */
         @media (max-width: 767px) {
+            /* Make header bigger */
+            .simplified-header {
+                margin-bottom: 20px !important;
+                padding: 20px 0 15px !important;
+            }
+            
+            .simplified-header-content {
+                padding: 15px 20px !important;
+                min-height: 65px !important;
+            }
+            
+            .logo-image-container {
+                width: 50px !important;
+                height: 50px !important;
+            }
+            
+            .simplified-logo-title {
+                font-size: 20px !important;
+            }
+            
+            .simplified-logo-subtitle {
+                font-size: 11px !important;
+            }
+            
+            /* Make hero content bigger and hide question container */
+            .hero-container {
+                padding: 10px 15px 30px !important;
+                gap: 40px !important;
+                min-height: 85vh !important;
+                overflow: hidden !important;
+                position: relative !important;
+            }
+            
+            .hero-content {
+                text-align: center !important;
+                width: 100% !important;
+                padding-top: 10px !important;
+            }
+            
+            .hero-title {
+                font-size: 2.4rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 20px !important;
+                padding: 0 10px !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem !important;
+                line-height: 1.6 !important;
+                margin-bottom: 30px !important;
+                padding: 0 15px !important;
+            }
+            
+            /* Make action buttons bigger */
+            .hero-actions {
+                flex-direction: column !important;
+                gap: 20px !important;
+                padding: 0 20px !important;
+            }
+            
+            .action-btn {
+                width: 100% !important;
+                padding: 20px 25px !important;
+                font-size: 1.1rem !important;
+                min-height: 60px !important;
+                justify-content: center !important;
+            }
+            
+            /* Hide question container from initial view */
+            .hero-container .question-card-3d {
+                opacity: 0 !important;
+                transform: translateY(50px) !important;
+                transition: opacity 0.8s ease, transform 0.8s ease !important;
+                pointer-events: none !important;
+            }
+            
+            /* Show question container when scrolled to */
+            .hero-container .question-card-3d.visible {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+                pointer-events: auto !important;
+            }
+            
+            /* Ensure bottom question container is visible */
+            .question-container-bottom .question-card-3d {
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: auto !important;
+            }
+            
+            .question-container-bottom {
+                margin-top: 30px !important;
+                margin-bottom: 30px !important;
+            }
+            
+            /* Original mobile styles */
             .hero-container {
                 padding: 15px 10px 40px !important;
                 gap: 40px !important;
@@ -1258,13 +1354,6 @@
                 min-width: unset !important;
                 order: 2;
                 margin-top: 20px;
-            }
-            
-            .hero-title {
-                font-size: 2.2rem !important;
-                line-height: 1.15 !important;
-                margin-bottom: 15px !important;
-                padding: 0 5px !important;
             }
             
             .hero-subtitle {
@@ -1342,28 +1431,6 @@
                 font-size: 1.8rem !important;
             }
             
-            .simplified-header {
-                margin-bottom: 15px !important;
-            }
-            
-            .simplified-header-content {
-                padding: 10px 15px !important;
-                min-height: 55px !important;
-            }
-            
-            .logo-image-container {
-                width: 40px !important;
-                height: 40px !important;
-            }
-            
-            .simplified-logo-title {
-                font-size: 16px !important;
-            }
-            
-            .simplified-logo-subtitle {
-                font-size: 9px !important;
-            }
-            
             .loading-orb {
                 width: 120px !important;
                 height: 120px !important;
@@ -1381,10 +1448,118 @@
             .loading-progress-container {
                 width: 250px !important;
             }
+            
+            /* Prevent horizontal scrolling on mobile */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100% !important;
+                position: relative !important;
+            }
+            
+            /* Ensure content fits within viewport */
+            .container, .hero-container, .topics-section, .faq-section {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            /* Improve touch targets */
+            .action-btn, .topic-card-link, .faq-question-3d {
+                min-height: 44px !important;
+            }
+            
+            /* Better spacing for mobile */
+            .topics-section, .faq-section {
+                padding: 40px 15px !important;
+            }
         }
 
         /* ============================================
-           TABLET LAYOUT - 4 CARDS PER ROW
+           TABLET PORTRAIT IMPROVEMENTS - 2 CARDS PER ROW
+           ============================================ */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            /* Tablet portrait: 2 cards per row */
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px !important;
+            }
+            
+            .topic-card-3d {
+                padding: 25px !important;
+                min-height: 280px !important;
+            }
+            
+            .topic-icon-wrapper {
+                width: 70px !important;
+                height: 70px !important;
+                margin-bottom: 25px !important;
+            }
+            
+            .topic-icon {
+                font-size: 28px !important;
+            }
+            
+            .topic-card-title {
+                font-size: 1.3rem !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .topic-card-description {
+                font-size: 1rem !important;
+                margin-bottom: 20px !important;
+                line-height: 1.5 !important;
+            }
+            
+            .topic-card-link {
+                font-size: 14px !important;
+                padding: 12px 20px !important;
+            }
+            
+            /* Ensure sections have enough space */
+            .topics-section {
+                padding: 60px 20px !important;
+            }
+            
+            .section-header {
+                margin-bottom: 40px !important;
+            }
+            
+            .section-title {
+                font-size: 2.2rem !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem !important;
+            }
+            
+            /* Tablet portrait hero adjustments */
+            .hero-container {
+                flex-direction: column !important;
+                padding: 30px 20px 60px !important;
+            }
+            
+            .hero-content {
+                max-width: 100% !important;
+                text-align: center !important;
+                padding-right: 0 !important;
+            }
+            
+            .question-card-3d {
+                max-width: 100% !important;
+                min-width: unset !important;
+                width: 100% !important;
+            }
+        }
+
+        /* Tablet landscape remains 4 cards */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .topics-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+
+        /* ============================================
+           TABLET LAYOUT - 4 CARDS PER ROW (Landscape)
            ============================================ */
         @media (min-width: 768px) and (max-width: 1024px) {
             .hero-container {
@@ -1629,12 +1804,12 @@
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 1.8rem !important;
+                font-size: 2rem !important;
                 margin-bottom: 8px !important;
             }
             
             .hero-subtitle {
-                font-size: 0.95rem !important;
+                font-size: 1rem !important;
                 margin: 0 auto 15px !important;
             }
             
@@ -2260,26 +2435,167 @@
                 </div>
             </div>
             <div class="faq-item-3d">
+<div class="faq-item-3d">
     <div class="faq-question-3d">
         <span>Does Galatians 1:8 prove the Quran is cursed?</span>
         <i class="fas fa-chevron-down faq-icon-3d"></i>
     </div>
     <div class="faq-answer-3d">
-        <p>Some Christians cite Galatians 1:8 as evidence against the Quran, but this argument is problematic for several reasons:</p>
+        <p style="margin-bottom: 20px; font-size: 1.05rem;">
+            Using Galatians 1:8 to "curse" the Quran is a common but deeply flawed argument. 
+            Here is why it fails from both Islamic and logical perspectives:
+        </p>
 
-        <div class="quran-verse-glass">"But even if we or an angel from heaven should preach a gospel other than the one we preached to you, let them be under God's curse!" (Galatians 1:8, NIV)</div>
+        <!-- First Point -->
+        <div class="argument-point" style="background: rgba(26, 35, 126, 0.15); border-left: 4px solid var(--neon-blue); padding: 20px; border-radius: 0 10px 10px 0; margin: 25px 0;">
+            <h4 style="color: var(--neon-blue); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-ban" style="color: #ff5757;"></i>
+                <span>First: Paul Has No Authority Over Islam</span>
+            </h4>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 3; min-width: 250px;">
+                    <p>Galatians 1:8 is a statement made by <strong>Paul to his own followers</strong> about preserving his message.</p>
+                    
+                    <div class="quran-verse-glass" style="margin: 15px 0; padding: 15px; font-size: 0.95rem;">
+                        "But even if we or an angel from heaven should preach a gospel other than the one we preached to you, let them be under God's curse!"<br>
+                        <em style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">— Galatians 1:8 (NIV)</em>
+                    </div>
+                    
+                    <p><strong>Islam does not recognize Paul:</strong></p>
+                    <ul style="margin: 15px 0 15px 20px;">
+                        <li>Not as a prophet</li>
+                        <li>Not as a divinely protected authority</li>
+                        <li>His writings are not divine scripture in Islam</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;">
+                        Therefore, his writings <strong>cannot be used as a standard</strong> to judge the Qur'an or Prophet Muhammad ﷺ.
+                    </p>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px; display: flex; align-items: center; justify-content: center;">
+                    <a href="paulvschrist.html" class="topic-card-link" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; padding: 12px 20px; margin: 10px 0;">
+                        <i class="fas fa-external-link-alt"></i>
+                        See More → paul.html
+                    </a>
+                </div>
+            </div>
+        </div>
 
-        <p><strong>1. Paul's authority issue:</strong> Paul wrote these words himself. He was not among the original disciples of Jesus, and his apostleship was contested even during his time. The Quran mentions that people before Muhammad ﷺ also received revelation but some altered it.</p>
+        <!-- Second Point -->
+        <div class="argument-point" style="background: rgba(255, 179, 0, 0.15); border-left: 4px solid var(--neon-gold); padding: 20px; border-radius: 0 10px 10px 0; margin: 25px 0;">
+            <h4 style="color: var(--neon-gold); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-times-circle" style="color: var(--neon-gold);"></i>
+                <span>Second: Even If Paul's Authority Is Assumed, The Argument Still Fails</span>
+            </h4>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 2; min-width: 300px;">
+                    <p>Paul's warning about "another gospel" is directed at <strong>people within his own community</strong> who were altering the message he believed he had already delivered.</p>
+                    
+                    <div style="background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                        <p style="margin: 0; font-style: italic; color: rgba(255, 255, 255, 0.9);">
+                            "It is <strong>not</strong> a universal rule declaring that any later revelation from God is automatically false."
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px; background: rgba(255, 87, 87, 0.1); padding: 15px; border-radius: 10px;">
+                    <h5 style="color: #ff5757; margin-bottom: 10px; font-size: 1rem;">The Circular Reasoning</h5>
+                    <p style="font-size: 0.95rem; margin: 0;">The argument assumes what it needs to prove:</p>
+                    <ol style="margin: 10px 0 0 15px; font-size: 0.9rem;">
+                        <li>Paul's version of the gospel is final</li>
+                        <li>Anything different must be false</li>
+                        <li>Therefore Islam is false</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
 
-        <div class="quran-verse-glass">"So woe to those who write the Scripture with their own hands, then say, 'This is from Allah,' in order to exchange it for a small price. Woe to them for what their hands have written and woe to them for what they earn." (Quran 2:79)</div>
+        <!-- Visual Diagram -->
+        <div style="background: rgba(0, 229, 255, 0.08); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center;">
+            <h5 style="color: var(--neon-blue); margin-bottom: 20px; font-size: 1.1rem;">The Flawed Logic Chain</h5>
+            
+            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; margin: 20px 0;">
+                <div style="background: rgba(255, 87, 87, 0.2); padding: 10px 15px; border-radius: 8px; position: relative;">
+                    <span>Assume Paul's Authority</span>
+                    <div style="position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--neon-blue);">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 87, 87, 0.2); padding: 10px 15px; border-radius: 8px; position: relative;">
+                    <span>Assume Paul's Gospel is Final</span>
+                    <div style="position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--neon-blue);">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 87, 87, 0.2); padding: 10px 15px; border-radius: 8px;">
+                    <span>Declare Islam False</span>
+                </div>
+            </div>
+            
+            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; margin-top: 15px;">
+                This is <strong>circular reasoning</strong> — the conclusion is already assumed at the start
+            </p>
+        </div>
 
-        <p><strong>2. Different message, different revelation:</strong> The Quran is not "another gospel" of Jesus - it's the final revelation from Allah to all humanity through Prophet Muhammad ﷺ. Jesus in the Gospels predicted another Comforter/Helper (John 14:16, 15:26, 16:7) who would guide to all truth.</p>
+        <!-- Conclusion -->
+        <div style="background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(0, 229, 255, 0.1)); border-radius: 15px; padding: 25px; margin: 30px 0; border: 1px solid rgba(0, 229, 255, 0.2);">
+            <h4 style="color: var(--pure-white); margin-bottom: 15px; text-align: center; font-size: 1.3rem;">
+                <i class="fas fa-gavel" style="margin-right: 10px; color: var(--neon-gold);"></i>
+                Conclusion
+            </h4>
+            
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 20px;">
+                    <strong>Galatians 1:8 is an internal statement about maintaining Paul's teachings</strong> — 
+                    not a divine verdict on Islam. Using it to condemn the Qur'an goes beyond:
+                </p>
+                
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 25px 0;">
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; min-width: 150px;">
+                        <div style="font-size: 2rem; color: var(--neon-blue); margin-bottom: 10px;">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <p style="margin: 0; font-size: 0.95rem;">The Text</p>
+                    </div>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; min-width: 150px;">
+                        <div style="font-size: 2rem; color: var(--neon-blue); margin-bottom: 10px;">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <p style="margin: 0; font-size: 0.95rem;">Its Context</p>
+                    </div>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; min-width: 150px;">
+                        <div style="font-size: 2rem; color: var(--neon-blue); margin-bottom: 10px;">
+                            <i class="fas fa-scale-balanced"></i>
+                        </div>
+                        <p style="margin: 0; font-size: 0.95rem;">Its Authority</p>
+                    </div>
+                </div>
+                
+                <div class="quran-verse-glass" style="max-width: 600px; margin: 25px auto;">
+                    "And We have revealed to you, [O Muhammad], the Book in truth, confirming that which preceded it of the Scripture and as a criterion over it..."<br>
+                    <em style="color: rgba(255, 255, 255, 0.7);">— Quran 5:48</em>
+                </div>
+            </div>
+        </div>
 
-        <p><strong>3. Self-referential problem:</strong> If Paul can curse future revelations, then by the same logic, Moses could have cursed Jesus' teachings, or Jesus could have cursed Paul's writings. Revelation doesn't work by cursing future prophets.</p>
-
-        <p><strong>4. The Quran confirms true Christianity:</strong> The Quran confirms the true teachings of Jesus while correcting distortions that entered over time. Muslims believe in Jesus as a prophet, born of virgin Mary, performing miracles by Allah's permission.</p>
-
-        <p>The Quran actually warns against following human writings over divine revelation, which aligns with the concern Paul expresses, but applied in reverse direction.</p>
+        <!-- Additional Resources -->
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 15px; font-size: 0.95rem;">
+                For a detailed analysis of Paul's teachings versus the original message of Jesus:
+            </p>
+            
+            <a href="paulvschrist.html" class="topic-card-link" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 25px; font-size: 1rem; text-decoration: none;">
+                <i class="fas fa-external-link-alt"></i>
+                Read Full Analysis: Paul vs. Jesus' Original Message
+            </a>
+        </div>
     </div>
 </div>
 
@@ -2450,6 +2766,43 @@
                 }
                 loadingProgress.style.width = `${progress}%`;
             }, 150);
+        });
+
+        // ============================================
+        // SHOW QUESTION CONTAINER ON SCROLL (MOBILE ONLY)
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionCard = document.querySelector('.hero-container .question-card-3d');
+            const heroContainer = document.querySelector('.hero-container');
+            
+            if (window.innerWidth <= 767 && questionCard) {
+                // Initially hide question container
+                questionCard.style.opacity = '0';
+                questionCard.style.transform = 'translateY(50px)';
+                questionCard.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                questionCard.style.pointerEvents = 'none';
+                
+                // Show when hero container is scrolled past
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // When hero is visible, keep question hidden
+                            questionCard.classList.remove('visible');
+                        } else {
+                            // When hero is not visible (scrolled past), show question
+                            setTimeout(() => {
+                                questionCard.classList.add('visible');
+                            }, 300);
+                        }
+                    });
+                }, {
+                    threshold: 0.3 // When 30% of hero is out of view
+                });
+                
+                if (heroContainer) {
+                    observer.observe(heroContainer);
+                }
+            }
         });
 
         // ============================================
