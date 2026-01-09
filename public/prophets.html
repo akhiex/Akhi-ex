@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>25 Prophets in Islam - Individual Detailed Cards - Akhi ex responds</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+<style>
+    /* ============================================
+       CSS VARIABLES
+       ============================================ */
+    :root {
+        --gradient-primary: linear-gradient(135deg, #1a237e 0%, #283593 25%, #3949ab 50%, #5c6bc0 75%, #7986cb 100%);
+        --gradient-secondary: linear-gradient(135deg, #ffd54f 0%, #ffca28 25%, #ffb300 50%, #ff8f00 75%, #ff6f00 100%);
+        --gradient-dark: linear-gradient(135deg, #0d0f1c 0%, #131626 50%, #1a1c2e 100%);
+        
+        --glass-white: rgba(255, 255, 255, 0.15);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        
+        --neon-blue: #00e5ff;
+        --neon-gold: #ffd700;
+        --pure-white: #ffffff;
+        
+        --max-width: 1200px;
+        --border-radius: 20px;
+        --border-radius-lg: 25px;
+        
+        --font-heading: 'Playfair Display', serif;
+        --font-body: 'Inter', system-ui, sans-serif;
+        --font-arabic: 'Amiri', serif;
+    }
+
+    /* ============================================
+       BASE STYLES
+       ============================================ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        background: var(--gradient-dark);
+    }
+
+    body {
+        font-family: var(--font-body);
+        color: var(--pure-white);
+        background: var(--gradient-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    /* ============================================
+       HEADER STYLES
+       ============================================ */
+    .floating-header {
+        padding: 15px 0;
+    }
+
+    .floating-header .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .header-content {
+        background: var(--glass-white);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius-lg);
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .logo-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 18px;
+        background: linear-gradient(135deg, var(--pure-white), var(--neon-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* ============================================
+       MAIN CONTENT
+       ============================================ */
+    #content {
+        padding-top: 20px;
+    }
+
+    .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* ============================================
+       HERO VIDEO
+       ============================================ */
+    .hero-video-section {
+        margin: 20px auto 40px;
+        max-width: 1000px;
+        padding: 0 15px;
+    }
+
+    .video-hero-container {
+        background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(10, 10, 10, 0.3));
+        border-radius: var(--border-radius-lg);
+        padding: 15px;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(25px);
+    }
+
+    .video-wrapper {
+        position: relative;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: var(--border-radius);
+    }
+
+    /* ============================================
+       PROPHET CARDS - 25 INDIVIDUAL CARDS
+       ============================================ */
+    .prophets-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin: 40px auto;
+        max-width: 1400px;
+        padding: 0 20px;
+    }
+
+    .prophet-card {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+        backdrop-filter: blur(25px);
+        border-radius: var(--border-radius-lg);
+        padding: 30px;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+        animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    /* Individual animation delays for 25 cards */
+    .prophet-card:nth-child(1) { animation-delay: 0.1s; }
+    .prophet-card:nth-child(2) { animation-delay: 0.2s; }
+    .prophet-card:nth-child(3) { animation-delay: 0.3s; }
+    .prophet-card:nth-child(4) { animation-delay: 0.4s; }
+    .prophet-card:nth-child(5) { animation-delay: 0.5s; }
+    .prophet-card:nth-child(6) { animation-delay: 0.6s; }
+    .prophet-card:nth-child(7) { animation-delay: 0.7s; }
+    .prophet-card:nth-child(8) { animation-delay: 0.8s; }
+    .prophet-card:nth-child(9) { animation-delay: 0.9s; }
+    .prophet-card:nth-child(10) { animation-delay: 1.0s; }
+    .prophet-card:nth-child(11) { animation-delay: 1.1s; }
+    .prophet-card:nth-child(12) { animation-delay: 1.2s; }
+    .prophet-card:nth-child(13) { animation-delay: 1.3s; }
+    .prophet-card:nth-child(14) { animation-delay: 1.4s; }
+    .prophet-card:nth-child(15) { animation-delay: 1.5s; }
+    .prophet-card:nth-child(16) { animation-delay: 1.6s; }
+    .prophet-card:nth-child(17) { animation-delay: 1.7s; }
+    .prophet-card:nth-child(18) { animation-delay: 1.8s; }
+    .prophet-card:nth-child(19) { animation-delay: 1.9s; }
+    .prophet-card:nth-child(20) { animation-delay: 2.0s; }
+    .prophet-card:nth-child(21) { animation-delay: 2.1s; }
+    .prophet-card:nth-child(22) { animation-delay: 2.2s; }
+    .prophet-card:nth-child(23) { animation-delay: 2.3s; }
+    .prophet-card:nth-child(24) { animation-delay: 2.4s; }
+    .prophet-card:nth-child(25) { animation-delay: 2.5s; }
+
+    @keyframes slideUp {
+        from { 
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .prophet-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+    }
+
+    .prophet-number {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--pure-white);
+        font-size: 24px;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    .prophet-name-container {
+        flex: 1;
+    }
+
+    .prophet-name {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        background: linear-gradient(135deg, var(--pure-white), var(--neon-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .prophet-arabic {
+        font-family: var(--font-arabic);
+        font-size: 1.5rem;
+        color: var(--neon-gold);
+        margin-top: 5px;
+        direction: rtl;
+    }
+
+    .prophet-biblical {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 3px;
+    }
+
+    /* Prophet Details Sections */
+    .prophet-details {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    @media (max-width: 992px) {
+        .prophet-details {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .main-details {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .prophet-story {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.95);
+        text-align: justify;
+    }
+
+    .prophet-story p {
+        margin-bottom: 15px;
+    }
+
+    /* Sidebar Information */
+    .sidebar-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .info-box {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 229, 255, 0.05));
+        border-radius: var(--border-radius);
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .info-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--neon-blue);
+        font-family: var(--font-heading);
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+    }
+
+    .info-title i {
+        font-size: 1.1rem;
+    }
+
+    .info-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .info-label {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+    }
+
+    .info-value {
+        color: var(--pure-white);
+        font-weight: 500;
+        text-align: right;
+        max-width: 60%;
+    }
+
+    /* Miracles List */
+    .miracles-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .miracle-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        border-left: 3px solid var(--neon-gold);
+    }
+
+    .miracle-item i {
+        color: var(--neon-gold);
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    .miracle-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Quranic Reference */
+    .quranic-reference {
+        background: linear-gradient(135deg, rgba(255, 179, 0, 0.1), rgba(26, 35, 126, 0.2));
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-top: 20px;
+        border-left: 4px solid var(--neon-gold);
+    }
+
+    .quran-text {
+        font-family: var(--font-arabic);
+        font-size: 1.3rem;
+        color: var(--neon-gold);
+        text-align: center;
+        margin-bottom: 15px;
+        line-height: 1.8;
+        direction: rtl;
+    }
+
+    .quran-translation {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        font-style: italic;
+        line-height: 1.6;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 15px;
+    }
+
+    /* Teachings Section */
+    .teachings-section {
+        margin-top: 25px;
+        padding: 20px;
+        background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(26, 35, 126, 0.15));
+        border-radius: var(--border-radius);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+    }
+
+    .teachings-title {
+        color: var(--neon-blue);
+        font-family: var(--font-heading);
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .teaching-points {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+    .teaching-point {
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .teaching-point strong {
+        color: var(--neon-blue);
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Footer */
+    .floating-footer {
+        text-align: center;
+        padding: 40px 0;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 60px;
+    }
+
+    .floating-footer .container {
+        background: var(--glass-white);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius-lg);
+        padding: 30px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .prophet-card {
+            padding: 20px;
+        }
+        
+        .prophet-header {
+            flex-direction: column;
+            text-align: center;
+            gap: 15px;
+        }
+        
+        .prophet-name {
+            font-size: 1.6rem;
+        }
+        
+        .prophet-number {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="floating-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-text">
+                        <div class="logo-title">Akhi ex responds</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Hero Video -->
+        <div class="hero-video-section">
+            <div class="video-hero-container">
+                <div class="video-wrapper">
+<iframe width="100%" height="100%" 
+         src="https://www.youtube-nocookie.com/embed/b3dbQyX6V8A?rel=0" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+</iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 25 INDIVIDUAL PROPHET CARDS -->
+        <div class="prophets-container" id="prophetsContainer">
+            <!-- Each prophet card will be inserted here by JavaScript -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="floating-footer">
+            <div class="container">
+                <h3>25 Prophets in Islam</h3>
+                <p>Detailed individual accounts based on Quranic and authentic sources</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript for 25 Individual Prophet Cards -->
+    <script>
+        const prophetsData = [
+            {
+                number: 1,
+                name: "Prophet Adam (AS)",
+                arabic: "آدم عليه السلام",
+                biblical: "Adam",
+                location: "Created in Paradise → Sent to Earth",
+                era: "Beginning of Humanity",
+                people: "First Human Generation",
+                duration: "930 years",
+                story: `Prophet Adam (AS) was the first human being created by Allah. According to Islamic tradition, Allah created Adam from clay and breathed His spirit into him. He was taught the names of all things, demonstrating knowledge superior to the angels. Allah commanded the angels to prostrate before Adam as a sign of respect, which all angels did except Iblis (Satan), who refused out of pride and was consequently expelled from Allah's mercy.
+
+Adam was placed in Paradise with his wife Hawwa (Eve), where they were permitted to enjoy everything except approaching a specific tree. Satan deceived them into eating from the forbidden tree, leading to their expulsion to Earth. This event was part of Allah's divine plan for humanity to inhabit Earth as His vicegerents.
+
+Upon Earth, Adam became the first prophet and messenger. He taught his progeny about monotheism, warned them against Satan's deception, and established the foundations of human civilization. Adam and Eve sincerely repented for their mistake, and Allah accepted their repentance, demonstrating His infinite mercy.
+
+Adam's life on Earth included the tragic event of his sons Qabil (Cain) and Habil (Abel), where Qabil murdered his brother out of jealousy - marking the first death and burial in human history. Before his death, Adam appointed his son Shith (Seth) as his successor to continue guiding humanity.
+
+The story of Adam establishes fundamental Islamic principles: the reality of free will and its consequences, the necessity of repentance, the constant struggle between good and evil, and humanity's role as Allah's vicegerents on Earth.`,
+                miracles: [
+                    "Direct creation by Allah's hands from clay",
+                    "Given knowledge of all things' names",
+                    "Angels commanded to prostrate before him",
+                    "Acceptance of sincere repentance"
+                ],
+                teachings: [
+                    "Foundation of human vicegerency on Earth",
+                    "Establishment of monotheistic worship",
+                    "Consequences of disobedience and power of repentance",
+                    "The reality of free will and choice"
+                ],
+                quran: "وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً",
+                translation: "And when your Lord said to the angels, 'Indeed, I will make upon the earth a successive authority.'"
+            },
+            {
+                number: 2,
+                name: "Prophet Idris (AS)",
+                arabic: "إدريس عليه السلام",
+                biblical: "Enoch",
+                location: "Babylon → Egypt",
+                era: "Antediluvian Period",
+                people: "Early Civilizations",
+                duration: "365 years (ascended)",
+                story: `Prophet Idris (AS), known as Enoch in the Bible, was the fifth generation from Prophet Adam. He was born in Babylon during a time when people had begun to deviate from the teachings of Adam and Seth. Idris called people back to the religion of monotheism, but few listened to his message.
+
+Due to persecution and rejection, Idris and his followers migrated from Babylon to Egypt. There he continued his mission, teaching people about justice, fairness, and proper worship. He instructed them in prayer, established specific days for fasting, and taught the importance of giving charity to the poor.
+
+Idris is credited with numerous innovations that advanced human civilization. He was the first to invent writing, which allowed for the preservation and transmission of knowledge. He also developed tailoring, teaching people how to sew clothing, and made advancements in astronomy and mathematics.
+
+The Quran describes Idris as "a man of truth and a prophet" whom Allah raised to a high station. According to Islamic tradition, Idris was taken up to heaven without experiencing death, similar to Prophet Jesus. His wisdom sayings emphasized gratitude, sharing with others, avoiding envy and excess, and the supreme value of wisdom over material possessions.`,
+                miracles: [
+                    "Invention of writing and various crafts",
+                    "Ascended to heaven without experiencing death",
+                    "Given knowledge of astronomy and calculation"
+                ],
+                teachings: [
+                    "Importance of knowledge and craftsmanship",
+                    "Ascetic lifestyle and devotion to worship",
+                    "Migration for religious freedom when necessary"
+                ],
+                quran: "وَاذْكُرْ فِي الْكِتَابِ إِدْرِيسَ إِنَّهُ كَانَ صِدِّيقًا نَّبِيًّا",
+                translation: "And mention in the Book, Enoch. Indeed, he was a man of truth and a prophet."
+            },
+            {
+                number: 3,
+                name: "Prophet Noah (AS)",
+                arabic: "نوح عليه السلام",
+                biblical: "Noah",
+                location: "Mesopotamia",
+                era: "Antediluvian Period",
+                people: "Wicked Generation",
+                duration: "950 years preaching",
+                story: `Prophet Noah (AS) lived among people who had descended into idol worship and moral corruption. These idols - named Wadd, Suwa, Yaghuth, Ya'uq, and Nasr - were originally statues of righteous people from earlier generations that gradually became objects of worship as the society went astray.
+
+Noah preached to his people for 950 years, calling them to worship Allah alone and abandon their idolatry. He used various approaches: public preaching, private counsel, day and night calls, but faced persistent rejection and mockery. His people accused him of being merely human, questioned the low social status of his followers, and demanded miraculous signs as proof.
+
+After centuries of rejection, Allah commanded Noah to build an ark. Despite mockery from his people who lived in a desert region with no sea, Noah faithfully constructed the massive vessel. When the divine punishment came in the form of a universal flood, Noah, the believers, and pairs of animals were saved in the ark while the disbelievers were destroyed.
+
+The flood lasted for months, after which the ark settled on Mount Judi. Noah and his followers established a new civilization based on monotheism. However, one of Noah's sons rejected the message and perished in the flood, demonstrating that familial relationship doesn't guarantee salvation without faith.`,
+                miracles: [
+                    "Construction of the massive ark without prior shipbuilding knowledge",
+                    "Survival through global flood",
+                    "Longevity of 950 years in prophetic mission"
+                ],
+                teachings: [
+                    "Perseverance and patience in calling to Allah",
+                    "Divine punishment for persistent disbelief",
+                    "New beginnings after destruction through faith"
+                ],
+                quran: "إِنَّا أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِ أَنْ أَنذِرْ قَوْمَكَ مِن قَبْلِ أَن يَأْتِيَهُمْ عَذَابٌ أَلِيمٌ",
+                translation: "Indeed, We sent Noah to his people, [saying], 'Warn your people before there comes to them a painful punishment.'"
+            },
+            {
+                number: 4,
+                name: "Prophet Hud (AS)",
+                arabic: "هود عليه السلام",
+                biblical: "Eber (possibly)",
+                location: "Al-Ahqaf (Southern Arabia)",
+                era: "Post-Noah Civilization",
+                people: "'Ad People",
+                duration: "Unknown",
+                story: `Prophet Hud (AS) was sent to the people of 'Ad, a civilization that existed in the southern part of the Arabian Peninsula. The 'Ad people were known for their physical strength, architectural achievements, and technological advancements. They built magnificent structures and developed a prosperous civilization, but this led to arrogance and disbelief.
+
+The people of 'Ad worshipped idols alongside Allah, attributing their success to false gods. Hud, who was from their own tribe, called them to pure monotheism. He reminded them of Allah's blessings: their strength, wealth, children, and provisions. He warned them about the fate of Noah's people and urged them to repent.
+
+The 'Ad people responded with mockery and arrogance. They called Hud mad and foolish, demanding that he bring about the punishment he threatened if he was truthful. They believed their gods would protect them and that their civilization was too powerful to be destroyed.
+
+After persistent rejection, Allah first sent a drought to warn them. When they still didn't repent, a devastating windstorm was sent that lasted for eight days and seven nights, completely destroying the disbelievers. Hud and the believers were saved. The ruins of their civilization in the Empty Quarter stand as a lesson for later generations.`,
+                miracles: [
+                    "Survival of believers from devastating windstorm",
+                    "Clear Arabic eloquence in delivering message",
+                    "Prophetic warnings exactly fulfilled"
+                ],
+                teachings: [
+                    "Consequences of arrogance and materialism",
+                    "Temporary nature of worldly power and civilizations",
+                    "Divine justice against persistent idolatry"
+                ],
+                quran: "وَإِلَىٰ عَادٍ أَخَاهُمْ هُودًا قَالَ يَا قَوْمِ اعْبُدُوا اللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُ",
+                translation: "And to 'Aad [We sent] their brother Hud. He said, 'O my people, worship Allah; you have no deity other than Him.'"
+            },
+            {
+                number: 5,
+                name: "Prophet Salih (AS)",
+                arabic: "صالح عليه السلام",
+                biblical: "Unknown",
+                location: "Al-Hijr (Northwest Arabia)",
+                era: "Post-'Ad Civilization",
+                people: "Thamud People",
+                duration: "Unknown",
+                story: `Prophet Salih (AS) was sent to the Thamud people, who succeeded the 'Ad civilization. The Thamud were known for carving magnificent homes and structures into mountains. They were wealthy and technologically advanced but fell into idol worship, oppression, and moral corruption.
+
+Salih was a respected man among them, known for his wisdom and goodness before his prophethood. He called his people to worship Allah alone and abandon their idols. The Thamud demanded a miracle as proof of his prophethood, asking for a she-camel to emerge from a specific rock.
+
+Allah granted their request, and a miraculous she-camel emerged from the rock. This camel was a sign from Allah - it would drink water on specific days while the Thamud's animals would drink on other days. The camel also produced abundant milk for the people. Salih warned them not to harm the camel.
+
+Despite this clear miracle, most Thamud continued in disbelief. A group of nine men plotted to kill the camel, which they did. Salih warned them of punishment in three days. They mocked him and arrogantly challenged the punishment to come quickly. After three days, Allah destroyed them with a mighty thunderbolt and earthquake. The believers who heeded Salih's warning and left were saved.`,
+                miracles: [
+                    "Emergence of she-camel from solid rock",
+                    "Miraculous production of abundant milk",
+                    "Specific water-drinking schedule established",
+                    "Prophetic warning exactly fulfilled"
+                ],
+                teachings: [
+                    "Respect for divine signs and miracles",
+                    "Consequences of harming sacred symbols",
+                    "Arrogance leads to destruction despite clear evidence"
+                ],
+                quran: "وَإِلَىٰ ثَمُودَ أَخَاهُمْ صَالِحًا قَالَ يَا قَوْمِ اعْبُدُوا اللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُ",
+                translation: "And to Thamud [We sent] their brother Salih. He said, 'O my people, worship Allah; you have no deity other than Him.'"
+            },
+            {
+                number: 6,
+                name: "Prophet Ibrahim (AS)",
+                arabic: "إبراهيم عليه السلام",
+                biblical: "Abraham",
+                location: "Ur → Canaan → Egypt",
+                era: "Patriarchal Age",
+                people: "Various Nations",
+                duration: "175 years",
+                story: `Prophet Ibrahim (AS), known as Abraham, is called "Khalilullah" (Friend of Allah) in Islam. He was born into a family of idol worshippers in ancient Mesopotamia. Even as a youth, Ibrahim used logical reasoning to conclude that celestial bodies and idols couldn't be gods since they were created, changeable, and powerless.
+
+Ibrahim first tried to guide his father Azar, then publicly challenged the idolatry of his people. During a festival when everyone left town, he destroyed all the idols except the largest one. When people returned and demanded an explanation, he told them to ask the chief idol - exposing the absurdity of their worship.
+
+The people threw Ibrahim into a massive fire, but Allah commanded the fire to be "coolness and safety" for him, and he emerged unharmed. He then emigrated with his wife Sarah and nephew Lut to spread monotheism. Ibrahim prayed for a righteous son, and Allah gave him Ismail through Hajar, then Isaac through Sarah in their old age.
+
+Allah tested Ibrahim with the command to sacrifice his son. Both father and son submitted completely to Allah's will. At the last moment, Allah replaced Ismail with a ram, establishing the tradition of sacrifice. Ibrahim and Ismail rebuilt the Kaaba in Mecca as the first house of worship for Allah.`,
+                miracles: [
+                    "Protection from fire which became cool and safe",
+                    "Revival of dead birds to demonstrate resurrection",
+                    "Angelic guests with news of Isaac's birth",
+                    "Acceptance of prayers for children in old age"
+                ],
+                teachings: [
+                    "Pure monotheism (Tawhid) and rejection of all idols",
+                    "Logical reasoning in establishing faith",
+                    "Complete submission and trust in Allah",
+                    "Hospitality and sacrifice as religious principles"
+                ],
+                quran: "وَإِذْ قَالَ إِبْرَاهِيمُ رَبِّ أَرِنِي كَيْفَ تُحْيِي الْمَوْتَىٰ",
+                translation: "And when Abraham said, 'My Lord, show me how You give life to the dead.'"
+            },
+            {
+                number: 7,
+                name: "Prophet Lut (AS)",
+                arabic: "لوط عليه السلام",
+                biblical: "Lot",
+                location: "Sodom (Dead Sea region)",
+                era: "Patriarchal Age",
+                people: "Sodom and Gomorrah",
+                duration: "Unknown",
+                story: `Prophet Lut (AS), the nephew of Ibrahim, was sent to the cities of Sodom and Gomorrah near the Dead Sea. These cities had become centers of extreme immorality, particularly homosexuality, which was practiced openly and aggressively. The people also engaged in robbery, highway robbery, and other crimes.
+
+Lut called his people to abandon their indecent practices and worship Allah alone. He reminded them of the natural order and the purpose of creation. However, they rejected his message, threatened to expel him from the city, and challenged him to bring Allah's punishment if he was truthful.
+
+Angels visited Lut in human form to deliver the news of impending punishment. Lut tried to protect his guests from the townspeople who demanded access to them for homosexual purposes. The angels revealed their identity and instructed Lut to leave with his family before dawn, warning them not to look back.
+
+At dawn, Allah destroyed the cities with an earthquake and a rain of stones of baked clay. Lut's wife, who was a disbeliever and had betrayed his mission, looked back and perished with the city. Lut and his believing followers were saved. The ruins of these cities remain as a warning against sexual immorality.`,
+                miracles: [
+                    "Angelic protection and deliverance of message",
+                    "Destruction of wicked cities as warned",
+                    "Salvation of believers from total destruction"
+                ],
+                teachings: [
+                    "Severe consequences of widespread sexual immorality",
+                    "Hospitality as a sacred duty",
+                    "Family loyalty cannot override religious principles",
+                    "Divine justice against persistent evil"
+                ],
+                quran: "وَلُوطًا إِذْ قَالَ لِقَوْمِهِ أَتَأْتُونَ الْفَاحِشَةَ مَا سَبَقَكُم بِهَا مِنْ أَحَدٍ مِّنَ الْعَالَمِينَ",
+                translation: "And Lot, when he said to his people, 'Do you commit such immorality as no one has preceded you with from among the worlds?'"
+            },
+            {
+                number: 8,
+                name: "Prophet Ismail (AS)",
+                arabic: "إسماعيل عليه السلام",
+                biblical: "Ishmael",
+                location: "Mecca",
+                era: "Patriarchal Age",
+                people: "Jurhum Tribe & Arabs",
+                duration: "137 years",
+                story: `Prophet Ismail (AS) was the first son of Ibrahim, born to Hajar. When Ismail was an infant, Allah commanded Ibrahim to leave Hajar and Ismail in the barren valley of Mecca. With unwavering faith, Hajar accepted this difficult command, trusting that Allah would not neglect them.
+
+When their water supply ran out, Hajar ran between the hills of Safa and Marwa searching for water. The angel Jibril struck the ground, and the Zamzam spring miraculously emerged, providing water that continues to flow to this day. The Jurhum tribe settled in the area due to the water source, and Ismail learned Arabic from them.
+
+When Ismail grew up, Ibrahim visited and together they rebuilt the Kaaba, the first house of worship dedicated to Allah. Ismail helped his father construct the sacred structure and establish the rituals of Hajj. Allah then tested Ibrahim with a dream commanding him to sacrifice Ismail.
+
+Both father and son demonstrated complete submission. Ismail willingly offered himself for sacrifice, saying "You will find me, if Allah wills, of the steadfast." At the moment of sacrifice, Allah replaced Ismail with a ram, establishing the ritual of Eid al-Adha. Ismail became a prophet to the Arab tribes, ancestor of the Prophet Muhammad ﷺ.`,
+                miracles: [
+                    "Zamzam spring emerging in barren desert",
+                    "Survival and thriving in uninhabited valley",
+                    "Willing submission to sacrifice command",
+                    "Prophethood among Arab tribes"
+                ],
+                teachings: [
+                    "Complete trust in Allah's plan during difficulty",
+                    "Submission to parental authority when aligned with Allah's will",
+                    "Foundation of Mecca as spiritual center",
+                    "Sacrifice as demonstration of faith"
+                ],
+                quran: "وَاذْكُرْ فِي الْكِتَابِ إِسْمَاعِيلَ إِنَّهُ كَانَ صَادِقَ الْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّا",
+                translation: "And mention in the Book, Ishmael. Indeed, he was true to his promise, and he was a messenger and a prophet."
+            },
+            {
+                number: 9,
+                name: "Prophet Ishaq (AS)",
+                arabic: "إسحاق عليه السلام",
+                biblical: "Isaac",
+                location: "Canaan",
+                era: "Patriarchal Age",
+                people: "Early Hebrews",
+                duration: "180 years",
+                story: `Prophet Ishaq (AS) was the second son of Ibrahim, born to Sarah in their old age when Sarah was 90 and Ibrahim was 100. His birth was a miraculous answer to Ibrahim's prayers and a demonstration of Allah's power over nature. Angels visited Ibrahim in human form to give the glad tidings of Ishaq's birth, followed by news of a grandson, Yaqub.
+
+Ishaq continued the monotheistic tradition of his father. He married Rebekah and had twin sons: Esau (Al-Eis) and Yaqub (Jacob). Ishaq preferred Yaqub because he recognized his spiritual inclinations and prophethood. This caused resentment from Esau, who was more worldly and materialistic.
+
+Ishaq lived as a prophet in Canaan, teaching his people about Allah and guiding them according to the teachings of his father Ibrahim. He emphasized the continuity of divine guidance and the importance of maintaining the covenant with Allah. Before his death, Ishaq blessed Yaqub and appointed him as his successor in prophethood.
+
+Ishaq was buried in the Cave of the Patriarchs in Hebron alongside his father Ibrahim, his wife Rebekah, and later his son Yaqub. His life represents the fulfillment of Allah's promise to Ibrahim and the continuation of the prophetic line through which many later prophets would come.`,
+                miracles: [
+                    "Birth to elderly parents (Sarah age 90, Ibrahim age 100)",
+                    "Continuation of prophetic line despite natural impossibility",
+                    "Angelic announcement of birth and future prophethood"
+                ],
+                teachings: [
+                    "Allah's power over natural limitations",
+                    "Continuity of divine guidance through generations",
+                    "Spiritual inheritance over material inheritance",
+                    "Patriarchal succession in prophethood"
+                ],
+                quran: "وَبَشَّرْنَاهُ بِإِسْحَاقَ نَبِيًّا مِّنَ الصَّالِحِينَ",
+                translation: "And We gave him good tidings of Isaac, a prophet from among the righteous."
+            },
+            {
+                number: 10,
+                name: "Prophet Yaqub (AS)",
+                arabic: "يعقوب عليه السلام",
+                biblical: "Jacob/Israel",
+                location: "Canaan → Egypt",
+                era: "Patriarchal Age",
+                people: "Children of Israel",
+                duration: "147 years",
+                story: `Prophet Yaqub (AS), also known as Israel, was the son of Ishaq and father of the twelve tribes of Israel. From childhood, he showed spiritual inclinations that distinguished him from his twin brother Esau. Yaqub received the blessing and prophethood from his father, which caused resentment from Esau.
+
+To escape Esau's anger, Yaqub traveled to his uncle Laban in Haran. On the journey, he dreamed of a ladder extending from earth to heaven with angels ascending and descending. Allah promised him the land and numerous descendants. Yaqub vowed to dedicate a house for worship if protected.
+
+Yaqub worked for twenty years for Laban, marrying his daughters Leah and Rachel. He had twelve sons who became the ancestors of the twelve tribes of Israel. His favorite son was Yusuf (Joseph), whose prophetic dreams and favored status caused jealousy among his brothers.
+
+The brothers plotted against Yusuf, leading to years of separation and grief for Yaqub, who lost his eyesight from crying. After decades, Yusuf rose to power in Egypt and reunited the family. Yaqub migrated to Egypt where he lived his final years, blessing his sons and establishing them as tribes before his death.`,
+                miracles: [
+                    "Dream of celestial ladder with angels",
+                    "Recovery of lost eyesight when Yusuf's shirt was placed on his face",
+                    "Prophethood bestowed on all twelve sons as tribal leaders"
+                ],
+                teachings: [
+                    "Patience during prolonged trials and separation",
+                    "Family reconciliation and forgiveness",
+                    "Divine planning working through human actions",
+                    "Establishment of tribal structure for Israelites"
+                ],
+                quran: "أَمْ كُنتُمْ شُهَدَاءَ إِذْ حَضَرَ يَعْقُوبَ الْمَوْتُ إِذْ قَالَ لِبَنِيهِ مَا تَعْبُدُونَ مِن بَعْدِي",
+                translation: "Or were you witnesses when death approached Jacob, when he said to his sons, 'What will you worship after me?'"
+            },
+            {
+                number: 11,
+                name: "Prophet Yusuf (AS)",
+                arabic: "يوسف عليه السلام",
+                biblical: "Joseph",
+                location: "Canaan → Egypt",
+                era: "Patriarchal Age",
+                people: "Egyptians & Hebrews",
+                duration: "110 years",
+                story: `Prophet Yusuf (AS) had prophetic dreams from childhood, including one where eleven stars, the sun, and moon prostrated to him. His father Yaqub recognized his special status, causing jealousy among his brothers. They plotted to kill him but instead threw him into a well and claimed a wolf killed him.
+
+Yusuf was rescued by travelers and sold into slavery in Egypt. Purchased by the Aziz (Potiphar), he grew into a handsome and righteous young man. The Aziz's wife tried to seduce him, but Yusuf chose prison over sin. In prison, he interpreted dreams for two cellmates, accurately predicting one's execution and the other's restoration to service.
+
+When Pharaoh had disturbing dreams, Yusuf was summoned from prison. He interpreted the dreams as seven years of abundance followed by seven years of famine and advised storing grain. Impressed, Pharaoh appointed him as treasurer of Egypt.
+
+During the famine, Yusuf's brothers came to Egypt for food. After testing them, he revealed his identity and forgave them. He brought his entire family to Egypt, reuniting with his father Yaqub. Yusuf's story demonstrates how Allah's plan works through apparent adversity to bring about greater good.`,
+                miracles: [
+                    "Interpretation of complex dreams with perfect accuracy",
+                    "Preservation of chastity despite extreme temptation",
+                    "Rise from prisoner to highest authority in Egypt",
+                    "Reunion of divided family through divine planning"
+                ],
+                teachings: [
+                    "Patience and perseverance during prolonged adversity",
+                    "Forgiveness of those who wronged you",
+                    "Divine planning working through human free will",
+                    "Moral integrity in the face of temptation"
+                ],
+                quran: "لَّقَدْ كَانَ فِي يُوسُفَ وَإِخْوَتِهِ آيَاتٌ لِّلسَّائِلِينَ",
+                translation: "Certainly were there in Joseph and his brothers signs for those who ask."
+            },
+            {
+                number: 12,
+                name: "Prophet Ayyub (AS)",
+                arabic: "أيوب عليه السلام",
+                biblical: "Job",
+                location: "Arabia (possibly)",
+                era: "Unknown",
+                people: "His Family & Community",
+                duration: "93 years (after restoration)",
+                story: `Prophet Ayyub (AS) is the epitome of patience in Islam. He was a wealthy and pious man with abundant livestock, large family, and good health. Iblis (Satan) became jealous of Ayyub's devotion and asked Allah for permission to test him, claiming Ayyub only worshipped because of his blessings.
+
+Allah allowed the test but forbade harming Ayyub's soul, faith, intellect, or tongue. Ayyub lost all his wealth, then all his children died, and finally he was afflicted with severe skin disease that lasted for years. Through all this, Ayyub maintained his faith, saying "What Allah has taken away from me belongs to Him."
+
+People abandoned him except his loyal wife, who supported him throughout his ordeal. After many years of suffering, Ayyub prayed: "Indeed, adversity has touched me, and you are the Most Merciful of the merciful." Allah immediately answered his prayer, commanding him to strike the ground with his foot.
+
+A spring of healing water emerged. Ayyub bathed in it and was completely healed. Allah restored his wealth twofold and gave him new children. The Prophet Muhammad ﷺ mentioned that when Ayyub was bathing naked, golden locusts fell on him, and he collected them, saying he couldn't shun Allah's blessings.`,
+                miracles: [
+                    "Healing from severe, long-lasting illness",
+                    "Restoration of family and wealth in greater measure",
+                    "Emergence of healing spring from ground",
+                    "Perfect patience maintained through extreme trials"
+                ],
+                teachings: [
+                    "Patience during suffering as highest form of worship",
+                    "Perseverance in faith despite loss of all worldly blessings",
+                    "Divine testing as means of spiritual elevation",
+                    "Gratitude in both ease and hardship"
+                ],
+                quran: "وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُ أَنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِينَ",
+                translation: "And Job, when he called to his Lord, 'Indeed, adversity has touched me, and you are the Most Merciful of the merciful.'"
+            },
+            {
+                number: 13,
+                name: "Prophet Shu'ayb (AS)",
+                arabic: "شعيب عليه السلام",
+                biblical: "Jethro/Reuel",
+                location: "Midian",
+                era: "Pre-Mosaic Period",
+                people: "Midianites",
+                duration: "Unknown",
+                story: `Prophet Shu'ayb (AS) was sent to the people of Midian in northwestern Arabia. The Midianites were known for dishonesty in commercial transactions - they would give short measure and weight while demanding full payment from others. They also hindered people from Allah's path and engaged in corruption on earth.
+
+Shu'ayb, known as the "Orator of the Prophets" for his eloquent speech, called his people to worship Allah alone and reform their business practices. He taught them to give full measure and weight, not to diminish people's goods, and not to cause corruption after reform had been established.
+
+The Midianites responded with mockery, threatening to stone Shu'ayb and his followers or expel them from their city. They seized the belongings of Shu'ayb's followers and drove them out. Shu'ayb warned them of punishment, reminding them of the fate of previous nations like Noah's people.
+
+Allah sent a punishment that began with scorching heat for seven days, followed by a cloud bringing darkness and thunderbolts. The earthquake seized them in their homes, destroying them completely. Shu'ayb and his believing followers were saved. He is also traditionally identified as the father-in-law of Musa (Moses).`,
+                miracles: [
+                    "Eloquent preaching that earned title 'Khatib al-Anbiya'",
+                    "Prophetic warnings exactly fulfilled",
+                    "Connection to Mosaic tradition through family relation"
+                ],
+                teachings: [
+                    "Commercial ethics and fair business practices",
+                    "Honesty in measurements and transactions",
+                    "Social justice and opposition to corruption",
+                    "Warning against exploiting others in trade"
+                ],
+                quran: "وَإِلَىٰ مَدْيَنَ أَخَاهُمْ شُعَيْبًا قَالَ يَا قَوْمِ اعْبُدُوا اللَّهَ مَا لَكُم مِّنْ إِلَـٰهٍ غَيْرُهُ",
+                translation: "And to Midian [We sent] their brother Shu'ayb. He said, 'O my people, worship Allah; you have no deity other than Him.'"
+            },
+            {
+                number: 14,
+                name: "Prophet Musa (AS)",
+                arabic: "موسى عليه السلام",
+                biblical: "Moses",
+                location: "Egypt → Sinai Wilderness",
+                era: "13th Century BCE",
+                people: "Israelites",
+                duration: "120 years",
+                story: `Prophet Musa (AS) was born during Pharaoh's decree to kill all Israelite male infants. His mother placed him in a basket in the Nile River, where Pharaoh's household found and adopted him. Raised in the palace, Musa accidentally killed an Egyptian and fled to Midian.
+
+In Midian, Musa helped water the flocks of two sisters and married one of them. After ten years, while at Mount Sinai, he saw a burning bush that wasn't consumed. Allah spoke directly to him, commissioning him as a prophet to confront Pharaoh. Musa was given two miracles: his staff turning into a serpent and his hand becoming radiant white.
+
+Musa and his brother Harun confronted Pharaoh, demanding freedom for the Israelites. Pharaoh refused, and Allah sent nine plagues. Finally, after the plague of the firstborn, Pharaoh let them go but pursued them. Allah parted the Red Sea for the Israelites to cross, then closed it on Pharaoh's army.
+
+In the wilderness, Musa received the Torah on Mount Sinai. However, the Israelites worshipped a golden calf in his absence. Despite miracles like manna and quail, they repeatedly complained and disobeyed. For their lack of faith, they wandered for forty years before the next generation could enter the Promised Land.`,
+                miracles: [
+                    "Staff turning into serpent and back",
+                    "Hand becoming radiant white",
+                    "Parting of the Red Sea",
+                    "Water from struck rock",
+                    "Direct speech with Allah"
+                ],
+                teachings: [
+                    "Confrontation of tyranny and oppression",
+                    "Divine legislation through the Torah",
+                    "Leadership of oppressed people to freedom",
+                    "Patience with disobedient followers"
+                ],
+                quran: "وَكَلَّمَ اللَّهُ مُوسَىٰ تَكْلِيمًا",
+                translation: "And Allah spoke to Moses with [direct] speech."
+            },
+            {
+                number: 15,
+                name: "Prophet Harun (AS)",
+                arabic: "هارون عليه السلام",
+                biblical: "Aaron",
+                location: "Egypt → Sinai Wilderness",
+                era: "13th Century BCE",
+                people: "Israelites",
+                duration: "123 years",
+                story: `Prophet Harun (AS) was the older brother of Musa and served as his assistant and spokesman. When Allah commissioned Musa at the burning bush, Musa requested that Harun accompany him because Harun was more eloquent in speech. Allah granted this request, making Harun a prophet to assist his brother.
+
+Harun supported Musa during the confrontations with Pharaoh, helping to deliver Allah's message and perform miracles. During the exodus from Egypt and the wilderness wanderings, Harun served as the high priest of the Israelites, responsible for religious rituals and the Tabernacle worship.
+
+When Musa ascended Mount Sinai for forty days to receive the Torah, he left Harun in charge. During this time, some Israelites pressured Harun to make them a golden calf to worship. Harun tried to delay them but ultimately complied under pressure. Musa was angry upon his return, but Harun explained the difficult situation.
+
+Despite this incident, Harun remained a prophet and continued to support Musa's leadership. He died before the Israelites entered the Promised Land, on Mount Hor. Harun's descendants became the priestly class (Kohanim) among the Israelites, with special religious duties and privileges.`,
+                miracles: [
+                    "Assistance in performing miracles before Pharaoh",
+                    "Shared in prophetic mission with brother",
+                    "Priestly leadership during wilderness period"
+                ],
+                teachings: [
+                    "Supportive leadership and brotherly cooperation",
+                    "Priestly mediation between people and Allah",
+                    "Patience under community pressure",
+                    "Shared responsibility in prophetic missions"
+                ],
+                quran: "وَأَخِي هَارُونُ هُوَ أَفْصَحُ مِنِّي لِسَانًا فَأَرْسِلْهُ مَعِيَ رِدْءًا يُصَدِّقُنِي",
+                translation: "And my brother Aaron is more eloquent than me in speech, so send him with me as a helper to confirm me."
+            },
+            {
+                number: 16,
+                name: "Prophet Dawud (AS)",
+                arabic: "داود عليه السلام",
+                biblical: "David",
+                location: "Jerusalem",
+                era: "10th Century BCE",
+                people: "Israelites",
+                duration: "70 years",
+                story: `Prophet Dawud (AS) began as a shepherd boy who volunteered to fight the giant Goliath (Jalut) when the Israelite army was terrified. With only a sling and stones, trusting in Allah, Dawud killed Goliath. This victory led to his rise in King Saul's army and eventually to kingship.
+
+Allah gave Dawud the kingdom and wisdom, and taught him what He willed. Dawud ruled justly for forty years, establishing Jerusalem as his capital. He received the Psalms (Zabur), which contained hymns, prayers, and wisdom. The mountains and birds would glorify Allah with him, and he could understand their speech.
+
+Dawud was also skilled in making armor from iron that Allah made soft for him. He would fast every other day and pray one-third of the night. One famous story involves two men who came to him for judgment about a damaged sheep. Through this, Dawud learned the importance of hearing both sides before judging.
+
+Despite being a king and prophet, Dawud remained humble and repentant. When he erred in judgment regarding Uriah's wife Bathsheba, he immediately repented when confronted by a prophet. His sincere repentance became an example for all believers.`,
+                miracles: [
+                    "Defeat of giant Goliath with simple sling",
+                    "Mountains and birds glorifying Allah with him",
+                    "Understanding language of birds and animals",
+                    "Iron made soft for crafting armor"
+                ],
+                teachings: [
+                    "Just kingship and fair judgment",
+                    "Devotional worship through Psalms",
+                    "Repentance and forgiveness after errors",
+                    "Humility despite power and position"
+                ],
+                quran: "وَآتَيْنَا دَاوُودَ زَبُورًا",
+                translation: "And to David We gave the book [of Psalms]."
+            },
+            {
+                number: 17,
+                name: "Prophet Sulayman (AS)",
+                arabic: "سليمان عليه السلام",
+                biblical: "Solomon",
+                location: "Jerusalem",
+                era: "10th Century BCE",
+                people: "Israelites, Jinn, Animals",
+                duration: "40 years reign",
+                story: `Prophet Sulayman (AS) inherited prophethood and kingdom from his father Dawud. Allah gave him unique abilities: understanding the language of birds and animals, control over the wind, and authority over jinn who worked for him by Allah's permission. Sulayman used these gifts to spread Islam and establish justice.
+
+One famous story involves the hoopoe bird who informed Sulayman about the Queen of Sheba (Bilqis) worshipping the sun. Sulayman sent her a letter inviting her to Islam. When she came with gifts, he demonstrated Allah's power by having her throne brought to him instantly through a jinn's power before she arrived.
+
+Sulayman built the magnificent Temple in Jerusalem. He ruled with wisdom and justice, and his kingdom extended over humans, jinn, animals, and birds. He once heard an ant warning others about his approaching army, and he smiled, thanking Allah for the blessing.
+
+Sulayman died while leaning on his staff, overseeing jinn at work. They continued working, thinking he was alive, until a termite ate through his staff and his body fell. This demonstrated that only Allah knows the unseen. His death showed that no creature, not even powerful jinn, has independent power.`,
+                miracles: [
+                    "Control over wind for travel",
+                    "Understanding language of all creatures",
+                    "Authority over jinn who worked for him",
+                    "Instant transportation of Queen's throne"
+                ],
+                teachings: [
+                    "Wisdom in leadership and judgment",
+                    "Gratitude for Allah's unique blessings",
+                    "Use of abilities for spreading Islam",
+                    "Humility despite extraordinary powers"
+                ],
+                quran: "وَوَرِثَ سُلَيْمَانُ دَاوُودَ وَقَالَ يَا أَيُّهَا النَّاسُ عُلِّمْنَا مَنطِقَ الطَّيْرِ",
+                translation: "And Solomon inherited David. He said, 'O people, we have been taught the language of birds.'"
+            },
+            {
+                number: 18,
+                name: "Prophet Ilyas (AS)",
+                arabic: "إلياس عليه السلام",
+                biblical: "Elijah",
+                location: "Israel",
+                era: "9th Century BCE",
+                people: "Israelites",
+                duration: "Unknown",
+                story: `Prophet Ilyas (AS) was sent to the Israelites during the reign of King Ahab and Queen Jezebel, when Baal worship had become widespread. The people had abandoned the worship of Allah and turned to idolatry. Ilyas confronted this corruption boldly, calling people back to the worship of Allah alone.
+
+Ilyas performed several miracles to demonstrate Allah's power. When King Ahab challenged him, Ilyas proposed a contest on Mount Carmel between himself and 450 prophets of Baal. Both would prepare sacrifices and call on their deity to send fire. The Baal prophets called all day with no response. Then Ilyas prayed to Allah, and fire descended from heaven, consuming his water-soaked sacrifice.
+
+For his bold opposition to idolatry, Ilyas faced persecution and had to flee into the wilderness. During this time, ravens brought him food, and he stayed with a widow whose flour and oil were miraculously multiplied during a famine. He also raised her son from death.
+
+According to Islamic tradition, Ilyas did not die but was taken up to heaven. He is believed to return to earth with Prophet Khidr periodically. In some traditions, he appears with Prophet Khidr during Hajj season.`,
+                miracles: [
+                    "Fire from heaven consuming sacrifice",
+                    "Multiplication of widow's flour and oil",
+                    "Raising widow's son from death",
+                    "Being fed by ravens in wilderness"
+                ],
+                teachings: [
+                    "Bold confrontation of idolatry and corruption",
+                    "Trust in Allah's provision during persecution",
+                    "Miracles as proof for stubborn people",
+                    "Perseverance despite royal opposition"
+                ],
+                quran: "وَإِنَّ إِلْيَاسَ لَمِنَ الْمُرْسَلِينَ",
+                translation: "And indeed, Elijah was among the messengers."
+            },
+            {
+                number: 19,
+                name: "Prophet Al-Yasa (AS)",
+                arabic: "اليسع عليه السلام",
+                biblical: "Elisha",
+                location: "Israel",
+                era: "9th Century BCE",
+                people: "Israelites",
+                duration: "Unknown",
+                story: `Prophet Al-Yasa (AS) was the successor and student of Prophet Ilyas. He continued Ilyas's mission of calling the Israelites back to monotheism during a period of widespread idolatry and moral decline. Al-Yasa performed numerous miracles that demonstrated Allah's power and mercy.
+
+One of his most famous miracles involved a poor widow who was in debt and whose sons were to be taken as slaves. Al-Yasa told her to gather empty vessels and pour her small amount of oil into them. The oil miraculously multiplied, filling all the vessels, which she could then sell to pay her debts.
+
+Al-Yasa also healed Naaman, the commander of the Syrian army, of leprosy by instructing him to bathe seven times in the Jordan River. Initially proud, Naaman eventually followed the simple instruction and was completely healed, leading him to believe in Allah.
+
+Another miracle involved resurrecting a dead child. When a woman's son died, she sought Al-Yasa's help. He prayed to Allah, and the child was brought back to life. Al-Yasa continued Ilyas's work of reforming the Israelites and maintaining monotheistic worship during turbulent times.`,
+                miracles: [
+                    "Multiplication of widow's oil to pay debts",
+                    "Healing of Naaman's leprosy",
+                    "Resurrection of dead child",
+                    "Purification of poisoned stew"
+                ],
+                teachings: [
+                    "Continuity of prophetic mission through successors",
+                    "Healing and mercy as aspects of prophethood",
+                    "Simple obedience to divine instructions",
+                    "Social concern for the poor and indebted"
+                ],
+                quran: "وَإِسْمَاعِيلَ وَالْيَسَعَ وَيُونُسَ وَلُوطًا وَكُلًّا فَضَّلْنَا عَلَى الْعَالَمِينَ",
+                translation: "And Ishmael and Elisha and Jonah and Lot - and all [of them] We preferred over the worlds."
+            },
+            {
+                number: 20,
+                name: "Prophet Yunus (AS)",
+                arabic: "يونس عليه السلام",
+                biblical: "Jonah",
+                location: "Nineveh (Mosul)",
+                era: "8th Century BCE",
+                people: "Ninevites",
+                duration: "Unknown",
+                story: `Prophet Yunus (AS) was sent to the people of Nineveh (modern-day Mosul, Iraq) who were engaged in idol worship and immoral practices. He called them to worship Allah alone, but they rejected his message. Frustrated and without waiting for Allah's command, Yunus left the city, thinking Allah would not hold him responsible for people who wouldn't believe.
+
+Yunus boarded a ship which encountered a storm. The sailors drew lots to determine who was causing the misfortune, and the lot fell on Yunus. He was thrown overboard and swallowed by a large fish (whale). In the fish's belly, in darkness and distress, Yunus realized his mistake and prayed sincerely: "There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers."
+
+Allah accepted his repentance and commanded the fish to eject him onto a shore. Meanwhile, the people of Nineveh saw signs of impending punishment, repented sincerely, and were forgiven. When Yunus returned, he found them as believers. Allah made a gourd plant grow over him for shade during his recovery.
+
+Yunus's story emphasizes that no one should consider themselves better than others and that sincere repentance is always accepted. The Prophet Muhammad ﷺ said: "No one should say I am better than Yunus ibn Matta."`,
+                miracles: [
+                    "Survival in fish's belly for days",
+                    "Acceptance of sincere repentance in extreme circumstances",
+                    "City-wide repentance after his departure",
+                    "Gourd plant growing rapidly for shade"
+                ],
+                teachings: [
+                    "Power of sincere repentance in any situation",
+                    "Divine mercy extends to all who repent",
+                    "Patience in delivering message, not haste",
+                    "No prophet should consider himself superior"
+                ],
+                quran: "وَذَا النُّونِ إِذ ذَّهَبَ مُغَاضِبًا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ",
+                translation: "And [mention] the man of the fish [Jonah], when he went off in anger and thought that We would not decree [anything] upon him."
+            },
+            {
+                number: 21,
+                name: "Prophet Dhul-Kifl (AS)",
+                arabic: "ذا الكفل",
+                biblical: "Ezekiel (possibly)",
+                location: "Babylon",
+                era: "6th Century BCE",
+                people: "Exiled Israelites",
+                duration: "Unknown",
+                story: `Prophet Dhul-Kifl (AS) is mentioned twice in the Quran among other prophets. The name "Dhul-Kifl" means "possessor of" or "guarantor" - possibly referring to his commitment or responsibility. He is often identified with the biblical Prophet Ezekiel, who prophesied during the Babylonian exile.
+
+Dhul-Kifl was known for his extreme patience and perseverance. He lived during a difficult period when the Israelites were in exile in Babylon after the destruction of Jerusalem. Despite the challenging circumstances, he continued to call people to Allah and maintain hope for restoration.
+
+One famous story associated with Dhul-Kifl involves his commitment to fast every day, pray all night, and judge fairly among people. He was so dedicated to justice that he would never turn away anyone seeking judgment. His patience was tested when Satan tried to distract him from his worship, but he remained steadfast.
+
+Dhul-Kifl's message emphasized hope during exile, individual responsibility before Allah, and the promise of eventual restoration for those who remain faithful. He represents the continuity of prophethood even during national disaster and displacement.`,
+                miracles: [
+                    "Extreme patience and perseverance tested by Satan",
+                    "Maintaining prophethood during national exile",
+                    "Commitment to justice and fairness"
+                ],
+                teachings: [
+                    "Patience and perseverance during national disaster",
+                    "Individual responsibility in collective punishment",
+                    "Hope and promise of restoration after exile",
+                    "Steadfastness in worship during difficult times"
+                ],
+                quran: "وَإِسْمَاعِيلَ وَإِدْرِيسَ وَذَا الْكِفْلِ كُلٌّ مِّنَ الصَّابِرِينَ",
+                translation: "And Ishmael and Idris and Dhul-Kifl - all were of the patient."
+            },
+            {
+                number: 22,
+                name: "Prophet Zakariyya (AS)",
+                arabic: "زكريا عليه السلام",
+                biblical: "Zechariah",
+                location: "Jerusalem",
+                era: "1st Century BCE",
+                people: "Israelites",
+                duration: "Unknown",
+                story: `Prophet Zakariyya (AS) was a priest in the Jerusalem Temple during Roman rule. He was the guardian of Maryam (Mary), who was dedicated to service in the temple. Zakariyya witnessed miracles in her life - she would receive provisions from Allah that he didn't provide.
+
+Despite being elderly and his wife being barren, Zakariyya prayed for a son to continue the prophetic line and serve as his heir in guiding people. He prayed: "My Lord, indeed my bones have weakened, and my head has filled with white, and never have I been in my supplication to You, my Lord, unhappy."
+
+Allah answered his prayer, giving glad tidings of a son named Yahya (John), who would be pure, a prophet, and righteous. As a sign, Zakariyya was unable to speak to people for three days except through gestures. His wife conceived despite their old age and barrenness.
+
+Zakariyya continued to serve in the temple until, according to tradition, he was martyred by being sawed in half by opponents. His story demonstrates that Allah answers sincere prayers regardless of natural limitations and that prophethood continues through divine will, not human planning.`,
+                miracles: [
+                    "Birth of son in extreme old age to barren wife",
+                    "Temporary muteness as sign of prophethood",
+                    "Witnessing miraculous provisions for Maryam"
+                ],
+                teachings: [
+                    "Sincere prayer can overcome natural limitations",
+                    "Importance of righteous heirs to continue guidance",
+                    "Patience in old age while awaiting Allah's promise",
+                    "Guardianship and care for dedicated worshippers"
+                ],
+                quran: "هُنَالِكَ دَعَا زَكَرِيَّا رَبَّهُ قَالَ رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً",
+                translation: "At that, Zechariah called upon his Lord, saying, 'My Lord, grant me from Yourself a good offspring.'"
+            },
+            {
+                number: 23,
+                name: "Prophet Yahya (AS)",
+                arabic: "يحيى عليه السلام",
+                biblical: "John the Baptist",
+                location: "Judean Wilderness",
+                era: "1st Century CE",
+                people: "Israelites",
+                duration: "30 years",
+                story: `Prophet Yahya (AS) was the son of Zakariyya, born miraculously to elderly parents. From childhood, he was given wisdom and prophethood. He lived an ascetic life in the wilderness, wearing coarse clothing made of camel hair and eating simple food like locusts and wild honey.
+
+Yahya called people to repentance and baptized them in the Jordan River as a symbol of purification. He was the herald for Prophet Isa (Jesus), preparing the way for his message. Yahya said about Isa: "He must increase, but I must decrease," showing humility and recognition of Isa's greater mission.
+
+Yahya boldly confronted moral corruption, including criticizing King Herod Antipas for marrying his brother's wife Herodias. This confrontation led to his imprisonment. At a birthday celebration for Herod, Herodias's daughter Salome danced so well that Herod promised her anything she wanted. Prompted by her mother, she asked for Yahya's head on a platter.
+
+Despite his righteousness and prophethood, Yahya was martyred due to the sins of others. His life demonstrates that righteousness doesn't guarantee worldly safety and that prophets often face persecution for speaking truth to power.`,
+                miracles: [
+                    "Birth to elderly, barren parents as answer to prayer",
+                    "Wisdom and prophethood from childhood",
+                    "Ascetic lifestyle maintained from youth"
+                ],
+                teachings: [
+                    "Asceticism and detachment from worldly pleasures",
+                    "Bold confrontation of political corruption",
+                    "Humility in recognizing greater prophets to come",
+                    "Baptism as symbol of repentance and purification"
+                ],
+                quran: "يَا يَحْيَىٰ خُذِ الْكِتَابَ بِقُوَّةٍ وَآتَيْنَاهُ الْحُكْمَ صَبِيًّا",
+                translation: "O John, take the Scripture with determination.' And We gave him judgment [while yet] a boy."
+            },
+            {
+                number: 24,
+                name: "Prophet Isa (AS)",
+                arabic: "عيسى عليه السلام",
+                biblical: "Jesus Christ",
+                location: "Bethlehem → Galilee",
+                era: "1st Century CE",
+                people: "Israelites",
+                duration: "33 years (earthly mission)",
+                story: `Prophet Isa (AS) was born miraculously to the Virgin Maryam without a father. He spoke from the cradle, declaring: "Indeed, I am the servant of Allah. He has given me the Scripture and made me a prophet." This miraculous speech defended his mother's honor against accusations of immorality.
+
+Isa performed numerous miracles by Allah's permission: healing the blind and lepers, bringing dead people back to life, and creating birds from clay then breathing life into them. He called people to worship Allah alone, reinforced the Torah's laws, and denounced the materialism and hypocrisy of religious leaders.
+
+Isa received the Injil (Gospel) which confirmed the Torah and brought new teachings of love, forgiveness, and spiritual purity. He predicted the coming of Ahmad (another name for Prophet Muhammad ﷺ). The Jewish religious establishment felt threatened by his popularity and message.
+
+Contrary to Christian belief, Islam teaches that Isa was not crucified. Instead, Allah raised him to heaven and someone else was made to resemble him on the cross. Isa will return before the Day of Judgment to defeat the false Messiah (Dajjal), establish justice, and die a natural death after ruling according to Islamic law.`,
+                miracles: [
+                    "Virgin birth without father",
+                    "Speaking from cradle as infant",
+                    "Healing blind and lepers by Allah's permission",
+                    "Bringing dead back to life",
+                    "Creating birds from clay and giving them life",
+                    "Table spread with food from heaven"
+                ],
+                teachings: [
+                    "Pure monotheism and rejection of Trinity",
+                    "Love, forgiveness, and spiritual purity",
+                    "Humility and service as worship",
+                    "Preparation for final prophet to come"
+                ],
+                quran: "إِنَّمَا الْمَسِيحُ عِيسَى ابْنُ مَرْيَمَ رَسُولُ اللَّهِ وَكَلِمَتُهُ أَلْقَاهَا إِلَىٰ مَرْيَمَ وَرُوحٌ مِّنْهُ",
+                translation: "The Messiah, Jesus, the son of Mary, was but a messenger of Allah and His word which He directed to Mary and a soul [created at a command] from Him."
+            },
+            {
+                number: 25,
+                name: "Prophet Muhammad ﷺ",
+                arabic: "محمد صلى الله عليه وسلم",
+                biblical: "Foretold in previous scriptures",
+                location: "Mecca → Medina",
+                era: "570-632 CE",
+                people: "All Humanity",
+                duration: "63 years",
+                story: `Prophet Muhammad ﷺ is the final prophet and messenger of Allah, sent to all humanity. Born in Mecca in 570 CE, orphaned early, he was known as "Al-Amin" (the Trustworthy) before prophethood. At age 40, while meditating in Cave Hira, he received his first revelation through Angel Jibril (Gabriel).
+
+For 23 years, the Quran was revealed to him piece by piece, addressing various situations and providing complete guidance for all aspects of life. He faced severe persecution in Mecca for 13 years before migrating to Medina, where he established the first Islamic state.
+
+In Medina, the Prophet ﷺ united the tribes under the Constitution of Medina, established brotherhood between migrants and helpers, and built the first mosque. He led the Muslim community through defensive battles, treaties, and ultimately the peaceful conquest of Mecca.
+
+The Prophet ﷺ delivered the Farewell Sermon on Mount Arafat, establishing fundamental human rights. He completed his mission of delivering the Quran and establishing the Sunnah (his teachings and example). He died in Medina in 632 CE, leaving behind the complete and preserved guidance for all humanity until the Day of Judgment.`,
+                miracles: [
+                    "The Quran - eternal linguistic and scientific miracle",
+                    "Night Journey and Ascension (Isra and Miraj)",
+                    "Splitting of the moon",
+                    "Multiplication of food and water",
+                    "Prayer answered for rain during drought",
+                    "Healing of companions through his prayers"
+                ],
+                teachings: [
+                    "Complete submission to Allah (Islam)",
+                    "Social justice, equality, and human rights",
+                    "Mercy to all creation including animals",
+                    "Balance between spiritual and worldly life",
+                    "Final and complete guidance for all humanity"
+                ],
+                quran: "مَّا كَانَ مُحَمَّدٌ أَبَا أَحِدٍ مِّن رِّجَالِكُمْ وَلَٰكِن رَّسُولَ اللَّهِ وَخَاتَمَ النَّبِيِّينَ",
+                translation: "Muhammad is not the father of [any] one of your men, but [he is] the Messenger of Allah and last of the prophets."
+            }
+        ];
+
+        // Generate 25 Individual Prophet Cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const prophetsContainer = document.getElementById('prophetsContainer');
+            
+            prophetsData.forEach(prophet => {
+                const card = document.createElement('div');
+                card.className = 'prophet-card';
+                
+                card.innerHTML = `
+                    <div class="prophet-header">
+                        <div class="prophet-number">${prophet.number}</div>
+                        <div class="prophet-name-container">
+                            <h2 class="prophet-name">${prophet.name}</h2>
+                            <div class="prophet-arabic">${prophet.arabic}</div>
+                            <div class="prophet-biblical">Biblical: ${prophet.biblical}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="prophet-details">
+                        <div class="main-details">
+                            <div class="prophet-story">
+                                <p>${prophet.story}</p>
+                            </div>
+                            
+                            <div class="teachings-section">
+                                <div class="teachings-title">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Core Teachings
+                                </div>
+                                <div class="teaching-points">
+                                    ${prophet.teachings.map(teaching => `
+                                        <div class="teaching-point">
+                                            <strong>Teaching:</strong> ${teaching}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-info">
+                            <div class="info-box">
+                                <div class="info-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Historical Information
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-item">
+                                        <span class="info-label">Location:</span>
+                                        <span class="info-value">${prophet.location}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Historical Era:</span>
+                                        <span class="info-value">${prophet.era}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">People Sent To:</span>
+                                        <span class="info-value">${prophet.people}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Duration/Lifespan:</span>
+                                        <span class="info-value">${prophet.duration}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-box">
+                                <div class="info-title">
+                                    <i class="fas fa-star"></i>
+                                    Notable Miracles
+                                </div>
+                                <div class="miracles-list">
+                                    ${prophet.miracles.map(miracle => `
+                                        <div class="miracle-item">
+                                            <i class="fas fa-check"></i>
+                                            <div class="miracle-text">${miracle}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quranic-reference">
+                        <div class="quran-text">${prophet.quran}</div>
+                        <div class="quran-translation">"${prophet.translation}"</div>
+                    </div>
+                `;
+                
+                prophetsContainer.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

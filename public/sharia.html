@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sharia & Islamic Justice - Comprehensive Guide - Akhi ex responds</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           CSS VARIABLES - OPTIMIZED FOR MOBILE & DESKTOP
+           ============================================ */
+        :root {
+            /* Modern Gradient Color Palette */
+            --gradient-primary: linear-gradient(135deg, #006400 0%, #228B22 25%, #32CD32 50%, #50C878 75%, #90EE90 100%);
+            --gradient-secondary: linear-gradient(135deg, #8B4513 0%, #A0522D 25%, #D2691E 50%, #CD853F 75%, #F4A460 100%);
+            --gradient-dark: linear-gradient(135deg, #0d0f1c 0%, #131626 50%, #1a1c2e 100%);
+            --gradient-light: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            
+            /* Glassmorphism Colors */
+            --glass-white: rgba(255, 255, 255, 0.15);
+            --glass-white-heavy: rgba(255, 255, 255, 0.25);
+            --glass-dark: rgba(0, 0, 0, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            
+            /* Earth Tone Accents */
+            --earth-green: #32CD32;
+            --earth-brown: #8B4513;
+            --earth-gold: #DAA520;
+            --earth-teal: #20B2AA;
+            --earth-sage: #9DC183;
+            
+            /* Core Colors */
+            --deep-green: #006400;
+            --rich-brown: #8B4513;
+            --pure-white: #ffffff;
+            --pure-black: #0a0a0a;
+            --light-gray: #e0e0e0;
+            
+            /* Layout Variables - OPTIMIZED */
+            --max-width: 1400px;
+            --border-radius-sm: 12px;
+            --border-radius: 16px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 24px;
+            
+            /* Shadows */
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.2);
+            --shadow-green: 0 0 15px rgba(50, 205, 50, 0.5);
+            --shadow-gold: 0 0 20px rgba(218, 165, 32, 0.4);
+            
+            /* Font System */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-accent: 'Poppins', sans-serif;
+            --font-arabic: 'Amiri', serif;
+            
+            /* Transition Speeds */
+            --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           BASE RESET & GLOBAL STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 15px;
+            overflow-x: hidden;
+            background: var(--gradient-dark);
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--pure-white);
+            background: var(--gradient-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 100, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(218, 165, 32, 0.1) 0%, transparent 50%);
+            z-index: -2;
+            animation: backgroundFloat 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(10px, -10px) scale(1.02); }
+            66% { transform: translate(-5px, 5px) scale(0.98); }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ============================================
+           HEADER & NAVIGATION - OPTIMIZED
+           ============================================ */
+        .floating-header {
+            position: relative;
+            width: 100%;
+            background: transparent;
+            padding: 12px 0;
+            animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        .floating-header .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .header-content {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image-container {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            animation: float3D 6s infinite ease-in-out;
+        }
+
+        @keyframes float3D {
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            50% { transform: translateY(-5px) rotateX(5deg); }
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 16px;
+            background: linear-gradient(135deg, var(--pure-white), var(--earth-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1px;
+            letter-spacing: 0.3px;
+        }
+
+        .mobile-nav-toggle {
+            width: 36px;
+            height: 36px;
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .mobile-nav-toggle span {
+            width: 18px;
+            height: 2px;
+            background: var(--pure-white);
+            border-radius: 1px;
+            transition: all var(--transition-fast);
+            transform-origin: center;
+        }
+
+        nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--glass-white);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 12px;
+            margin-top: 8px;
+            box-shadow: var(--shadow-strong);
+            z-index: 1000;
+        }
+
+        nav.active {
+            display: block;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all var(--transition-fast);
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* ============================================
+           MAIN CONTENT AREA
+           ============================================ */
+        #content {
+            flex: 1;
+            width: 100%;
+            padding-top: 16px;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 16px;
+            width: 100%;
+        }
+
+        /* ============================================
+           YOUTUBE VIDEO SECTION
+           ============================================ */
+        .youtube-section {
+            position: relative;
+            margin: 30px auto;
+            max-width: 1100px;
+            padding: 0 16px;
+            animation: slideUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+        }
+
+        .video-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--pure-white);
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
+            background: linear-gradient(135deg, var(--pure-white), var(--earth-green), var(--earth-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 25px 0;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .youtube-container {
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 100, 0, 0.2), rgba(10, 10, 10, 0.3));
+            border-radius: var(--border-radius-xl);
+            padding: 20px;
+            box-shadow: 
+                var(--shadow-strong),
+                0 0 50px rgba(0, 100, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(25px);
+            overflow: hidden;
+        }
+
+        .youtube-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            z-index: 2;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 
+                var(--shadow-strong),
+                0 0 40px rgba(50, 205, 50, 0.3);
+            transform: perspective(1000px) rotateX(1deg);
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(50, 205, 50, 0.2);
+        }
+
+        .video-wrapper:hover {
+            transform: perspective(1000px) rotateX(0) scale(1.02);
+            box-shadow: 
+                var(--shadow-strong),
+                0 0 60px rgba(50, 205, 50, 0.5),
+                0 0 15px rgba(50, 205, 50, 0.5);
+            border-color: rgba(50, 205, 50, 0.4);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--border-radius-lg);
+        }
+
+        /* ============================================
+           PRINCIPLES GRID - WIDER LANDSCAPE CARDS
+           ============================================ */
+        .principles-section {
+            max-width: 1600px;
+            margin: 0 auto 40px;
+            padding: 0 16px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+            gap: 25px;
+        }
+
+        /* Principle Card - WIDER LANDSCAPE DESIGN */
+        .principle-card {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.03) 100%
+            );
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            animation: slideUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            display: flex;
+            flex-direction: column;
+            min-height: 320px;
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .principle-card::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .principle-card::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        .principle-card::-webkit-scrollbar-thumb {
+            background: var(--earth-green);
+            border-radius: 3px;
+        }
+
+        /* Staggered animation delays */
+        .principle-card:nth-child(1) { animation-delay: 0.3s; }
+        .principle-card:nth-child(2) { animation-delay: 0.35s; }
+        .principle-card:nth-child(3) { animation-delay: 0.4s; }
+        .principle-card:nth-child(4) { animation-delay: 0.45s; }
+        .principle-card:nth-child(5) { animation-delay: 0.5s; }
+        .principle-card:nth-child(6) { animation-delay: 0.55s; }
+        .principle-card:nth-child(7) { animation-delay: 0.6s; }
+        .principle-card:nth-child(8) { animation-delay: 0.65s; }
+        .principle-card:nth-child(9) { animation-delay: 0.7s; }
+        .principle-card:nth-child(10) { animation-delay: 0.75s; }
+
+        .principle-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 
+                var(--shadow-strong),
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                var(--shadow-green);
+            border-color: rgba(50, 205, 50, 0.4);
+        }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(50, 205, 50, 0.3);
+            flex-shrink: 0;
+        }
+
+        .card-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--pure-white);
+            box-shadow: 0 4px 15px rgba(0, 100, 0, 0.5);
+            flex-shrink: 0;
+        }
+
+        .card-title-section {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--pure-white), var(--earth-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+        }
+
+        .card-reference {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(50, 205, 50, 0.15);
+            color: var(--earth-green);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(50, 205, 50, 0.3);
+            white-space: nowrap;
+        }
+
+        /* Quran Verse */
+        .quran-verse {
+            background: linear-gradient(135deg, rgba(0, 100, 0, 0.15), rgba(0, 0, 0, 0.2));
+            border-radius: var(--border-radius-sm);
+            padding: 15px;
+            margin: 12px 0;
+            border-left: 3px solid var(--earth-green);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            font-style: italic;
+            flex-shrink: 0;
+        }
+
+        .arabic-text {
+            display: block;
+            margin-top: 6px;
+            font-size: 1.2rem;
+            color: var(--earth-gold);
+            font-family: var(--font-arabic);
+            text-align: center;
+        }
+
+        /* Explanation Section */
+        .explanation-section {
+            margin: 12px 0;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--earth-teal);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-family: var(--font-accent);
+        }
+
+        .explanation-points {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .explanation-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(50, 205, 50, 0.05));
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .explanation-point i {
+            color: var(--earth-teal);
+            font-size: 0.9rem;
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+
+        /* Historical Example */
+        .historical-example {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.05));
+            border-radius: var(--border-radius-sm);
+            padding: 12px;
+            margin: 10px 0;
+            border-left: 3px solid var(--earth-brown);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .example-title {
+            color: var(--earth-brown);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-accent);
+        }
+
+        /* Practical Application */
+        .practical-application {
+            background: linear-gradient(135deg, rgba(32, 178, 170, 0.1), rgba(50, 205, 50, 0.05));
+            border-radius: var(--border-radius-sm);
+            padding: 12px;
+            margin-top: 10px;
+            border-left: 3px solid var(--earth-teal);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .application-title {
+            color: var(--earth-teal);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-accent);
+        }
+
+        /* ============================================
+           CONCLUSION SECTION
+           ============================================ */
+        .conclusion-section {
+            background: linear-gradient(135deg, rgba(0, 100, 0, 0.2), rgba(218, 165, 32, 0.1));
+            backdrop-filter: blur(30px);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(50, 205, 50, 0.3);
+            margin: 40px auto;
+            max-width: 1000px;
+            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1s both;
+        }
+
+        .conclusion-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--earth-green), var(--earth-teal), var(--earth-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .final-statement {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .islamic-affirmation {
+            display: inline-block;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, rgba(50, 205, 50, 0.15), rgba(218, 165, 32, 0.1));
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(50, 205, 50, 0.4);
+            font-family: var(--font-arabic);
+            font-size: 1.2rem;
+            color: var(--earth-green);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .islamic-affirmation:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(50, 205, 50, 0.3);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .floating-footer {
+            text-align: center;
+            padding: 30px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .floating-footer .container {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN - DESKTOP OPTIMIZATIONS
+           ============================================ */
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+            
+            .mobile-nav-toggle {
+                display: none;
+            }
+            
+            nav {
+                display: flex !important;
+                position: static;
+                background: transparent;
+                backdrop-filter: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                box-shadow: none;
+                gap: 20px;
+            }
+            
+            nav a {
+                padding: 8px 0;
+                margin: 0;
+                background: transparent;
+                border-radius: 0;
+                position: relative;
+            }
+            
+            nav a::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--earth-green);
+                transition: width 0.3s ease;
+            }
+            
+            nav a:hover::before {
+                width: 100%;
+            }
+            
+            nav a:hover {
+                background: transparent;
+                transform: none;
+            }
+            
+            .principles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                padding: 0 20px;
+            }
+            
+            .principle-card {
+                padding: 25px;
+            }
+            
+            .card-title {
+                font-size: 1.4rem;
+            }
+            
+            .video-title {
+                font-size: 2rem;
+            }
+            
+            .youtube-section {
+                margin: 30px auto 40px;
+                padding: 0 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .header-content {
+                padding: 12px 20px;
+            }
+            
+            .logo-image-container {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-title {
+                font-size: 18px;
+            }
+            
+            .principles-grid {
+                gap: 30px;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .principles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                padding: 0 40px;
+            }
+            
+            .principle-card {
+                max-height: 400px;
+            }
+        }
+
+        /* Mobile-specific optimizations */
+        @media (max-width: 767px) {
+            .youtube-section {
+                margin: 15px auto 25px;
+                padding: 0 12px;
+            }
+            
+            .video-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+            
+            .youtube-container {
+                padding: 15px;
+                border-radius: var(--border-radius-lg);
+            }
+            
+            .video-wrapper {
+                border-radius: var(--border-radius);
+            }
+            
+            .principles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 12px;
+            }
+            
+            .principle-card {
+                padding: 20px;
+                max-height: none;
+                min-height: auto;
+                overflow-y: visible;
+            }
+            
+            .card-header {
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .card-number {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+            
+            .principle-card {
+                padding: 16px;
+            }
+            
+            .card-header {
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .card-reference {
+                font-size: 0.8rem;
+            }
+            
+            .video-title {
+                font-size: 1.4rem;
+            }
+            
+            .youtube-container {
+                padding: 12px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--earth-green);
+            border-radius: 4px;
+        }
+
+        ::selection {
+            background: rgba(50, 205, 50, 0.3);
+            color: var(--pure-white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Header -->
+    <header class="floating-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-image-container">
+                        <img src="image.png" alt="Akhi ex responds Logo" class="logo-image">
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-title">Akhi ex responds</div>
+                        <div class="logo-subtitle">Understanding Sharia & Islamic Justice</div>
+                    </div>
+                </a>
+
+                <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav id="mainNav">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- YouTube Video Section -->
+        <div class="youtube-section">
+            <h2 class="video-title">Sharia & Islamic Justice: A Comprehensive Guide</h2>
+            <div class="youtube-container">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/19cDIFIzC-I" 
+                        title="Sharia & Islamic Justice Explained" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Principles Grid -->
+        <div class="principles-section">
+            <div class="principles-grid" id="principlesGrid">
+                <!-- Principle 1 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">1</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">The Foundation: Adl (Justice) & Ihsan (Excellence)</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-quran"></i>
+                                Quran 16:90
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quran-verse">
+                        "Indeed, Allah orders justice and good conduct and giving to relatives and forbids immorality and bad conduct and oppression. He admonishes you that perhaps you will be reminded."
+                        <span class="arabic-text">
+                            إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ وَإِيتَاءِ ذِي الْقُرْبَىٰ وَيَنْهَىٰ عَنِ الْفَحْشَاءِ وَالْمُنكَرِ وَالْبَغْيِ ۚ يَعِظُكُمْ لَعَلَّكُمْ تَذَكَّرُونَ
+                        </span>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-balance-scale"></i>
+                            Key Distinctions:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span><strong>Adl (Justice):</strong> Giving people what you owe them and taking what they owe you</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span><strong>Ihsan (Excellence):</strong> Giving people more than what you owe them or forgiving what they owe you</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Principle 2 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">2</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Economic Justice: Prohibition of Riba</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-quran"></i>
+                                Quran 2:275-279
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            Social Justice Issue:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Riba (usury/interest) creates unbearable debt cycles that destroy societies</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Prophet Muhammad ﷺ abolished all riba, starting with his own uncle Al-Abbas</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Debt leads to dishonesty, corruption, and exploitation of the poor</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="historical-example">
+                        <h3 class="example-title">
+                            <i class="fas fa-history"></i>
+                            Historical Implementation:
+                        </h3>
+                        <p>When Muslims conquered Mecca, Prophet Muhammad ﷺ abolished ALL riba debts, demonstrating that economic justice begins with those closest to you, even if they are wealthy.</p>
+                    </div>
+                </div>
+
+                <!-- Principle 3 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">3</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Protection of Orphans</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-quran"></i>
+                                Quran 4:2, 4:10
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quran-verse">
+                        "And give to the orphans their properties and do not substitute the defective [of your own] for the good [of theirs]. And do not consume their properties into your own. Indeed, that is ever a great sin."
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-child"></i>
+                            Prophet's Example:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Ibn Umar (companion) would never eat a meal without an orphan at his table</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Allah warns so severely about consuming orphan wealth that companions were afraid to even take a bite from an orphan's plate</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practical-application">
+                        <h3 class="application-title">
+                            <i class="fas fa-users"></i>
+                            Social Impact:
+                        </h3>
+                        <p>Creates a society where the most vulnerable are protected and cherished, not exploited.</p>
+                    </div>
+                </div>
+
+                <!-- Principle 4 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">4</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Fair Treatment of Non-Muslims</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-quran"></i>
+                                Quran 60:8
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quran-verse">
+                        "Allah does not forbid you from those who do not fight you because of religion and do not expel you from your homes from being righteous toward them and acting justly toward them. Indeed, Allah loves those who act justly."
+                    </div>
+                    
+                    <div class="historical-example">
+                        <h3 class="example-title">
+                            <i class="fas fa-handshake"></i>
+                            Historical Examples:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Umar ibn al-Khattab lifted jizya (tax) from elderly People of the Book saying: "We used your youth, we won't abuse your old age"</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>When Muslims retreated from conquered lands, they RETURNED the jizya they had collected because they could no longer provide protection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Principle 5 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">5</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Justice Transcends Personal Feelings</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-quran"></i>
+                                Quran 5:8
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quran-verse">
+                        "O you who have believed, be persistently standing firm for Allah, witnesses in justice, and do not let the hatred of a people prevent you from being just. Be just; that is nearer to righteousness."
+                        <span class="arabic-text">
+                            يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا قَوَّامِينَ لِلَّهِ شُهَدَاءَ بِالْقِسْطِ ۖ وَلَا يَجْرِمَنَّكُمْ شَنَآنُ قَوْمٍ عَلَىٰ أَلَّا تَعْدِلُوا ۚ اعْدِلُوا هُوَ أَقْرَبُ لِلتَّقْوَىٰ
+                        </span>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-heart"></i>
+                            Core Principle:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Justice must be applied even to enemies and those you dislike</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Personal animosity cannot justify injustice</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>This principle creates true social cohesion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Principle 6 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">6</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Prophetic Mercy in Victory</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-book-open"></i>
+                                Conquest of Mecca
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-dove"></i>
+                            The Ultimate Example:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>After 13 years of persecution, torture, and war, Prophet Muhammad ﷺ conquered Mecca</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>He had complete power over those who had killed his family members and companions</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>His declaration: "Go, you are free" - granting general amnesty to all</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="historical-example">
+                        <h3 class="example-title">
+                            <i class="fas fa-quote-left"></i>
+                            Companion's Reflection:
+                        </h3>
+                        <p>"If we as an Ummah treated each other the way the Prophet treated his enemies, we would be good."</p>
+                    </div>
+                </div>
+
+                <!-- Principle 7 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">7</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Justice Begins at Home</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-home"></i>
+                                Family Justice
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-user-friends"></i>
+                            Practical Applications:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Fair treatment between children (no favoritism)</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Justice between spouses</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Fair treatment of in-laws</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Equal treatment of guests' children and your own</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practical-application">
+                        <h3 class="application-title">
+                            <i class="fas fa-star"></i>
+                            Prophetic Example:
+                        </h3>
+                        <p>Anas ibn Malik served the Prophet for 10 years and said: "He never yelled at me, never scolded me." This is the standard for household justice.</p>
+                    </div>
+                </div>
+
+                <!-- Principle 8 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">8</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Compassion for All Creatures</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-dove"></i>
+                                Prophet's Mercy
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-paw"></i>
+                            Beyond Human Justice:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Prophet stopped an entire army because a mother bird was distressed</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>He listened to animals' complaints during important human endeavors</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>This teaches that justice and compassion extend to all creation</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practical-application">
+                        <h3 class="application-title">
+                            <i class="fas fa-seedling"></i>
+                            Modern Application:
+                        </h3>
+                        <p>A heart that cares about people thousands of miles away must first care about those right next to you, and this care should extend to all living beings.</p>
+                    </div>
+                </div>
+
+                <!-- Principle 9 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">9</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Integrity in Leadership</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-crown"></i>
+                                Sahabah Examples
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="historical-example">
+                        <h3 class="example-title">
+                            <i class="fas fa-user-tie"></i>
+                            Salman al-Farsi's Governance:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Appointed governor of Persian capital after being a slave</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Would pick dates from trees and sell them in marketplace like ordinary people</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Rode a donkey instead of royal procession</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-bullhorn"></i>
+                            His Declaration:
+                        </h3>
+                        <p>"Allah has sent us from being enslaved to other slaves to being enslaved to the Lord of all slaves, from the constriction of this world to the expanse of this world and the hereafter, from the injustice of all other ways to the justice of Islam."</p>
+                    </div>
+                </div>
+
+                <!-- Principle 10 -->
+                <div class="principle-card">
+                    <div class="card-header">
+                        <div class="card-number">10</div>
+                        <div class="card-title-section">
+                            <h2 class="card-title">Modern Social Justice Framework</h2>
+                            <div class="card-reference">
+                                <i class="fas fa-globe-americas"></i>
+                                Contemporary Application
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-hands-helping"></i>
+                            Principles for Activism:
+                        </h3>
+                        <div class="explanation-points">
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Work with diverse groups on specific issues while maintaining Islamic principles</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Genuine care must precede political activism</span>
+                            </div>
+                            <div class="explanation-point">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Start with family justice before addressing societal injustice</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practical-application">
+                        <h3 class="application-title">
+                            <i class="fas fa-heart"></i>
+                            Key Advice:
+                        </h3>
+                        <p>"If you're yelling at your parents but want to go yell at a tyrant in the street - look at the tyrant in the mirror first. Justice begins with self-accountability."</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Conclusion Section -->
+        <div class="conclusion-section">
+            <h2 class="conclusion-title">The Comprehensive Nature of Islamic Justice</h2>
+            
+            <div class="final-statement">
+                Sharia and Islamic justice represent a comprehensive system that addresses every aspect of human life:
+                <br><br>
+                <strong>1. Divine Foundation:</strong> Justice begins with proper worship of Allah, the source of all justice.
+                <br>
+                <strong>2. Economic Equity:</strong> Prohibition of riba, protection of orphan wealth, and fair distribution.
+                <br>
+                <strong>3. Universal Application:</strong> Justice applies to Muslims and non-Muslims alike, transcending personal feelings.
+                <br>
+                <strong>4. Mercy in Power:</strong> The Prophet's example shows that true justice includes forgiveness and mercy.
+                <br>
+                <strong>5. Holistic Approach:</strong> From family relationships to international relations, from human interactions to animal welfare.
+                <br><br>
+                The success of early Muslim societies stemmed from their genuine implementation of these principles, not just as laws but as heartfelt convictions. Modern Muslims seeking social justice must first internalize these values in their personal and family lives before effectively advocating for them in society.
+            </div>
+            
+            <div class="islamic-affirmation">
+                <i class="fas fa-star-and-crescent"></i>
+                "Indeed, Allah commands justice and excellence"
+                <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; display: block; margin-top: 8px;">Quran 16:90</span>
+                <i class="fas fa-star-and-crescent"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Footer -->
+    <footer class="floating-footer">
+        <div class="container">
+            <div id="footerContent">
+                <h3 style="color: var(--earth-green); margin-bottom: 10px;">Akhi ex responds</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+                    Methodology: Quranic analysis, Prophetic tradition, historical implementation, contemporary application.
+                    Based on authentic Islamic scholarship and practical wisdom.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mainNav.classList.toggle('active');
+                this.classList.toggle('active');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
+                    mainNav.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+            
+            // Close menu when clicking links
+            if (mainNav.querySelectorAll('a').length > 0) {
+                mainNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mainNav.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    });
+                });
+            }
+        }
+
+        // Interactive card features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.principle-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Add click effect to Islamic affirmation
+            const islamicAffirmation = document.querySelector('.islamic-affirmation');
+            if (islamicAffirmation) {
+                islamicAffirmation.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-3px)';
+                    }, 300);
+                });
+            }
+            
+            // YouTube video wrapper interactions
+            const videoWrappers = document.querySelectorAll('.video-wrapper');
+            videoWrappers.forEach(wrapper => {
+                wrapper.addEventListener('mouseenter', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0) scale(1.02)';
+                    this.style.boxShadow = 
+                        'var(--shadow-strong), 0 0 60px rgba(50, 205, 50, 0.5), 0 0 15px rgba(50, 205, 50, 0.5)';
+                    this.style.borderColor = 'rgba(50, 205, 50, 0.4)';
+                });
+                
+                wrapper.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(1deg) scale(1)';
+                    this.style.boxShadow = 
+                        'var(--shadow-strong), 0 0 40px rgba(50, 205, 50, 0.3)';
+                    this.style.borderColor = 'rgba(50, 205, 50, 0.2)';
+                });
+            });
+            
+            // Add scroll animations for cards when they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all principle cards
+            cards.forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

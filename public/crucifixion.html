@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>The Crucifixion Question: Early Christian Testimony - Akhi ex responds</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+<style>
+    /* ============================================
+       CSS VARIABLES - Matching Style
+       ============================================ */
+    :root {
+        /* Modern Gradient Color Palette */
+        --gradient-primary: linear-gradient(135deg, #5D4037 0%, #795548 25%, #8D6E63 50%, #A1887F 75%, #BCAAA4 100%);
+        --gradient-secondary: linear-gradient(135deg, #0277BD 0%, #0288D1 25%, #039BE5 50%, #03A9F4 75%, #29B6F6 100%);
+        --gradient-dark: linear-gradient(135deg, #0d0f1c 0%, #131626 50%, #1a1c2e 100%);
+        
+        /* Glassmorphism Colors */
+        --glass-white: rgba(255, 255, 255, 0.15);
+        --glass-brown: rgba(93, 64, 55, 0.2);
+        --glass-blue: rgba(2, 119, 189, 0.2);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        
+        /* Accent Colors */
+        --neon-brown: #8D6E63;
+        --neon-blue: #03A9F4;
+        --neon-gold: #FFD700;
+        --neon-red: #F44336;
+        
+        /* Core Colors */
+        --deep-brown: #5D4037;
+        --rich-blue: #0277BD;
+        --pure-white: #ffffff;
+        --pure-black: #0a0a0a;
+        
+        /* Layout Variables */
+        --max-width: 1200px;
+        --border-radius-sm: 12px;
+        --border-radius: 16px;
+        --border-radius-lg: 20px;
+        --border-radius-xl: 24px;
+        
+        /* Shadows */
+        --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.15);
+        --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.2);
+        --shadow-neon-brown: 0 0 15px rgba(141, 110, 99, 0.5);
+        --shadow-neon-blue: 0 0 15px rgba(3, 169, 244, 0.5);
+        
+        /* Font System */
+        --font-heading: 'Playfair Display', serif;
+        --font-body: 'Inter', system-ui, sans-serif;
+        --font-accent: 'Poppins', sans-serif;
+        --font-arabic: 'Amiri', serif;
+        
+        /* Transition Speeds */
+        --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============================================
+       BASE RESET & GLOBAL STYLES
+       ============================================ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        font-size: 15px;
+        overflow-x: hidden;
+        background: var(--gradient-dark);
+    }
+
+    body {
+        font-family: var(--font-body);
+        color: var(--pure-white);
+        background: var(--gradient-dark);
+        line-height: 1.5;
+        overflow-x: hidden;
+        position: relative;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Background Effect */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 30%, rgba(93, 64, 55, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(2, 119, 189, 0.05) 0%, transparent 50%);
+        z-index: -2;
+        animation: backgroundFloat 30s infinite alternate ease-in-out;
+    }
+
+    @keyframes backgroundFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(10px, -10px) scale(1.02); }
+    }
+
+    @keyframes slideUp {
+        from { 
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @keyframes float3D {
+        0%, 100% { transform: translateY(0) rotateX(0); }
+        50% { transform: translateY(-5px) rotateX(5deg); }
+    }
+
+    @keyframes highlightPulse {
+        0%, 100% { 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(141, 110, 99, 0.05));
+            box-shadow: 0 5px 15px rgba(141, 110, 99, 0.1);
+        }
+        50% { 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(141, 110, 99, 0.1));
+            box-shadow: 0 5px 20px rgba(141, 110, 99, 0.2);
+        }
+    }
+
+    /* ============================================
+       HEADER & NAVIGATION
+       ============================================ */
+    .floating-header {
+        position: relative;
+        width: 100%;
+        background: transparent;
+        padding: 12px 0;
+        animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .floating-header .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    .header-content {
+        background: var(--glass-white);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius-lg);
+        padding: 10px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow-medium);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .logo-image-container {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .logo-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+        animation: float3D 6s infinite ease-in-out;
+        box-shadow: var(--shadow-neon-brown);
+    }
+
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo-title {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 16px;
+        background: linear-gradient(135deg, var(--pure-white), var(--neon-brown));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+    }
+
+    .logo-subtitle {
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 1px;
+        letter-spacing: 0.3px;
+    }
+
+    .mobile-nav-toggle {
+        width: 36px;
+        height: 36px;
+        background: var(--glass-white);
+        border: 1px solid var(--glass-border);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        flex-shrink: 0;
+    }
+
+    .mobile-nav-toggle span {
+        width: 18px;
+        height: 2px;
+        background: var(--pure-white);
+        border-radius: 1px;
+        transition: all var(--transition-fast);
+        transform-origin: center;
+    }
+
+    .mobile-nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 4px);
+    }
+
+    .mobile-nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -5px);
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--glass-white);
+        backdrop-filter: blur(30px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius);
+        padding: 12px;
+        margin-top: 8px;
+        box-shadow: var(--shadow-strong);
+        z-index: 1000;
+    }
+
+    nav.active {
+        display: block;
+    }
+
+    nav a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        color: var(--pure-white);
+        text-decoration: none;
+        font-weight: 500;
+        border-radius: 10px;
+        transition: all var(--transition-fast);
+        margin-bottom: 4px;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+    }
+
+    /* ============================================
+       MAIN CONTENT AREA
+       ============================================ */
+    #content {
+        flex: 1;
+        width: 100%;
+        padding-top: 16px;
+    }
+
+    .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 16px;
+        width: 100%;
+    }
+
+    /* ============================================
+       YOUTUBE VIDEO SECTION
+       ============================================ */
+    .youtube-section {
+        position: relative;
+        margin: 40px auto;
+        max-width: 1100px;
+        padding: 0 20px;
+        animation: slideUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    }
+
+    .youtube-container {
+        position: relative;
+        background: linear-gradient(135deg, rgba(93, 64, 55, 0.2), rgba(10, 10, 10, 0.3));
+        border-radius: var(--border-radius-xl);
+        padding: 25px;
+        box-shadow: 
+            var(--shadow-strong),
+            0 0 60px rgba(93, 64, 55, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(25px);
+        overflow: hidden;
+    }
+
+    .youtube-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient-primary);
+        z-index: 2;
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: var(--border-radius-lg);
+        box-shadow: 
+            var(--shadow-strong),
+            0 0 50px rgba(141, 110, 99, 0.3);
+        transform: perspective(1000px) rotateX(1deg);
+        transition: all var(--transition-normal);
+        border: 2px solid rgba(141, 110, 99, 0.2);
+    }
+
+    .video-wrapper:hover {
+        transform: perspective(1000px) rotateX(0) scale(1.02);
+        box-shadow: 
+            var(--shadow-strong),
+            0 0 80px rgba(141, 110, 99, 0.5),
+            0 0 20px rgba(141, 110, 99, 0.5);
+        border-color: rgba(141, 110, 99, 0.4);
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: var(--border-radius-lg);
+    }
+
+    .video-title {
+        font-family: var(--font-heading);
+        font-size: 2.5rem;
+        color: var(--pure-white);
+        text-shadow: 0 2px 30px rgba(0, 0, 0, 0.9);
+        background: linear-gradient(135deg, var(--pure-white), var(--neon-brown), var(--neon-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 25px 0 15px 0;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .video-subtitle {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+    }
+
+    /* ============================================
+       MAIN CONTENT GRID
+       ============================================ */
+    .content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin: 0 auto 40px;
+        padding: 0 16px;
+    }
+
+    /* HISTORICAL EVIDENCE CARDS */
+    .evidence-card {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(93, 64, 55, 0.1));
+        backdrop-filter: blur(20px);
+        border-radius: var(--border-radius-lg);
+        padding: 25px;
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-medium);
+        position: relative;
+        overflow: hidden;
+        transition: all var(--transition-normal);
+        animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .evidence-card:nth-child(1) { animation-delay: 0.3s; }
+    .evidence-card:nth-child(2) { animation-delay: 0.4s; }
+    .evidence-card:nth-child(3) { animation-delay: 0.5s; }
+    .evidence-card:nth-child(4) { animation-delay: 0.6s; }
+    .evidence-card:nth-child(5) { animation-delay: 0.7s; }
+
+    .evidence-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-strong), 0 0 20px rgba(141, 110, 99, 0.3);
+        border-color: var(--neon-brown);
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid rgba(141, 110, 99, 0.3);
+    }
+
+    .card-icon {
+        width: 44px;
+        height: 44px;
+        background: var(--gradient-primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--pure-white);
+        font-size: 20px;
+        box-shadow: 0 4px 12px rgba(93, 64, 55, 0.4);
+        flex-shrink: 0;
+        transition: all var(--transition-normal);
+    }
+
+    .evidence-card:hover .card-icon {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 6px 20px rgba(93, 64, 55, 0.6);
+    }
+
+    .card-title {
+        font-family: var(--font-heading);
+        font-size: 1.4rem;
+        background: linear-gradient(135deg, var(--pure-white), var(--neon-brown));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        line-height: 1.3;
+        flex: 1;
+    }
+
+    /* Card content */
+    .card-content {
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        flex: 1;
+        padding-right: 0;
+    }
+
+    .card-content p {
+        margin-bottom: 15px;
+    }
+
+    .card-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Quote blocks */
+    .historical-quote {
+        background: linear-gradient(135deg, rgba(141, 110, 99, 0.1), rgba(3, 169, 244, 0.05));
+        border-radius: var(--border-radius);
+        padding: 15px;
+        margin: 15px 0;
+        border-left: 4px solid var(--neon-brown);
+        font-style: italic;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quote-source {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(141, 110, 99, 0.2);
+        color: var(--neon-brown);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+        border: 1px solid rgba(141, 110, 99, 0.3);
+        font-family: var(--font-accent);
+        box-shadow: 0 3px 10px rgba(141, 110, 99, 0.2);
+    }
+
+    .quote-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.95);
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--border-radius-sm);
+        border-left: 3px solid var(--neon-blue);
+        font-family: var(--font-body);
+    }
+
+    /* Key points */
+    .key-points {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 15px 0;
+    }
+
+    .key-point {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(141, 110, 99, 0.05));
+        border-radius: 10px;
+        transition: all var(--transition-fast);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .key-point:hover {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(141, 110, 99, 0.1));
+        transform: translateX(5px);
+        border-color: rgba(141, 110, 99, 0.3);
+        animation: highlightPulse 2s ease-in-out;
+    }
+
+    .key-point i {
+        color: var(--neon-brown);
+        font-size: 1rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+        min-width: 20px;
+    }
+
+    .key-point span {
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    /* Irony section */
+    .irony-section {
+        background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(93, 64, 55, 0.15));
+        backdrop-filter: blur(25px);
+        border-radius: var(--border-radius-lg);
+        padding: 25px;
+        border: 1px solid rgba(244, 67, 54, 0.3);
+        margin: 30px auto;
+        max-width: 1000px;
+        animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+    }
+
+    .timeline-container {
+        position: relative;
+        padding: 25px 0;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding: 20px;
+        margin: 20px 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(141, 110, 99, 0.05));
+        border-radius: var(--border-radius);
+        border-left: 3px solid var(--neon-red);
+        border-right: 3px solid var(--neon-brown);
+        transition: all var(--transition-normal);
+    }
+
+    .timeline-item:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-medium);
+    }
+
+    .timeline-year {
+        display: inline-block;
+        padding: 6px 15px;
+        background: var(--gradient-primary);
+        color: var(--pure-white);
+        border-radius: 20px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        box-shadow: var(--shadow-soft);
+        font-size: 0.9rem;
+    }
+
+    /* Quranic evidence */
+    .quranic-section {
+        background: linear-gradient(135deg, rgba(2, 119, 189, 0.1), rgba(93, 64, 55, 0.15));
+        backdrop-filter: blur(25px);
+        border-radius: var(--border-radius-lg);
+        padding: 25px;
+        border: 1px solid rgba(2, 119, 189, 0.3);
+        margin: 30px auto;
+        max-width: 1000px;
+        animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+    }
+
+    .arabic-text {
+        font-family: var(--font-arabic);
+        font-size: 1.3rem;
+        color: var(--neon-gold);
+        text-align: center;
+        margin: 15px 0;
+        padding: 15px;
+        background: rgba(255, 215, 0, 0.1);
+        border-radius: var(--border-radius);
+        direction: rtl;
+        line-height: 1.8;
+    }
+
+    .translation {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        font-style: italic;
+        line-height: 1.6;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 15px;
+    }
+
+    /* Conclusion section */
+    .conclusion-section {
+        background: linear-gradient(135deg, rgba(93, 64, 55, 0.2), rgba(2, 119, 189, 0.1));
+        backdrop-filter: blur(30px);
+        border-radius: var(--border-radius-lg);
+        padding: 30px;
+        text-align: center;
+        border: 1px solid rgba(141, 110, 99, 0.3);
+        margin: 40px auto;
+        max-width: 1000px;
+        animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+    }
+
+    .conclusion-title {
+        font-family: var(--font-heading);
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, var(--neon-brown), var(--neon-blue), var(--neon-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .final-statement {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.95);
+        margin: 0 auto 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--border-radius);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: left;
+    }
+
+    .islamic-affirmation {
+        display: inline-block;
+        padding: 15px 25px;
+        background: linear-gradient(135deg, rgba(141, 110, 99, 0.15), rgba(255, 215, 0, 0.1));
+        border-radius: var(--border-radius);
+        border: 1px solid rgba(141, 110, 99, 0.4);
+        font-family: var(--font-arabic);
+        font-size: 1.2rem;
+        color: var(--neon-gold);
+        margin-top: 20px;
+        position: relative;
+        overflow: hidden;
+        transition: all var(--transition-normal);
+    }
+
+    .islamic-affirmation:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(141, 110, 99, 0.3);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .floating-footer {
+        text-align: center;
+        padding: 30px 0;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        margin-top: 40px;
+        width: 100%;
+    }
+
+    .floating-footer .container {
+        background: var(--glass-white);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius-lg);
+        padding: 20px;
+        box-shadow: var(--shadow-medium);
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+    @media (min-width: 768px) {
+        html {
+            font-size: 16px;
+        }
+        
+        .mobile-nav-toggle {
+            display: none;
+        }
+        
+        nav {
+            display: flex !important;
+            position: static;
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            box-shadow: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            padding: 8px 0;
+            margin: 0;
+            background: transparent;
+            border-radius: 0;
+            position: relative;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-brown);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::before {
+            width: 100%;
+        }
+        
+        nav a:hover {
+            background: transparent;
+            transform: none;
+        }
+        
+        .content-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 0 20px;
+        }
+        
+        .video-title {
+            font-size: 2rem;
+        }
+        
+        .youtube-section {
+            margin: 30px auto 40px;
+            padding: 0 20px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .header-content {
+            padding: 12px 20px;
+        }
+        
+        .logo-image-container {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .logo-title {
+            font-size: 18px;
+        }
+        
+        .content-grid {
+            gap: 30px;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .youtube-section {
+            padding: 0 15px;
+            margin: 20px auto 40px;
+        }
+        
+        .video-title {
+            font-size: 1.8rem;
+            margin: 20px 0 15px 0;
+        }
+        
+        .youtube-container {
+            padding: 20px;
+            border-radius: var(--border-radius-lg);
+        }
+        
+        .video-wrapper {
+            border-radius: var(--border-radius);
+        }
+        
+        .header-content {
+            padding: 8px 12px;
+        }
+        
+        .logo-title {
+            font-size: 14px;
+        }
+        
+        .logo-subtitle {
+            font-size: 8px;
+        }
+        
+        .evidence-card {
+            padding: 20px;
+        }
+        
+        .card-header {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        html {
+            font-size: 14px;
+        }
+        
+        .evidence-card {
+            padding: 16px;
+        }
+        
+        .card-header {
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+        }
+        
+        .video-title {
+            font-size: 1.4rem;
+        }
+        
+        .arabic-text {
+            font-size: 1.1rem;
+            padding: 12px;
+        }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--neon-brown);
+        border-radius: 4px;
+    }
+
+    ::selection {
+        background: rgba(141, 110, 99, 0.3);
+        color: var(--pure-white);
+    }
+</style>
+</head>
+<body>
+    <!-- Floating Header -->
+    <header class="floating-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-image-container">
+                        <img src="image.png" alt="Akhi ex responds Logo" class="logo-image">
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-title">Akhi ex responds</div>
+                        <div class="logo-subtitle">Examining the Crucifixion: Early Christian Testimony</div>
+                    </div>
+                </a>
+
+                <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav id="mainNav">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Back to Home</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- YouTube Video Section -->
+        <div class="youtube-section">
+            <h2 class="video-title">Early Christian Testimony: The Crucifixion Question</h2>
+            <p class="video-subtitle">First-century evidence of Christians who denied Jesus was crucified</p>
+            <div class="youtube-container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/E74nMN6cGcM" 
+                            title="Early Christian Testimony: The Crucifixion Question" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid - Evidence Cards -->
+        <div class="content-grid">
+            <!-- Card 1: Ignatius of Antioch -->
+            <div class="evidence-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <h2 class="card-title">Ignatius of Antioch: First-Century Bishop</h2>
+                </div>
+                <div class="card-content">
+                    <p>Ignatius, known as Saint Ignatius of Antioch, was a first-century Christian bishop martyred around 108 AD. Born in the early 30s AD, his life overlapped with Jesus's disciples, including Jesus's brother James who headed the Jerusalem church.</p>
+                    
+                    <div class="historical-quote">
+                        <div class="quote-source">
+                            <i class="fas fa-quote-left"></i>
+                            Letter to the Magnesians, Section 9
+                        </div>
+                        <div class="quote-text">
+                            "We have seen how former adherents of the ancient customs have since attained to a new hope... The day when life first dawned for us thanks to him and his death - that death, though some deny it, is the very mystery which has moved us to become believers."
+                        </div>
+                    </div>
+                    
+                    <div class="key-points">
+                        <div class="key-point">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Born:</strong> Early 30s AD - overlapped with Jesus's contemporaries</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-church"></i>
+                            <span><strong>Position:</strong> Second or third bishop of Antioch after Peter</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-lion"></i>
+                            <span><strong>Fate:</strong> Martyred in Rome, thrown to lions around 108 AD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: The Denial Testimony -->
+            <div class="evidence-card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #0277BD, #03A9F4);">
+                        <i class="fas fa-users-slash"></i>
+                    </div>
+                    <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        First-Century Christians Who Denied Crucifixion
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <p>Ignatius's testimony reveals a significant fact: in the first century, there were Christians who denied that Jesus died on the cross. This belief, later found in Islam, was present among early Christian communities.</p>
+                    
+                    <div class="key-points">
+                        <div class="key-point">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span><strong>Key Phrase:</strong> "though some deny it" - explicit acknowledgment of dissenters</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-history"></i>
+                            <span><strong>Historical Context:</strong> This is not a later Islamic invention but first-century Christian testimony</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-book-quran"></i>
+                            <span><strong>Islamic Connection:</strong> Quranic teaching aligns with these early Christian beliefs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="historical-quote">
+                        <div class="quote-source" style="background: rgba(3, 169, 244, 0.2); color: var(--neon-blue); border-color: rgba(3, 169, 244, 0.3);">
+                            <i class="fas fa-user-friends"></i>
+                            Significance of the Testimony
+                        </div>
+                        <div class="quote-text">
+                            "This is remarkable first-century testimony from a prominent Christian about other Christians who did not agree with Ignatius. While Ignatius condemns these people, their mere existence is historically significant evidence."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: The Great Irony -->
+            <div class="evidence-card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #F44336, #D32F2F);">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        The Great Irony: Rejecting Jesus's Religion
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <p>Ignatius makes a startling statement that represents one of history's great ironies: Christianity's rejection of the very religion practiced by Jesus and his immediate followers.</p>
+                    
+                    <div class="historical-quote">
+                        <div class="quote-source" style="background: rgba(244, 67, 54, 0.2); color: var(--neon-red); border-color: rgba(244, 67, 54, 0.3);">
+                            <i class="fas fa-quote-left"></i>
+                            Letter to the Magnesians, Section 10
+                        </div>
+                        <div class="quote-text">
+                            "To profess Jesus Christ while continuing to follow Jewish customs is an absurdity. The Christian faith does not look to Judaism, but Judaism looks to Christianity."
+                        </div>
+                    </div>
+                    
+                    <p><strong>The Irony:</strong> Jesus himself, according to the Gospels, taught obedience to Jewish law:</p>
+                    
+                    <div class="key-points">
+                        <div class="key-point">
+                            <i class="fas fa-torah"></i>
+                            <span><strong>Matthew 23:2-3:</strong> "The scribes and Pharisees sit on Moses' seat; therefore, do whatever they teach you and follow it."</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-balance-scale"></i>
+                            <span><strong>Matthew 23:23:</strong> "You tithe mint, dill, and cumin, and have neglected the weightier matters of the law: justice, mercy, and faith. It is these you ought to have practiced without neglecting the others."</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-mountain"></i>
+                            <span><strong>Matthew 5:17:</strong> "Do not think that I have come to abolish the law... not one letter, not one stroke of a letter, will pass from the law."</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: James and the Jerusalem Church -->
+            <div class="evidence-card">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #FFD700, #FF8C00);">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        James: Head of the Jerusalem Church
+                    </h2>
+                </div>
+                <div class="card-content">
+                    <p>Contrary to Catholic claims about Peter, the New Testament and early sources indicate James (Jesus's brother) was the head of the Jerusalem church and a practicing Jew.</p>
+                    
+                    <div class="key-points">
+                        <div class="key-point">
+                            <i class="fas fa-user-tie"></i>
+                            <span><strong>Position:</strong> Head of Jerusalem church, appointed by apostles including Peter</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-star-of-david"></i>
+                            <span><strong>Practice:</strong> Known as "James the Just" - zealous for Jewish law</span>
+                        </div>
+                        <div class="key-point">
+                            <i class="fas fa-history"></i>
+                            <span><strong>Timeline:</strong> Led church until temple destruction (70 AD)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="historical-quote">
+                        <div class="quote-source" style="background: rgba(255, 215, 0, 0.2); color: var(--neon-gold); border-color: rgba(255, 215, 0, 0.3);">
+                            <i class="fas fa-bible"></i>
+                            Acts 21:20
+                        </div>
+                        <div class="quote-text">
+                            "You see, brother, how many thousands of believers there are among the Jews, and they are all zealous for the law."
+                        </div>
+                    </div>
+                    
+                    <p><strong>Historical Testimony:</strong> Jewish historian Josephus and early Christian sources describe James as famous among Jews for his zeal for Jewish law.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline of the Great Irony -->
+        <div class="irony-section">
+            <div class="card-header" style="border-bottom-color: rgba(244, 67, 54, 0.4); padding: 0 0 25px 0; text-align: center;">
+                <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, #F44336, #D32F2F);">
+                    <i class="fas fa-retweet"></i>
+                </div>
+                <h2 class="card-title" style="text-align: center; width: 100%; margin-top: 15px; background: linear-gradient(135deg, #F44336, #FF8C00, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Timeline: The Great Historical Irony
+                </h2>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-year">c. 30 AD</div>
+                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.5; margin-bottom: 12px; font-size: 0.9rem;">
+                        <strong>Jesus's Ministry:</strong> Teaches obedience to Jewish law, tells followers to obey those who "sit on Moses' seat" (Matthew 23:2-3).
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">30-60 AD</div>
+                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.5; margin-bottom: 12px; font-size: 0.9rem;">
+                        <strong>Jerusalem Church:</strong> Led by James (Jesus's brother). Thousands of Jewish believers "zealous for the law" (Acts 21:20). James known for Torah observance.
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">c. 108 AD</div>
+                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.5; margin-bottom: 12px; font-size: 0.9rem;">
+                        <strong>Ignatius of Antioch:</strong> Declares: "To profess Jesus Christ while continuing to follow Jewish customs is an absurdity." First recorded use of word "Christianity."
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">The Irony</div>
+                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.5; margin-bottom: 12px; font-size: 0.9rem;">
+                        <strong>The Contradiction:</strong> Emerging Gentile Christianity rejects the very religion practiced by Jesus, his brother James, and the Jerusalem church. Christianity disowns its parent faith.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(141, 110, 99, 0.1)); border-radius: var(--border-radius); border: 1px solid rgba(244, 67, 54, 0.3);">
+                <h3 style="color: var(--neon-red); margin-bottom: 12px; text-align: center; font-size: 1.1rem;">The Historical Significance</h3>
+                <p style="color: rgba(255, 255, 255, 0.95); text-align: center; line-height: 1.5; font-size: 0.9rem;">
+                    "One of the great ironies of history: the later emergent Christianity which claims Jesus as its founder rejected the very religion of its founder. We see this rejection explicitly and very early in Christian history."
+                </p>
+            </div>
+        </div>
+
+        <!-- Quranic Evidence -->
+        <div class="quranic-section">
+            <div class="card-header" style="border-bottom-color: rgba(2, 119, 189, 0.4); padding: 0 0 25px 0; text-align: center;">
+                <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, #0277BD, #03A9F4);">
+                    <i class="fas fa-quran"></i>
+                </div>
+                <h2 class="card-title" style="text-align: center; width: 100%; margin-top: 15px; background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Quranic Perspective on the Crucifixion
+                </h2>
+            </div>
+            
+            <div class="arabic-text">
+                وَقَوْلِهِمْ إِنَّا قَتَلْنَا الْمَسِيحَ عِيسَى ابْنَ مَرْيَمَ رَسُولَ اللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَٰكِن شُبِّهَ لَهُمْ ۚ وَإِنَّ الَّذِينَ اخْتَلَفُوا فِيهِ لَفِي شَكٍّ مِّنْهُ ۚ مَا لَهُم بِهِ مِنْ عِلْمٍ إِلَّا اتِّبَاعَ الظَّنِّ ۚ وَمَا قَتَلُوهُ يَقِينًا
+            </div>
+            
+            <div class="translation">
+                "And [for] their saying, 'Indeed, we have killed the Messiah, Jesus, the son of Mary, the messenger of Allah.' And they did not kill him, nor did they crucify him; but [another] was made to resemble him to them. And indeed, those who differ over it are in doubt about it. They have no knowledge of it except the following of assumption. And they did not kill him, for certain." (Quran 4:157)
+            </div>
+            
+            <div style="margin-top: 25px; text-align: center;">
+                <div style="display: inline-block; padding: 15px 25px; background: linear-gradient(135deg, rgba(2, 119, 189, 0.2), rgba(141, 110, 99, 0.2)); border-radius: var(--border-radius); border: 2px solid rgba(2, 119, 189, 0.4);">
+                    <h3 style="color: var(--neon-blue); font-size: 1.2rem; margin-bottom: 8px; font-family: var(--font-heading);">Historical Connection:</h3>
+                    <div style="text-align: left; color: var(--pure-white); font-size: 0.95rem;">
+                        <p><i class="fas fa-check-circle" style="color: var(--neon-blue);"></i> Quran's teaching not a 6th-century invention</p>
+                        <p><i class="fas fa-check-circle" style="color: var(--neon-blue);"></i> Aligns with first-century Christian testimony</p>
+                        <p><i class="fas fa-check-circle" style="color: var(--neon-blue);"></i> Ignatius confirms existence of Christians who denied crucifixion</p>
+                        <p><i class="fas fa-check-circle" style="color: var(--neon-blue);"></i> Shows early diversity in Christian beliefs</p>
+                        <p><i class="fas fa-check-circle" style="color: var(--neon-blue);"></i> Historical evidence supports Quranic narrative</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-section">
+            <h2 class="conclusion-title">Two Key Historical Revelations</h2>
+            
+            <div class="final-statement">
+                <strong>1. Early Christians Denied the Crucifixion:</strong><br>
+                Ignatius of Antioch, a first-century bishop born in the early 30s AD, testifies to the existence of Christians who "deny" Jesus's death on the cross. This is not a later Islamic invention but first-century Christian testimony. The Quranic teaching that Jesus was not crucified aligns with these early Christian beliefs.
+                <br><br>
+                <strong>2. The Great Historical Irony:</strong><br>
+                Ignatius declares that "to profess Jesus Christ while continuing to follow Jewish customs is an absurdity." This represents one of history's great ironies: Christianity's rejection of the very religion practiced by Jesus, his brother James (head of the Jerusalem church), and Jesus's earliest followers. Jesus taught obedience to Jewish law, James was known for his zeal for the Torah, yet emerging Gentile Christianity explicitly rejected Judaism.
+                <br><br>
+                <strong>Historical Significance:</strong><br>
+                These two points from Ignatius - living in the first century, overlapping with Jesus's contemporaries - provide crucial historical evidence:
+                - The crucifixion was disputed among early Christians
+                - Christianity rapidly diverged from the religion of its founder
+                - The Quran's teaching on crucifixion has first-century precedent
+                - The "great irony" reveals Christianity's transformation from a Jewish reform movement to a new religion rejecting its Jewish roots
+            </div>
+            
+            <div class="islamic-affirmation">
+                <i class="fas fa-star-and-crescent"></i>
+                "Indeed, the example of Jesus to Allah is like that of Adam. He created Him from dust; then He said to him, 'Be,' and he was."
+                <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; display: block; margin-top: 8px;">Quran 3:59</span>
+                <i class="fas fa-star-and-crescent"></i>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(141, 110, 99, 0.1); border-radius: var(--border-radius); display: inline-block;">
+                <p style="color: rgba(255, 255, 255, 0.9); margin: 0; font-size: 0.95rem;">
+                    <i class="fas fa-quote-left" style="color: var(--neon-brown);"></i>
+                    "The Quran is not making up beliefs that only came about in the sixth century. It's endorsing beliefs that early first-century Christians held."
+                    <i class="fas fa-quote-right" style="color: var(--neon-brown);"></i>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Footer -->
+    <footer class="floating-footer">
+        <div class="container">
+            <div id="footerContent">
+                <h3 style="color: var(--neon-brown); margin-bottom: 10px;">Akhi ex responds</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+                    Methodology: Historical analysis, early Christian writings, scriptural comparison, 
+                    and examination of first-century testimonies about Christian beliefs.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mainNav.classList.toggle('active');
+                this.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
+                    mainNav.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+            
+            if (mainNav.querySelectorAll('a').length > 0) {
+                mainNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mainNav.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    });
+                });
+            }
+        }
+
+        // Interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.evidence-card, .timeline-item');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add click effect to Islamic affirmation
+            const islamicAffirmation = document.querySelector('.islamic-affirmation');
+            if (islamicAffirmation) {
+                islamicAffirmation.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-3px)';
+                    }, 300);
+                });
+            }
+            
+            // YouTube video wrapper interactions
+            const videoWrappers = document.querySelectorAll('.video-wrapper');
+            videoWrappers.forEach(wrapper => {
+                wrapper.addEventListener('mouseenter', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0) scale(1.02)';
+                    this.style.boxShadow = 
+                        'var(--shadow-strong), 0 0 80px rgba(141, 110, 99, 0.5), 0 0 20px rgba(141, 110, 99, 0.5)';
+                    this.style.borderColor = 'rgba(141, 110, 99, 0.4)';
+                });
+                
+                wrapper.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(1deg) scale(1)';
+                    this.style.boxShadow = 
+                        'var(--shadow-strong), 0 0 50px rgba(141, 110, 99, 0.3)';
+                    this.style.borderColor = 'rgba(141, 110, 99, 0.2)';
+                });
+            });
+            
+            // Key point hover effects
+            const keyPoints = document.querySelectorAll('.key-point');
+            keyPoints.forEach(point => {
+                point.addEventListener('mouseenter', function() {
+                    this.classList.add('highlight');
+                });
+                
+                point.addEventListener('mouseleave', function() {
+                    setTimeout(() => {
+                        this.classList.remove('highlight');
+                    }, 500);
+                });
+            });
+            
+            // Card icon floating animation
+            const icons = document.querySelectorAll('.card-icon');
+            icons.forEach((icon, index) => {
+                icon.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            // Timeline item animation delays
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                item.style.animationDelay = `${0.5 + (index * 0.1)}s`;
+                item.style.animation = 'slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both';
+            });
+        });
+    </script>
+</body>
+</html>

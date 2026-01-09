@@ -45,25 +45,35 @@
             --pure-black: #0a0a0a;
             --light-gray: #e0e0e0;
             
-            /* Layout Variables */
+            /* Layout Variables - ADJUSTED FOR BETTER MOBILE */
             --max-width: 1200px;
-            --border-radius-sm: 20px;
-            --border-radius: 30px;
-            --border-radius-lg: 40px;
-            --border-radius-xl: 60px;
+            --border-radius-sm: 12px;
+            --border-radius: 16px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 24px;
             
             /* Shadows with Depth */
-            --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.1);
-            --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.15);
-            --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.2);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.2);
             --shadow-neon: 0 0 20px rgba(0, 229, 255, 0.5);
             --shadow-gold: 0 0 30px rgba(255, 179, 0, 0.4);
             
-            /* Font System */
+            /* Font System with BETTER MOBILE SIZES */
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Inter', system-ui, sans-serif;
             --font-accent: 'Poppins', sans-serif;
             --font-arabic: 'Amiri', serif;
+            
+            /* Typography Scale - Mobile First */
+            --text-xs: 0.75rem;   /* 12px */
+            --text-sm: 0.875rem;  /* 14px */
+            --text-base: 1rem;    /* 16px */
+            --text-lg: 1.125rem;  /* 18px */
+            --text-xl: 1.25rem;   /* 20px */
+            --text-2xl: 1.5rem;   /* 24px */
+            --text-3xl: 1.875rem; /* 30px */
+            --text-4xl: 2.25rem;  /* 36px */
             
             /* Transition Speeds */
             --transition-superfast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -73,7 +83,7 @@
         }
 
         /* ============================================
-           BASE RESET & GLOBAL STYLES
+           BASE RESET & GLOBAL STYLES - MOBILE FIRST
            ============================================ */
         * {
             margin: 0;
@@ -93,7 +103,7 @@
             font-family: var(--font-body);
             color: var(--pure-white);
             background: var(--gradient-dark);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
@@ -128,7 +138,7 @@
         @keyframes slideUp {
             from { 
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(30px) scale(0.95);
             }
             to { 
                 opacity: 1;
@@ -145,8 +155,8 @@
            LOGO IMAGE STYLES - FIXED SIZE
            ============================================ */
         .logo-image-container {
-            width: 40px; /* FIXED: Smaller size */
-            height: 40px; /* FIXED: Smaller size */
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -157,7 +167,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 10px; /* Smaller radius */
+            border-radius: 8px;
             animation: float3D 6s infinite ease-in-out;
             box-shadow: var(--shadow-neon);
         }
@@ -175,7 +185,7 @@
         }
 
         /* ============================================
-           FLOATING HEADER - REVOLUTIONARY DESIGN
+           FLOATING HEADER - MOBILE OPTIMIZED
            ============================================ */
         .floating-header {
             position: relative;
@@ -184,14 +194,15 @@
             backdrop-filter: none;
             border: none;
             margin-bottom: 0;
-            padding: 15px 0; /* Reduced padding */
+            padding: 12px 0;
             animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            z-index: 1000;
         }
 
         .floating-header .container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
         .header-content {
@@ -199,14 +210,14 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: var(--border-radius-lg);
-            padding: 12px 20px; /* Reduced padding */
+            padding: 10px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow-strong);
             position: relative;
             overflow: hidden;
-            min-height: 60px; /* Ensure consistent height */
+            min-height: 56px;
         }
 
         .header-content::before {
@@ -227,45 +238,55 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px; /* Reduced gap */
+            gap: 10px;
             text-decoration: none;
             cursor: pointer;
+            flex-shrink: 1;
+            min-width: 0;
         }
 
         .logo-text {
             display: flex;
             flex-direction: column;
+            min-width: 0;
+            flex-shrink: 1;
         }
 
         .logo-title {
             font-family: var(--font-heading);
             font-weight: 700;
-            font-size: 18px; /* Slightly smaller */
+            font-size: 16px;
             background: linear-gradient(135deg, var(--pure-white), var(--neon-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .logo-subtitle {
-            font-size: 10px; /* Slightly smaller */
+            font-size: 9px;
             color: rgba(255, 255, 255, 0.8);
             margin-top: 1px;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .mobile-nav-toggle {
-            width: 40px; /* Smaller */
-            height: 40px; /* Smaller */
+            width: 36px;
+            height: 36px;
             background: var(--glass-white);
             border: 1px solid var(--glass-border);
-            border-radius: 12px; /* Smaller */
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 5px; /* Smaller gap */
+            gap: 4px;
             cursor: pointer;
             transition: all var(--transition-fast);
             position: relative;
@@ -274,7 +295,7 @@
         }
 
         .mobile-nav-toggle span {
-            width: 20px; /* Smaller */
+            width: 18px;
             height: 2px;
             background: var(--pure-white);
             border-radius: 1px;
@@ -283,7 +304,7 @@
         }
 
         .mobile-nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(4px, 4px);
+            transform: rotate(45deg) translate(4px, 3px);
         }
 
         .mobile-nav-toggle.active span:nth-child(2) {
@@ -291,7 +312,7 @@
         }
 
         .mobile-nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -5px);
+            transform: rotate(-45deg) translate(5px, -4px);
         }
 
         /* ============================================
@@ -300,34 +321,35 @@
         nav {
             display: none;
             position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
+            top: calc(100% + 8px);
+            left: 16px;
+            right: 16px;
             background: var(--glass-white);
             backdrop-filter: blur(30px);
             border: 1px solid var(--glass-border);
             border-radius: var(--border-radius);
-            padding: 15px;
-            margin-top: 8px;
+            padding: 12px;
             box-shadow: var(--shadow-strong);
             z-index: 1000;
         }
 
         nav.active {
             display: block;
+            animation: slideUp 0.3s ease-out;
         }
 
         nav a {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
+            gap: 10px;
+            padding: 10px 14px;
             color: var(--pure-white);
             text-decoration: none;
             font-weight: 500;
-            border-radius: 12px;
+            border-radius: 10px;
             transition: all var(--transition-fast);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
+            font-size: var(--text-sm);
         }
 
         nav a:last-child {
@@ -341,74 +363,405 @@
 
         nav a i {
             color: var(--neon-blue);
-            width: 18px;
+            width: 16px;
             text-align: center;
-            font-size: 16px;
-        }
-
-        .cta-button {
-            background: var(--gradient-primary);
-            color: var(--pure-white);
-            padding: 10px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all var(--transition-fast);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-strong), var(--shadow-neon);
+            font-size: 14px;
         }
 
         /* ============================================
-           MAIN CONTENT AREA
+           MAIN CONTENT AREA - FIXED SCROLLING ISSUE
            ============================================ */
         #content {
             flex: 1;
             width: 100%;
-            padding-top: 20px;
+            padding-top: 16px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
         }
 
-        /* Container */
         .container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
             width: 100%;
         }
 
         /* ============================================
-           FLOATING FOOTER - GLASS MORPHISM
+           YOUTUBE VIDEO EMBED - LANDSCAPE ORIENTATION
+           ============================================ */
+        .hero-video-section {
+            margin: 24px auto 40px;
+            max-width: min(1000px, calc(100vw - 32px));
+            animation: slideUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+        }
+
+        .video-hero-container {
+            position: relative;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(10, 10, 10, 0.3));
+            border-radius: var(--border-radius-xl);
+            padding: 20px;
+            box-shadow: 
+                var(--shadow-strong),
+                0 0 40px rgba(26, 35, 126, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(25px);
+            overflow: hidden;
+            aspect-ratio: 16/9; /* ENFORCE LANDSCAPE */
+        }
+
+        .video-hero-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            z-index: 2;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-strong), 0 0 30px rgba(0, 229, 255, 0.3);
+            transform: perspective(800px) rotateX(1deg);
+            transition: all var(--transition-normal);
+            border: 2px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .video-wrapper:hover {
+            transform: perspective(800px) rotateX(0) scale(1.02);
+            box-shadow: var(--shadow-strong), 0 0 60px rgba(0, 229, 255, 0.5);
+            border-color: rgba(0, 229, 255, 0.4);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--border-radius-lg);
+        }
+
+        /* ============================================
+           CARD LAYOUT - FIXED FOR MOBILE & DESKTOP
+           ============================================ */
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin: 0 auto 40px;
+            max-width: var(--max-width);
+            width: 100%;
+        }
+
+        /* Argument Cards - LANDSCAPE ORIENTATION ON DESKTOP */
+        .argument-card {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.03) 100%
+            );
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+            min-height: 0;
+        }
+
+        /* Remove the nth-child animations that cause staggered loading */
+        .argument-card:nth-child(2) { animation-delay: 0.5s; }
+        .argument-card:nth-child(3) { animation-delay: 0.6s; }
+        .argument-card:nth-child(4) { animation-delay: 0.7s; }
+
+        .argument-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong), 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 229, 255, 0.4);
+        }
+
+        /* Card Header - MOBILE FRIENDLY */
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+            position: relative;
+        }
+
+        @media (min-width: 640px) {
+            .card-header {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pure-white);
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.5);
+            flex-shrink: 0;
+            transition: all var(--transition-normal);
+        }
+
+        .argument-card:hover .card-icon {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(26, 35, 126, 0.7);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: var(--text-2xl);
+            background: linear-gradient(135deg, var(--pure-white), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        /* ============================================
+           TYPOGRAPHY - MOBILE OPTIMIZED
+           ============================================ */
+        .scripture-evidence {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(26, 35, 126, 0.2));
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--neon-blue);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .scripture-ref {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 229, 255, 0.2);
+            color: var(--neon-blue);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            font-family: var(--font-accent);
+            box-shadow: 0 3px 10px rgba(0, 229, 255, 0.2);
+        }
+
+        .bible-quote {
+            font-size: var(--text-lg);
+            line-height: 1.6;
+            color: var(--pure-white);
+            margin: 16px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--neon-gold);
+            font-family: var(--font-arabic);
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Evidence Points - BETTER MOBILE LAYOUT */
+        .evidence-points {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .evidence-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 229, 255, 0.05));
+            border-radius: 12px;
+            transition: all var(--transition-fast);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .evidence-point:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 229, 255, 0.1));
+            transform: translateX(5px);
+            border-color: rgba(0, 229, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+        }
+
+        .evidence-point i {
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+            min-width: 20px;
+        }
+
+        .evidence-point span {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            font-size: var(--text-base);
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        /* ============================================
+           DESKTOP LAYOUT - LANDSCAPE CARDS
+           ============================================ */
+        @media (min-width: 1024px) {
+            .content-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+            
+            .argument-card {
+                padding: 28px;
+                height: auto;
+                min-height: 300px;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .card-title {
+                font-size: var(--text-2xl);
+                line-height: 1.3;
+            }
+            
+            .bible-quote {
+                font-size: var(--text-lg);
+                line-height: 1.6;
+                padding: 20px;
+            }
+            
+            .evidence-point {
+                padding: 14px;
+            }
+            
+            .evidence-point span {
+                font-size: var(--text-sm);
+            }
+            
+            /* Make cards more landscape-like */
+            .argument-card .card-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+            }
+            
+            .argument-card .card-content > *:last-child {
+                margin-top: auto;
+            }
+        }
+
+        /* ============================================
+           WIDE DESKTOP LAYOUT - EVEN BETTER
+           ============================================ */
+        @media (min-width: 1280px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+            
+            .argument-card {
+                min-height: 320px;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+            
+            .argument-card::-webkit-scrollbar {
+                width: 6px;
+            }
+            
+            .argument-card::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 3px;
+            }
+            
+            .argument-card::-webkit-scrollbar-thumb {
+                background: var(--gradient-primary);
+                border-radius: 3px;
+            }
+        }
+
+        /* ============================================
+           TIMELINE & OTHER SECTIONS - MOBILE OPTIMIZED
+           ============================================ */
+        .timeline-section,
+        .critical-analysis,
+        .conclusion-section {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.03) 100%
+            );
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 28px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-strong);
+            margin: 32px auto;
+            max-width: var(--max-width);
+            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both;
+            width: calc(100% - 32px);
+        }
+
+        .conclusion-title {
+            font-family: var(--font-heading);
+            font-size: var(--text-3xl);
+            margin-bottom: 28px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .final-statement {
+            font-size: var(--text-lg);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0 auto 32px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
+            border-radius: var(--border-radius);
+            border: 1px solid var(--glass-border);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ============================================
+           FLOATING FOOTER
            ============================================ */
         .floating-footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 32px 0;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            margin-top: 60px;
+            font-size: var(--text-sm);
+            margin-top: 48px;
             width: 100%;
             position: relative;
         }
@@ -418,8 +771,10 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: var(--border-radius-lg);
-            padding: 30px;
+            padding: 24px;
             box-shadow: var(--shadow-strong);
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
 
         .floating-footer::before {
@@ -428,7 +783,7 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 80px;
             height: 3px;
             background: var(--gradient-primary);
             border-radius: 2px;
@@ -452,15 +807,16 @@
                 margin: 0;
                 box-shadow: none;
                 animation: none;
-                gap: 20px;
+                gap: 16px;
             }
 
             nav a {
-                padding: 8px 0;
+                padding: 6px 0;
                 margin: 0;
                 background: transparent;
                 border-radius: 0;
                 position: relative;
+                font-size: var(--text-sm);
             }
 
             nav a::before {
@@ -483,21 +839,33 @@
                 transform: none;
                 box-shadow: none;
             }
-        }
-
-        @media (min-width: 1024px) {
-            .header-content {
-                padding: 15px 25px;
-            }
             
-            .logo-image-container {
-                width: 45px;
-                height: 45px;
+            /* Adjust header padding */
+            .header-content {
+                padding: 12px 20px;
             }
             
             .logo-title {
-                font-size: 20px;
+                font-size: 18px;
             }
+            
+            .logo-subtitle {
+                font-size: 10px;
+            }
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .text-balance {
+            text-wrap: balance;
+        }
+        
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         /* ============================================
@@ -539,669 +907,74 @@
         }
 
         /* ============================================
-           CONTENT SPECIFIC STYLES
+           RESPONSIVE TYPOGRAPHY
            ============================================ */
-        
-        /* Hero Video Section */
-        .hero-video-section {
-            position: relative;
-            margin: 40px auto 60px;
-            max-width: 1000px;
-            padding: 0 20px;
-            animation: slideUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
-        }
-
-        .video-hero-container {
-            position: relative;
-            background: linear-gradient(135deg, rgba(26, 35, 126, 0.2), rgba(10, 10, 10, 0.3));
-            border-radius: var(--border-radius-xl);
-            padding: 25px;
-            box-shadow: 
-                var(--shadow-strong),
-                0 0 60px rgba(26, 35, 126, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(25px);
-            overflow: hidden;
-        }
-
-        .video-hero-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            z-index: 2;
-        }
-
-        .video-wrapper {
-            position: relative;
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-            box-shadow: 
-                var(--shadow-strong),
-                0 0 50px rgba(0, 229, 255, 0.3);
-            transform: perspective(1000px) rotateX(1deg);
-            transition: all var(--transition-normal);
-            border: 2px solid rgba(0, 229, 255, 0.2);
-        }
-
-        .video-wrapper:hover {
-            transform: perspective(1000px) rotateX(0) scale(1.02);
-            box-shadow: 
-                var(--shadow-strong),
-                0 0 80px rgba(0, 229, 255, 0.5),
-                var(--shadow-neon);
-            border-color: rgba(0, 229, 255, 0.4);
-        }
-
-        .video-wrapper video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: var(--border-radius-lg);
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(10, 10, 10, 0.7) 0%,
-                rgba(10, 10, 10, 0.3) 40%,
-                transparent 100%
-            );
-            display: flex;
-            align-items: flex-end;
-            padding: 40px;
-            opacity: 1;
-            transition: opacity var(--transition-fast);
-        }
-
-        .video-title {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            color: var(--pure-white);
-            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.9);
-            background: linear-gradient(135deg, var(--pure-white), var(--neon-blue), var(--neon-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        /* Main Content Grid */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
-
-        @media (min-width: 992px) {
-            .content-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        /* Argument Cards - 3D Glass Effect */
-        .argument-card {
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.03) 100%
-            );
-            backdrop-filter: blur(25px);
-            border-radius: var(--border-radius-lg);
-            padding: 35px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 
-                var(--shadow-medium),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            position: relative;
-            overflow: hidden;
-            transition: all var(--transition-normal);
-            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
-        }
-
-        .argument-card:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .argument-card:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        .argument-card:nth-child(4) {
-            animation-delay: 0.7s;
-        }
-
-        .argument-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                circle at 20% 80%,
-                rgba(0, 229, 255, 0.08) 0%,
-                transparent 70%
-            );
-            z-index: -1;
-            transition: all var(--transition-slow);
-        }
-
-        .argument-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 
-                var(--shadow-strong),
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                var(--shadow-neon);
-            border-color: rgba(0, 229, 255, 0.4);
-        }
-
-        .argument-card:hover::before {
-            background: radial-gradient(
-                circle at 20% 80%,
-                rgba(0, 229, 255, 0.2) 0%,
-                transparent 70%
-            );
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
-            position: relative;
-        }
-
-        .card-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-primary);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--pure-white);
-            font-size: 28px;
-            box-shadow: 
-                0 5px 20px rgba(26, 35, 126, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            flex-shrink: 0;
-            transition: all var(--transition-normal);
-        }
-
-        .argument-card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 
-                0 8px 25px rgba(26, 35, 126, 0.7),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-        }
-
-        .card-title {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            background: linear-gradient(135deg, var(--pure-white), var(--neon-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        /* Scripture Evidence */
-        .scripture-evidence {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(26, 35, 126, 0.2));
-            border-radius: var(--border-radius);
-            padding: 30px;
-            margin: 25px 0;
-            border-left: 5px solid var(--neon-blue);
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .scripture-evidence::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
-        }
-
-        .scripture-ref {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 229, 255, 0.2);
-            color: var(--neon-blue);
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            font-family: var(--font-accent);
-            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
-        }
-
-        .scripture-ref i {
-            font-size: 0.9rem;
-        }
-
-        .bible-quote {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            color: var(--pure-white);
-            margin: 20px 0;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--border-radius-sm);
-            border-left: 4px solid var(--neon-gold);
-            font-family: var(--font-arabic);
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .bible-quote::before {
-            content: '"';
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 3.5rem;
-            color: rgba(255, 179, 0, 0.3);
-            font-family: var(--font-heading);
-            opacity: 0.7;
-        }
-
-        /* Key Evidence Points */
-        .evidence-points {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .evidence-point {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 18px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 229, 255, 0.05));
-            border-radius: 15px;
-            transition: all var(--transition-fast);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .evidence-point:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 229, 255, 0.1));
-            transform: translateX(10px);
-            border-color: rgba(0, 229, 255, 0.3);
-            box-shadow: 0 5px 20px rgba(0, 229, 255, 0.1);
-        }
-
-        .evidence-point i {
-            color: var(--neon-blue);
-            font-size: 1.4rem;
-            margin-top: 3px;
-            flex-shrink: 0;
-        }
-
-        .evidence-point span {
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 500;
-            font-size: 1.1rem;
-            line-height: 1.5;
-        }
-
-        /* Timeline Visualization */
-        .timeline-section {
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.03) 100%
-            );
-            backdrop-filter: blur(25px);
-            border-radius: var(--border-radius-lg);
-            padding: 50px;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-strong);
-            margin: 40px auto;
-            max-width: 1200px;
-            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 40px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                var(--neon-blue),
-                var(--neon-gold),
-                var(--neon-purple),
-                transparent
-            );
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-        }
-
-        .timeline-item {
-            position: relative;
-            width: calc(50% - 50px);
-            margin-bottom: 60px;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
-            border-radius: var(--border-radius);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-medium);
-            transition: all var(--transition-fast);
-        }
-
-        .timeline-item:nth-child(odd) {
-            margin-left: auto;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-right: auto;
-        }
-
-        .timeline-item:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: var(--shadow-strong);
-            border-color: var(--neon-blue);
-        }
-
-        .timeline-date {
-            font-family: var(--font-heading);
-            color: var(--neon-gold);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .timeline-date::before {
-            content: '';
-            width: 15px;
-            height: 15px;
-            background: var(--neon-blue);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
-
-        /* Critical Analysis Section */
-        .critical-analysis {
-            background: linear-gradient(
-                135deg,
-                rgba(255, 179, 0, 0.1) 0%,
-                rgba(179, 136, 255, 0.1) 100%
-            );
-            backdrop-filter: blur(25px);
-            border-radius: var(--border-radius-lg);
-            padding: 50px;
-            border: 1px solid rgba(255, 179, 0, 0.3);
-            margin: 60px auto;
-            max-width: 1200px;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s both;
-        }
-
-        .critical-analysis::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--neon-gold), var(--neon-purple), var(--neon-blue));
-        }
-
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .analysis-point {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
-            padding: 30px;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--glass-border);
-            transition: all var(--transition-normal);
-        }
-
-        .analysis-point:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-purple);
-            box-shadow: 0 15px 40px rgba(179, 136, 255, 0.3);
-        }
-
-        /* Conclusion */
-        .conclusion-section {
-            background: linear-gradient(
-                135deg,
-                rgba(26, 35, 126, 0.2) 0%,
-                rgba(0, 229, 255, 0.15) 100%
-            );
-            backdrop-filter: blur(35px);
-            border-radius: var(--border-radius-xl);
-            padding: 60px;
-            text-align: center;
-            border: 1px solid var(--glass-border);
-            margin: 80px auto 40px;
-            max-width: 1200px;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1s both;
-        }
-
-        .conclusion-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .conclusion-title {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .final-statement {
-            font-size: 1.5rem;
-            line-height: 1.9;
-            color: rgba(255, 255, 255, 0.95);
-            margin: 0 auto 50px;
-            max-width: 900px;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
-            border-radius: var(--border-radius);
-            border: 1px solid var(--glass-border);
-            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .islamic-affirmation {
-            display: inline-block;
-            padding: 25px 50px;
-            background: linear-gradient(135deg, rgba(255, 179, 0, 0.15), rgba(0, 229, 255, 0.15));
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 179, 0, 0.4);
-            font-family: var(--font-arabic);
-            font-size: 1.5rem;
-            color: var(--neon-gold);
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255, 179, 0, 0.2);
-            transition: all var(--transition-normal);
-        }
-
-        .islamic-affirmation:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 179, 0, 0.3);
-            border-color: rgba(255, 179, 0, 0.6);
-        }
-
-        .islamic-affirmation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s ease;
-        }
-
-        .islamic-affirmation:hover::before {
-            left: 100%;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-video-section {
-                padding: 0 15px;
-                margin: 20px auto 40px;
-            }
-            
-            .video-title {
-                font-size: 2rem;
-            }
-            
-            .content-grid {
-                padding: 0 15px;
-                gap: 30px;
-                margin-bottom: 40px;
-            }
-            
-            .argument-card {
-                padding: 25px;
-            }
-            
+        @media (max-width: 640px) {
             .card-title {
-                font-size: 1.6rem;
-            }
-            
-            .card-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
+                font-size: var(--text-xl);
             }
             
             .bible-quote {
-                font-size: 1.2rem;
-                padding: 20px;
+                font-size: var(--text-base);
+                padding: 16px;
             }
             
-            .timeline::before {
-                left: 30px;
+            .evidence-point {
+                padding: 14px;
             }
             
-            .timeline-item {
-                width: calc(100% - 70px);
-                margin-left: 70px !important;
-                margin-right: 0 !important;
-                padding: 25px;
-            }
-            
-            .timeline-section,
-            .critical-analysis,
-            .conclusion-section {
-                padding: 30px 20px;
-                margin: 30px 15px;
+            .evidence-point span {
+                font-size: var(--text-sm);
             }
             
             .conclusion-title {
-                font-size: 2.2rem;
+                font-size: var(--text-2xl);
             }
             
             .final-statement {
-                font-size: 1.2rem;
-                padding: 25px;
-            }
-            
-            .islamic-affirmation {
-                padding: 20px 30px;
-                font-size: 1.3rem;
+                font-size: var(--text-base);
+                padding: 20px;
             }
         }
 
         @media (max-width: 480px) {
             .video-hero-container {
-                padding: 15px;
+                padding: 16px;
             }
             
-            .video-overlay {
+            .argument-card {
                 padding: 20px;
             }
             
-            .video-title {
-                font-size: 1.6rem;
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
             }
             
-            .card-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
+            .scripture-evidence {
+                padding: 16px;
             }
             
-            .timeline-item {
-                width: calc(100% - 50px);
-                margin-left: 50px !important;
-                padding: 20px;
-            }
-            
-            .analysis-grid {
-                grid-template-columns: 1fr;
+            .timeline-section,
+            .critical-analysis,
+            .conclusion-section {
+                padding: 20px 16px;
+                margin: 24px 16px;
             }
         }
 
-        /* Animation for evidence points */
+        /* ============================================
+           INTERACTION ANIMATIONS
+           ============================================ */
         @keyframes highlightPulse {
             0%, 100% { 
                 background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 229, 255, 0.05));
-                box-shadow: 0 5px 20px rgba(0, 229, 255, 0.1);
+                box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
             }
             50% { 
                 background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 229, 255, 0.1));
-                box-shadow: 0 5px 25px rgba(0, 229, 255, 0.2);
+                box-shadow: 0 4px 20px rgba(0, 229, 255, 0.2);
             }
         }
 
@@ -1211,7 +984,7 @@
 
         @keyframes floatUp {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
             100% { transform: translateY(0); }
         }
 
@@ -1221,11 +994,10 @@
     </style>
 </head>
 <body>
-    <!-- Floating Header - EXACT COPY FROM base.html -->
+    <!-- Floating Header -->
     <header class="floating-header">
         <div class="container">
             <div class="header-content">
-                <!-- LOGO NOW CLICKABLE AND LINKS TO index.html -->
                 <a href="index.html" class="logo">
                     <div class="logo-image-container">
                         <img src="image.png" alt="Akhi ex responds Logo" class="logo-image">
@@ -1243,7 +1015,6 @@
                 </button>
 
                 <nav id="mainNav">
-                    <!-- Navigation links -->
                     <a href="index.html">
                         <i class="fas fa-home"></i>
                         <span>Back to Home</span>
@@ -1255,335 +1026,235 @@
 
     <!-- Main Content -->
     <div id="content">
-        <!-- Hero Video Section -->
+        <!-- YouTube Video Section -->
         <div class="hero-video-section">
             <div class="video-hero-container">
                 <div class="video-wrapper">
-                    <!-- VIDEO FIXED: Added multiple sources and better fallback -->
-                    <video controls >
-                        <source src="jesusdivinity.mp4" type="video/mp4">
-                        
-                        Your browser does not support the video tag. Please download the video to view it.
-                    </video>
-                    
+                    <!-- YouTube Embed -->
+                    <iframe 
+                        src="https://www.youtube.com/embed/M3NFiOxjN1g" 
+                        title="Jesus Never Claimed Divinity" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
-                
             </div>
         </div>
 
         <!-- Main Content Grid -->
         <div class="content-grid">
-            <!-- Card 1: The Core Argument - ENHANCED CONTENT -->
+            <!-- Card 1: The Core Argument -->
             <div class="argument-card">
                 <div class="card-header">
                     <div class="card-icon">
                         <i class="fas fa-gavel"></i>
                     </div>
-                    <h2 class="card-title">The Scholarly Consensus:<br>No Direct Claim of Divinity</h2>
+                    <h2 class="card-title text-balance">The Scholarly Consensus: No Direct Claim of Divinity</h2>
                 </div>
-                
-                <div class="scripture-evidence">
-                    <div class="scripture-ref">
-                        <i class="fas fa-quote-left"></i>
-                        The Academic Reality
+                <div class="card-content">
+                    <div class="scripture-evidence">
+                        <div class="scripture-ref">
+                            <i class="fas fa-quote-left"></i>
+                            The Academic Reality
+                        </div>
+                        <div class="bible-quote">
+                            "Not a single critical New Testament scholar argues that the historical Jesus explicitly said 'I am God.' The debate is whether he made implicit claims, not explicit ones."
+                        </div>
                     </div>
-                    <div class="bible-quote">
-                        "Not a single critical New Testament scholar argues that the historical Jesus explicitly said 'I am God.' The debate is whether he made implicit claims, not explicit ones. This is the foundational fact of historical Jesus research."
+                    
+                    <div class="evidence-points">
+                        <div class="evidence-point">
+                            <i class="fas fa-times-circle"></i>
+                            <span><strong>Markan Priority:</strong> Our earliest Gospel (65-75 CE) contains ZERO instances where Jesus claims divinity</span>
+                        </div>
+                        <div class="evidence-point">
+                            <i class="fas fa-language"></i>
+                            <span><strong>Johannine Anomaly:</strong> John's 'I AM' statements reflect late 1st-century theology, not historical Jesus' words</span>
+                        </div>
                     </div>
+                    
+                    <p style="color: rgba(255, 255, 255, 0.95); margin-top: 16px; line-height: 1.6; font-size: var(--text-sm); padding: 16px; background: rgba(179, 136, 255, 0.1); border-radius: 12px; border-left: 3px solid var(--neon-purple);">
+                        <strong>Academic Note:</strong> Dr. Bart Ehrman: "If Jesus went around Galilee saying 'I am God,' how could six independent early sources fail to mention it?"
+                    </p>
                 </div>
-                
-                <div class="evidence-points">
-                    <div class="evidence-point">
-                        <i class="fas fa-times-circle"></i>
-                        <span><strong>Markan Priority:</strong> Our earliest Gospel (65-75 CE) contains ZERO instances where Jesus claims divinity or accepts worship as God</span>
-                    </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-language"></i>
-                        <span><strong>Johannine Anomaly:</strong> John's 'I AM' statements reflect late 1st-century Johannine theology, not the historical Jesus' words. Theissen & Metzger date John to 90-110 CE</span>
-                    </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-history"></i>
-                        <span><strong>Chronological Escalation:</strong> Claims develop from Messiah (Mark) → Virgin Birth (Matthew/Luke) → Preexistence (John) → Consubstantial (325 CE) → Trinity (381 CE)</span>
-                    </div>
-                </div>
-                
-                <p style="color: rgba(255, 255, 255, 0.95); margin-top: 20px; line-height: 1.7; font-size: 1.1rem; padding: 20px; background: rgba(179, 136, 255, 0.1); border-radius: 15px; border-left: 3px solid var(--neon-purple);">
-                    <strong>Academic Note:</strong> Dr. Bart Ehrman (UNC Chapel Hill): "If Jesus went around Galilee saying 'I am God,' how could six independent early sources fail to mention it, while only our latest source contains such claims? Historically, this is impossible."
-                </p>
             </div>
 
-            <!-- Card 2: Jesus' Own Words - ENHANCED CONTENT -->
+            <!-- Card 2: Jesus' Own Words -->
             <div class="argument-card">
                 <div class="card-header">
                     <div class="card-icon" style="background: var(--gradient-secondary);">
                         <i class="fas fa-bible"></i>
                     </div>
-                    <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                        Jesus' Explicit Theology:<br>Subordination & Monotheism
+                    <h2 class="card-title text-balance" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        Jesus' Explicit Theology: Subordination & Monotheism
                     </h2>
                 </div>
-                
-                <div class="scripture-evidence" style="border-left-color: var(--neon-gold);">
-                    <div class="scripture-ref" style="background: rgba(255, 179, 0, 0.2); color: var(--neon-gold); border-color: rgba(255, 179, 0, 0.3);">
-                        <i class="fas fa-scroll"></i>
-                        John 14:28 - The Definitive Statement
+                <div class="card-content">
+                    <div class="scripture-evidence" style="border-left-color: var(--neon-gold);">
+                        <div class="scripture-ref" style="background: rgba(255, 179, 0, 0.2); color: var(--neon-gold); border-color: rgba(255, 179, 0, 0.3);">
+                            <i class="fas fa-scroll"></i>
+                            John 14:28
+                        </div>
+                        <div class="bible-quote" style="border-left-color: var(--neon-gold);">
+                            "You heard me say to you, 'I am going away, and I am coming to you.' If you loved me, you would rejoice that I am going to the Father, <strong>for the Father is greater than I.</strong>"
+                        </div>
                     </div>
-                    <div class="bible-quote" style="border-left-color: var(--neon-gold); font-family: var(--font-body);">
-                        "You heard me say to you, 'I am going away, and I am coming to you.' If you loved me, you would rejoice that I am going to the Father, <strong>for the Father is greater than I.</strong>"
+                    
+                    <div class="scripture-evidence" style="border-left-color: var(--neon-blue); margin-top: 16px;">
+                        <div class="scripture-ref">
+                            <i class="fas fa-scroll"></i>
+                            John 5:30
+                        </div>
+                        <div class="bible-quote">
+                            "I can do nothing on my own. As I hear, I judge, and my judgment is just, because <strong>I seek not my own will but the will of him who sent me.</strong>"
+                        </div>
                     </div>
-                    <div style="margin-top: 20px; padding: 15px; background: rgba(255, 179, 0, 0.1); border-radius: 10px; border-left: 3px solid var(--neon-gold);">
-                        <small style="color: rgba(255, 255, 255, 0.9);"><strong>Greek Analysis:</strong> ὁ πατὴρ μείζων μού ἐστιν (ho patēr meizōn mou estin) - The comparative "greater than" (μείζων) establishes ontological hierarchy, not equality.</small>
-                    </div>
-                </div>
-                
-                <div class="scripture-evidence" style="border-left-color: var(--neon-blue); margin-top: 20px;">
-                    <div class="scripture-ref">
-                        <i class="fas fa-scroll"></i>
-                        John 5:30 - Submission to God's Will
-                    </div>
-                    <div class="bible-quote">
-                        "I can do nothing on my own. As I hear, I judge, and my judgment is just, because <strong>I seek not my own will but the will of him who sent me.</strong>"
-                    </div>
-                    <div style="margin-top: 20px; padding: 15px; background: rgba(0, 229, 255, 0.1); border-radius: 10px; border-left: 3px solid var(--neon-blue);">
-                        <small style="color: rgba(255, 255, 255, 0.9);"><strong>Islamic Parallel:</strong> This is the precise definition of "Muslim" - one who submits (Islam) to God's will. Jesus embodies complete submission.</small>
-                    </div>
-                </div>
-                
-                <div class="evidence-points" style="margin-top: 25px;">
-                    <div class="evidence-point">
-                        <i class="fas fa-hands-praying"></i>
-                        <span><strong>Acts 2:22:</strong> Peter calls Jesus "a man approved of God" (ἄνδρα ἀποδεδειγμένον ἀπὸ τοῦ θεοῦ) - human designation</span>
-                    </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-user-tie"></i>
-                        <span><strong>Acts 10:38:</strong> "God anointed Jesus of Nazareth with the Holy Spirit and with power" - God acting through Jesus</span>
-                    </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-hand-sparkles"></i>
-                        <span><strong>Deuteronomy 18:18:</strong> Jewish expectation: "I will raise up for them a prophet like you [Moses]" - not a divine being</span>
+                    
+                    <div class="evidence-points" style="margin-top: 20px;">
+                        <div class="evidence-point">
+                            <i class="fas fa-hands-praying"></i>
+                            <span><strong>Acts 2:22:</strong> Peter calls Jesus "a man approved of God" - human designation</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 3: The Scholarly Consensus - ENHANCED CONTENT -->
+            <!-- Card 3: The Scholarly Consensus -->
             <div class="argument-card">
                 <div class="card-header">
                     <div class="card-icon" style="background: linear-gradient(135deg, #b388ff, #7986cb);">
                         <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                        Academic Analysis:<br>The Six Independent Sources
+                    <h2 class="card-title text-balance" style="background: linear-gradient(135deg, var(--pure-white), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        Academic Analysis: The Six Independent Sources
                     </h2>
                 </div>
-                
-                <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 20px; line-height: 1.7; font-size: 1.1rem; padding: 20px; background: rgba(26, 35, 126, 0.15); border-radius: 15px;">
-                    New Testament scholarship identifies <strong>six independent early sources</strong> about Jesus: Mark, Q (Quelle), M (Matthew's special material), L (Luke's special material), Matthew, and Luke. Statistical analysis reveals a critical pattern:
-                </p>
-                
-                <div class="bible-quote" style="background: rgba(179, 136, 255, 0.15); border-left-color: var(--neon-purple); font-family: var(--font-body);">
-                    "The silence of six independent early sources (60-85 CE) is deafening compared to the solitary voice of one late source (90-110 CE). In historical methodology, early silence outweighs late testimony. If Jesus claimed divinity, how could six authors writing within 30-60 years of his death all omit this central claim?"
-                </div>
-                
-                <div class="evidence-points" style="margin: 25px 0;">
-                    <div class="evidence-point">
-                        <i class="fas fa-layer-group"></i>
-                        <span><strong>Source Dating:</strong> Mark (65-75 CE), Q (50-70 CE), M/L (60-85 CE), Matthew (80-90 CE), Luke (80-90 CE) → <strong>NO DIVINITY CLAIMS</strong></span>
+                <div class="card-content">
+                    <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 16px; line-height: 1.6; font-size: var(--text-sm);">
+                        New Testament scholarship identifies <strong>six independent early sources</strong> about Jesus: Mark, Q, M, L, Matthew, and Luke.
+                    </p>
+                    
+                    <div class="bible-quote" style="background: rgba(179, 136, 255, 0.15); border-left-color: var(--neon-purple);">
+                        "The silence of six independent early sources (60-85 CE) is deafening compared to the solitary voice of one late source (90-110 CE)."
                     </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-calendar-plus"></i>
-                        <span><strong>John's Anomaly:</strong> Only John (90-110 CE) contains passages interpretable as divinity claims - written 60-80 years after Jesus</span>
+                    
+                    <div class="evidence-points" style="margin: 20px 0;">
+                        <div class="evidence-point">
+                            <i class="fas fa-layer-group"></i>
+                            <span><strong>Source Dating:</strong> Mark (65-75 CE), Q (50-70 CE), M/L (60-85 CE) → <strong>NO DIVINITY CLAIMS</strong></span>
+                        </div>
+                        <div class="evidence-point">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span><strong>John's Anomaly:</strong> Only John (90-110 CE) contains interpretable divinity claims</span>
+                        </div>
                     </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-balance-scale-right"></i>
-                        <span><strong>Historical Method:</strong> Multiple independent attestation is gold standard. Single late attestation is weakest evidence</span>
-                    </div>
-                </div>
-                
-                <div style="color: rgba(255, 255, 255, 0.9); font-style: normal; padding: 25px; background: linear-gradient(135deg, rgba(179, 136, 255, 0.1), rgba(26, 35, 126, 0.2)); border-radius: 15px; border: 1px solid rgba(179, 136, 255, 0.2); margin-top: 20px;">
-                    <h4 style="color: var(--neon-purple); margin-bottom: 15px;">Scholarly Consensus Statements:</h4>
-                    <p style="margin-bottom: 15px;"><strong>Dr. James D.G. Dunn (University of Durham):</strong> "The earliest Christology was functional and adoptionist: Jesus became God's Son at resurrection. Only later development led to ontological divinity."</p>
-                    <p><strong>Dr. Larry Hurtado (University of Edinburgh):</strong> "While early Christians worshipped Jesus, this doesn't mean they considered him ontologically equal to God the Father. That development came later."</p>
                 </div>
             </div>
 
-            <!-- Card 4: Problematic "Proof Texts" - ENHANCED CONTENT -->
+            <!-- Card 4: Problematic "Proof Texts" -->
             <div class="argument-card">
                 <div class="card-header">
                     <div class="card-icon" style="background: linear-gradient(135deg, #ff6f00, #ffb300);">
                         <i class="fas fa-question"></i>
                     </div>
-                    <h2 class="card-title" style="background: linear-gradient(135deg, var(--pure-white), #ff8f00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                        Textual Analysis:<br>Examining Alleged "Proofs"
+                    <h2 class="card-title text-balance" style="background: linear-gradient(135deg, var(--pure-white), #ff8f00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        Textual Analysis: Examining Alleged "Proofs"
                     </h2>
                 </div>
-                
-                <div class="evidence-points">
-                    <div class="evidence-point">
-                        <i class="fas fa-hand-holding-heart"></i>
-                        <span><strong>"Your sins are forgiven" (Mark 2:5-7):</strong> Priests forgave sins in Temple (Leviticus 4-5). Jewish priests acted as God's agents. The Pharisees object to <em>authority</em>, not divinity.</span>
+                <div class="card-content">
+                    <div class="evidence-points">
+                        <div class="evidence-point">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <span><strong>"Your sins are forgiven":</strong> Priests forgave sins in Temple. Pharisees object to <em>authority</em>, not divinity.</span>
+                        </div>
+                        <div class="evidence-point">
+                            <i class="fas fa-crown"></i>
+                            <span><strong>"Son of God":</strong> Royal title for Jewish kings (Psalm 2:7), Israel (Exodus 4:22). Never meant ontological equality.</span>
+                        </div>
                     </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-crown"></i>
-                        <span><strong>"Son of God":</strong> Royal title for Jewish kings (Psalm 2:7), Israel (Exodus 4:22), angels (Job 1:6). Used for Solomon (2 Samuel 7:14). Never meant ontological equality with Yahweh.</span>
+                    
+                    <div class="scripture-evidence" style="margin-top: 16px; border-left-color: #ff8f00;">
+                        <div class="scripture-ref" style="background: rgba(255, 111, 0, 0.2); color: #ff8f00; border-color: rgba(255, 111, 0, 0.3);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            John 10:33-36 - Jesus' Explicit Denial
+                        </div>
+                        <div class="bible-quote" style="border-left-color: #ff8f00; font-size: var(--text-base);">
+                            <strong>Accusation:</strong> "You, being a man, make yourself God"<br>
+                            <strong>Jesus' Defense:</strong> "Is it not written... 'I said, you are gods'?... why do you say... 'You are blaspheming'?"
+                        </div>
                     </div>
-                    <div class="evidence-point">
-                        <i class="fas fa-clock"></i>
-                        <span><strong>"Before Abraham was, I am" (John 8:58):</strong> Greek ἐγώ εἰμι = "I am he" (Isaiah 43:10 LXX). Same phrase in John 9:9 where healed man says "I am (he)." Not divine claim.</span>
-                    </div>
-                </div>
-                
-                <div class="scripture-evidence" style="margin-top: 20px; border-left-color: #ff8f00;">
-                    <div class="scripture-ref" style="background: rgba(255, 111, 0, 0.2); color: #ff8f00; border-color: rgba(255, 111, 0, 0.3);">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        John 10:33-36 - Jesus' Explicit Denial
-                    </div>
-                    <div class="bible-quote" style="border-left-color: #ff8f00; font-family: var(--font-body);">
-                        <strong>Accusation:</strong> "You, being a man, make yourself God" (v33)<br>
-                        <strong>Jesus' Defense:</strong> "Is it not written in your Law, 'I said, you are gods'? If he called them gods to whom the word of God came... <strong>why do you say of him whom the Father consecrated and sent into the world, 'You are blaspheming,' because I said, 'I am the Son of God'?</strong>" (v34-36)
-                    </div>
-                    <div style="margin-top: 20px; padding: 15px; background: rgba(255, 111, 0, 0.1); border-radius: 10px; border-left: 3px solid #ff8f00;">
-                        <small style="color: rgba(255, 255, 255, 0.9);"><strong>Key Analysis:</strong> Jesus quotes Psalm 82:6 where humans are called "gods" (elohim). His argument: If scripture calls humans "gods," why object to "Son of God"? This is a denial, not affirmation, of claiming to be Yahweh.</small>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, rgba(255, 111, 0, 0.1), rgba(255, 179, 0, 0.05)); border-radius: 15px; border: 1px solid rgba(255, 179, 0, 0.3);">
-                    <h4 style="color: #ff8f00; margin-bottom: 10px;">Thomas' Statement: John 20:28</h4>
-                    <p style="color: rgba(255, 255, 255, 0.95);">Thomas says "My Lord and my God!" (ὁ κύριός μου καὶ ὁ θεός μου). Jesus doesn't affirm this. Instead, he redirects: "Blessed are those who have not seen and yet have believed" (v29). The narrative focuses on faith without sight, not affirming divinity.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Timeline Section - ENHANCED CONTENT -->
+        <!-- Timeline Section -->
         <div class="timeline-section">
-            <div class="card-header" style="border-bottom-color: rgba(0, 229, 255, 0.3); padding: 0 0 30px 0; margin-bottom: 20px;">
+            <div class="card-header" style="border-bottom-color: rgba(0, 229, 255, 0.3); padding: 0 0 20px 0; margin-bottom: 16px;">
                 <div class="card-icon" style="background: var(--gradient-primary);">
                     <i class="fas fa-timeline"></i>
                 </div>
-                <h2 class="card-title">Historical Development:<br>When Did Jesus Become "God"?</h2>
+                <h2 class="card-title">Historical Development: When Did Jesus Become "God"?</h2>
             </div>
             
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">30-33 CE</div>
-                    <h3 style="color: var(--pure-white); margin-bottom: 10px; font-size: 1.3rem;">Historical Jesus</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Jewish prophet preaching God's kingdom. Uses "Son of Man" (Daniel's human figure). Preaches strict monotheism. No divinity claims in Q source (earliest material).</p>
-                    <div style="margin-top: 10px; padding: 8px 15px; background: rgba(0, 229, 255, 0.1); border-radius: 20px; display: inline-block; font-size: 0.9rem; color: var(--neon-blue);">
-                        <i class="fas fa-check-circle"></i> Historical Consensus
-                    </div>
+            <div style="display: grid; gap: 16px;">
+                <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--neon-blue);">
+                    <div style="color: var(--neon-blue); font-weight: bold; margin-bottom: 8px;">30-33 CE</div>
+                    <p style="color: rgba(255, 255, 255, 0.9); font-size: var(--text-sm);">Historical Jesus: Jewish prophet preaching monotheism. No divinity claims in earliest material.</p>
                 </div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">50-70 CE</div>
-                    <h3 style="color: var(--pure-white); margin-bottom: 10px; font-size: 1.3rem;">Pauline Letters</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Paul calls Jesus "Lord" (κύριος) but maintains distinction between God and Lord (1 Corinthians 8:6). Jesus as divine agent, not equal to God. <strong>Never quotes Jesus claiming divinity.</strong></p>
+                <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--neon-gold);">
+                    <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 8px;">65-75 CE</div>
+                    <p style="color: rgba(255, 255, 255, 0.9); font-size: var(--text-sm);">Gospel of Mark: First written Gospel. <strong>Zero divinity claims.</strong> "Son of God" only at baptism/crucifixion.</p>
                 </div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">65-75 CE</div>
-                    <h3 style="color: var(--pure-white); margin-bottom: 10px; font-size: 1.3rem;">Gospel of Mark</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">First written Gospel. Jesus as Messiah who dies as "ransom for many." <strong>Zero divinity claims.</strong> "Son of God" title appears only at baptism and crucifixion (adoptionist).</p>
+                <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--neon-purple);">
+                    <div style="color: var(--neon-purple); font-weight: bold; margin-bottom: 8px;">90-110 CE</div>
+                    <p style="color: rgba(255, 255, 255, 0.9); font-size: var(--text-sm);"><strong>First and only Gospel</strong> with passages interpretable as divinity claims. Written 60-80 years after Jesus.</p>
                 </div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">80-90 CE</div>
-                    <h3 style="color: var(--pure-white); margin-bottom: 10px; font-size: 1.3rem;">Matthew & Luke</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Add virgin birth narratives. Still maintain Jewish monotheism. Jesus submits to God's will. No "I am God" statements. Focus on Jesus as Messiah in Jewish sense.</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">90-110 CE</div>
-                    <h3 style="color: var(--pure-white); margin-bottom: 10px; font-size: 1.3rem;">Gospel of John</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);"><strong>First and only Gospel</strong> with passages interpretable as divinity claims. Reflects late 1st-century Johannine community theology. Written 60-80 years after Jesus, outside Palestine, for Gentile audience.</p>
-                    <div style="margin-top: 10px; padding: 8px 15px; background: rgba(255, 50, 50, 0.1); border-radius: 20px; display: inline-block; font-size: 0.9rem; color: #ff6b6b;">
-                        <i class="fas fa-exclamation-triangle"></i> Late Development
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">325 CE</div>
-                    <h3 style="color: var(--pure-white); margin-bottom: 10px; font-size: 1.3rem;">Council of Nicaea</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Nearly 300 years after Jesus. Emperor Constantine convenes council. "Homoousios" (same substance) adopted. Arianism condemned. <strong>First official declaration</strong> of Jesus as "true God from true God."</p>
+                <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: var(--border-radius); border-left: 4px solid #ff6b6b;">
+                    <div style="color: #ff6b6b; font-weight: bold; margin-bottom: 8px;">325 CE</div>
+                    <p style="color: rgba(255, 255, 255, 0.9); font-size: var(--text-sm);">Council of Nicaea: Nearly 300 years after Jesus. <strong>First official declaration</strong> of Jesus as "true God from true God."</p>
                 </div>
             </div>
         </div>
 
-        <!-- Critical Analysis Section - ENHANCED CONTENT -->
-        <div class="critical-analysis">
-            <div class="card-header" style="border-bottom-color: rgba(255, 179, 0, 0.3); padding: 0 0 30px 0;">
-                <div class="card-icon" style="background: var(--gradient-secondary);">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h2 class="card-title">Critical Examination:<br>The Implications</h2>
-            </div>
-            
-            <div class="analysis-grid">
-                <div class="analysis-point">
-                    <h3 style="color: var(--neon-gold); margin-bottom: 15px; font-size: 1.4rem; font-family: var(--font-heading);">The Islamic Jesus</h3>
-                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.7;">
-                        The historical Jesus aligns perfectly with Islamic prophecy: a human messenger (rasūl) who submits completely to Allah's will. "I seek not my will but the will of him who sent me" (John 5:30) is the definition of "Muslim." The Quran affirms Jesus as "a servant of Allah" (19:30), "a prophet" (19:30), and "a messenger" (4:171), while rejecting divinity.
-                    </p>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255, 179, 0, 0.1); border-radius: 10px; border-left: 3px solid var(--neon-gold);">
-                        <small style="color: rgba(255, 255, 255, 0.9);">"He [Jesus] was no more than a servant: We granted Our favour to him, and We made him an example to the Children of Israel." (Quran 43:59)</small>
-                    </div>
-                </div>
-                
-                <div class="analysis-point">
-                    <h3 style="color: var(--neon-purple); margin-bottom: 15px; font-size: 1.4rem; font-family: var(--font-heading);">Theological Evolution</h3>
-                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.7;">
-                        Christianity transformed from a Jewish messianic movement to a Gentile religion. As it spread through the Greco-Roman world, it absorbed concepts from pagan "god-men" (Hercules, Asclepius, Dionysus) and Greek philosophy (Platonic forms, Logos theology). The divinity claim made Christianity more palatable to converts familiar with divine-human mediators.
-                    </p>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(179, 136, 255, 0.1); border-radius: 10px; border-left: 3px solid var(--neon-purple);">
-                        <small style="color: rgba(255, 255, 255, 0.9);">Dr. Richard Carrier: "The Jesus story fits patterns of dying-and-rising god myths common in Mediterranean mystery religions."</small>
-                    </div>
-                </div>
-                
-                <div class="analysis-point">
-                    <h3 style="color: var(--neon-blue); margin-bottom: 15px; font-size: 1.4rem; font-family: var(--font-heading);">Historical Methodology</h3>
-                    <p style="color: rgba(255, 255, 255, 0.95); line-height: 1.7;">
-                        Historical Jesus research follows standard historical-critical method: multiple independent attestation, criterion of embarrassment, criterion of dissimilarity. By these criteria, Jesus as divine fails while Jesus as Jewish prophet succeeds. The burden of proof rests on those claiming late testimony over early silence.
-                    </p>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(0, 229, 255, 0.1); border-radius: 10px; border-left: 3px solid var(--neon-blue);">
-                        <small style="color: rgba(255, 255, 255, 0.9);">E.P. Sanders: "We know more about Jesus than about almost any other 1st-century figure. The evidence points to an eschatological prophet, not a divine being."</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Conclusion - ENHANCED CONTENT -->
+        <!-- Conclusion -->
         <div class="conclusion-section">
-            <h2 class="conclusion-title">The Overwhelming Evidence</h2>
+            <h2 class="conclusion-title text-balance">The Overwhelming Evidence</h2>
             
             <div class="final-statement">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px;">
-                    <div style="text-align: center; padding: 20px; background: rgba(0, 229, 255, 0.1); border-radius: var(--border-radius);">
-                        <div style="font-size: 2.2rem; color: var(--neon-blue); margin-bottom: 10px; font-weight: bold;">0</div>
-                        <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">Direct "I am God" statements in Synoptics</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-bottom: 32px;">
+                    <div style="text-align: center; padding: 16px; background: rgba(0, 229, 255, 0.1); border-radius: var(--border-radius);">
+                        <div style="font-size: 1.8rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold;">0</div>
+                        <div style="color: rgba(255, 255, 255, 0.9); font-size: var(--text-sm);">Direct "I am God" statements in Synoptics</div>
                     </div>
-                    <div style="text-align: center; padding: 20px; background: rgba(255, 179, 0, 0.1); border-radius: var(--border-radius);">
-                        <div style="font-size: 2.2rem; color: var(--neon-gold); margin-bottom: 10px; font-weight: bold;">6</div>
-                        <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">Independent early sources with no divinity claims</div>
+                    <div style="text-align: center; padding: 16px; background: rgba(255, 179, 0, 0.1); border-radius: var(--border-radius);">
+                        <div style="font-size: 1.8rem; color: var(--neon-gold); margin-bottom: 8px; font-weight: bold;">6</div>
+                        <div style="color: rgba(255, 255, 255, 0.9); font-size: var(--text-sm);">Early sources with no divinity claims</div>
                     </div>
-                    <div style="text-align: center; padding: 20px; background: rgba(179, 136, 255, 0.1); border-radius: var(--border-radius);">
-                        <div style="font-size: 2.2rem; color: var(--neon-purple); margin-bottom: 10px; font-weight: bold;">295</div>
-                        <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">Years until official divinity declaration (Nicaea)</div>
+                    <div style="text-align: center; padding: 16px; background: rgba(179, 136, 255, 0.1); border-radius: var(--border-radius);">
+                        <div style="font-size: 1.8rem; color: var(--neon-purple); margin-bottom: 8px; font-weight: bold;">295</div>
+                        <div style="color: rgba(255, 255, 255, 0.9); font-size: var(--text-sm);">Years until official divinity declaration</div>
                     </div>
                 </div>
 
-                The historical Jesus of Nazareth was a Jewish prophet who preached strict monotheism, submitted completely to God's will (the precise definition of "Muslim"), and never claimed divinity. The doctrine of Jesus as God developed gradually over centuries through theological debates, political pressures, and philosophical influences alien to Jesus' original Palestinian Jewish context.
+                The historical Jesus of Nazareth was a Jewish prophet who preached strict monotheism, submitted completely to God's will, and never claimed divinity. The doctrine of Jesus as God developed gradually over centuries through theological debates and philosophical influences.
                 <br><br>
-                The Quranic portrayal of Jesus as a mighty messenger of Allah, born of the virgin Mary, performing miracles by God's permission, preaching submission to the One God, and rejecting any claim to divinity—this aligns perfectly with the historical evidence, while the later Christian dogma contradicts both history and Jesus' own teachings.
+                The Quranic portrayal of Jesus as a mighty messenger of Allah aligns perfectly with the historical evidence, while the later Christian dogma contradicts both history and Jesus' own teachings.
             </div>
             
-            <div class="islamic-affirmation">
+            <div style="display: inline-block; padding: 20px 32px; background: linear-gradient(135deg, rgba(255, 179, 0, 0.15), rgba(0, 229, 255, 0.15)); border-radius: var(--border-radius); border: 1px solid rgba(255, 179, 0, 0.4); font-family: var(--font-arabic); font-size: var(--text-xl); color: var(--neon-gold); margin-top: 24px; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(255, 179, 0, 0.2); transition: all var(--transition-normal);">
                 <i class="fas fa-star-and-crescent"></i>
-                "He [Jesus] was no more than a servant. We granted Our favour to him, and We made him an example to the Children of Israel."
-                <span style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; display: block; margin-top: 10px;">Quran 43:59</span>
+                "He was no more than a servant. We granted Our favour to him, and We made him an example to the Children of Israel."
+                <span style="color: rgba(255, 255, 255, 0.8); font-size: var(--text-sm); display: block; margin-top: 8px;">Quran 43:59</span>
                 <i class="fas fa-star-and-crescent"></i>
             </div>
         </div>
     </div>
 
-    <!-- Floating Footer - EXACT COPY FROM base.html -->
+    <!-- Floating Footer -->
     <footer class="floating-footer">
         <div class="container">
             <div id="footerContent">
@@ -1594,19 +1265,17 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle Script - SIMPLIFIED AND WORKING
+        // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
         
         if (menuToggle && mainNav) {
-            // Toggle mobile menu
             menuToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
                 mainNav.classList.toggle('active');
                 this.classList.toggle('active');
             });
             
-            // Close menu when clicking outside
             document.addEventListener('click', function(event) {
                 if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
                     mainNav.classList.remove('active');
@@ -1614,7 +1283,6 @@
                 }
             });
             
-            // Close menu when clicking on a nav link
             if (mainNav.querySelectorAll('a').length > 0) {
                 mainNav.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
@@ -1625,9 +1293,9 @@
             }
         }
 
-        // Content interactive features
+        // Interactive features
         document.addEventListener('DOMContentLoaded', function() {
-            // Add highlight animation to evidence points on hover
+            // Evidence point interactions
             const evidencePoints = document.querySelectorAll('.evidence-point');
             evidencePoints.forEach(point => {
                 point.addEventListener('mouseenter', function() {
@@ -1641,43 +1309,28 @@
                 });
             });
             
-            // Video interaction
-            const video = document.querySelector('video');
+            // YouTube iframe handling
             const videoWrapper = document.querySelector('.video-wrapper');
+            const iframe = document.querySelector('iframe');
             
-            if (video && videoWrapper) {
-                video.addEventListener('play', function() {
-                    videoWrapper.style.transform = 'perspective(1000px) rotateX(0) scale(1.05)';
-                    videoWrapper.style.boxShadow = 
-                        'var(--shadow-strong), 0 0 100px rgba(0, 229, 255, 0.6), var(--shadow-neon)';
-                    videoWrapper.style.borderColor = 'rgba(0, 229, 255, 0.6)';
+            if (iframe && videoWrapper) {
+                // Add loading state
+                videoWrapper.style.opacity = '0.8';
+                iframe.addEventListener('load', function() {
+                    videoWrapper.style.opacity = '1';
                 });
                 
-                video.addEventListener('pause', function() {
-                    videoWrapper.style.transform = 'perspective(1000px) rotateX(1deg) scale(1)';
-                    videoWrapper.style.boxShadow = 
-                        'var(--shadow-strong), 0 0 50px rgba(0, 229, 255, 0.3)';
-                    videoWrapper.style.borderColor = 'rgba(0, 229, 255, 0.2)';
-                });
-                
-                // If video doesn't load, show message
-                video.addEventListener('error', function() {
-                    const container = document.querySelector('.video-hero-container');
-                    const errorMsg = document.createElement('div');
-                    errorMsg.style.cssText = `
-                        text-align: center;
-                        padding: 20px;
-                        background: rgba(255, 50, 50, 0.1);
-                        border-radius: 10px;
-                        margin-top: 15px;
-                        border: 1px solid rgba(255, 50, 50, 0.3);
-                        color: #ff6b6b;
+                // Error handling
+                iframe.addEventListener('error', function() {
+                    videoWrapper.innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(0,0,0,0.7); color: white; padding: 20px; text-align: center;">
+                            <div>
+                                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                <p>YouTube video couldn't load. Please check your connection.</p>
+                                <a href="https://youtu.be/M3NFiOxjN1g" target="_blank" style="color: var(--neon-blue); text-decoration: underline;">Watch on YouTube</a>
+                            </div>
+                        </div>
                     `;
-                    errorMsg.innerHTML = `
-                        <i class="fas fa-exclamation-triangle"></i>
-                        Video file "jesusdivinity.mp4" not found. Please ensure it's in the same folder as this HTML file.
-                    `;
-                    container.appendChild(errorMsg);
                 });
             }
             
@@ -1688,14 +1341,37 @@
                 icon.classList.add('floating');
             });
             
-            // Logo click handler
-            const logo = document.querySelector('.logo');
-            if (logo) {
-                logo.addEventListener('click', function(e) {
-                    // Already handled by href="index.html"
-                    console.log('Logo clicked - navigating to index.html');
-                });
+            // Optimize card heights on desktop
+            function optimizeCardLayout() {
+                if (window.innerWidth >= 1024) {
+                    const cards = document.querySelectorAll('.argument-card');
+                    let maxHeight = 0;
+                    
+                    // Reset heights first
+                    cards.forEach(card => {
+                        card.style.height = 'auto';
+                    });
+                    
+                    // Get max height in each row (assuming 2 columns)
+                    for (let i = 0; i < cards.length; i += 2) {
+                        const card1 = cards[i];
+                        const card2 = cards[i + 1];
+                        
+                        if (card1 && card2) {
+                            const height1 = card1.offsetHeight;
+                            const height2 = card2.offsetHeight;
+                            const rowMax = Math.max(height1, height2);
+                            
+                            card1.style.height = rowMax + 'px';
+                            card2.style.height = rowMax + 'px';
+                        }
+                    }
+                }
             }
+            
+            // Run on load and resize
+            optimizeCardLayout();
+            window.addEventListener('resize', optimizeCardLayout);
         });
     </script>
 </body>
