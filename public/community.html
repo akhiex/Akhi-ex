@@ -1264,809 +1264,828 @@
         </div>
     </footer>
 
-    <script>
-        // ============================================
-        // NICKNAME SYSTEM
-        // ============================================
-        function getNickname() {
-            return localStorage.getItem('userNickname');
+<script>
+    // ============================================
+    // NICKNAME SYSTEM
+    // ============================================
+    function getNickname() {
+        return localStorage.getItem('userNickname');
+    }
+
+    function setNickname(nickname) {
+        if (nickname && nickname.trim()) {
+            localStorage.setItem('userNickname', nickname.trim());
+            return true;
         }
+        return false;
+    }
 
-        function setNickname(nickname) {
-            if (nickname && nickname.trim()) {
-                localStorage.setItem('userNickname', nickname.trim());
-                return true;
-            }
-            return false;
+    function showNicknameModal() {
+        const nickname = getNickname();
+        if (!nickname) {
+            document.getElementById('nicknameModal').classList.add('active');
+            document.getElementById('nicknameInput').focus();
         }
+    }
 
-        function showNicknameModal() {
-            const nickname = getNickname();
-            if (!nickname) {
-                document.getElementById('nicknameModal').classList.add('active');
-                document.getElementById('nicknameInput').focus();
-            }
+    function saveNickname() {
+        const nicknameInput = document.getElementById('nicknameInput');
+        const nickname = nicknameInput.value.trim();
+        
+        if (!nickname) {
+            alert('Please enter a nickname');
+            nicknameInput.focus();
+            return;
         }
-
-        function saveNickname() {
-            const nicknameInput = document.getElementById('nicknameInput');
-            const nickname = nicknameInput.value.trim();
-            
-            if (!nickname) {
-                alert('Please enter a nickname');
-                nicknameInput.focus();
-                return;
-            }
-            
-            if (nickname.length < 2) {
-                alert('Nickname must be at least 2 characters');
-                nicknameInput.focus();
-                return;
-            }
-            
-            if (setNickname(nickname)) {
-                document.getElementById('nicknameModal').classList.remove('active');
-                // Auto-fill the name field in reply form
-                document.getElementById('replyName').value = nickname;
-                alert('Nickname saved successfully! You can now post replies.');
-            }
+        
+        if (nickname.length < 2) {
+            alert('Nickname must be at least 2 characters');
+            nicknameInput.focus();
+            return;
         }
-
-        // Initialize nickname system when DOM loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show nickname modal if not set
-            setTimeout(() => {
-                showNicknameModal();
-            }, 1000);
-            
-            // Save nickname button event
-            const saveBtn = document.getElementById('saveNicknameBtn');
-            if (saveBtn) {
-                saveBtn.addEventListener('click', saveNickname);
-            }
-            
-            // Allow Enter key to save nickname
-            const nicknameInput = document.getElementById('nicknameInput');
-            if (nicknameInput) {
-                nicknameInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        saveNickname();
-                    }
-                });
-            }
-            
-            // Auto-fill the reply form name field if nickname exists
-            const nickname = getNickname();
-            if (nickname) {
-                document.getElementById('replyName').value = nickname;
-            }
-        });
-
-        // Community page JavaScript
-        const OWNER_EMAIL = "Akhiexresponse@gmail.com";
-        const OWNER_CODE = "7192834650";
-        let isOwnerAuthenticated = localStorage.getItem('ownerAuthenticated') === 'true';
-        let currentQuestionId = null;
-        let currentParentAnswerId = null;
-        let allQuestions = [];
-        let userId = localStorage.getItem('userId') || 'user_' + Math.random().toString(36).substr(2, 9);
-
-        if (!localStorage.getItem('userId')) {
-            localStorage.setItem('userId', userId);
+        
+        if (setNickname(nickname)) {
+            document.getElementById('nicknameModal').classList.remove('active');
+            // Auto-fill the name field in reply form
+            document.getElementById('replyName').value = nickname;
+            alert('Nickname saved successfully! You can now post replies.');
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            updateOwnerButton();
-            loadQuestions();
-            
-            document.getElementById('ownerButton').addEventListener('click', function() {
-                if (isOwnerAuthenticated) {
-                    if (confirm("Log out as owner?")) {
-                        localStorage.removeItem('ownerAuthenticated');
-                        isOwnerAuthenticated = false;
-                        updateOwnerButton();
-                        loadQuestions();
-                        alert("Logged out.");
-                    }
-                } else {
-                    authenticateOwner();
+    // ============================================
+    // COMMUNITY PAGE JAVASCRIPT
+    // ============================================
+    const OWNER_EMAIL = "Akhiexresponse@gmail.com";
+    const OWNER_CODE = "7192834650";
+    let isOwnerAuthenticated = localStorage.getItem('ownerAuthenticated') === 'true';
+    let currentQuestionId = null;
+    let currentParentAnswerId = null;
+    let allQuestions = [];
+    let userId = localStorage.getItem('userId') || 'user_' + Math.random().toString(36).substr(2, 9);
+
+    if (!localStorage.getItem('userId')) {
+        localStorage.setItem('userId', userId);
+    }
+
+    // Initialize nickname system when DOM loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show nickname modal if not set
+        setTimeout(() => {
+            showNicknameModal();
+        }, 1000);
+        
+        // Save nickname button event
+        const saveBtn = document.getElementById('saveNicknameBtn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', saveNickname);
+        }
+        
+        // Allow Enter key to save nickname
+        const nicknameInput = document.getElementById('nicknameInput');
+        if (nicknameInput) {
+            nicknameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    saveNickname();
                 }
             });
-            
-            document.getElementById('overlay').addEventListener('click', closeSideForm);
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('newQuestion') === 'true') {
-                setTimeout(() => {
-                    loadQuestions();
-                }, 500);
-            }
-        });
-
-        function authenticateOwner() {
-            // Create a modal for email and password input
-            const modalHtml = `
-                <div style="
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0,0,0,0.8);
-                    backdrop-filter: blur(20px);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 10000;
-                ">
-                    <div style="
-                        background: rgba(255, 255, 255, 0.15);
-                        backdrop-filter: blur(30px);
-                        border: 1px solid rgba(255, 255, 255, 0.2);
-                        padding: 40px;
-                        border-radius: 30px;
-                        width: 90%;
-                        max-width: 400px;
-                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-                    ">
-                        <h3 style="color: var(--pure-white); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; font-size: 1.5rem;">
-                            <i class="fas fa-user-shield" style="color: var(--neon-gold);"></i>
-                            Owner Authentication
-                        </h3>
-                        
-                        <div style="margin-bottom: 25px;">
-                            <label style="display: block; margin-bottom: 12px; color: var(--pure-white); font-weight: 500; display: flex; align-items: center; gap: 10px;">
-                                <i class="fas fa-envelope" style="color: var(--neon-blue);"></i>
-                                Email Address
-                            </label>
-                            <input type="email" id="authEmail" placeholder="Enter your email" 
-                                   style="width: 100%; padding: 18px; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: var(--pure-white); font-family: inherit; font-size: 1rem; transition: all 0.3s;"
-                                   onfocus="this.style.borderColor='var(--neon-blue)'; this.style.boxShadow='0 0 30px rgba(0, 229, 255, 0.2)'"
-                                   onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none'">
-                        </div>
-                        
-                        <div style="margin-bottom: 30px;">
-                            <label style="display: block; margin-bottom: 12px; color: var(--pure-white); font-weight: 500; display: flex; align-items: center; gap: 10px;">
-                                <i class="fas fa-key" style="color: var(--neon-gold);"></i>
-                                Security Code
-                            </label>
-                            <input type="password" id="authCode" placeholder="Enter security code" 
-                                   style="width: 100%; padding: 18px; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: var(--pure-white); font-family: inherit; font-size: 1rem; transition: all 0.3s;"
-                                   onfocus="this.style.borderColor='var(--neon-blue)'; this.style.boxShadow='0 0 30px rgba(0, 229, 255, 0.2)'"
-                                   onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none'">
-                        </div>
-                        
-                        <div style="display: flex; gap: 15px; justify-content: flex-end;">
-                            <button id="cancelAuth" style="
-                                padding: 15px 25px;
-                                background: rgba(255, 255, 255, 0.1);
-                                border: 1px solid rgba(255, 255, 255, 0.2);
-                                border-radius: 15px;
-                                color: rgba(255, 255, 255, 0.8);
-                                font-family: inherit;
-                                font-weight: 500;
-                                cursor: pointer;
-                                transition: all 0.3s;
-                            " onmouseover="this.style.borderColor='var(--neon-blue)'; this.style.color='var(--neon-blue)'"
-                              onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='rgba(255, 255, 255, 0.8)'">
-                                Cancel
-                            </button>
-                            <button id="submitAuth" style="
-                                padding: 15px 25px;
-                                background: linear-gradient(135deg, #1a237e, #3949ab);
-                                border: none;
-                                border-radius: 15px;
-                                color: var(--pure-white);
-                                font-family: inherit;
-                                font-weight: 600;
-                                cursor: pointer;
-                                transition: all 0.3s;
-                                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-                            " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 20px 60px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 229, 255, 0.4)'"
-                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.15)'">
-                                Authenticate
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            const modal = document.createElement('div');
-            modal.innerHTML = modalHtml;
-            document.body.appendChild(modal);
-            
-            // Focus on email input
-            setTimeout(() => {
-                document.getElementById('authEmail').focus();
-            }, 100);
-            
-            // Cancel button handler
-            document.getElementById('cancelAuth').addEventListener('click', function() {
-                document.body.removeChild(modal);
-            });
-            
-            // Submit button handler
-            document.getElementById('submitAuth').addEventListener('click', function() {
-                const email = document.getElementById('authEmail').value.trim();
-                const code = document.getElementById('authCode').value.trim();
-                
-                if (!email) {
-                    alert("Please enter your email address.");
-                    document.getElementById('authEmail').focus();
-                    return;
-                }
-                
-                if (!code) {
-                    alert("Please enter the security code.");
-                    document.getElementById('authCode').focus();
-                    return;
-                }
-                
-                // Normalize email for comparison
-                const normalizedEmail = email.toLowerCase().trim();
-                const normalizedOwnerEmail = OWNER_EMAIL.toLowerCase().trim();
-                
-                if (normalizedEmail === normalizedOwnerEmail && code === OWNER_CODE) {
-                    isOwnerAuthenticated = true;
-                    localStorage.setItem('ownerAuthenticated', 'true');
+        }
+        
+        // Auto-fill the reply form name field if nickname exists
+        const nickname = getNickname();
+        if (nickname) {
+            document.getElementById('replyName').value = nickname;
+        }
+        
+        // Initialize community functionality
+        updateOwnerButton();
+        loadQuestions();
+        
+        document.getElementById('ownerButton').addEventListener('click', function() {
+            if (isOwnerAuthenticated) {
+                if (confirm("Log out as owner?")) {
+                    localStorage.removeItem('ownerAuthenticated');
+                    isOwnerAuthenticated = false;
                     updateOwnerButton();
                     loadQuestions();
-                    document.body.removeChild(modal);
-                    
-                    // Show success notification
-                    const successMsg = document.createElement('div');
-                    successMsg.innerHTML = `
-                        <div style="
-                            position: fixed;
-                            top: 30px;
-                            right: 30px;
-                            background: rgba(0, 229, 255, 0.2);
-                            backdrop-filter: blur(20px);
-                            border: 1px solid rgba(0, 229, 255, 0.3);
-                            color: var(--pure-white);
-                            padding: 20px 25px;
-                            border-radius: 20px;
-                            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-                            z-index: 10001;
-                            animation: slideUp 0.3s ease-out;
-                            display: flex;
-                            align-items: center;
-                            gap: 15px;
-                            max-width: 350px;
-                        ">
-                            <i class="fas fa-check-circle" style="color: var(--neon-blue); font-size: 24px;"></i>
-                            <div>
-                                <div style="font-weight: 600; font-size: 1.1rem;">Owner authentication successful!</div>
-                                <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">You are now logged in as owner</div>
-                            </div>
-                        </div>
-                    `;
-                    document.body.appendChild(successMsg);
-                    setTimeout(() => {
-                        document.body.removeChild(successMsg);
-                    }, 4000);
-                    
-                } else {
-                    // Show error notification
-                    const errorMsg = document.createElement('div');
-                    errorMsg.innerHTML = `
-                        <div style="
-                            position: fixed;
-                            top: 30px;
-                            right: 30px;
-                            background: rgba(255, 87, 87, 0.2);
-                            backdrop-filter: blur(20px);
-                            border: 1px solid rgba(255, 87, 87, 0.3);
-                            color: var(--pure-white);
-                            padding: 20px 25px;
-                            border-radius: 20px;
-                            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-                            z-index: 10001;
-                            animation: slideUp 0.3s ease-out;
-                            display: flex;
-                            align-items: center;
-                            gap: 15px;
-                            max-width: 350px;
-                        ">
-                            <i class="fas fa-exclamation-circle" style="color: #ff5757; font-size: 24px;"></i>
-                            <div>
-                                <div style="font-weight: 600; font-size: 1.1rem;">Invalid email or security code</div>
-                                <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">Please try again</div>
-                            </div>
-                        </div>
-                    `;
-                    document.body.appendChild(errorMsg);
-                    setTimeout(() => {
-                        document.body.removeChild(errorMsg);
-                    }, 4000);
-                    
-                    // Shake animation for incorrect input
-                    const authForm = modal.querySelector('div > div');
-                    authForm.style.animation = 'shake 0.5s';
-                    setTimeout(() => {
-                        authForm.style.animation = '';
-                    }, 500);
-                    
-                    // Clear password field
-                    document.getElementById('authCode').value = '';
-                    document.getElementById('authCode').focus();
+                    alert("Logged out.");
                 }
-            });
-            
-            // Enter key support
-            document.getElementById('authCode').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    document.getElementById('submitAuth').click();
-                }
-            });
-            
-            document.getElementById('authEmail').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    document.getElementById('authCode').focus();
-                }
-            });
-            
-            // Close modal when clicking outside
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    document.body.removeChild(modal);
-                }
-            });
-            
-            // Add shake animation
-            if (!document.querySelector('#shakeStyle')) {
-                const style = document.createElement('style');
-                style.id = 'shakeStyle';
-                style.textContent = `
-                    @keyframes shake {
-                        0%, 100% { transform: translateX(0); }
-                        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                        20%, 40%, 60%, 80% { transform: translateX(5px); }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        }
-
-        function updateOwnerButton() {
-            const btn = document.getElementById('ownerButton');
-            if (isOwnerAuthenticated) {
-                btn.classList.add('authenticated');
-                btn.title = "Owner (Authenticated) - Click to logout";
-                btn.innerHTML = '<i class="fas fa-user-check"></i>';
             } else {
-                btn.classList.remove('authenticated');
-                btn.title = "Owner Authentication";
-                btn.innerHTML = '<i class="fas fa-user-shield"></i>';
+                authenticateOwner();
             }
+        });
+        
+        document.getElementById('overlay').addEventListener('click', closeSideForm);
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('newQuestion') === 'true') {
+            setTimeout(() => {
+                loadQuestions();
+            }, 500);
         }
+    });
 
-        async function loadQuestions() {
-            try {
-                console.log('Loading questions...');
-                const response = await fetch('/api/questions');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                allQuestions = await response.json();
-                
-                if (!Array.isArray(allQuestions)) {
-                    allQuestions = [];
-                }
-                
-                console.log(`Loaded ${allQuestions.length} questions`);
-                displayQuestions();
-            } catch (error) {
-                console.error('Error loading questions:', error);
-                allQuestions = [];
-                displayQuestions();
-            }
-        }
-
-        function displayQuestions() {
-            const questionsContainer = document.getElementById('questionsContainer');
-            const emptyState = document.getElementById('emptyState');
+    function authenticateOwner() {
+        // Create a modal for email and password input
+        const modalHtml = `
+            <div style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                backdrop-filter: blur(20px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+            ">
+                <div style="
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(30px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    padding: 40px;
+                    border-radius: 30px;
+                    width: 90%;
+                    max-width: 400px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+                ">
+                    <h3 style="color: var(--pure-white); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; font-size: 1.5rem;">
+                        <i class="fas fa-user-shield" style="color: var(--neon-gold);"></i>
+                        Owner Authentication
+                    </h3>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 12px; color: var(--pure-white); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-envelope" style="color: var(--neon-blue);"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="authEmail" placeholder="Enter your email" 
+                               style="width: 100%; padding: 18px; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: var(--pure-white); font-family: inherit; font-size: 1rem; transition: all 0.3s;"
+                               onfocus="this.style.borderColor='var(--neon-blue)'; this.style.boxShadow='0 0 30px rgba(0, 229, 255, 0.2)'"
+                               onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none'">
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <label style="display: block; margin-bottom: 12px; color: var(--pure-white); font-weight: 500; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-key" style="color: var(--neon-gold);"></i>
+                            Security Code
+                        </label>
+                        <input type="password" id="authCode" placeholder="Enter security code" 
+                               style="width: 100%; padding: 18px; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 15px; color: var(--pure-white); font-family: inherit; font-size: 1rem; transition: all 0.3s;"
+                               onfocus="this.style.borderColor='var(--neon-blue)'; this.style.boxShadow='0 0 30px rgba(0, 229, 255, 0.2)'"
+                               onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none'">
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; justify-content: flex-end;">
+                        <button id="cancelAuth" style="
+                            padding: 15px 25px;
+                            background: rgba(255, 255, 255, 0.1);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            border-radius: 15px;
+                            color: rgba(255, 255, 255, 0.8);
+                            font-family: inherit;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: all 0.3s;
+                        " onmouseover="this.style.borderColor='var(--neon-blue)'; this.style.color='var(--neon-blue)'"
+                          onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='rgba(255, 255, 255, 0.8)'">
+                            Cancel
+                        </button>
+                        <button id="submitAuth" style="
+                            padding: 15px 25px;
+                            background: linear-gradient(135deg, #1a237e, #3949ab);
+                            border: none;
+                            border-radius: 15px;
+                            color: var(--pure-white);
+                            font-family: inherit;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s;
+                            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+                        " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 20px 60px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 229, 255, 0.4)'"
+                          onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.15)'">
+                            Authenticate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const modal = document.createElement('div');
+        modal.innerHTML = modalHtml;
+        document.body.appendChild(modal);
+        
+        // Focus on email input
+        setTimeout(() => {
+            document.getElementById('authEmail').focus();
+        }, 100);
+        
+        // Cancel button handler
+        document.getElementById('cancelAuth').addEventListener('click', function() {
+            document.body.removeChild(modal);
+        });
+        
+        // Submit button handler
+        document.getElementById('submitAuth').addEventListener('click', function() {
+            const email = document.getElementById('authEmail').value.trim();
+            const code = document.getElementById('authCode').value.trim();
             
-            if (!allQuestions || allQuestions.length === 0) {
-                emptyState.style.display = 'block';
-                questionsContainer.innerHTML = '';
-                questionsContainer.appendChild(emptyState);
+            if (!email) {
+                alert("Please enter your email address.");
+                document.getElementById('authEmail').focus();
                 return;
             }
             
-            emptyState.style.display = 'none';
-            allQuestions.sort((a, b) => b.id - a.id);
+            if (!code) {
+                alert("Please enter the security code.");
+                document.getElementById('authCode').focus();
+                return;
+            }
             
-            questionsContainer.innerHTML = allQuestions.map(q => createQuestionHTML(q)).join('');
+            // Normalize email for comparison
+            const normalizedEmail = email.toLowerCase().trim();
+            const normalizedOwnerEmail = OWNER_EMAIL.toLowerCase().trim();
             
-            allQuestions.forEach(q => {
-                const likeButton = document.querySelector(`.question-card-3d[data-id="${q.id}"] .action-button-3d`);
-                if (likeButton && q.likedBy && q.likedBy.includes(userId)) {
-                    likeButton.classList.add('liked');
+            if (normalizedEmail === normalizedOwnerEmail && code === OWNER_CODE) {
+                isOwnerAuthenticated = true;
+                localStorage.setItem('ownerAuthenticated', 'true');
+                updateOwnerButton();
+                loadQuestions();
+                document.body.removeChild(modal);
+                
+                // Show success notification
+                const successMsg = document.createElement('div');
+                successMsg.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 30px;
+                        right: 30px;
+                        background: rgba(0, 229, 255, 0.2);
+                        backdrop-filter: blur(20px);
+                        border: 1px solid rgba(0, 229, 255, 0.3);
+                        color: var(--pure-white);
+                        padding: 20px 25px;
+                        border-radius: 20px;
+                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+                        z-index: 10001;
+                        animation: slideUp 0.3s ease-out;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        max-width: 350px;
+                    ">
+                        <i class="fas fa-check-circle" style="color: var(--neon-blue); font-size: 24px;"></i>
+                        <div>
+                            <div style="font-weight: 600; font-size: 1.1rem;">Owner authentication successful!</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">You are now logged in as owner</div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(successMsg);
+                setTimeout(() => {
+                    document.body.removeChild(successMsg);
+                }, 4000);
+                
+            } else {
+                // Show error notification
+                const errorMsg = document.createElement('div');
+                errorMsg.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 30px;
+                        right: 30px;
+                        background: rgba(255, 87, 87, 0.2);
+                        backdrop-filter: blur(20px);
+                        border: 1px solid rgba(255, 87, 87, 0.3);
+                        color: var(--pure-white);
+                        padding: 20px 25px;
+                        border-radius: 20px;
+                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+                        z-index: 10001;
+                        animation: slideUp 0.3s ease-out;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        max-width: 350px;
+                    ">
+                        <i class="fas fa-exclamation-circle" style="color: #ff5757; font-size: 24px;"></i>
+                        <div>
+                            <div style="font-weight: 600; font-size: 1.1rem;">Invalid email or security code</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">Please try again</div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(errorMsg);
+                setTimeout(() => {
+                    document.body.removeChild(errorMsg);
+                }, 4000);
+                
+                // Shake animation for incorrect input
+                const authForm = modal.querySelector('div > div');
+                authForm.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    authForm.style.animation = '';
+                }, 500);
+                
+                // Clear password field
+                document.getElementById('authCode').value = '';
+                document.getElementById('authCode').focus();
+            }
+        });
+        
+        // Enter key support
+        document.getElementById('authCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('submitAuth').click();
+            }
+        });
+        
+        document.getElementById('authEmail').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('authCode').focus();
+            }
+        });
+        
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                document.body.removeChild(modal);
+            }
+        });
+        
+        // Add shake animation
+        if (!document.querySelector('#shakeStyle')) {
+            const style = document.createElement('style');
+            style.id = 'shakeStyle';
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
                 }
-            });
+            `;
+            document.head.appendChild(style);
         }
+    }
 
-        function createQuestionHTML(q) {
-            const answers = q.answers || [];
-            const ownerAnswers = answers.filter(a => a.isOwner);
-            const communityAnswers = answers.filter(a => !a.isOwner);
-            const date = q.timestamp ? new Date(q.timestamp).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
-            }) : 'Unknown date';
+    function updateOwnerButton() {
+        const btn = document.getElementById('ownerButton');
+        if (isOwnerAuthenticated) {
+            btn.classList.add('authenticated');
+            btn.title = "Owner (Authenticated) - Click to logout";
+            btn.innerHTML = '<i class="fas fa-user-check"></i>';
+        } else {
+            btn.classList.remove('authenticated');
+            btn.title = "Owner Authentication";
+            btn.innerHTML = '<i class="fas fa-user-shield"></i>';
+        }
+    }
+
+    async function loadQuestions() {
+        try {
+            console.log('Loading questions from server...');
+            const response = await fetch('/api/questions');
             
-            const isLiked = q.likedBy && q.likedBy.includes(userId);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             
-            return `
-                <div class="question-card-3d" data-id="${q.id}">
-                    <div class="question-header-3d">
-                        <div class="user-avatar-3d">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="question-info-3d">
-                            <div class="question-author-3d">${escapeHtml(q.name || 'Anonymous')}</div>
-                            <div class="question-date-3d">${date}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-content-3d">
-                        ${escapeHtml(q.question)}
-                    </div>
-                    
-                    <div class="question-actions-3d">
-                        <button class="action-button-3d ${isLiked ? 'liked' : ''}" onclick="likeQuestion(${q.id}, this)">
-                            <i class="fas fa-thumbs-up"></i>
-                            <span class="like-count">${q.likes || 0}</span>
-                        </button>
-                        <button class="action-button-3d" onclick="openReplyForm(${q.id}, null)">
-                            <i class="fas fa-reply"></i>
-                            <span>Reply</span>
-                        </button>
-                        <button class="action-button-3d" onclick="toggleReplies(${q.id}, this)">
-                            <i class="fas fa-users"></i>
-                            <span>Replies (${countAllReplies(q.answers)})</span>
-                        </button>
-                    </div>
-                    
-                    ${ownerAnswers.map(answer => createReplyHTML(answer, true, q.id, 0)).join('')}
-                    
-                    <div class="answers-section-3d" id="replies-${q.id}" style="display: none;">
-                        <div class="section-title-3d">
-                            <i class="fas fa-users"></i>
-                            <span>Community Replies</span>
-                        </div>
-                        
-                        ${communityAnswers.length > 0 ? 
-                            communityAnswers.map(answer => createReplyHTML(answer, false, q.id, 0)).join('') :
-                            '<p style="color: rgba(255, 255, 255, 0.5); padding: 30px; text-align: center;">No replies yet.</p>'
-                        }
-                    </div>
+            allQuestions = await response.json();
+            
+            if (!Array.isArray(allQuestions)) {
+                console.warn('Server returned non-array data:', allQuestions);
+                allQuestions = [];
+            }
+            
+            console.log(`Successfully loaded ${allQuestions.length} questions`);
+            displayQuestions();
+        } catch (error) {
+            console.error('Error loading questions:', error);
+            allQuestions = [];
+            displayQuestions();
+            
+            // Show error message
+            const questionsContainer = document.getElementById('questionsContainer');
+            questionsContainer.innerHTML = `
+                <div class="empty-state-glass">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Failed to load questions</h3>
+                    <p>${error.message}. Please try refreshing the page.</p>
+                    <button onclick="loadQuestions()" class="action-button-3d" style="display: inline-flex; margin-top: 15px;">
+                        <i class="fas fa-redo"></i> Retry
+                    </button>
                 </div>
             `;
         }
+    }
 
-        function createReplyHTML(reply, isOwner = false, questionId, level = 0) {
-            const date = reply.date ? new Date(reply.date).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
-            }) : 'Unknown date';
-            
-            // Calculate margin based on nesting level
-            const marginLeft = level * 30;
-            const borderLeft = level > 0 ? '3px solid rgba(255, 255, 255, 0.1)' : 'none';
-            const paddingLeft = level > 0 ? '20px' : '0';
-            
-            // Create nested replies HTML
-            let nestedRepliesHtml = '';
-            if (reply.replies && reply.replies.length > 0) {
-                nestedRepliesHtml = `<div class="nested-replies" style="margin-left: ${marginLeft}px;">`;
-                reply.replies.forEach(nestedReply => {
-                    nestedRepliesHtml += createReplyHTML(nestedReply, nestedReply.isOwner, questionId, level + 1);
-                });
-                nestedRepliesHtml += '</div>';
+    function displayQuestions() {
+        const questionsContainer = document.getElementById('questionsContainer');
+        const emptyState = document.getElementById('emptyState');
+        
+        if (!allQuestions || allQuestions.length === 0) {
+            emptyState.style.display = 'block';
+            questionsContainer.innerHTML = '';
+            questionsContainer.appendChild(emptyState);
+            return;
+        }
+        
+        emptyState.style.display = 'none';
+        allQuestions.sort((a, b) => b.id - a.id);
+        
+        questionsContainer.innerHTML = allQuestions.map(q => createQuestionHTML(q)).join('');
+        
+        allQuestions.forEach(q => {
+            const likeButton = document.querySelector(`.question-card-3d[data-id="${q.id}"] .action-button-3d`);
+            if (likeButton && q.likedBy && q.likedBy.includes(userId)) {
+                likeButton.classList.add('liked');
             }
-            
-            return `
-                <div class="${isOwner ? 'authors-answer-3d' : 'reply-card-3d'}" 
-                     data-answer-id="${reply.id}" 
-                     data-question-id="${questionId}"
-                     data-parent-id="${reply.parentAnswerId || ''}"
-                     style="margin-left: ${marginLeft}px; border-left: ${borderLeft}; padding-left: ${paddingLeft};">
-                    <div class="reply-header-3d">
-                        <span class="reply-author-3d">
-                            ${escapeHtml(reply.author || 'Anonymous')}
-                            ${reply.isOwner ? '<span class="owner-badge-3d">Author</span>' : ''}
-                        </span>
-                        <span class="reply-date-3d">${date}</span>
+        });
+    }
+
+    function createQuestionHTML(q) {
+        const answers = q.answers || [];
+        const ownerAnswers = answers.filter(a => a.isOwner);
+        const communityAnswers = answers.filter(a => !a.isOwner);
+        const date = q.timestamp ? new Date(q.timestamp).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+        }) : 'Unknown date';
+        
+        const isLiked = q.likedBy && q.likedBy.includes(userId);
+        
+        return `
+            <div class="question-card-3d" data-id="${q.id}">
+                <div class="question-header-3d">
+                    <div class="user-avatar-3d">
+                        <i class="fas fa-user"></i>
                     </div>
-                    
-                    <div class="reply-content-3d">
-                        ${escapeHtml(reply.content)}
+                    <div class="question-info-3d">
+                        <div class="question-author-3d">${escapeHtml(q.name || 'Anonymous')}</div>
+                        <div class="question-date-3d">${date}</div>
                     </div>
-                    
-                    <div class="reply-actions-3d">
-                        <button class="reply-button-3d" onclick="openReplyForm(${questionId}, ${reply.id})">
-                            <i class="fas fa-reply"></i>
-                            <span>Reply</span>
-                        </button>
-                    </div>
-                    
-                    ${nestedRepliesHtml}
                 </div>
-            `;
-        }
-
-        function countAllReplies(answers) {
-            if (!answers) return 0;
-            let count = answers.length;
-            answers.forEach(answer => {
-                if (answer.replies) {
-                    count += countAllReplies(answer.replies);
-                }
-            });
-            return count;
-        }
-
-        function openReplyForm(questionId, parentAnswerId) {
-            currentQuestionId = questionId;
-            currentParentAnswerId = parentAnswerId;
-            
-            const formTitle = document.getElementById('formTitle');
-            const nameLabel = document.getElementById('nameLabel').querySelector('span');
-            const nameInput = document.getElementById('replyName');
-            
-            // Auto-fill with nickname if available
-            const nickname = getNickname();
-            if (nickname) {
-                nameInput.value = nickname;
-                nameInput.disabled = true;
-                nameLabel.innerHTML = '<i class="fas fa-user"></i><span>Your Name (from nickname)</span>';
-            } else {
-                nameInput.disabled = false;
-                nameInput.value = '';
-                nameInput.placeholder = 'Enter your name (optional)';
-                nameLabel.innerHTML = '<i class="fas fa-user"></i><span>Your Name (optional)</span>';
-            }
-            
-            if (parentAnswerId) {
-                formTitle.textContent = "Reply to Comment";
-            } else {
-                formTitle.textContent = "Post a Reply";
-            }
-            
-            document.getElementById('overlay').classList.add('active');
-            document.getElementById('sideForm').classList.add('active');
-            document.getElementById('replyContent').focus();
-        }
-
-        function closeSideForm() {
-            document.getElementById('overlay').classList.remove('active');
-            document.getElementById('sideForm').classList.remove('active');
-            document.getElementById('replyContent').value = '';
-            currentQuestionId = null;
-            currentParentAnswerId = null;
-            
-            // Re-enable name input if it was disabled
-            const nameInput = document.getElementById('replyName');
-            nameInput.disabled = false;
-        }
-
-        function addToCommunitySection(replyHtml) {
-            const questionElement = document.querySelector(
-                `.question-card-3d[data-id="${currentQuestionId}"]`
-            );
-
-            let answersSection = document.getElementById(`replies-${currentQuestionId}`);
-
-            if (!answersSection) {
-                answersSection = document.createElement("div");
-                answersSection.id = `replies-${currentQuestionId}`;
-                answersSection.className = "answers-section-3d";
-                answersSection.style.display = "block";
-
-                answersSection.innerHTML = `
+                
+                <div class="question-content-3d">
+                    ${escapeHtml(q.question)}
+                </div>
+                
+                <div class="question-actions-3d">
+                    <button class="action-button-3d ${isLiked ? 'liked' : ''}" onclick="likeQuestion(${q.id}, this)">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="like-count">${q.likes || 0}</span>
+                    </button>
+                    <button class="action-button-3d" onclick="openReplyForm(${q.id}, null)">
+                        <i class="fas fa-reply"></i>
+                        <span>Reply</span>
+                    </button>
+                    <button class="action-button-3d" onclick="toggleReplies(${q.id}, this)">
+                        <i class="fas fa-users"></i>
+                        <span>Replies (${countAllReplies(q.answers)})</span>
+                    </button>
+                </div>
+                
+                ${ownerAnswers.map(answer => createReplyHTML(answer, true, q.id, 0)).join('')}
+                
+                <div class="answers-section-3d" id="replies-${q.id}" style="display: none;">
                     <div class="section-title-3d">
                         <i class="fas fa-users"></i>
                         <span>Community Replies</span>
                     </div>
-                    ${replyHtml}
-                `;
+                    
+                    ${communityAnswers.length > 0 ? 
+                        communityAnswers.map(answer => createReplyHTML(answer, false, q.id, 0)).join('') :
+                        '<p style="color: rgba(255, 255, 255, 0.5); padding: 30px; text-align: center;">No replies yet.</p>'
+                    }
+                </div>
+            </div>
+        `;
+    }
 
-                const actions = questionElement.querySelector(".question-actions-3d");
-                actions.insertAdjacentElement("afterend", answersSection);
+    function createReplyHTML(reply, isOwner = false, questionId, level = 0) {
+        const date = reply.date ? new Date(reply.date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+        }) : 'Unknown date';
+        
+        // Calculate margin based on nesting level
+        const marginLeft = level * 30;
+        const borderLeft = level > 0 ? '3px solid rgba(255, 255, 255, 0.1)' : 'none';
+        const paddingLeft = level > 0 ? '20px' : '0';
+        
+        // Create nested replies HTML
+        let nestedRepliesHtml = '';
+        if (reply.replies && reply.replies.length > 0) {
+            nestedRepliesHtml = `<div class="nested-replies" style="margin-left: ${marginLeft}px;">`;
+            reply.replies.forEach(nestedReply => {
+                nestedRepliesHtml += createReplyHTML(nestedReply, nestedReply.isOwner, questionId, level + 1);
+            });
+            nestedRepliesHtml += '</div>';
+        }
+        
+        return `
+            <div class="${isOwner ? 'authors-answer-3d' : 'reply-card-3d'}" 
+                 data-answer-id="${reply.id}" 
+                 data-question-id="${questionId}"
+                 data-parent-id="${reply.parentAnswerId || ''}"
+                 style="margin-left: ${marginLeft}px; border-left: ${borderLeft}; padding-left: ${paddingLeft};">
+                <div class="reply-header-3d">
+                    <span class="reply-author-3d">
+                        ${escapeHtml(reply.author || 'Anonymous')}
+                        ${reply.isOwner ? '<span class="owner-badge-3d">Author</span>' : ''}
+                    </span>
+                    <span class="reply-date-3d">${date}</span>
+                </div>
+                
+                <div class="reply-content-3d">
+                    ${escapeHtml(reply.content)}
+                </div>
+                
+                <div class="reply-actions-3d">
+                    <button class="reply-button-3d" onclick="openReplyForm(${questionId}, ${reply.id})">
+                        <i class="fas fa-reply"></i>
+                        <span>Reply</span>
+                    </button>
+                </div>
+                
+                ${nestedRepliesHtml}
+            </div>
+        `;
+    }
 
-                return;
+    function countAllReplies(answers) {
+        if (!answers) return 0;
+        let count = answers.length;
+        answers.forEach(answer => {
+            if (answer.replies) {
+                count += countAllReplies(answer.replies);
             }
+        });
+        return count;
+    }
 
-            const noRepliesMessage = answersSection.querySelector("p");
-            if (noRepliesMessage) noRepliesMessage.remove();
+    function openReplyForm(questionId, parentAnswerId) {
+        currentQuestionId = questionId;
+        currentParentAnswerId = parentAnswerId;
+        
+        const formTitle = document.getElementById('formTitle');
+        const nameLabel = document.getElementById('nameLabel').querySelector('span');
+        const nameInput = document.getElementById('replyName');
+        
+        // Auto-fill with nickname if available
+        const nickname = getNickname();
+        if (nickname) {
+            nameInput.value = nickname;
+            nameInput.disabled = true;
+            nameLabel.innerHTML = '<i class="fas fa-user"></i><span>Your Name (from nickname)</span>';
+        } else {
+            nameInput.disabled = false;
+            nameInput.value = '';
+            nameInput.placeholder = 'Enter your name (optional)';
+            nameLabel.innerHTML = '<i class="fas fa-user"></i><span>Your Name (optional)</span>';
+        }
+        
+        if (parentAnswerId) {
+            formTitle.textContent = "Reply to Comment";
+        } else {
+            formTitle.textContent = "Post a Reply";
+        }
+        
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById('sideForm').classList.add('active');
+        document.getElementById('replyContent').focus();
+    }
 
-            answersSection.insertAdjacentHTML("beforeend", replyHtml);
+    function closeSideForm() {
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('sideForm').classList.remove('active');
+        document.getElementById('replyContent').value = '';
+        currentQuestionId = null;
+        currentParentAnswerId = null;
+        
+        // Re-enable name input if it was disabled
+        const nameInput = document.getElementById('replyName');
+        nameInput.disabled = false;
+    }
+
+    function addToCommunitySection(replyHtml) {
+        const questionElement = document.querySelector(
+            `.question-card-3d[data-id="${currentQuestionId}"]`
+        );
+
+        let answersSection = document.getElementById(`replies-${currentQuestionId}`);
+
+        if (!answersSection) {
+            answersSection = document.createElement("div");
+            answersSection.id = `replies-${currentQuestionId}`;
+            answersSection.className = "answers-section-3d";
             answersSection.style.display = "block";
+
+            answersSection.innerHTML = `
+                <div class="section-title-3d">
+                    <i class="fas fa-users"></i>
+                    <span>Community Replies</span>
+                </div>
+                ${replyHtml}
+            `;
+
+            const actions = questionElement.querySelector(".question-actions-3d");
+            actions.insertAdjacentElement("afterend", answersSection);
+
+            return;
         }
 
-        async function submitReplyFromForm() {
-            const nameInput = document.getElementById('replyName');
-            const content = document.getElementById('replyContent').value.trim();
+        const noRepliesMessage = answersSection.querySelector("p");
+        if (noRepliesMessage) noRepliesMessage.remove();
+
+        answersSection.insertAdjacentHTML("beforeend", replyHtml);
+        answersSection.style.display = "block";
+    }
+
+    async function submitReplyFromForm() {
+        const nameInput = document.getElementById('replyName');
+        const content = document.getElementById('replyContent').value.trim();
+        
+        // Use nickname if available, otherwise use input value
+        let name = getNickname();
+        if (!name && nameInput.value.trim()) {
+            name = nameInput.value.trim();
+        }
+        name = name || 'Anonymous';
+        
+        if (!content) {
+            alert("Please write a reply.");
+            return;
+        }
+        
+        const submitBtn = document.getElementById('submitReplyBtn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<div class="spinner-glass"></div>';
+        submitBtn.disabled = true;
+        
+        try {
+            console.log('Posting reply to server...');
             
-            // Use nickname if available, otherwise use input value
-            let name = getNickname();
-            if (!name && nameInput.value.trim()) {
-                name = nameInput.value.trim();
-            }
-            name = name || 'Anonymous';
+            const response = await fetch(`/api/questions/${currentQuestionId}/answer`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    answer: content,
+                    author: name,
+                    isOwner: isOwnerAuthenticated,
+                    parentAnswerId: currentParentAnswerId
+                })
+            });
             
-            if (!content) {
-                alert("Please write a reply.");
-                return;
-            }
+            console.log('Response status:', response.status);
+            const result = await response.json();
+            console.log('Response result:', result);
             
-            const submitBtn = document.getElementById('submitReplyBtn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<div class="spinner-glass"></div>';
-            submitBtn.disabled = true;
-            
-            try {
-                console.log('Posting reply...');
+            if (result.success) {
+                const newReply = {
+                    id: Date.now(),
+                    content: content,
+                    author: name,
+                    isOwner: isOwnerAuthenticated,
+                    date: new Date().toISOString(),
+                    parentAnswerId: currentParentAnswerId,
+                    replies: []
+                };
                 
-                const response = await fetch(`/api/questions/${currentQuestionId}/answer`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        answer: content,
-                        author: name,
-                        isOwner: isOwnerAuthenticated,
-                        parentAnswerId: currentParentAnswerId
-                    })
-                });
+                const replyHtml = createReplyHTML(newReply, isOwnerAuthenticated, currentQuestionId, 0);
                 
-                console.log('Response received:', response.status);
-                
-                const result = await response.json();
-                console.log('Result:', result);
-                
-                if (result.success) {
-                    const newReply = {
-                        id: Date.now(),
-                        content: content,
-                        author: name,
-                        isOwner: isOwnerAuthenticated,
-                        date: new Date().toISOString(),
-                        parentAnswerId: currentParentAnswerId, // Add this line
-                        replies: []
-                    };
+                if (isOwnerAuthenticated) {
+                    const questionElement = document.querySelector(`.question-card-3d[data-id="${currentQuestionId}"]`);
+                    let existingAuthorAnswer = questionElement.querySelector('.authors-answer-3d');
                     
-                    const replyHtml = createReplyHTML(newReply, isOwnerAuthenticated, currentQuestionId, 0);
-                    
-                    if (isOwnerAuthenticated) {
-                        const questionElement = document.querySelector(`.question-card-3d[data-id="${currentQuestionId}"]`);
-                        let existingAuthorAnswer = questionElement.querySelector('.authors-answer-3d');
-                        
-                        if (existingAuthorAnswer) {
-                            existingAuthorAnswer.insertAdjacentHTML('afterend', replyHtml);
-                        } else {
-                            const actions = questionElement.querySelector('.question-actions-3d');
-                            actions.insertAdjacentHTML('afterend', replyHtml);
-                        }
+                    if (existingAuthorAnswer) {
+                        existingAuthorAnswer.insertAdjacentHTML('afterend', replyHtml);
                     } else {
-                        // Add to appropriate location based on parent
-                        if (currentParentAnswerId) {
-                            // Find the parent reply element
-                            const parentElement = document.querySelector(`[data-answer-id="${currentParentAnswerId}"]`);
-                            if (parentElement) {
-                                // Create a nested replies container if it doesn't exist
-                                let nestedContainer = parentElement.querySelector('.nested-replies');
-                                if (!nestedContainer) {
-                                    nestedContainer = document.createElement('div');
-                                    nestedContainer.className = 'nested-replies';
-                                    parentElement.appendChild(nestedContainer);
-                                }
-                                nestedContainer.insertAdjacentHTML('beforeend', replyHtml);
-                            } else {
-                                // Fallback to community section
-                                addToCommunitySection(replyHtml);
+                        const actions = questionElement.querySelector('.question-actions-3d');
+                        actions.insertAdjacentHTML('afterend', replyHtml);
+                    }
+                } else {
+                    // Add to appropriate location based on parent
+                    if (currentParentAnswerId) {
+                        // Find the parent reply element
+                        const parentElement = document.querySelector(`[data-answer-id="${currentParentAnswerId}"]`);
+                        if (parentElement) {
+                            // Create a nested replies container if it doesn't exist
+                            let nestedContainer = parentElement.querySelector('.nested-replies');
+                            if (!nestedContainer) {
+                                nestedContainer = document.createElement('div');
+                                nestedContainer.className = 'nested-replies';
+                                parentElement.appendChild(nestedContainer);
                             }
+                            nestedContainer.insertAdjacentHTML('beforeend', replyHtml);
                         } else {
+                            // Fallback to community section
                             addToCommunitySection(replyHtml);
                         }
+                    } else {
+                        addToCommunitySection(replyHtml);
                     }
-                    
-                    const repliesButton = document.querySelector(`.question-card-3d[data-id="${currentQuestionId}"] .action-button-3d:nth-child(3)`);
-                    if (repliesButton) {
-                        const currentCount = parseInt(repliesButton.querySelector('span:last-child').textContent.match(/\d+/)[0]) || 0;
-                        repliesButton.querySelector('span:last-child').textContent = `Replies (${currentCount + 1})`;
-                    }
-                    
-                    closeSideForm();
-                    console.log('✅ Reply posted and UI updated instantly!');
-                    
-                    setTimeout(() => {
-                        loadQuestions();
-                    }, 1000);
-                    
-                } else {
-                    throw new Error(result.message || 'Failed to post reply');
                 }
                 
-            } catch (error) {
-                console.error('Error posting reply:', error);
-                alert("Error posting reply. Please try again.");
-            } finally {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
+                const repliesButton = document.querySelector(`.question-card-3d[data-id="${currentQuestionId}"] .action-button-3d:nth-child(3)`);
+                if (repliesButton) {
+                    const currentCount = parseInt(repliesButton.querySelector('span:last-child').textContent.match(/\d+/)[0]) || 0;
+                    repliesButton.querySelector('span:last-child').textContent = `Replies (${currentCount + 1})`;
+                }
+                
+                closeSideForm();
+                console.log('✅ Reply posted successfully!');
+                
+                // Refresh questions after a short delay
+                setTimeout(() => {
+                    loadQuestions();
+                }, 1000);
+                
+            } else {
+                throw new Error(result.message || 'Failed to post reply');
             }
+            
+        } catch (error) {
+            console.error('Error posting reply:', error);
+            alert("Error posting reply. Please try again.");
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
         }
+    }
 
-        async function likeQuestion(questionId, button) {
-            try {
-                const response = await fetch(`/api/questions/${questionId}/like`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        userId: userId
-                    })
-                });
+    async function likeQuestion(questionId, button) {
+        try {
+            console.log('Liking question:', questionId);
+            
+            const response = await fetch(`/api/questions/${questionId}/like`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: userId
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                const likeCount = button.querySelector('.like-count');
+                likeCount.textContent = result.likes;
                 
-                const result = await response.json();
+                if (result.isLiked) {
+                    button.classList.add('liked');
+                } else {
+                    button.classList.remove('liked');
+                }
                 
-                if (result.success) {
-                    const likeCount = button.querySelector('.like-count');
-                    likeCount.textContent = result.likes;
+                const questionIndex = allQuestions.findIndex(q => q.id == questionId);
+                if (questionIndex !== -1) {
+                    if (!allQuestions[questionIndex].likedBy) {
+                        allQuestions[questionIndex].likedBy = [];
+                    }
                     
                     if (result.isLiked) {
-                        button.classList.add('liked');
+                        if (!allQuestions[questionIndex].likedBy.includes(userId)) {
+                            allQuestions[questionIndex].likedBy.push(userId);
+                        }
                     } else {
-                        button.classList.remove('liked');
-                    }
-                    
-                    const questionIndex = allQuestions.findIndex(q => q.id == questionId);
-                    if (questionIndex !== -1) {
-                        if (!allQuestions[questionIndex].likedBy) {
-                            allQuestions[questionIndex].likedBy = [];
+                        const index = allQuestions[questionIndex].likedBy.indexOf(userId);
+                        if (index !== -1) {
+                            allQuestions[questionIndex].likedBy.splice(index, 1);
                         }
-                        
-                        if (result.isLiked) {
-                            if (!allQuestions[questionIndex].likedBy.includes(userId)) {
-                                allQuestions[questionIndex].likedBy.push(userId);
-                            }
-                        } else {
-                            const index = allQuestions[questionIndex].likedBy.indexOf(userId);
-                            if (index !== -1) {
-                                allQuestions[questionIndex].likedBy.splice(index, 1);
-                            }
-                        }
-                        allQuestions[questionIndex].likes = result.likes;
                     }
+                    allQuestions[questionIndex].likes = result.likes;
                 }
-            } catch (error) {
-                console.error('Error liking question:', error);
             }
+        } catch (error) {
+            console.error('Error liking question:', error);
         }
+    }
 
-        function toggleReplies(questionId, button) {
-            const repliesSection = document.getElementById(`replies-${questionId}`);
-            if (repliesSection.style.display === 'none') {
-                repliesSection.style.display = 'block';
-                button.classList.add('active');
-            } else {
-                repliesSection.style.display = 'none';
-                button.classList.remove('active');
-            }
+    function toggleReplies(questionId, button) {
+        const repliesSection = document.getElementById(`replies-${questionId}`);
+        if (repliesSection.style.display === 'none') {
+            repliesSection.style.display = 'block';
+            button.classList.add('active');
+        } else {
+            repliesSection.style.display = 'none';
+            button.classList.remove('active');
         }
+    }
 
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-    </script>
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+</script>
 </body>
 </html>

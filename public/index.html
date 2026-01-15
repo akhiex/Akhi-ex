@@ -2428,313 +2428,323 @@
         </div>
     </footer>
 
-    <script>
-        // ============================================
-        // LOADING SCREEN FUNCTIONALITY
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const loadingProgress = document.getElementById('loadingProgress');
-            
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 20;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    
-                    // Hide loading screen
-                    setTimeout(() => {
-                        loadingScreen.classList.add('hidden');
-                    }, 500);
-                }
-                loadingProgress.style.width = `${progress}%`;
-            }, 150);
-        });
-
-        // ============================================
-        // NICKNAME SYSTEM
-        // ============================================
-        function getNickname() {
-            return localStorage.getItem('userNickname');
-        }
-
-        function setNickname(nickname) {
-            if (nickname && nickname.trim()) {
-                localStorage.setItem('userNickname', nickname.trim());
-                return true;
-            }
-            return false;
-        }
-
-        function showNicknameModal() {
-            const nickname = getNickname();
-            if (!nickname) {
-                document.getElementById('nicknameModal').classList.add('active');
-                document.getElementById('nicknameInput').focus();
-            }
-        }
-
-        function saveNickname() {
-            const nicknameInput = document.getElementById('nicknameInput');
-            const nickname = nicknameInput.value.trim();
-            
-            if (!nickname) {
-                alert('Please enter a nickname');
-                nicknameInput.focus();
-                return;
-            }
-            
-            if (nickname.length < 2) {
-                alert('Nickname must be at least 2 characters');
-                nicknameInput.focus();
-                return;
-            }
-            
-            if (setNickname(nickname)) {
-                document.getElementById('nicknameModal').classList.remove('active');
-                alert('Nickname saved successfully! You can now submit questions.');
-            }
-        }
-
-        // Initialize nickname system when DOM loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show nickname modal if not set
-            setTimeout(() => {
-                showNicknameModal();
-            }, 2000);
-            
-            // Save nickname button event
-            const saveBtn = document.getElementById('saveNicknameBtn');
-            if (saveBtn) {
-                saveBtn.addEventListener('click', saveNickname);
-            }
-            
-            // Allow Enter key to save nickname
-            const nicknameInput = document.getElementById('nicknameInput');
-            if (nicknameInput) {
-                nicknameInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        saveNickname();
-                    }
-                });
-            }
-        });
-
-        // FAQ Accordion Functionality
-        document.querySelectorAll('.faq-question-3d').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                const isActive = faqItem.classList.contains('active');
+<script>
+    // ============================================
+    // LOADING SCREEN FUNCTIONALITY
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingProgress = document.getElementById('loadingProgress');
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 20;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
                 
-                // Close all FAQ items
-                document.querySelectorAll('.faq-item-3d').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    faqItem.classList.add('active');
+                // Hide loading screen
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 500);
+            }
+            loadingProgress.style.width = `${progress}%`;
+        }, 150);
+    });
+
+    // ============================================
+    // NICKNAME SYSTEM
+    // ============================================
+    function getNickname() {
+        return localStorage.getItem('userNickname');
+    }
+
+    function setNickname(nickname) {
+        if (nickname && nickname.trim()) {
+            localStorage.setItem('userNickname', nickname.trim());
+            return true;
+        }
+        return false;
+    }
+
+    function showNicknameModal() {
+        const nickname = getNickname();
+        if (!nickname) {
+            document.getElementById('nicknameModal').classList.add('active');
+            document.getElementById('nicknameInput').focus();
+        }
+    }
+
+    function saveNickname() {
+        const nicknameInput = document.getElementById('nicknameInput');
+        const nickname = nicknameInput.value.trim();
+        
+        if (!nickname) {
+            alert('Please enter a nickname');
+            nicknameInput.focus();
+            return;
+        }
+        
+        if (nickname.length < 2) {
+            alert('Nickname must be at least 2 characters');
+            nicknameInput.focus();
+            return;
+        }
+        
+        if (setNickname(nickname)) {
+            document.getElementById('nicknameModal').classList.remove('active');
+            alert('Nickname saved successfully! You can now submit questions.');
+        }
+    }
+
+    // Initialize nickname system when DOM loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show nickname modal if not set
+        setTimeout(() => {
+            showNicknameModal();
+        }, 2000);
+        
+        // Save nickname button event
+        const saveBtn = document.getElementById('saveNicknameBtn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', saveNickname);
+        }
+        
+        // Allow Enter key to save nickname
+        const nicknameInput = document.getElementById('nicknameInput');
+        if (nicknameInput) {
+            nicknameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    saveNickname();
                 }
             });
-        });
-
-        // Form Validation
-        function showError(elementId, message) {
-            const errorElement = document.getElementById(elementId);
-            errorElement.textContent = message;
-            errorElement.style.display = 'block';
         }
+    });
 
-        function hideError(elementId) {
-            const errorElement = document.getElementById(elementId);
-            errorElement.style.display = 'none';
+    // ============================================
+    // FAQ ACCORDION FUNCTIONALITY
+    // ============================================
+    document.querySelectorAll('.faq-question-3d').forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item-3d').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+
+    // ============================================
+    // FORM VALIDATION
+    // ============================================
+    function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+
+    function hideError(elementId) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.style.display = 'none';
+    }
+
+    // ============================================
+    // QUESTION FORM SUBMISSION (TOP FORM)
+    // ============================================
+    document.getElementById('questionForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const question = document.getElementById('question').value.trim();
+        
+        // Check if nickname exists
+        const nickname = getNickname();
+        if (!nickname) {
+            alert('Please set a nickname first before submitting questions.');
+            showNicknameModal();
+            return;
         }
-
-        // Question Form Submission (Top)
-        document.getElementById('questionForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        
+        hideError('questionError');
+        
+        let isValid = true;
+        
+        if (!question) {
+            showError('questionError', 'Question is required');
+            isValid = false;
+        } else if (question.length < 20) {
+            showError('questionError', 'Question must be at least 20 characters');
+            isValid = false;
+        }
+        
+        if (!isValid) return;
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<div class="btn-spinner"></div>';
+        submitBtn.classList.add('loading');
+        
+        try {
+            console.log('Submitting question to server...');
             
-            const question = document.getElementById('question').value.trim();
-            
-            // Check if nickname exists
-            const nickname = getNickname();
-            if (!nickname) {
-                alert('Please set a nickname first before submitting questions.');
-                showNicknameModal();
-                return;
-            }
-            
-            hideError('questionError');
-            
-            let isValid = true;
-            
-            if (!question) {
-                showError('questionError', 'Question is required');
-                isValid = false;
-            } else if (question.length < 20) {
-                showError('questionError', 'Question must be at least 20 characters');
-                isValid = false;
-            }
-            
-            if (!isValid) return;
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<div class="btn-spinner"></div>';
-            submitBtn.classList.add('loading');
-            
-            try {
-                const userAgent = navigator.userAgent;
-                const timestamp = new Date().toISOString();
-                
-                const response = await fetch('/api/submit-question', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: nickname, // Use nickname
-                        email: "",
-                        question: question,
-                        timestamp: timestamp,
-                        userAgent: userAgent
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    document.getElementById('questionForm').style.display = 'none';
-                    document.getElementById('successMessage').classList.add('active');
-                    
-                    setTimeout(() => {
-                        window.location.href = 'community.html?newQuestion=true&t=' + Date.now();
-                    }, 2000);
-                } else {
-                    throw new Error(result.message || 'Failed to submit question');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showError('questionError', 'Failed to submit. Please try again.');
-                submitBtn.innerHTML = originalText;
-                submitBtn.classList.remove('loading');
-            }
-        });
-
-        // Bottom Question Form Submission
-        document.getElementById('submitBtnBottom').addEventListener('click', async function(e) {
-            e.preventDefault();
-            
-            const question = document.getElementById('questionBottom').value.trim();
-            
-            // Check if nickname exists
-            const nickname = getNickname();
-            if (!nickname) {
-                alert('Please set a nickname first before submitting questions.');
-                showNicknameModal();
-                return;
-            }
-            
-            hideError('questionErrorBottom');
-            
-            let isValid = true;
-            
-            if (!question) {
-                showError('questionErrorBottom', 'Question is required');
-                isValid = false;
-            } else if (question.length < 20) {
-                showError('questionErrorBottom', 'Question must be at least 20 characters');
-                isValid = false;
-            }
-            
-            if (!isValid) return;
-            
-            const submitBtn = document.getElementById('submitBtnBottom');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Posting...';
-            submitBtn.disabled = true;
-            
-            try {
-                const userAgent = navigator.userAgent;
-                const timestamp = new Date().toISOString();
-                
-                const response = await fetch('/api/submit-question', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: nickname, // Use nickname
-                        email: "",
-                        question: question,
-                        timestamp: timestamp,
-                        userAgent: userAgent
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    document.getElementById('questionBottom').parentElement.parentElement.style.display = 'none';
-                    document.getElementById('successMessageBottom').style.display = 'block';
-                    
-                    setTimeout(() => {
-                        window.location.href = 'community.html?newQuestion=true&t=' + Date.now();
-                    }, 2000);
-                } else {
-                    throw new Error(result.message || 'Failed to submit question');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showError('questionErrorBottom', 'Failed to submit. Please try again.');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const section = document.querySelector(href);
-                    if (section) {
-                        section.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        });
-
-        // 3D Card Hover Effects - REMOVED FOR FAQ ITEMS
-        document.querySelectorAll('.topic-card-3d, .question-card-inner').forEach(card => {
-            card.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateY = ((x - centerX) / centerX) * 5;
-                const rotateX = ((centerY - y) / centerY) * 5;
-                
-                this.style.transform = `
-                    perspective(1500px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                    translateZ(20px)
-                `;
+            const response = await fetch('/api/submit-question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: nickname,
+                    email: "",
+                    question: question
+                })
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = '';
+            console.log('Response status:', response.status);
+            const result = await response.json();
+            console.log('Response result:', result);
+            
+            if (result.success) {
+                document.getElementById('questionForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('active');
+                
+                setTimeout(() => {
+                    window.location.href = 'community.html?newQuestion=true&t=' + Date.now();
+                }, 2000);
+            } else {
+                throw new Error(result.message || 'Failed to submit question');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showError('questionError', 'Failed to submit. Please try again.');
+            submitBtn.innerHTML = originalText;
+            submitBtn.classList.remove('loading');
+        }
+    });
+
+    // ============================================
+    // BOTTOM QUESTION FORM SUBMISSION
+    // ============================================
+    document.getElementById('submitBtnBottom').addEventListener('click', async function(e) {
+        e.preventDefault();
+        
+        const question = document.getElementById('questionBottom').value.trim();
+        
+        // Check if nickname exists
+        const nickname = getNickname();
+        if (!nickname) {
+            alert('Please set a nickname first before submitting questions.');
+            showNicknameModal();
+            return;
+        }
+        
+        hideError('questionErrorBottom');
+        
+        let isValid = true;
+        
+        if (!question) {
+            showError('questionErrorBottom', 'Question is required');
+            isValid = false;
+        } else if (question.length < 20) {
+            showError('questionErrorBottom', 'Question must be at least 20 characters');
+            isValid = false;
+        }
+        
+        if (!isValid) return;
+        
+        const submitBtn = document.getElementById('submitBtnBottom');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Posting...';
+        submitBtn.disabled = true;
+        
+        try {
+            console.log('Submitting bottom question to server...');
+            
+            const response = await fetch('/api/submit-question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: nickname,
+                    email: "",
+                    question: question
+                })
             });
+            
+            console.log('Response status:', response.status);
+            const result = await response.json();
+            console.log('Response result:', result);
+            
+            if (result.success) {
+                document.getElementById('questionBottom').parentElement.parentElement.style.display = 'none';
+                document.getElementById('successMessageBottom').style.display = 'block';
+                
+                setTimeout(() => {
+                    window.location.href = 'community.html?newQuestion=true&t=' + Date.now();
+                }, 2000);
+            } else {
+                throw new Error(result.message || 'Failed to submit question');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showError('questionErrorBottom', 'Failed to submit. Please try again.');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // ============================================
+    // SMOOTH SCROLLING FOR ANCHOR LINKS
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const section = document.querySelector(href);
+                if (section) {
+                    section.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
         });
-    </script>
+    });
+
+    // ============================================
+    // 3D CARD HOVER EFFECTS
+    // ============================================
+    document.querySelectorAll('.topic-card-3d, .question-card-inner').forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateY = ((x - centerX) / centerX) * 5;
+            const rotateX = ((centerY - y) / centerY) * 5;
+            
+            this.style.transform = `
+                perspective(1500px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                translateZ(20px)
+            `;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
+</script>
 </body>
 </html>
