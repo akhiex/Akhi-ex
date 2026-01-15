@@ -1,7 +1,7 @@
 {
-  "name": "islamic-apologetics-platform",
+  "name": "akhi-ex-responds",
   "version": "1.0.0",
-  "description": "Islamic apologetics platform with question submission",
+  "description": "Islamic Apologetics Platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -12,7 +12,7 @@
     "cors": "^2.8.5",
     "body-parser": "^1.20.2"
   },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
