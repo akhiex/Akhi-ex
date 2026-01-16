@@ -1,27 +1,50 @@
-// server.js - COMPLETE FIXED VERSION
+// server.js - PRODUCTION READY VERSION
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
+const os = require('os');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = path.join(__dirname, 'data');
+
+// IMPORTANT: For hosting platforms, use temp directory or environment variable
+const DATA_DIR = process.env.DATA_DIR || 
+                 path.join(os.tmpdir(), 'akhi-ex-responds-data');
 const QUESTIONS_FILE = path.join(DATA_DIR, 'questions.json');
+
+// Log startup information (helpful for debugging)
+console.log('🚀 Akhi ex responds Server Starting...');
+console.log('📁 Data Directory:', DATA_DIR);
+console.log('📄 Questions File:', QUESTIONS_FILE);
+console.log('🔧 Environment:', process.env.NODE_ENV || 'development');
+console.log('🌐 Port:', PORT);
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(express.static('public'));
 
-// Ensure data directory exists
+// Ensure data directory exists with proper permissions
 async function ensureDataDir() {
     try {
         await fs.mkdir(DATA_DIR, { recursive: true });
-        console.log('✅ Data directory ensured');
+        
+        // Set appropriate permissions
+        if (process.platform !== 'win32') {
+            try {
+                await fs.chmod(DATA_DIR, 0o755);
+            } catch (chmodError) {
+                // Permission change not critical
+            }
+        }
+        
+        console.log('✅ Data directory ready:', DATA_DIR);
+        return true;
     } catch (error) {
-        console.error('Error creating data directory:', error);
+        console.error('❌ Error creating data directory:', error.message);
+        return false;
     }
 }
 
@@ -34,8 +57,8 @@ async function readQuestionsFile() {
         try {
             await fs.access(QUESTIONS_FILE);
         } catch {
-            // File doesn't exist, create it
-            await writeQuestionsFile({ questions: [] });
+            // File doesn't exist, create it with empty array
+            await fs.writeFile(QUESTIONS_FILE, JSON.stringify({ questions: [] }, null, 2));
             return { questions: [] };
         }
         
@@ -43,74 +66,77 @@ async function readQuestionsFile() {
         if (!data.trim()) {
             return { questions: [] };
         }
-        return JSON.parse(data);
+        
+        const parsed = JSON.parse(data);
+        // Ensure the structure is correct
+        if (!parsed.questions) {
+            parsed.questions = [];
+        }
+        return parsed;
+        
     } catch (error) {
-        console.error('Error reading questions file:', error);
+        console.error('Error reading questions file:', error.message);
         return { questions: [] };
     }
 }
 
-// Write questions to file
+// Write questions to file with error recovery
 async function writeQuestionsFile(questionsData) {
     try {
-        await ensureDataDir();
+        // Ensure data directory exists
+        if (!(await ensureDataDir())) {
+            console.error('Cannot write: Data directory not available');
+            return false;
+        }
+        
+        // Ensure data structure is correct
+        if (!questionsData.questions) {
+            questionsData.questions = [];
+        }
+        
+        // Write to file
         await fs.writeFile(QUESTIONS_FILE, JSON.stringify(questionsData, null, 2));
-        console.log('✅ Data saved to questions.json');
+        console.log('✅ Data saved successfully to:', QUESTIONS_FILE);
         return true;
+        
     } catch (error) {
-        console.error('❌ Error writing questions file:', error);
-        return false;
+        console.error('❌ Error writing questions file:', error.message);
+        
+        // Try fallback location as last resort
+        try {
+            const fallbackDir = path.join(__dirname, 'data_fallback');
+            await fs.mkdir(fallbackDir, { recursive: true });
+            const fallbackFile = path.join(fallbackDir, 'questions.json');
+            await fs.writeFile(fallbackFile, JSON.stringify(questionsData, null, 2));
+            console.log('📦 Saved to fallback location:', fallbackFile);
+            return true;
+        } catch (fallbackError) {
+            console.error('❌ Fallback also failed:', fallbackError.message);
+            return false;
+        }
     }
 }
 
 // Initialize on server start
 async function initializeData() {
-    await ensureDataDir();
-    const data = await readQuestionsFile();
-    console.log(`📊 Initialized with ${data.questions?.length || 0} questions`);
+    try {
+        const data = await readQuestionsFile();
+        console.log(`📊 Initialized with ${data.questions?.length || 0} questions`);
+        return true;
+    } catch (error) {
+        console.error('Initialization error:', error.message);
+        return false;
+    }
 }
 
-// Add the new FAQ
-function addNewFAQ() {
-    return `
-<div class="faq-item-3d">
-    <div class="faq-question-3d">
-        <span>Can Allah have a son?</span>
-        <i class="fas fa-chevron-down faq-icon-3d"></i>
-    </div>
-    <div class="faq-answer-3d">
-        <p>The concept of God having a son is strongly rejected in Islamic theology. Allah is the One and Only God, the Creator of everything, who has no partners, no equals, and no offspring.</p>
+// ==================== API ROUTES ====================
 
-        <div class="quran-verse-glass">"Say, 'He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent.'" (Quran 112:1-4)</div>
-
-        <p>This chapter of the Quran directly refutes the idea of God having a son. In Islamic belief, Jesus (peace be upon him) was a mighty prophet and messenger of God, but not divine and not the "son of God" in a literal sense. The Quran states clearly:</p>
-
-        <div class="quran-verse-glass">"It is not befitting for Allah to take a son. Exalted is He! When He decrees a matter, He only says to it, 'Be,' and it is." (Quran 19:35)</div>
-
-        <p>The idea of God having a son is seen as anthropomorphism — attributing human characteristics to God. Allah is beyond such human relationships. He created everything, including Jesus, by His command "Be!"</p>
-
-        <p>For a detailed discussion on this topic, watch this video analysis:</p>
-        
-        <div style="text-align: center; margin: 20px 0;">
-            <a href="https://youtu.be/t3a-sPh0yYQ" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 25px; background: rgba(0, 229, 255, 0.1); border: 1px solid var(--neon-blue); border-radius: 15px; color: var(--neon-blue); text-decoration: none; font-weight: 500; transition: all 0.3s;">
-                <i class="fab fa-youtube"></i>
-                Watch: "Can Allah Have a Son?" Analysis
-            </a>
-        </div>
-
-        <p>The video explains how the concept of divine sonship developed historically and why it contradicts pure monotheism as understood in Islam.</p>
-    </div>
-</div>
-`;
-}
-
-// API Routes
+// Submit a new question
 app.post('/api/submit-question', async (req, res) => {
-    console.log('📥 SUBMIT QUESTION');
-    
     try {
         const { name, email, question } = req.body;
         
+        // Validation
         if (!question || question.trim().length < 5) {
             return res.status(400).json({ 
                 success: false, 
@@ -122,8 +148,8 @@ app.post('/api/submit-question', async (req, res) => {
         
         const newQuestion = {
             id: Date.now(),
-            name: name || 'Anonymous',
-            email: email || '',
+            name: name?.trim() || 'Anonymous',
+            email: email?.trim() || '',
             question: question.trim(),
             timestamp: new Date().toISOString(),
             status: 'pending',
@@ -132,20 +158,21 @@ app.post('/api/submit-question', async (req, res) => {
             answers: []
         };
         
-        console.log(`📝 New question #${newQuestion.id} by ${newQuestion.name}`);
+        console.log(`📝 New question #${newQuestion.id} from ${newQuestion.name}`);
         
-        if (!questionsData.questions) {
+        // Add to questions array
+        if (!Array.isArray(questionsData.questions)) {
             questionsData.questions = [];
         }
-        
         questionsData.questions.push(newQuestion);
         
+        // Save to file
         const writeSuccess = await writeQuestionsFile(questionsData);
         
         if (!writeSuccess) {
             return res.status(500).json({ 
                 success: false, 
-                message: 'Failed to save question' 
+                message: 'Failed to save question to storage' 
             });
         }
         
@@ -156,7 +183,7 @@ app.post('/api/submit-question', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('Submit question error:', error);
         res.status(500).json({ 
             success: false, 
             message: 'Server error: ' + error.message 
@@ -164,24 +191,27 @@ app.post('/api/submit-question', async (req, res) => {
     }
 });
 
+// Get all questions
 app.get('/api/questions', async (req, res) => {
-    console.log('📥 GET ALL QUESTIONS');
-    
     try {
         const questionsData = await readQuestionsFile();
-        res.json(questionsData.questions || []);
+        // Return newest questions first
+        const questions = Array.isArray(questionsData.questions) 
+            ? questionsData.questions.sort((a, b) => b.id - a.id)
+            : [];
+        
+        res.json(questions);
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('Get questions error:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Server error' 
+            message: 'Failed to load questions' 
         });
     }
 });
 
+// Post a reply/answer to a question
 app.post('/api/questions/:id/answer', async (req, res) => {
-    console.log('📥 POST REPLY to question:', req.params.id);
-    
     try {
         const { id } = req.params;
         const { answer, author, isOwner, parentAnswerId } = req.body;
@@ -194,8 +224,9 @@ app.post('/api/questions/:id/answer', async (req, res) => {
         }
         
         const questionsData = await readQuestionsFile();
-        const questionIndex = questionsData.questions.findIndex(q => q.id == id);
         
+        // Find the question
+        const questionIndex = questionsData.questions.findIndex(q => q.id == id);
         if (questionIndex === -1) {
             return res.status(404).json({ 
                 success: false, 
@@ -206,24 +237,27 @@ app.post('/api/questions/:id/answer', async (req, res) => {
         const newReply = {
             id: Date.now(),
             content: answer.trim(),
-            author: author || 'Anonymous',
+            author: author?.trim() || 'Anonymous',
             isOwner: !!isOwner,
             date: new Date().toISOString(),
             replies: [],
             parentAnswerId: parentAnswerId || null
         };
         
-        console.log(`📝 New reply #${newReply.id} by ${newReply.author}`);
+        console.log(`📝 New reply #${newReply.id} from ${newReply.author}`);
         
-        if (!questionsData.questions[questionIndex].answers) {
+        // Initialize answers array if needed
+        if (!Array.isArray(questionsData.questions[questionIndex].answers)) {
             questionsData.questions[questionIndex].answers = [];
         }
         
-        // Helper function to add reply to parent
+        // Helper to add nested replies
         const addReplyToParent = (replies, parentId, reply) => {
             for (let i = 0; i < replies.length; i++) {
                 if (replies[i].id == parentId) {
-                    if (!replies[i].replies) replies[i].replies = [];
+                    if (!Array.isArray(replies[i].replies)) {
+                        replies[i].replies = [];
+                    }
                     replies[i].replies.push(reply);
                     return true;
                 }
@@ -238,6 +272,7 @@ app.post('/api/questions/:id/answer', async (req, res) => {
         
         let added = false;
         
+        // Add as nested reply if parentAnswerId is provided
         if (parentAnswerId) {
             added = addReplyToParent(
                 questionsData.questions[questionIndex].answers, 
@@ -246,22 +281,17 @@ app.post('/api/questions/:id/answer', async (req, res) => {
             );
         }
         
+        // If not added as nested, add as top-level reply
         if (!added) {
             questionsData.questions[questionIndex].answers.push(newReply);
-            added = true;
             
+            // Mark as answered if owner replied
             if (isOwner) {
-                questionsData.questions[questionIndex].status = 'pending';
+                questionsData.questions[questionIndex].status = 'answered';
             }
         }
         
-        if (!added) {
-            return res.status(500).json({ 
-                success: false, 
-                message: 'Failed to add reply' 
-            });
-        }
-        
+        // Save to file
         const writeSuccess = await writeQuestionsFile(questionsData);
         
         if (!writeSuccess) {
@@ -278,7 +308,7 @@ app.post('/api/questions/:id/answer', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('Post reply error:', error);
         res.status(500).json({ 
             success: false, 
             message: 'Server error: ' + error.message 
@@ -286,9 +316,8 @@ app.post('/api/questions/:id/answer', async (req, res) => {
     }
 });
 
+// Like a question
 app.post('/api/questions/:id/like', async (req, res) => {
-    console.log('❤️ LIKE QUESTION:', req.params.id);
-    
     try {
         const { id } = req.params;
         const { userId = 'user_' + Date.now() } = req.body;
@@ -305,12 +334,14 @@ app.post('/api/questions/:id/like', async (req, res) => {
         
         const question = questionsData.questions[questionIndex];
         
-        if (!question.likedBy) {
+        // Initialize likedBy array
+        if (!Array.isArray(question.likedBy)) {
             question.likedBy = [];
         }
         
         const userIndex = question.likedBy.indexOf(userId);
         
+        // Toggle like
         if (userIndex === -1) {
             question.likedBy.push(userId);
             question.likes = (question.likes || 0) + 1;
@@ -319,6 +350,7 @@ app.post('/api/questions/:id/like', async (req, res) => {
             question.likes = Math.max(0, (question.likes || 0) - 1);
         }
         
+        // Save to file
         const writeSuccess = await writeQuestionsFile(questionsData);
         
         if (!writeSuccess) {
@@ -335,7 +367,7 @@ app.post('/api/questions/:id/like', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('Like question error:', error);
         res.status(500).json({ 
             success: false, 
             message: 'Server error' 
@@ -343,24 +375,49 @@ app.post('/api/questions/:id/like', async (req, res) => {
     }
 });
 
-// Test endpoint
-app.get('/api/test', async (req, res) => {
+// ==================== HEALTH & STATUS ENDPOINTS ====================
+
+// Simple health check
+app.get('/api/health', (req, res) => {
+    res.json({
+        success: true,
+        message: 'Server is running',
+        timestamp: new Date().toISOString(),
+        dataDir: DATA_DIR,
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
+
+// Status check with file system verification
+app.get('/api/status', async (req, res) => {
     try {
-        const data = await readQuestionsFile();
+        const questionsData = await readQuestionsFile();
+        const questionCount = Array.isArray(questionsData.questions) 
+            ? questionsData.questions.length 
+            : 0;
+        
         res.json({
             success: true,
-            message: 'Server is working!',
-            questionsCount: data.questions?.length || 0,
-            dataDir: DATA_DIR,
-            fileExists: true
+            status: 'operational',
+            data: {
+                questionsCount: questionCount,
+                dataDir: DATA_DIR,
+                questionsFile: QUESTIONS_FILE,
+                writable: true,
+                timestamp: new Date().toISOString()
+            }
         });
     } catch (error) {
         res.json({
             success: false,
-            message: 'Test failed: ' + error.message
+            status: 'degraded',
+            error: error.message,
+            dataDir: DATA_DIR
         });
     }
 });
+
+// ==================== STATIC FILE SERVING ====================
 
 // Serve HTML files
 app.get('/', (req, res) => {
@@ -371,7 +428,7 @@ app.get('/community', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'community.html'));
 });
 
-// Handle other pages
+// Serve other HTML pages
 app.get('/:page', (req, res) => {
     const page = req.params.page;
     const filePath = path.join(__dirname, 'public', `${page}.html`);
@@ -383,18 +440,56 @@ app.get('/:page', (req, res) => {
     });
 });
 
-// Start server
-async function startServer() {
-    await initializeData();
-    
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on port ${PORT}`);
-        console.log(`📁 Data directory: ${DATA_DIR}`);
-        console.log(`📄 Questions file: ${QUESTIONS_FILE}`);
-        console.log(`🌐 Home: http://localhost:${PORT}`);
-        console.log(`💬 Community: http://localhost:${PORT}/community`);
-        console.log(`🧪 Test: http://localhost:${PORT}/api/test`);
+// 404 handler
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// ==================== ERROR HANDLING ====================
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error('🚨 Unhandled error:', err);
+    res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
+});
+
+// ==================== SERVER STARTUP ====================
+
+async function startServer() {
+    try {
+        // Initialize data
+        await initializeData();
+        
+        // Start server
+        app.listen(PORT, () => {
+            console.log(`🎯 Server running on port ${PORT}`);
+            console.log(`🌐 Homepage: http://localhost:${PORT}`);
+            console.log(`💬 Community: http://localhost:${PORT}/community`);
+            console.log(`🩺 Health check: http://localhost:${PORT}/api/health`);
+            console.log(`📊 Status: http://localhost:${PORT}/api/status`);
+            console.log('===========================================');
+        });
+        
+        // Handle graceful shutdown
+        process.on('SIGTERM', () => {
+            console.log('🛑 SIGTERM received, shutting down gracefully...');
+            process.exit(0);
+        });
+        
+        process.on('SIGINT', () => {
+            console.log('🛑 SIGINT received, shutting down gracefully...');
+            process.exit(0);
+        });
+        
+    } catch (error) {
+        console.error('❌ Failed to start server:', error);
+        process.exit(1);
+    }
 }
 
+// Start the server
 startServer();
