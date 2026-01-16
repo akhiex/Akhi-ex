@@ -1,0 +1,108 @@
+{
+  "questions": [
+    {
+      "id": 1768448691999,
+      "name": "3005ml",
+      "email": "",
+      "question": "did jesus fulfil old testament prophecy",
+      "timestamp": "2026-01-15T03:44:51.999Z",
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+      "status": "pending",
+      "likes": 1,
+      "likedBy": ["user_k2dl7w3ut"],
+      "answers": []
+    },
+    {
+      "id": 1768500000000,
+      "name": "question(summary)",
+      "email": "",
+      "question": "Why does the Quran call Mary the sister of Aaron? This creates confusion since her father is Imran and her brother is Aaron, relating to Miriam at the time of Moses.",
+      "timestamp": "2026-01-15T20:00:00.000Z",
+      "ip": "",
+      "userAgent": "",
+      "status": "answered",
+      "likes": 0,
+      "likedBy": [],
+      "answers": ["The Quran uses 'sister of Aaron' as an honorific title indicating lineage from the pious line of Aaron, not as literal sibling reference. Miriam (Maryam) in Arabic tradition is from the same righteous family."]
+    },
+    {
+      "id": 1768501000000,
+      "name": "question(summary)",
+      "email": "",
+      "question": "Who wrote Hebrews?",
+      "timestamp": "2026-01-15T20:16:40.000Z",
+      "ip": "",
+      "userAgent": "",
+      "status": "answered",
+      "likes": 0,
+      "likedBy": [],
+      "answers": ["The authorship of Hebrews is unknown; it is anonymous in the manuscript tradition and debated among scholars."]
+    },
+    {
+      "id": 1768502000000,
+      "name": "question(summary)",
+      "email": "",
+      "question": "Why don't Muslims believe in the Torah when it has higher preservation than the Gospel and Christian New Testament? Why would rabbis change the Torah?",
+      "timestamp": "2026-01-15T20:33:20.000Z",
+      "ip": "",
+      "userAgent": "",
+      "status": "answered",
+      "likes": 0,
+      "likedBy": [],
+      "answers": ["Muslims believe the original Torah was revealed to Moses but was altered over time. The Quran mentions this in Surah Al-Baqarah (2:79): \"So woe to those who write the 'scripture' with their own hands, then say, 'This is from Allah,' in order to exchange it for a small price. Woe to them for what their hands have written and woe to them for what they earn.\""]
+    },
+    {
+      "id": 1768503000000,
+      "name": "question(summary)",
+      "email": "",
+      "question": "Why did Uthman burn copies of the Quran and how can we say the Quran is preserved after this?",
+      "timestamp": "2026-01-15T20:50:00.000Z",
+      "ip": "",
+      "userAgent": "",
+      "status": "answered",
+      "likes": 0,
+      "likedBy": [],
+      "answers": ["Uthman standardized the Quran to eliminate dialectal variations after Islam spread. The original revelation was preserved in memory and writing; burning copies was to unify the Ummah under one authentic version, not to destroy the Quran itself."]
+    },
+    {
+      "id": 1768504000000,
+      "name": "question(summary)",
+      "email": "",
+      "question": "I am not a hadith rejecter, but I want to understand: What makes hadith reliable and why should we follow them? How are they preserved compared to the Quran?",
+      "timestamp": "2026-01-15T21:30:00.000Z",
+      "ip": "",
+      "userAgent": "",
+      "status": "pending",
+      "likes": 0,
+      "likedBy": [],
+      "answers": []
+    },
+    {
+      "id": 1768505000000,
+      "name": "question(summary)",
+      "email": "",
+      "question": "Can you create a page refuting the website 'The Islam Issue'?",
+      "timestamp": "2026-01-15T21:06:40.000Z",
+      "ip": "",
+      "userAgent": "",
+      "status": "pending",
+      "likes": 0,
+      "likedBy": [],
+      "answers": []
+    },
+    {
+      "id": 1768506000000,
+      "name": "Zack",
+      "email": "",
+      "question": "What about people in Egypt that have seen Mary?",
+      "timestamp": "2026-01-16T09:00:00.000Z",
+      "ip": "",
+      "userAgent": "",
+      "status": "pending",
+      "likes": 0,
+      "likedBy": [],
+      "answers": []
+    }
+  ]
+}
