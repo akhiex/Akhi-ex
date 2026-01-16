@@ -1,4 +1,4 @@
-// server.js - COMPLETE FIXED VERSION
+// server.js - PRODUCTION DEPLOYMENT VERSION
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
@@ -7,7 +7,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = path.join(__dirname, 'data');
+
+// Use project directory for data storage
+const DATA_DIR = path.join(process.cwd(), 'data');
 const QUESTIONS_FILE = path.join(DATA_DIR, 'questions.json');
 
 // Middleware
@@ -19,9 +21,10 @@ app.use(express.static('public'));
 async function ensureDataDir() {
     try {
         await fs.mkdir(DATA_DIR, { recursive: true });
-        console.log('✅ Data directory ensured');
+        return true;
     } catch (error) {
         console.error('Error creating data directory:', error);
+        return false;
     }
 }
 
@@ -35,7 +38,7 @@ async function readQuestionsFile() {
             await fs.access(QUESTIONS_FILE);
         } catch {
             // File doesn't exist, create it
-            await writeQuestionsFile({ questions: [] });
+            await fs.writeFile(QUESTIONS_FILE, JSON.stringify({ questions: [] }, null, 2));
             return { questions: [] };
         }
         
@@ -43,7 +46,16 @@ async function readQuestionsFile() {
         if (!data.trim()) {
             return { questions: [] };
         }
-        return JSON.parse(data);
+        
+        const parsed = JSON.parse(data);
+        
+        // Ensure it has the right structure
+        if (!parsed.questions) {
+            parsed.questions = [];
+        }
+        
+        return parsed;
+        
     } catch (error) {
         console.error('Error reading questions file:', error);
         return { questions: [] };
@@ -54,11 +66,16 @@ async function readQuestionsFile() {
 async function writeQuestionsFile(questionsData) {
     try {
         await ensureDataDir();
+        
+        // Ensure proper structure
+        if (!questionsData.questions) {
+            questionsData.questions = [];
+        }
+        
         await fs.writeFile(QUESTIONS_FILE, JSON.stringify(questionsData, null, 2));
-        console.log('✅ Data saved to questions.json');
         return true;
     } catch (error) {
-        console.error('❌ Error writing questions file:', error);
+        console.error('Error writing questions file:', error);
         return false;
     }
 }
@@ -67,47 +84,13 @@ async function writeQuestionsFile(questionsData) {
 async function initializeData() {
     await ensureDataDir();
     const data = await readQuestionsFile();
-    console.log(`📊 Initialized with ${data.questions?.length || 0} questions`);
+    console.log(`Initialized with ${data.questions?.length || 0} questions`);
 }
 
-// Add the new FAQ
-function addNewFAQ() {
-    return `
-<div class="faq-item-3d">
-    <div class="faq-question-3d">
-        <span>Can Allah have a son?</span>
-        <i class="fas fa-chevron-down faq-icon-3d"></i>
-    </div>
-    <div class="faq-answer-3d">
-        <p>The concept of God having a son is strongly rejected in Islamic theology. Allah is the One and Only God, the Creator of everything, who has no partners, no equals, and no offspring.</p>
+// ==================== API ROUTES ====================
 
-        <div class="quran-verse-glass">"Say, 'He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent.'" (Quran 112:1-4)</div>
-
-        <p>This chapter of the Quran directly refutes the idea of God having a son. In Islamic belief, Jesus (peace be upon him) was a mighty prophet and messenger of God, but not divine and not the "son of God" in a literal sense. The Quran states clearly:</p>
-
-        <div class="quran-verse-glass">"It is not befitting for Allah to take a son. Exalted is He! When He decrees a matter, He only says to it, 'Be,' and it is." (Quran 19:35)</div>
-
-        <p>The idea of God having a son is seen as anthropomorphism — attributing human characteristics to God. Allah is beyond such human relationships. He created everything, including Jesus, by His command "Be!"</p>
-
-        <p>For a detailed discussion on this topic, watch this video analysis:</p>
-        
-        <div style="text-align: center; margin: 20px 0;">
-            <a href="https://youtu.be/t3a-sPh0yYQ" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 25px; background: rgba(0, 229, 255, 0.1); border: 1px solid var(--neon-blue); border-radius: 15px; color: var(--neon-blue); text-decoration: none; font-weight: 500; transition: all 0.3s;">
-                <i class="fab fa-youtube"></i>
-                Watch: "Can Allah Have a Son?" Analysis
-            </a>
-        </div>
-
-        <p>The video explains how the concept of divine sonship developed historically and why it contradicts pure monotheism as understood in Islam.</p>
-    </div>
-</div>
-`;
-}
-
-// API Routes
+// Submit a new question
 app.post('/api/submit-question', async (req, res) => {
-    console.log('📥 SUBMIT QUESTION');
-    
     try {
         const { name, email, question } = req.body;
         
@@ -132,8 +115,6 @@ app.post('/api/submit-question', async (req, res) => {
             answers: []
         };
         
-        console.log(`📝 New question #${newQuestion.id} by ${newQuestion.name}`);
-        
         if (!questionsData.questions) {
             questionsData.questions = [];
         }
@@ -156,22 +137,7 @@ app.post('/api/submit-question', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('❌ Error:', error);
-        res.status(500).json({ 
-            success: false, 
-            message: 'Server error: ' + error.message 
-        });
-    }
-});
-
-app.get('/api/questions', async (req, res) => {
-    console.log('📥 GET ALL QUESTIONS');
-    
-    try {
-        const questionsData = await readQuestionsFile();
-        res.json(questionsData.questions || []);
-    } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('Error:', error);
         res.status(500).json({ 
             success: false, 
             message: 'Server error' 
@@ -179,9 +145,22 @@ app.get('/api/questions', async (req, res) => {
     }
 });
 
+// Get all questions
+app.get('/api/questions', async (req, res) => {
+    try {
+        const questionsData = await readQuestionsFile();
+        res.json(questionsData.questions || []);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Server error' 
+        });
+    }
+});
+
+// Post a reply to a question
 app.post('/api/questions/:id/answer', async (req, res) => {
-    console.log('📥 POST REPLY to question:', req.params.id);
-    
     try {
         const { id } = req.params;
         const { answer, author, isOwner, parentAnswerId } = req.body;
@@ -212,8 +191,6 @@ app.post('/api/questions/:id/answer', async (req, res) => {
             replies: [],
             parentAnswerId: parentAnswerId || null
         };
-        
-        console.log(`📝 New reply #${newReply.id} by ${newReply.author}`);
         
         if (!questionsData.questions[questionIndex].answers) {
             questionsData.questions[questionIndex].answers = [];
@@ -248,18 +225,10 @@ app.post('/api/questions/:id/answer', async (req, res) => {
         
         if (!added) {
             questionsData.questions[questionIndex].answers.push(newReply);
-            added = true;
             
             if (isOwner) {
                 questionsData.questions[questionIndex].status = 'answered';
             }
-        }
-        
-        if (!added) {
-            return res.status(500).json({ 
-                success: false, 
-                message: 'Failed to add reply' 
-            });
         }
         
         const writeSuccess = await writeQuestionsFile(questionsData);
@@ -278,17 +247,16 @@ app.post('/api/questions/:id/answer', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('Error:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Server error: ' + error.message 
+            message: 'Server error' 
         });
     }
 });
 
+// Like a question
 app.post('/api/questions/:id/like', async (req, res) => {
-    console.log('❤️ LIKE QUESTION:', req.params.id);
-    
     try {
         const { id } = req.params;
         const { userId = 'user_' + Date.now() } = req.body;
@@ -335,7 +303,7 @@ app.post('/api/questions/:id/like', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('Error:', error);
         res.status(500).json({ 
             success: false, 
             message: 'Server error' 
@@ -343,24 +311,7 @@ app.post('/api/questions/:id/like', async (req, res) => {
     }
 });
 
-// Test endpoint
-app.get('/api/test', async (req, res) => {
-    try {
-        const data = await readQuestionsFile();
-        res.json({
-            success: true,
-            message: 'Server is working!',
-            questionsCount: data.questions?.length || 0,
-            dataDir: DATA_DIR,
-            fileExists: true
-        });
-    } catch (error) {
-        res.json({
-            success: false,
-            message: 'Test failed: ' + error.message
-        });
-    }
-});
+// ==================== STATIC FILE SERVING ====================
 
 // Serve HTML files
 app.get('/', (req, res) => {
@@ -371,7 +322,7 @@ app.get('/community', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'community.html'));
 });
 
-// Handle other pages
+// Serve other HTML pages
 app.get('/:page', (req, res) => {
     const page = req.params.page;
     const filePath = path.join(__dirname, 'public', `${page}.html`);
@@ -383,17 +334,15 @@ app.get('/:page', (req, res) => {
     });
 });
 
-// Start server
+// ==================== START SERVER ====================
+
 async function startServer() {
     await initializeData();
     
     app.listen(PORT, () => {
-        console.log(`🚀 Server running on port ${PORT}`);
-        console.log(`📁 Data directory: ${DATA_DIR}`);
-        console.log(`📄 Questions file: ${QUESTIONS_FILE}`);
-        console.log(`🌐 Home: http://localhost:${PORT}`);
-        console.log(`💬 Community: http://localhost:${PORT}/community`);
-        console.log(`🧪 Test: http://localhost:${PORT}/api/test`);
+        console.log(`Server running on port ${PORT}`);
+        console.log(`Home: http://localhost:${PORT}`);
+        console.log(`Community: http://localhost:${PORT}/community`);
     });
 }
 
