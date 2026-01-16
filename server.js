@@ -1,5 +1,6 @@
-// server.js - PRODUCTION DEPLOYMENT VERSION
+// server.js - PRODUCTION DEPLOYMENT VERSION WITH GITHUB STORAGE
 const express = require('express');
+const axios = require('axios'); // Added for GitHub API
 const fs = require('fs').promises;
 const path = require('path');
 const cors = require('cors');
@@ -8,7 +9,34 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Use project directory for data storage
+// GitHub Configuration - SET THESE IN RENDER ENVIRONMENT VARIABLES
+const GITHUB = {
+    owner: process.env.GITHUB_OWNER || 'your-github-username', // Your GitHub username
+    repo: process.env.GITHUB_REPO || 'akhi-questions-database', // Repo for storing questions
+    token: process.env.GITHUB_TOKEN, // Your GitHub Personal Access Token
+    branch: 'main',
+    filePath: 'questions.json'
+};
+
+// Log GitHub config (without exposing token)
+console.log('GitHub Config:', {
+    owner: GITHUB.owner,
+    repo: GITHUB.repo,
+    hasToken: !!GITHUB.token,
+    branch: GITHUB.branch
+});
+
+// GitHub API client
+const githubAPI = axios.create({
+    baseURL: 'https://api.github.com',
+    headers: {
+        'Authorization': `token ${GITHUB.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'Akhi-ex-responds-App'
+    }
+});
+
+// Keep local directory for fallback (optional)
 const DATA_DIR = path.join(process.cwd(), 'data');
 const QUESTIONS_FILE = path.join(DATA_DIR, 'questions.json');
 
@@ -16,6 +44,126 @@ const QUESTIONS_FILE = path.join(DATA_DIR, 'questions.json');
 app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(express.static('public'));
+
+// ============================================
+// GITHUB STORAGE FUNCTIONS
+// ============================================
+
+// Read questions from GitHub
+async function readQuestionsFromGitHub() {
+    try {
+        console.log('📖 Reading questions from GitHub...');
+        
+        if (!GITHUB.token) {
+            throw new Error('GitHub token not configured');
+        }
+        
+        const url = `/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.filePath}?ref=${GITHUB.branch}`;
+        console.log('GitHub URL:', url);
+        
+        const response = await githubAPI.get(url);
+        
+        const content = Buffer.from(response.data.content, 'base64').toString('utf8');
+        const parsedData = JSON.parse(content);
+        
+        // Ensure proper structure
+        if (!parsedData.questions) {
+            parsedData.questions = [];
+        }
+        
+        console.log(`✅ Successfully read ${parsedData.questions.length} questions from GitHub`);
+        return parsedData;
+        
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            // File doesn't exist yet, return empty structure
+            console.log('📝 Questions file not found in GitHub, starting fresh');
+            return { questions: [] };
+        }
+        
+        console.error('❌ Error reading from GitHub:', error.message);
+        
+        if (error.response) {
+            console.error('GitHub API response:', error.response.status, error.response.data);
+        }
+        
+        // Fallback to local file if GitHub fails
+        console.log('🔄 Falling back to local storage...');
+        return await readQuestionsFileLocal();
+    }
+}
+
+// Write questions to GitHub
+async function writeQuestionsToGitHub(questionsData) {
+    try {
+        console.log('💾 Saving questions to GitHub...');
+        
+        if (!GITHUB.token) {
+            throw new Error('GitHub token not configured');
+        }
+        
+        // Ensure proper structure
+        if (!questionsData.questions) {
+            questionsData.questions = [];
+        }
+        
+        // Get current file to get SHA (required for updates)
+        const getUrl = `/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.filePath}?ref=${GITHUB.branch}`;
+        let sha = null;
+        
+        try {
+            const getResponse = await githubAPI.get(getUrl);
+            sha = getResponse.data.sha;
+            console.log('📝 Updating existing file with SHA:', sha.substring(0, 8) + '...');
+        } catch (error) {
+            if (error.response && error.response.status === 404) {
+                console.log('📝 Creating new file in GitHub');
+            } else {
+                throw error;
+            }
+        }
+        
+        const content = JSON.stringify(questionsData, null, 2);
+        const encodedContent = Buffer.from(content).toString('base64');
+        
+        const putUrl = `/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.filePath}`;
+        
+        const response = await githubAPI.put(putUrl, {
+            message: `Update questions - ${new Date().toISOString()}`,
+            content: encodedContent,
+            sha: sha,
+            branch: GITHUB.branch,
+            committer: {
+                name: 'Akhi ex responds Bot',
+                email: 'bot@akhi-ex-responds.com'
+            }
+        });
+        
+        console.log('✅ Successfully saved to GitHub!');
+        console.log('📊 Commit SHA:', response.data.commit.sha.substring(0, 8) + '...');
+        
+        // Also save locally as backup
+        await writeQuestionsFileLocal(questionsData);
+        
+        return true;
+        
+    } catch (error) {
+        console.error('❌ Error writing to GitHub:', error.message);
+        
+        if (error.response) {
+            console.error('GitHub API response:', error.response.status);
+            console.error('Response data:', error.response.data);
+        }
+        
+        // Fallback to local storage
+        console.log('🔄 Falling back to local storage...');
+        return await writeQuestionsFileLocal(questionsData);
+    }
+}
+
+// ============================================
+// LOCAL STORAGE FUNCTIONS (FALLBACK)
+// ============================================
 
 // Ensure data directory exists
 async function ensureDataDir() {
@@ -28,8 +176,8 @@ async function ensureDataDir() {
     }
 }
 
-// Read questions from file
-async function readQuestionsFile() {
+// Read questions from local file (fallback)
+async function readQuestionsFileLocal() {
     try {
         await ensureDataDir();
         
@@ -54,16 +202,17 @@ async function readQuestionsFile() {
             parsed.questions = [];
         }
         
+        console.log(`📖 Read ${parsed.questions.length} questions from local file`);
         return parsed;
         
     } catch (error) {
-        console.error('Error reading questions file:', error);
+        console.error('Error reading local questions file:', error);
         return { questions: [] };
     }
 }
 
-// Write questions to file
-async function writeQuestionsFile(questionsData) {
+// Write questions to local file (fallback)
+async function writeQuestionsFileLocal(questionsData) {
     try {
         await ensureDataDir();
         
@@ -73,21 +222,33 @@ async function writeQuestionsFile(questionsData) {
         }
         
         await fs.writeFile(QUESTIONS_FILE, JSON.stringify(questionsData, null, 2));
+        console.log(`💾 Saved ${questionsData.questions.length} questions to local file`);
         return true;
     } catch (error) {
-        console.error('Error writing questions file:', error);
+        console.error('Error writing local questions file:', error);
         return false;
     }
 }
 
 // Initialize on server start
 async function initializeData() {
-    await ensureDataDir();
-    const data = await readQuestionsFile();
-    console.log(`Initialized with ${data.questions?.length || 0} questions`);
+    try {
+        console.log('🚀 Initializing Akhi ex responds server...');
+        
+        // Try to read from GitHub first
+        const data = await readQuestionsFromGitHub();
+        
+        console.log(`📊 Initialized with ${data.questions?.length || 0} questions`);
+        console.log('✅ Server ready!');
+        
+    } catch (error) {
+        console.error('Error during initialization:', error);
+    }
 }
 
-// ==================== API ROUTES ====================
+// ============================================
+// API ROUTES (UPDATED FOR GITHUB STORAGE)
+// ============================================
 
 // Submit a new question
 app.post('/api/submit-question', async (req, res) => {
@@ -101,7 +262,8 @@ app.post('/api/submit-question', async (req, res) => {
             });
         }
         
-        const questionsData = await readQuestionsFile();
+        // Read questions from GitHub
+        const questionsData = await readQuestionsFromGitHub();
         
         const newQuestion = {
             id: Date.now(),
@@ -121,7 +283,8 @@ app.post('/api/submit-question', async (req, res) => {
         
         questionsData.questions.push(newQuestion);
         
-        const writeSuccess = await writeQuestionsFile(questionsData);
+        // Save to GitHub
+        const writeSuccess = await writeQuestionsToGitHub(questionsData);
         
         if (!writeSuccess) {
             return res.status(500).json({ 
@@ -148,7 +311,7 @@ app.post('/api/submit-question', async (req, res) => {
 // Get all questions
 app.get('/api/questions', async (req, res) => {
     try {
-        const questionsData = await readQuestionsFile();
+        const questionsData = await readQuestionsFromGitHub();
         res.json(questionsData.questions || []);
     } catch (error) {
         console.error('Error:', error);
@@ -172,7 +335,8 @@ app.post('/api/questions/:id/answer', async (req, res) => {
             });
         }
         
-        const questionsData = await readQuestionsFile();
+        // Read questions from GitHub
+        const questionsData = await readQuestionsFromGitHub();
         const questionIndex = questionsData.questions.findIndex(q => q.id == id);
         
         if (questionIndex === -1) {
@@ -231,7 +395,8 @@ app.post('/api/questions/:id/answer', async (req, res) => {
             }
         }
         
-        const writeSuccess = await writeQuestionsFile(questionsData);
+        // Save to GitHub
+        const writeSuccess = await writeQuestionsToGitHub(questionsData);
         
         if (!writeSuccess) {
             return res.status(500).json({ 
@@ -261,7 +426,8 @@ app.post('/api/questions/:id/like', async (req, res) => {
         const { id } = req.params;
         const { userId = 'user_' + Date.now() } = req.body;
         
-        const questionsData = await readQuestionsFile();
+        // Read questions from GitHub
+        const questionsData = await readQuestionsFromGitHub();
         const questionIndex = questionsData.questions.findIndex(q => q.id == id);
         
         if (questionIndex === -1) {
@@ -287,7 +453,8 @@ app.post('/api/questions/:id/like', async (req, res) => {
             question.likes = Math.max(0, (question.likes || 0) - 1);
         }
         
-        const writeSuccess = await writeQuestionsFile(questionsData);
+        // Save to GitHub
+        const writeSuccess = await writeQuestionsToGitHub(questionsData);
         
         if (!writeSuccess) {
             return res.status(500).json({ 
@@ -311,7 +478,9 @@ app.post('/api/questions/:id/like', async (req, res) => {
     }
 });
 
-// ==================== STATIC FILE SERVING ====================
+// ============================================
+// STATIC FILE SERVING
+// ============================================
 
 // Serve HTML files
 app.get('/', (req, res) => {
@@ -334,16 +503,42 @@ app.get('/:page', (req, res) => {
     });
 });
 
-// ==================== START SERVER ====================
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        github: {
+            owner: GITHUB.owner,
+            repo: GITHUB.repo,
+            configured: !!GITHUB.token
+        }
+    });
+});
+
+// ============================================
+// START SERVER
+// ============================================
 
 async function startServer() {
     await initializeData();
     
     app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-        console.log(`Home: http://localhost:${PORT}`);
-        console.log(`Community: http://localhost:${PORT}/community`);
+        console.log(`=========================================`);
+        console.log(`🚀 Server running on port ${PORT}`);
+        console.log(`🏠 Home: http://localhost:${PORT}`);
+        console.log(`👥 Community: http://localhost:${PORT}/community`);
+        console.log(`💾 Storage: GitHub (${GITHUB.owner}/${GITHUB.repo})`);
+        console.log(`=========================================`);
     });
 }
 
-startServer();
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+    console.error('Unhandled Promise Rejection:', err);
+});
+
+startServer().catch(error => {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+});

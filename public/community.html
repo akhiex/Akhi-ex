@@ -1181,18 +1181,28 @@
             }
             
             /* Question actions - better mobile layout */
-            .question-actions-3d {
-                padding-top: 20px !important;
-                gap: 10px !important;
-                flex-wrap: wrap;
-            }
-            
-            .action-button-3d {
-                padding: 10px 15px !important;
-                font-size: 0.9rem !important;
-                min-width: calc(50% - 5px) !important;
-                flex: none !important;
-            }
+ 
+    .question-actions-3d {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+    }
+    
+    .action-button-3d {
+        flex: 1 !important;
+        margin: 0 3px !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 44px !important; /* Touch-friendly */
+    }
+    
+    .action-button-3d i {
+        margin-right: 5px !important;
+    }
             
             /* Reply cards - smaller on mobile */
             .reply-card-3d,
