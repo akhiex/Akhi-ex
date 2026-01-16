@@ -21,7 +21,7 @@
       "timestamp": "2026-01-15T20:00:00.000Z",
       "ip": "",
       "userAgent": "",
-      "status": "answered",
+      "status": "pending",
       "likes": 0,
       "likedBy": [],
       "answers": ["The Quran uses 'sister of Aaron' as an honorific title indicating lineage from the pious line of Aaron, not as literal sibling reference. Miriam (Maryam) in Arabic tradition is from the same righteous family."]
@@ -34,7 +34,7 @@
       "timestamp": "2026-01-15T20:16:40.000Z",
       "ip": "",
       "userAgent": "",
-      "status": "answered",
+      "status": "pending",
       "likes": 0,
       "likedBy": [],
       "answers": ["The authorship of Hebrews is unknown; it is anonymous in the manuscript tradition and debated among scholars."]
@@ -47,7 +47,7 @@
       "timestamp": "2026-01-15T20:33:20.000Z",
       "ip": "",
       "userAgent": "",
-      "status": "answered",
+      "status": "pending",
       "likes": 0,
       "likedBy": [],
       "answers": ["Muslims believe the original Torah was revealed to Moses but was altered over time. The Quran mentions this in Surah Al-Baqarah (2:79): \"So woe to those who write the 'scripture' with their own hands, then say, 'This is from Allah,' in order to exchange it for a small price. Woe to them for what their hands have written and woe to them for what they earn.\""]
@@ -60,12 +60,12 @@
       "timestamp": "2026-01-15T20:50:00.000Z",
       "ip": "",
       "userAgent": "",
-      "status": "answered",
+      "status": "pending",
       "likes": 0,
-      "likedBy": [],
-      "answers": ["Uthman standardized the Quran to eliminate dialectal variations after Islam spread. The original revelation was preserved in memory and writing; burning copies was to unify the Ummah under one authentic version, not to destroy the Quran itself."]
-    },
-    {
+      "likedBy": []
+    }
+
+  {
       "id": 1768504000000,
       "name": "question(summary)",
       "email": "",

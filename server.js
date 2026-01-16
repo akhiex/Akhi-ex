@@ -251,7 +251,7 @@ app.post('/api/questions/:id/answer', async (req, res) => {
             added = true;
             
             if (isOwner) {
-                questionsData.questions[questionIndex].status = 'answered';
+                questionsData.questions[questionIndex].status = 'pending';
             }
         }
         
