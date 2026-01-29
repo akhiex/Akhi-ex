@@ -1257,18 +1257,20 @@
                 max-width: 100% !important;
                 min-width: unset !important;
                 order: 2;
-                margin-top: 20px;
+                /* ADDED: More vertical space above question container */
+                margin-top: 40px !important;
             }
             
+            /* ADDED: Increased text size for mobile first-view */
             .hero-title {
-                font-size: 2.2rem !important;
+                font-size: 2.4rem !important; /* Increased from 2.2rem */
                 line-height: 1.15 !important;
                 margin-bottom: 15px !important;
                 padding: 0 5px !important;
             }
             
             .hero-subtitle {
-                font-size: 1.1rem !important;
+                font-size: 1.2rem !important; /* Increased from 1.1rem */
                 line-height: 1.6 !important;
                 padding: 0 10px !important;
                 margin-bottom: 25px !important;
@@ -1404,10 +1406,71 @@
                 width: 100% !important;
             }
             
-            /* Tablet: 4 cards per row */
+            /* Tablet: 4 cards per row - KEPT FOR OTHER SECTIONS */
             .topics-grid {
                 grid-template-columns: repeat(4, 1fr) !important;
                 gap: 15px !important;
+            }
+            
+            /* ADDED: Tablet Portrait Mode - Horizontal cards for specific sections */
+            @media (orientation: portrait) {
+                /* Apply to Proving Islam section */
+                #proving-islam .topics-grid,
+                /* Apply to Key Disagreements section */
+                #key-disagreements .topics-grid {
+                    grid-template-columns: 1fr !important; /* Single column */
+                }
+                
+                /* Make cards wider and shorter (horizontal) */
+                #proving-islam .topic-card-3d,
+                #key-disagreements .topic-card-3d {
+                    display: flex !important;
+                    flex-direction: row !important;
+                    align-items: center !important;
+                    min-height: 140px !important; /* Much shorter height */
+                    padding: 15px 20px !important;
+                }
+                
+                /* Adjust icon wrapper for horizontal layout */
+                #proving-islam .topic-icon-wrapper,
+                #key-disagreements .topic-icon-wrapper {
+                    width: 50px !important;
+                    height: 50px !important;
+                    margin-bottom: 0 !important;
+                    margin-right: 20px !important;
+                    flex-shrink: 0 !important;
+                }
+                
+                /* Content area that grows to fill horizontal space */
+                #proving-islam .topic-card-content,
+                #key-disagreements .topic-card-content {
+                    flex: 1 !important;
+                    min-width: 0 !important; /* Allow text wrapping */
+                }
+                
+                /* Title and description in horizontal layout */
+                #proving-islam .topic-card-title,
+                #key-disagreements .topic-card-title {
+                    font-size: 1.1rem !important;
+                    margin-bottom: 8px !important;
+                    line-height: 1.3 !important;
+                }
+                
+                #proving-islam .topic-card-description,
+                #key-disagreements .topic-card-description {
+                    font-size: 0.9rem !important;
+                    margin-bottom: 12px !important;
+                    line-height: 1.4 !important;
+                    max-height: 2.8em !important; /* Limit to 2 lines */
+                    overflow: hidden !important;
+                }
+                
+                /* Link in horizontal layout */
+                #proving-islam .topic-card-link,
+                #key-disagreements .topic-card-link {
+                    padding: 8px 15px !important;
+                    font-size: 13px !important;
+                }
             }
             
             .topic-card-3d {
@@ -1629,12 +1692,12 @@
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 1.8rem !important;
+                font-size: 2rem !important; /* Increased from 1.8rem */
                 margin-bottom: 8px !important;
             }
             
             .hero-subtitle {
-                font-size: 0.95rem !important;
+                font-size: 1.1rem !important; /* Increased from 0.95rem */
                 margin: 0 auto 15px !important;
             }
             
@@ -1885,120 +1948,140 @@
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-comments topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Refuting Islamic Dilemma</h3>
-                <p class="topic-card-description">Addressing common misconceptions and objections about Islam</p>
-                <a class="topic-card-link" href="islamicdilemma.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Refuting Islamic Dilemma</h3>
+                    <p class="topic-card-description">Addressing common misconceptions and objections about Islam</p>
+                    <a class="topic-card-link" href="islamicdilemma.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-history topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">The Age of Aisha</h3>
-                <p class="topic-card-description">Historical context and scholarly perspectives</p>
-                <a class="topic-card-link" href="ageofaisha.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">The Age of Aisha</h3>
+                    <p class="topic-card-description">Historical context and scholarly perspectives</p>
+                    <a class="topic-card-link" href="ageofaisha.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
-    <div class="topic-icon-wrapper">
-        <i class="fas fa-user-secret topic-icon"></i>
-    </div>
-    <h3 class="topic-card-title">Is Allah a Deceiver?</h3>
-    <p class="topic-card-description">Responding to claims about Allah's nature in the Quran</p>
-    <a class="topic-card-link" href="allahdeceiver.html">
-        Read Analysis
-        <i class="fas fa-arrow-right"></i>
-    </a>
-</article>
+                <div class="topic-icon-wrapper">
+                    <i class="fas fa-user-secret topic-icon"></i>
+                </div>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Is Allah a Deceiver?</h3>
+                    <p class="topic-card-description">Responding to claims about Allah's nature in the Quran</p>
+                    <a class="topic-card-link" href="allahdeceiver.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-user-shield topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Claims Against Prophet Muhammad <span class="pbuh">ﷺ</span></h3>
-                <p class="topic-card-description">Responding to criticisms of Prophet Muhammad's character</p>
-                <a class="topic-card-link" href="againstprophet.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Claims Against Prophet Muhammad <span class="pbuh">ﷺ</span></h3>
+                    <p class="topic-card-description">Responding to criticisms of Prophet Muhammad's character</p>
+                    <a class="topic-card-link" href="againstprophet.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-mosque topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Prophethood Evidence</h3>
-                <p class="topic-card-description">Evidence for Muhammad's prophethood and responses to objections</p>
-                <a class="topic-card-link" href="prophethood.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Prophethood Evidence</h3>
+                    <p class="topic-card-description">Evidence for Muhammad's prophethood and responses to objections</p>
+                    <a class="topic-card-link" href="prophethood.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-bible topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Muhammad <span class="pbuh">ﷺ</span> in the Bible</h3>
-                <p class="topic-card-description">Biblical prophecies pointing to Prophet Muhammad</p>
-                <a class="topic-card-link" href="muhammadinbible.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Muhammad <span class="pbuh">ﷺ</span> in the Bible</h3>
+                    <p class="topic-card-description">Biblical prophecies pointing to Prophet Muhammad</p>
+                    <a class="topic-card-link" href="muhammadinbible.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-atom topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Scientific Miracles</h3>
-                <p class="topic-card-description">Scientific facts in the Quran unknown at the time</p>
-                <a class="topic-card-link" href="miracles.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Scientific Miracles</h3>
+                    <p class="topic-card-description">Scientific facts in the Quran unknown at the time</p>
+                    <a class="topic-card-link" href="miracles.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-quran topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Quran Preservation</h3>
-                <p class="topic-card-description">Evidence for perfect preservation of the Quranic text</p>
-                <a class="topic-card-link" href="quranpreservation.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Quran Preservation</h3>
+                    <p class="topic-card-description">Evidence for perfect preservation of the Quranic text</p>
+                    <a class="topic-card-link" href="quranpreservation.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-user-tie topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Islamic View of Prophets</h3>
-                <p class="topic-card-description">Understanding the role and status of prophets in Islam</p>
-                <a class="topic-card-link" href="prophets.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Islamic View of Prophets</h3>
+                    <p class="topic-card-description">Understanding the role and status of prophets in Islam</p>
+                    <a class="topic-card-link" href="prophets.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-scale-balanced topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Sharia & Governance</h3>
-                <p class="topic-card-description">Clarifying Islamic law and historical development</p>
-                <a class="topic-card-link" href="sharia.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Sharia & Governance</h3>
+                    <p class="topic-card-description">Clarifying Islamic law and historical development</p>
+                    <a class="topic-card-link" href="sharia.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             
@@ -2017,120 +2100,140 @@
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-cross topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Jesus Never Claimed Divinity</h3>
-                <p class="topic-card-description">Examining Jesus' own statements about his nature and mission versus later Christian doctrines</p>
-                <a class="topic-card-link" href="jesusdivinity.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Jesus Never Claimed Divinity</h3>
+                    <p class="topic-card-description">Examining Jesus' own statements about his nature and mission versus later Christian doctrines</p>
+                    <a class="topic-card-link" href="jesusdivinity.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-church topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Evolution of Trinity Doctrine</h3>
-                <p class="topic-card-description">How the concept of Trinity developed over centuries through church councils</p>
-                <a class="topic-card-link" href="trinityevolution.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Evolution of Trinity Doctrine</h3>
+                    <p class="topic-card-description">How the concept of Trinity developed over centuries through church councils</p>
+                    <a class="topic-card-link" href="trinityevolution.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-book topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Biblical Textual Integrity</h3>
-                <p class="topic-card-description">Anonymous authorship and textual variations in the New Testament</p>
-                <a class="topic-card-link" href="biblicalcorruption.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Biblical Textual Integrity</h3>
+                    <p class="topic-card-description">Anonymous authorship and textual variations in the New Testament</p>
+                    <a class="topic-card-link" href="biblicalcorruption.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
-    <div class="topic-icon-wrapper">
-        <i class="fas fa-circle-exclamation topic-icon"></i>
-    </div>
-    <h3 class="topic-card-title">Bible Contradictions & Errors</h3>
-    <p class="topic-card-description">Examining internal inconsistencies and historical errors in biblical texts</p>
-    <a class="topic-card-link" href="biblicalcontradictions.html">
-        Read Analysis
-        <i class="fas fa-arrow-right"></i>
-    </a>
-</article>
+                <div class="topic-icon-wrapper">
+                    <i class="fas fa-circle-exclamation topic-icon"></i>
+                </div>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Bible Contradictions & Errors</h3>
+                    <p class="topic-card-description">Examining internal inconsistencies and historical errors in biblical texts</p>
+                    <a class="topic-card-link" href="biblicalcontradictions.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-user topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Paul: Apostle or Apostate?</h3>
-                <p class="topic-card-description">Evaluating Paul's teachings versus Jesus' original message</p>
-                <a class="topic-card-link" href="paulvschrist.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Paul: Apostle or Apostate?</h3>
+                    <p class="topic-card-description">Evaluating Paul's teachings versus Jesus' original message</p>
+                    <a class="topic-card-link" href="paulvschrist.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-star-and-crescent topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Pagan Origins of Christianity</h3>
-                <p class="topic-card-description">Pagan influences on Christian doctrines versus pure monotheism</p>
-                <a class="topic-card-link" href="paganorigins.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Pagan Origins of Christianity</h3>
+                    <p class="topic-card-description">Pagan influences on Christian doctrines versus pure monotheism</p>
+                    <a class="topic-card-link" href="paganorigins.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-balance-scale topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Jesus' Teachings vs Christianity</h3>
-                <p class="topic-card-description">How Jesus' original message contradicts modern Christian doctrines</p>
-                <a class="topic-card-link" href="modernchristianity.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Jesus' Teachings vs Christianity</h3>
+                    <p class="topic-card-description">How Jesus' original message contradicts modern Christian doctrines</p>
+                    <a class="topic-card-link" href="modernchristianity.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-shield-alt topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Original Sin & Atonement</h3>
-                <p class="topic-card-description">Islamic rejection of inherited sin versus Christian doctrine of atonement</p>
-                <a class="topic-card-link" href="originalsin.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Original Sin & Atonement</h3>
+                    <p class="topic-card-description">Islamic rejection of inherited sin versus Christian doctrine of atonement</p>
+                    <a class="topic-card-link" href="originalsin.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-times topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Crucifixion Narrative</h3>
-                <p class="topic-card-description">Is Crucifixion really historically accurate?</p>
-                <a class="topic-card-link" href="crucifixion.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Crucifixion Narrative</h3>
+                    <p class="topic-card-description">Is Crucifixion really historically accurate?</p>
+                    <a class="topic-card-link" href="crucifixion.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="topic-card-3d">
                 <div class="topic-icon-wrapper">
                     <i class="fas fa-hands-praying topic-icon"></i>
                 </div>
-                <h3 class="topic-card-title">Salvation Concept</h3>
-                <p class="topic-card-description">Faith versus works in Islamic and Christian theology</p>
-                <a class="topic-card-link" href="salvation.html">
-                    Read Analysis
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <div class="topic-card-content">
+                    <h3 class="topic-card-title">Salvation Concept</h3>
+                    <p class="topic-card-description">Faith versus works in Islamic and Christian theology</p>
+                    <a class="topic-card-link" href="salvation.html">
+                        Read Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </article>
         </div>
     </section>
@@ -2145,6 +2248,28 @@
         </div>
         
         <div class="faq-accordion">
+            <!-- ADDED: New FAQ Question with PDF -->
+            <div class="faq-item-3d">
+                <div class="faq-question-3d">
+                    <span>Is Islam the continuation of biblical monotheism and prophetic religion?</span>
+                    <i class="fas fa-chevron-down faq-icon-3d"></i>
+                </div>
+                <div class="faq-answer-3d">
+                    
+
+                    <div class="quran-verse-glass">"He has sent down upon you, [O Muhammad], the Book in truth, confirming what was before it. And He revealed the Torah and the Gospel." (Quran 3:3)</div>
+
+                    <p>For a detailed analysis of how Islam continues the biblical prophetic tradition, have a look at the comprehensive document:</p>
+                    
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="islam.docx" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 25px; background: rgba(0, 229, 255, 0.1); border: 1px solid var(--neon-blue); border-radius: 15px; color: var(--neon-blue); text-decoration: none; font-weight: 500; transition: all 0.3s;">
+                            <i class="fas fa-file-pdf"></i>
+                             Islam as Biblical Continuation (PDF)
+                        </a>
+                    </div>
+
+                </div>
+            </div>
 
             <div class="faq-item-3d">
     <div class="faq-question-3d">
